@@ -1,8 +1,11 @@
 import React from "react";
+import MainLayout from "../layouts/MainLayout";
 
-const App = () =>
-  <div>
-    Hello World!
-  </div>;
+// prettier-ignore
+const App = () => (
+  <MainLayout>
+    HelloWorld!
+  </MainLayout>
+);
 
 export default App;
