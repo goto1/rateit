@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import iphone from "../assets/iphone.svg";
-import github from "../assets/github-logo.svg";
+import iphoneMockup from "../assets/iphone.svg";
+import githubLogo from "../assets/github-logo.svg";
 
 const Main = styled.main`
   height: 100vh;
@@ -52,10 +52,10 @@ const MainLayout = ({ children }) =>
       target="_blank"
       rel="noopener noreferrer"
     >
-      <GithubIcon src={github} alt="github" />
+      <GithubIcon src={githubLogo} alt="github" />
     </GithubLink>
     <AppSection>
-      <img src={iphone} alt="iphone" />
+      <img src={iphoneMockup} alt="iphone" />
       <AppContainer>{children}</AppContainer>
     </AppSection>
   </Main>;
