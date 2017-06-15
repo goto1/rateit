@@ -6,11 +6,12 @@ import github from "../assets/github-logo.svg";
 const Main = styled.main`
   height: 100vh;
   width: 100vw;
+  min-width: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px 0;
   position: relative;
+  background: #BCF6C5;
 `;
 
 const AppSection = styled.section`
@@ -27,13 +28,9 @@ const AppContainer = styled.section`
   top: 11%; left: 5.5%;
 `;
 
-const LinksSection = styled.section`
-  position: absolute;
-`;
-
 const GithubLink = styled.a`
   position: absolute;
-  right: 5px; top: 0;
+  right: 1.5px; top: 5px;
   background: linear-gradient(#60707A, #242A2E);
   padding: 7.5px 7.5px 3px 7.5px;
   border-radius: 50%;
