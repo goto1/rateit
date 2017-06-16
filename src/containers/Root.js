@@ -1,11 +1,14 @@
 import React from "react";
 import MainLayout from "../layouts/MainLayout";
+import AppF7, { Home } from "./AppF7";
 
 // prettier-ignore
-const App = () => (
+const Root = () => (
   <MainLayout>
-    HelloWorld!
+    <AppF7>
+      <Home />
+    </AppF7>
   </MainLayout>
-);
+)
 
-export default App;
+export default Root;
