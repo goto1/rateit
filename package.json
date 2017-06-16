@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "author": "Tomasz Goralczyk <devflag@gmail.com>",
+  "homepage": "https://rateit-8e36f.firebaseapp.com",
   "dependencies": {
     "framework7": "^1.6.4",
     "framework7-react": "^0.8.5-beta.10",
@@ -15,6 +16,7 @@
     "styled-components": "^2.1.0"
   },
   "devDependencies": {
+    "firebase-tools": "^3.9.1",
     "flow-bin": "^0.48.0",
     "prettier": "^1.4.4",
     "react-scripts": "1.0.7"
@@ -24,6 +26,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "flow": "flow"
+    "flow": "flow",
+    "deploy": "firebase deploy"
   }
 }
