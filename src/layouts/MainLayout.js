@@ -26,6 +26,7 @@ const AppContainer = styled.section`
   border-radius: 2.5px;
   position: absolute;
   top: 11%; left: 5.5%;
+  overflow: hidden;
 `;
 
 const GithubLink = styled.a`
