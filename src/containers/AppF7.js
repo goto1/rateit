@@ -1,13 +1,17 @@
 import React from "react";
+import styled from "styled-components";
 import routes from "../routes";
 import {
   Framework7App,
+  Toolbar,
   Page,
   Pages,
   ContentBlock,
   ContentBlockTitle,
   List,
   ListItem,
+  Link,
+  Icon,
   View,
   Views,
   Navbar,
@@ -16,6 +20,13 @@ import {
 
 import "framework7/dist/css/framework7.ios.min.css";
 import "framework7/dist/css/framework7.ios.colors.min.css";
+
+const IconCustom = styled(Icon)`
+  font-size: 25px;
+`;
+const LinkText = styled.span`
+  font-size: 12.5px;
+`;
 
 const ViewsF7 = (props, context) =>
   <Views>
@@ -26,6 +37,20 @@ const ViewsF7 = (props, context) =>
       <Pages>
         {props.children}
       </Pages>
+      <Toolbar tabbar labels>
+        <Link href="/about/">
+          <IconCustom material="search" />
+          <LinkText>Search</LinkText>
+        </Link>
+        <Link href="/about/">
+          <IconCustom material="bookmark" />
+          <LinkText>Saved</LinkText>
+        </Link>
+        <Link href="/about/">
+          <IconCustom material="settings" />
+          <LinkText>Settings</LinkText>
+        </Link>
+      </Toolbar>
     </View>
   </Views>;
 
