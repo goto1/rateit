@@ -13,7 +13,8 @@ export const Search = () =>
     <Navbar title="RateIt" sliding />
     <Searchbar
       cancelLink="Cancel"
-      placeholder="Search for professors and classmates..."
+      placeholder="Search professors and classmates"
+      clearButton={true}
       searchList="#search-list"
       onSearchbarSearch={() => console.log("onSearchbarSearch")}
       onSearchbarEnable={() => console.log("onSearchbarEnable")}
