@@ -11,7 +11,7 @@ const Main = styled.main`
   justify-content: center;
   align-items: center;
   position: relative;
-  background: #BCF6C5;
+  background: #F9FAFB;
 `;
 
 const AppSection = styled.section`
