@@ -1,17 +1,33 @@
 import React from "react";
-import ViewsLayoutF7 from "../layouts/ViewsLayoutF7";
 import routes from "../routes";
 import {
   Framework7App,
   Page,
+  Pages,
   ContentBlock,
   ContentBlockTitle,
   List,
-  ListItem
+  ListItem,
+  View,
+  Views,
+  Navbar,
+  NavCenter
 } from "framework7-react";
 
 import "framework7/dist/css/framework7.ios.min.css";
 import "framework7/dist/css/framework7.ios.colors.min.css";
+
+const ViewsF7 = (props, context) =>
+  <Views>
+    <View id="main-view" navbarThrough dynamicNavbar={true} main url="/">
+      <Navbar>
+        <NavCenter sliding>RateIt</NavCenter>
+      </Navbar>
+      <Pages>
+        {props.children}
+      </Pages>
+    </View>
+  </Views>;
 
 export const Home = () =>
   <Page>
@@ -32,9 +48,9 @@ export const Home = () =>
 
 const AppF7 = ({ children }) =>
   <Framework7App themeType="ios" routes={routes}>
-    <ViewsLayoutF7>
+    <ViewsF7>
       {children}
-    </ViewsLayoutF7>
+    </ViewsF7>
   </Framework7App>;
 
 export default AppF7;
