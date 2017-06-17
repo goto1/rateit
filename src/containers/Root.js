@@ -1,12 +1,13 @@
 import React from "react";
 import MainLayout from "../layouts/MainLayout";
-import AppF7, { Home } from "./AppF7";
+import AppF7 from "./AppF7";
+import { Search } from "../routes";
 
 // prettier-ignore
 const Root = () => (
   <MainLayout>
     <AppF7>
-      <Home />
+      <Search />
     </AppF7>
   </MainLayout>
 )

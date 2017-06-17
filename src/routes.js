@@ -1,9 +1,38 @@
 import React from "react";
-import { Page, Navbar, ContentBlock } from "framework7-react";
+import {
+  Page,
+  Navbar,
+  ContentBlock,
+  Searchbar,
+  List,
+  ListItem
+} from "framework7-react";
 
-const About = () =>
+export const Search = () =>
   <Page>
-    <Navbar title="About" backLink="Back" sliding />
+    <Navbar title="RateIt" sliding />
+    <Searchbar
+      cancelLink="Cancel"
+      placeholder="Search for professors and classmates..."
+      searchList="#search-list"
+      onSearchbarSearch={() => console.log("onSearchbarSearch")}
+      onSearchbarEnable={() => console.log("onSearchbarEnable")}
+      onSearchbarDisable={() => console.log("onSearchbarDisable")}
+      onSearchbarClear={() => console.log("onSearchbarClear")}
+    />
+    <List className="searchbar-not-found">
+      <ListItem title="Nothing found" />
+    </List>
+    <List className="searchbar-found" id="search-list">
+      {Array.apply(null, Array(100)).map((item, index) =>
+        <ListItem key={index} title={`Item ${index + 1}`} />
+      )}
+    </List>
+  </Page>;
+
+const Saved = () =>
+  <Page>
+    <Navbar title="Saved" backLink="Back" sliding />
     <ContentBlock inner>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, delectus,
       ut! Aspernatur incidunt laudantium nobis doloribus commodi non
@@ -12,9 +41,9 @@ const About = () =>
     </ContentBlock>
   </Page>;
 
-const Form = () =>
+const Settings = () =>
   <Page>
-    <Navbar title="Form" backLink="Back" sliding />
+    <Navbar title="Settings" backLink="Back" sliding />
     <ContentBlock inner>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias
       laboriosam voluptate facilis libero sint voluptates reiciendis
@@ -24,10 +53,14 @@ const Form = () =>
   </Page>;
 
 const createRoute = (path, component) => ({
-  path,
+  path: `/${path}/`,
   component
 });
 
-const routes = [createRoute("/about/", About), createRoute("/form/", Form)];
+const routes = [
+  createRoute("/", Search),
+  createRoute("saved", Saved),
+  createRoute("settings", Settings)
+];
 
 export default routes;

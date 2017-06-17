@@ -4,12 +4,7 @@ import routes from "../routes";
 import {
   Framework7App,
   Toolbar,
-  Page,
   Pages,
-  ContentBlock,
-  ContentBlockTitle,
-  List,
-  ListItem,
   Link,
   Icon,
   View,
@@ -31,7 +26,14 @@ const LinkText = styled.span`
 
 const ViewsF7 = (props, context) =>
   <Views>
-    <View id="main-view" navbarThrough dynamicNavbar={true} main url="/">
+    <View
+      id="main-view"
+      navbarThrough
+      toolbarThrough
+      dynamicNavbar={true}
+      main
+      url="/"
+    >
       <Navbar>
         <NavCenter sliding>RateIt</NavCenter>
       </Navbar>
@@ -39,38 +41,21 @@ const ViewsF7 = (props, context) =>
         {props.children}
       </Pages>
       <Toolbar tabbar labels>
-        <Link href="/about/">
+        <Link href="/">
           <IconCustom material="search" />
           <LinkText>Search</LinkText>
         </Link>
-        <Link href="/about/">
+        <Link href="/saved/">
           <IconCustom material="bookmark" />
           <LinkText>Saved</LinkText>
         </Link>
-        <Link href="/about/">
+        <Link href="/settings/">
           <IconCustom material="settings" />
           <LinkText>Settings</LinkText>
         </Link>
       </Toolbar>
     </View>
   </Views>;
-
-export const Home = () =>
-  <Page>
-    <ContentBlockTitle>Welcome to my App</ContentBlockTitle>
-    <ContentBlock inner>
-      <p>
-        Duis sed erat ac eros ultrices pharetra id ut tellus. Praesent
-        rhoncus enim ornare ipsum aliquet ultricies. Pellentesque
-        sodales erat quis elementum sagittis.
-      </p>
-    </ContentBlock>
-    <ContentBlockTitle>Navigation</ContentBlockTitle>
-    <List>
-      <ListItem link="/about/" title="About" />
-      <ListItem link="/form/" title="Form" />
-    </List>
-  </Page>;
 
 const AppF7 = ({ children }) =>
   <Framework7App routes={routes}>
