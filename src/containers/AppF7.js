@@ -22,10 +22,11 @@ import "framework7/dist/css/framework7.ios.min.css";
 import "framework7/dist/css/framework7.ios.colors.min.css";
 
 const IconCustom = styled(Icon)`
-  font-size: 25px;
+  font-size: 23px;
+  padding-top: 5px;
 `;
 const LinkText = styled.span`
-  font-size: 12.5px;
+  font-size: 12px;
 `;
 
 const ViewsF7 = (props, context) =>
@@ -72,7 +73,7 @@ export const Home = () =>
   </Page>;
 
 const AppF7 = ({ children }) =>
-  <Framework7App themeType="ios" routes={routes}>
+  <Framework7App routes={routes}>
     <ViewsF7>
       {children}
     </ViewsF7>
