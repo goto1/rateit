@@ -1,7 +1,7 @@
 import React from "react";
 import MainLayout from "../layouts/MainLayout";
 import AppF7 from "./AppF7";
-import { Search } from "../routes";
+import Search from "../containers/Search";
 
 // prettier-ignore
 const Root = () => (
