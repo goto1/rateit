@@ -9,49 +9,90 @@ import {
   ListItem
 } from "framework7-react";
 
-const createPerson = ({ name, type, school, rating, numOfRatings }) => {
-  const id = Math.random().toString().slice(2);
+// const createPerson = ({ name, type, school, rating, numOfRatings }) => {
+//   const id = Math.random().toString().slice(2);
 
-  return {
-    id,
-    name,
-    type,
-    school,
-    rating,
-    numOfRatings,
-    link: `/person/${id}`
-  };
-};
+//   return {
+//     id,
+//     name,
+//     type,
+//     school,
+//     rating,
+//     numOfRatings,
+//     link: `/person/${id}`
+//   };
+// };
+
+// const people = [
+//   createPerson({
+//     name: "Randall Rivera",
+//     type: "Student",
+//     school: "NJIT",
+//     rating: 4.5,
+//     numOfRatings: 201
+//   }),
+//   createPerson({
+//     name: "Renee Porter",
+//     type: "Professor",
+//     school: "NJIT",
+//     rating: 3,
+//     numOfRatings: 110
+//   }),
+//   createPerson({
+//     name: "Lionel Ford",
+//     type: "Student",
+//     school: "Rutgers",
+//     rating: 2.5,
+//     numOfRatings: 30
+//   }),
+//   createPerson({
+//     name: "Jonathon Sims",
+//     type: "Professor",
+//     school: "Rutgers",
+//     rating: 5,
+//     numOfRatings: 63
+//   })
+// ];
+
+// console.log(JSON.stringify(people));
 
 const people = [
-  createPerson({
+  {
+    id: "009404973009374595",
     name: "Randall Rivera",
     type: "Student",
     school: "NJIT",
     rating: 4.5,
-    numOfRatings: 201
-  }),
-  createPerson({
+    numOfRatings: 201,
+    link: "/person/009404973009374595"
+  },
+  {
+    id: "7456062367375738",
     name: "Renee Porter",
     type: "Professor",
     school: "NJIT",
     rating: 3,
-    numOfRatings: 110
-  }),
-  createPerson({
+    numOfRatings: 110,
+    link: "/person/7456062367375738"
+  },
+  {
+    id: "9766491935583002",
     name: "Lionel Ford",
     type: "Student",
     school: "Rutgers",
     rating: 2.5,
-    numOfRatings: 30
-  }),
-  createPerson({
+    numOfRatings: 30,
+    link: "/person/9766491935583002"
+  },
+  {
+    id: "6428626191061508",
     name: "Jonathon Sims",
     type: "Professor",
     school: "Rutgers",
     rating: 5,
-    numOfRatings: 63
-  })
+    numOfRatings: 63,
+    link: "/person/6428626191061508"
+  }
 ];
 
 export const Search = () =>

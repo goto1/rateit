@@ -1,8 +1,89 @@
 import React from "react";
 import styled from "styled-components";
-import { List, ListItem, Icon } from "framework7-react";
+import { Icon } from "framework7-react";
 
-const ListItemCustom = ({ url, children }) =>
+const Name = ({ type, name }) =>
+  <div
+    className="person-name"
+    style={{
+      color: type.toLowerCase() === "student" ? "#497B3C" : "#6967AE",
+      fontWeight: "500"
+    }}
+  >
+    {name.length > 19 ? `${name.slice(0, 17)}..` : name}
+  </div>;
+
+const Role = ({ type, school }) =>
+  <div style={{ color: "rgb(0,0,0)", fontSize: "14px" }}>
+    {type} at {school.length > 10 ? `${school.slice(0, 8)}..` : school}
+  </div>;
+
+const NumOfRatings = ({ numOfRatings }) =>
+  <div style={{ color: "#8E8E93", fontSize: "13px" }}>
+    <span style={{ fontWeight: "600" }}>{numOfRatings}</span> ratings
+  </div>;
+
+const ArrowRight = () =>
+  <Icon
+    material="keyboard_arrow_right"
+    style={{
+      position: "absolute",
+      right: "0",
+      color: "#C7C7CC"
+    }}
+  />;
+
+const NumericRating = ({ rating }) =>
+  <div
+    style={{
+      borderRadius: "5px",
+      backgroundColor: "#0B7EFF",
+      color: "#FFF",
+      width: "32.5px",
+      textAlign: "center",
+      fontWeight: "300",
+      fontSize: "15px",
+      position: "absolute",
+      right: "25px",
+      top: "2px"
+    }}
+  >
+    {rating}
+  </div>;
+
+const Star = styled(Icon)`
+  font-size: 19px;
+  color: #FEBA72;
+  width: 19px;
+`;
+
+const StarsRating = ({ rating }) => {
+  const NUMBER_OF_STARS = 5;
+  const stringified = rating.toString();
+  const decimalPointIndex = stringified.indexOf(".");
+
+  const halfStar = decimalPointIndex > -1 ? 1 : 0;
+  const wholeStars = halfStar
+    ? +stringified.slice(0, decimalPointIndex)
+    : +stringified;
+  const emptyStars = NUMBER_OF_STARS - halfStar - wholeStars;
+
+  return (
+    <div style={{ position: "absolute", bottom: "0", right: "6px" }}>
+      {Array.apply(null, Array(wholeStars)).map((item, idx) =>
+        <Star key={idx} material="start" />
+      )}
+
+      {halfStar === 1 && <Star material="star_half" />}
+
+      {Array.apply(null, Array(emptyStars)).map((item, idx) =>
+        <Star key={idx} material="star_border" />
+      )}
+    </div>
+  );
+};
+
+const ListItemWrapper = ({ url, children }) =>
   <li>
     <a href={url} className="item-content" style={{ padding: "0" }}>
       <div className="item-inner" style={{ paddingRight: "0" }}>
@@ -16,113 +97,28 @@ const ListItemCustom = ({ url, children }) =>
     </a>
   </li>;
 
-const Info = styled.div`
-  flex-basis: 60%;
-  padding-left: 15px;
-`;
-
-const Name = styled.div`
-  color: ${props =>
-    props.type.toLowerCase() === "student" ? "#497B3C" : "#6967AE"};
-  font-weight: 500;
-`;
-
-const Role = styled.div`
-  color: rgb(0,0,0);
-  font-size: 14px;
-`;
-
-const NumberOfRatings = styled.div`
-  color: #8E8E93;
-  font-size: 13px;
-  span {
-    font-weight: 600
-  }
-`;
-
-const Ratings = styled.div`
-  flex-basis: 40%;
-  position: relative;
-`;
-
-const Numeric = styled.div`
-  border-radius: 5px;
-  background-color: #0B7EFF;
-  color: #FFFFFF;
-  width: 32.5px;
-  text-align: center;
-  font-weight: 300;
-  font-size: 15px;
-  position: absolute;
-  right: 25px;
-`;
-
-const Arrow = styled.div`
-  position: absolute;
-  right: 0;
-  color: #C7C7CC;
-`;
-
-const Star = styled(Icon)`
-  font-size: 19px;
-  color: #FEBA72;
-`;
-
-const Stars = ({ rating }) => {
-  const stringified = rating.toString();
-  const numberOfStars = 5;
-  const indexOfDecimal = stringified.indexOf(".");
-  const halfStar = indexOfDecimal > -1 ? true : false;
-  const wholeStars = halfStar
-    ? stringified.slice(0, indexOfDecimal)
-    : stringified;
-  const starsLeft = numberOfStars - (halfStar ? 1 : 0) - wholeStars;
-
-  const whole = Array.apply(null, Array(+wholeStars)).map((item, idx) =>
-    <Star key={idx} material="star" />
-  );
-  const half = halfStar && <Star material="star_half" />;
-  const empty = Array.apply(null, Array(+starsLeft)).map((item, idx) =>
-    <Star key={idx} material="star_border" />
-  );
-
-  return (
-    <div style={{ position: "absolute", bottom: "0", right: "6px" }}>
-      {whole}
-      {half}
-      {empty}
+const PersonListItem = ({
+  name,
+  type,
+  school,
+  rating,
+  numOfRatings,
+  profileUrl
+}) =>
+  <ListItemWrapper url={profileUrl}>
+    <div
+      style={{ flexBasis: "165px", overflow: "hidden", paddingLeft: "15px" }}
+    >
+      <Name type={type} name={name} />
+      <Role type={type} school={school} />
+      <NumOfRatings numOfRatings={numOfRatings} />
     </div>
-  );
-};
 
-const PersonListItem = props =>
-  <ListItemCustom url={props.link}>
-    <Info>
-      <Name type={props.type} className="person-name">{props.name}</Name>
-      <Role>{props.role} at {props.school}</Role>
-      <NumberOfRatings>
-        <span>{props.numOfRatings}</span> ratings
-      </NumberOfRatings>
-    </Info>
-    <Ratings>
-      <Arrow><Icon material="keyboard_arrow_right" /></Arrow>
-      <Numeric>{props.rating}</Numeric>
-      <Stars rating={props.rating} />
-    </Ratings>
-  </ListItemCustom>;
-
-// const PersonListItem = props =>
-//   <ListItemCustom url="bitch tits">
-//     <Info>
-//       <Name type="Student">Randall Rivera</Name>
-//       <Role>Student at NJIT</Role>
-//       <NumberOfRatings><span>201</span> ratings</NumberOfRatings>
-//     </Info>
-//     <Ratings>
-//       <Arrow><Icon material="keyboard_arrow_right" /></Arrow>
-//       <Numeric>4.5</Numeric>
-//       <Stars rating="4" />
-//     </Ratings>
-//   </ListItemCustom>;
+    <div style={{ flexBasis: "107px", position: "relative" }}>
+      <ArrowRight />
+      <NumericRating rating={rating} />
+      <StarsRating rating={rating} />
+    </div>
+  </ListItemWrapper>;
 
 export default PersonListItem;
