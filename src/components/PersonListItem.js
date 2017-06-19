@@ -1,6 +1,9 @@
+// @flow
+
 import React from "react";
 import styled from "styled-components";
 import { Icon } from "framework7-react";
+import type { PersonOverview } from "../types/types";
 
 const Name = ({ type, name }) =>
   <div
@@ -98,14 +101,14 @@ const ListItemWrapper = ({ url, children }) =>
   </li>;
 
 const PersonListItem = ({
+  id,
   name,
   type,
   school,
   rating,
-  numOfRatings,
-  profileUrl
-}) =>
-  <ListItemWrapper url={profileUrl}>
+  numOfRatings
+}: PersonOverview) =>
+  <ListItemWrapper url={`/person/${id}/`}>
     <div
       style={{ flexBasis: "165px", overflow: "hidden", paddingLeft: "15px" }}
     >
