@@ -1,15 +1,15 @@
 import React from "react";
 import MainLayout from "../layouts/MainLayout";
-import AppF7 from "./AppF7";
+import F7App from "./F7App";
 import Search from "../containers/Search";
 
 // prettier-ignore
-const Root = () => (
+const App = () => (
   <MainLayout>
-    <AppF7>
+    <F7App>
       <Search />
-    </AppF7>
+    </F7App>
   </MainLayout>
 )
 
-export default Root;
+export default App;

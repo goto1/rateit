@@ -6,13 +6,11 @@ import {
   Navbar,
   Searchbar,
   List,
-  ListItem,
   ContentBlockTitle,
   Chip,
   Card,
   CardHeader,
   CardContent,
-  CardFooter,
   GridRow,
   GridCol,
   Button

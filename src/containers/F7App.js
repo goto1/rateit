@@ -57,11 +57,11 @@ const ViewsF7 = (props, context) =>
     </View>
   </Views>;
 
-const AppF7 = ({ children }) =>
+const F7App = ({ children }) =>
   <Framework7App routes={routes}>
     <ViewsF7>
       {children}
     </ViewsF7>
   </Framework7App>;
 
-export default AppF7;
+export default F7App;
