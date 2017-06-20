@@ -81,7 +81,11 @@ const ButtonCustom = styled(Button)`
 const NoResults = () =>
   <List className="searchbar-not-found" style={{ marginTop: "30px" }}>
     <Card>
-      <CardHeaderCustom>No Results Found</CardHeaderCustom>
+      <CardHeaderCustom>
+        <span style={{ display: "inline-block", margin: "0 auto" }}>
+          No Results Found
+        </span>
+      </CardHeaderCustom>
       <CardContent style={{ textAlign: "center" }}>
         Can't find what you're looking for? You can rate {" "}
         <span style={{ fontWeight: "500" }}>professors</span> or {" "}
