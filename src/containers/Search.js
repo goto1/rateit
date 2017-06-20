@@ -1,6 +1,6 @@
 import React from "react";
 import PersonListItem from "../components/PersonListItem";
-// import styled from "styled-components";
+import styled from "styled-components";
 import {
   Page,
   Navbar,
@@ -46,31 +46,27 @@ const people = [
   }
 ];
 
-const SchoolNameChip = ({ name }) =>
-  <Chip
-    text={name}
-    style={{
-      margin: "7.5px 5px 0 0",
-      letterSpacing: "1.5px",
-      fontWeight: "300",
-      background: "#A09FA3"
-    }}
-  />;
+const CustomChip = styled(Chip)`
+  margin: 7.5px 5px 0 0 !important;
+  letter-spacing: 1.5px;
+  background: #A09FA3 !important;
+`;
 
-const ShowResultsFor = ({ schools }) =>
-  <ContentBlockTitle
-    style={{
-      margin: "15px 15px 0 15px",
-      whiteSpace: "normal"
-    }}
-  >
+const ContentBlockTitleCustom = styled(ContentBlockTitle)`
+  margin: 15px 15px 0 15px !important;
+  white-space: normal !important;
+`;
+
+const SchoolLabels = ({ schools }) =>
+  <ContentBlockTitleCustom>
     <span style={{ display: "block" }}>Searching In</span>
-    {schools.map((name, idx) => <SchoolNameChip key={idx} name={name} />)}
-  </ContentBlockTitle>;
+    {schools.map((name, idx) => <CustomChip key={idx} text={name} />)}
+  </ContentBlockTitleCustom>;
 
 const Search = () =>
   <Page>
-    <Navbar title="RATEIT" sliding />
+    <Navbar title="RateIt" sliding />
+
     <Searchbar
       cancelLink="Cancel"
       placeholder="Search professors and classmates"
@@ -82,10 +78,13 @@ const Search = () =>
       onSearchbarDisable={() => console.log("onSearchbarDisable")}
       onSearchbarClear={() => console.log("onSearchbarClear")}
     />
-    <ShowResultsFor schools={["NJIT", "Rutgers", "TCNJ"]} />
+
+    <SchoolLabels schools={["NJIT", "Rutgers", "TCNJ"]} />
+
     <List className="searchbar-not-found">
       <ListItem title="Nothing found" />
     </List>
+
     <List className="searchbar-found" id="search-list" inset>
       {people.map(person => <PersonListItem key={person.id} {...person} />)}
     </List>
