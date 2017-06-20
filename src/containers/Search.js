@@ -8,7 +8,14 @@ import {
   List,
   ListItem,
   ContentBlockTitle,
-  Chip
+  Chip,
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+  GridRow,
+  GridCol,
+  Button
 } from "framework7-react";
 
 const people = [
@@ -46,7 +53,7 @@ const people = [
   }
 ];
 
-const CustomChip = styled(Chip)`
+const ChipCustom = styled(Chip)`
   margin: 7.5px 5px 0 0 !important;
   letter-spacing: 1.5px;
   background: #A09FA3 !important;
@@ -57,10 +64,44 @@ const ContentBlockTitleCustom = styled(ContentBlockTitle)`
   white-space: normal !important;
 `;
 
+const CardHeaderCustom = styled(CardHeader)`
+  text-transform: uppercase;
+  letter-spacing: 1.1px;
+  font-weight: 500;
+`;
+
+const ButtonCustom = styled(Button)`
+  color: ${props => props.color} !important;
+  border: 2px solid ${props => props.color} !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+`;
+
+const NoResults = () =>
+  <List className="searchbar-not-found" style={{ marginTop: "30px" }}>
+    <Card>
+      <CardHeaderCustom>No Results Found</CardHeaderCustom>
+      <CardContent style={{ textAlign: "center" }}>
+        Can't find what you're looking for? You can rate {" "}
+        <span style={{ fontWeight: "500" }}>professors</span> or {" "}
+        <span style={{ fontWeight: "500" }}>classmates</span> down below!
+      </CardContent>
+    </Card>
+    <GridRow style={{ margin: "20px 10px" }}>
+      <GridCol>
+        <ButtonCustom big color="#9595A8">Rate a professor</ButtonCustom>
+      </GridCol>
+      <GridCol>
+        <ButtonCustom big color="#A8A284">Rate a classmate</ButtonCustom>
+      </GridCol>
+    </GridRow>
+  </List>;
+
 const SchoolLabels = ({ schools }) =>
   <ContentBlockTitleCustom>
     <span style={{ display: "block" }}>Searching In</span>
-    {schools.map((name, idx) => <CustomChip key={idx} text={name} />)}
+    {schools.map((name, idx) => <ChipCustom key={idx} text={name} />)}
   </ContentBlockTitleCustom>;
 
 const Search = () =>
@@ -81,9 +122,7 @@ const Search = () =>
 
     <SchoolLabels schools={["NJIT", "Rutgers", "TCNJ"]} />
 
-    <List className="searchbar-not-found">
-      <ListItem title="Nothing found" />
-    </List>
+    <NoResults />
 
     <List className="searchbar-found" id="search-list" inset>
       {people.map(person => <PersonListItem key={person.id} {...person} />)}
