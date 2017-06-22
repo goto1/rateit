@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const PersonName = ({ type, name, maxNameLength }) =>
+const PersonName = ({ type, name, maxNameLength, className }) =>
   <div
+    className={className}
     style={{
       fontSize: "15px",
       fontWeight: "500",
@@ -18,7 +19,8 @@ const PersonName = ({ type, name, maxNameLength }) =>
 PersonName.propTypes = {
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  maxNameLength: PropTypes.number.isRequired
+  maxNameLength: PropTypes.number.isRequired,
+  className: PropTypes.string
 };
 
 export default PersonName;
