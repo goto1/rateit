@@ -1,17 +1,10 @@
 import React from "react";
 import Search from "./containers/Search";
+import Bookmarks, {
+  SavedProfessors,
+  SavedStudents
+} from "./containers/Bookmarks";
 import { Page, Navbar, ContentBlock } from "framework7-react";
-
-const Saved = () =>
-  <Page>
-    <Navbar title="Saved" backLink="Back" sliding />
-    <ContentBlock inner>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, delectus,
-      ut! Aspernatur incidunt laudantium nobis doloribus commodi non
-      reprehenderit in doloremque animi repellendus aliquam voluptates, pariatur
-      possimus, est blanditiis qui?
-    </ContentBlock>
-  </Page>;
 
 const Settings = () =>
   <Page>
@@ -30,11 +23,23 @@ const routes = [
     component: Search
   },
   {
-    path: "/saved",
-    component: Saved
+    path: "/bookmarks/",
+    component: Bookmarks,
+    tabs: [
+      {
+        path: "/",
+        tabId: "professors",
+        component: SavedProfessors
+      },
+      {
+        path: "/students/",
+        tabId: "students",
+        component: SavedStudents
+      }
+    ]
   },
   {
-    path: "/settings",
+    path: "/settings/",
     component: Settings
   }
 ];
