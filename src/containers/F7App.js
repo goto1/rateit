@@ -10,18 +10,20 @@ import {
   Icon,
   View,
   Views,
-  Navbar,
-  NavCenter
+  Navbar
 } from "framework7-react";
 
 import "framework7/dist/css/framework7.ios.min.css";
 import "framework7/dist/css/framework7.ios.colors.min.css";
 
-let NavLink = ({ path, name, icon, currentPage }) =>
-  <Link href={`${path}`} active={path === currentPage}>
-    <Icon material={icon} style={{ fontSize: "23px", paddingTop: "5px" }} />
-    <span style={{ fontSize: "12px" }}>{name}</span>
-  </Link>;
+let NavLink = ({ path, name, icon, currentPage }) => {
+  return (
+    <Link href={`${path}`} className={path === currentPage ? "active" : ""}>
+      <Icon material={icon} style={{ fontSize: "23px", paddingTop: "5px" }} />
+      <span style={{ fontSize: "12px" }}>{name}</span>
+    </Link>
+  );
+};
 
 const mapStateToProps = state => ({ currentPage: state.currentPage });
 
@@ -30,16 +32,14 @@ NavLink = connect(mapStateToProps)(NavLink);
 const NavToolbar = () =>
   <Toolbar tabbar labels>
     <NavLink path="/" name="Search" icon="search" />
-    <NavLink path="/saved" name="Saved" icon="bookmark" />
-    <NavLink path="/settings" name="Settings" icon="settings" />
+    <NavLink path="/bookmarks/" name="Bookmarks" icon="bookmark" />
+    <NavLink path="/settings/" name="Settings" icon="settings" />
   </Toolbar>;
 
 const ViewsF7 = ({ children }) =>
   <Views>
     <View id="main-view" navbarThrough toolbarThrough dynamicNavbar={true} main>
-      <Navbar>
-        <NavCenter sliding>RateIt</NavCenter>
-      </Navbar>
+      <Navbar title="RateIt" sliding />
       <Pages>
         {children}
       </Pages>
@@ -50,7 +50,7 @@ const ViewsF7 = ({ children }) =>
 const F7App = ({ children, onRouteChange }) =>
   <Framework7App
     routes={routes}
-    onRouteChange={route => onRouteChange(route.path)}
+    onRouteChange={({ route }) => onRouteChange(route.pagePath)}
   >
     <ViewsF7>
       {children}
