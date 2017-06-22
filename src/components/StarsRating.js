@@ -21,7 +21,7 @@ const StarsRating = ({ rating }) => {
   const emptyStars = NUMBER_OF_STARS - halfStar - wholeStars;
 
   return (
-    <div style={{ position: "absolute", bottom: "0", right: "6px" }}>
+    <div style={{ width: "95px" }}>
       {Array.apply(null, Array(wholeStars)).map((item, idx) =>
         <Star key={idx} material="start" />
       )}
