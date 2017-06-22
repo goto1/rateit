@@ -1,5 +1,6 @@
 import React from "react";
-import styled from "styled-components";
+import { connect } from "react-redux";
+import { routeChange } from "../actions";
 import routes from "../routes";
 import {
   Framework7App,
@@ -16,52 +17,50 @@ import {
 import "framework7/dist/css/framework7.ios.min.css";
 import "framework7/dist/css/framework7.ios.colors.min.css";
 
-const IconCustom = styled(Icon)`
-  font-size: 23px;
-  padding-top: 5px;
-`;
-const LinkText = styled.span`
-  font-size: 12px;
-`;
+let NavLink = ({ path, name, icon, currentPage }) =>
+  <Link href={`${path}`} active={path === currentPage}>
+    <Icon material={icon} style={{ fontSize: "23px", paddingTop: "5px" }} />
+    <span style={{ fontSize: "12px" }}>{name}</span>
+  </Link>;
 
-const ViewsF7 = (props, context) =>
+const mapStateToProps = state => ({ currentPage: state.currentPage });
+
+NavLink = connect(mapStateToProps)(NavLink);
+
+const NavToolbar = () =>
+  <Toolbar tabbar labels>
+    <NavLink path="/" name="Search" icon="search" />
+    <NavLink path="/saved" name="Saved" icon="bookmark" />
+    <NavLink path="/settings" name="Settings" icon="settings" />
+  </Toolbar>;
+
+const ViewsF7 = ({ children }) =>
   <Views>
-    <View
-      id="main-view"
-      navbarThrough
-      toolbarThrough
-      dynamicNavbar={true}
-      main
-      url="/"
-    >
+    <View id="main-view" navbarThrough toolbarThrough dynamicNavbar={true} main>
       <Navbar>
         <NavCenter sliding>RateIt</NavCenter>
       </Navbar>
       <Pages>
-        {props.children}
+        {children}
       </Pages>
-      <Toolbar tabbar labels>
-        <Link href="/">
-          <IconCustom material="search" />
-          <LinkText>Search</LinkText>
-        </Link>
-        <Link href="/saved/">
-          <IconCustom material="bookmark" />
-          <LinkText>Saved</LinkText>
-        </Link>
-        <Link href="/settings/">
-          <IconCustom material="settings" />
-          <LinkText>Settings</LinkText>
-        </Link>
-      </Toolbar>
+      <NavToolbar />
     </View>
   </Views>;
 
-const F7App = ({ children }) =>
-  <Framework7App routes={routes}>
+const F7App = ({ children, onRouteChange }) =>
+  <Framework7App
+    routes={routes}
+    onRouteChange={route => onRouteChange(route.path)}
+  >
     <ViewsF7>
       {children}
     </ViewsF7>
   </Framework7App>;
 
-export default F7App;
+const mapDispatchToProps = dispatch => ({
+  onRouteChange: path => {
+    dispatch(routeChange(path));
+  }
+});
+
+export default connect(null, mapDispatchToProps)(F7App);

@@ -19,7 +19,8 @@
     "firebase-tools": "^3.9.1",
     "flow-bin": "^0.48.0",
     "prettier": "^1.4.4",
-    "react-scripts": "1.0.7"
+    "react-scripts": "1.0.7",
+    "redux-logger": "^3.0.6"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -24,15 +24,19 @@ const Settings = () =>
     </ContentBlock>
   </Page>;
 
-const createRoute = (path, component) => ({
-  path: `/${path}/`,
-  component
-});
-
 const routes = [
-  createRoute("/", Search),
-  createRoute("saved", Saved),
-  createRoute("settings", Settings)
+  {
+    path: "/",
+    component: Search
+  },
+  {
+    path: "/saved",
+    component: Saved
+  },
+  {
+    path: "/settings",
+    component: Settings
+  }
 ];
 
 export default routes;
