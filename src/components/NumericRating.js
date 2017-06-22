@@ -8,6 +8,7 @@ const NumericRating = styled.div`
   font-weight: 300;
   font-size: 15px;
   width: 32.5px;
+  padding: 1px;
 `;
 
 export default NumericRating;
