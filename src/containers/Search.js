@@ -77,7 +77,7 @@ const Search = () =>
     <Navbar title="RateIt" sliding />
     <Searchbar
       cancelLink="Cancel"
-      placeholder="Search professors and classmates"
+      placeholder="Search professors and students"
       clearButton={true}
       searchList="#search-list"
       searchIn=".person-name"
