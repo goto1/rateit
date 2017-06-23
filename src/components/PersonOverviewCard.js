@@ -1,3 +1,4 @@
+// @flow
 import React from "react";
 import styled from "styled-components";
 import PersonName from "./PersonName";
@@ -5,13 +6,13 @@ import PersonRole from "./PersonRole";
 import NumericRating from "./NumericRating";
 import NumberOfRatings from "./NumberOfRatings";
 import StarsRating from "./StarsRating";
+import type { PersonOverview } from "../types/index";
 import { Card, CardContent, CardFooter } from "framework7-react";
 
 const CardContentRow = styled.div`
   display: flex;
 `;
 
-// prettier-ignore
 const PersonOverviewCard = ({
   id,
   name,
@@ -19,7 +20,7 @@ const PersonOverviewCard = ({
   school,
   rating,
   numOfRatings
-}) => (
+}: PersonOverview) =>
   <Card>
     <CardContent>
       <CardContentRow>
@@ -35,7 +36,6 @@ const PersonOverviewCard = ({
       </CardContentRow>
     </CardContent>
     <CardFooter>CardFooter</CardFooter>
-  </Card>
-)
+  </Card>;
 
 export default PersonOverviewCard;
