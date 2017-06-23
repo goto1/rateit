@@ -7,35 +7,31 @@ import PersonName from "./PersonName";
 import PersonRole from "./PersonRole";
 import NumericRating from "./NumericRating";
 import NumberOfRatings from "./NumberOfRatings";
-import type { PersonOverview } from "../types/types";
+import type { PersonOverview } from "../types/index";
 
-const ArrowRight = () =>
-  <Icon
-    material="keyboard_arrow_right"
-    style={{
-      color: "#C7C7CC",
-      right: "-5px"
-    }}
-  />;
-
-const ListItem = ({ url, children }) =>
-  <li>
-    <a href={url}>
-      <div className="item-content">
-        <div
-          className="item-inner"
-          style={{ flexDirection: "column", paddingRight: "15px" }}
-        >
-          {children}
-        </div>
-      </div>
-    </a>
-  </li>;
+const ArrowRight = styled(Icon)`
+  color: #C7C7CC;
+  right: -5px;
+`;
 
 const ListItemRow = styled.div`
   display: flex;
   width: 100%;
 `;
+
+const ItemInner = styled.div`
+  flex-direction: column;
+  padding-right: 15px;
+`;
+
+const ListItem = ({ url, children }) =>
+  <li>
+    <a href={url}>
+      <div className="item-content">
+        <ItemInner className="item-inner">{children}</ItemInner>
+      </div>
+    </a>
+  </li>;
 
 const PersonListItem = ({
   id,
@@ -54,7 +50,7 @@ const PersonListItem = ({
         maxNameLength={20}
       />
       <NumericRating>{rating}</NumericRating>
-      <ArrowRight />
+      <ArrowRight material="keyboard_arrow_right" />
     </ListItemRow>
     <ListItemRow>
       <PersonRole type={type} school={school} maxLength={12} />
