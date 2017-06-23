@@ -1,6 +1,7 @@
 // @flow
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 import { Icon } from "framework7-react";
 import StarsRating from "./StarsRating";
 import PersonName from "./PersonName";
@@ -32,6 +33,11 @@ const ListItem = ({ url, children }) =>
       </div>
     </a>
   </li>;
+
+ListItem.propTypes = {
+  url: PropTypes.string.isRequired,
+  children: PropTypes.array.isRequired
+};
 
 const PersonListItem = ({
   id,
