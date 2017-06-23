@@ -1,6 +1,7 @@
 import React from "react";
-import PersonListItem from "../components/PersonListItem";
 import styled from "styled-components";
+import PropTypes from "prop-types";
+import PersonListItem from "../components/PersonListItem";
 import people from "../dummy-data";
 import {
   Page,
@@ -71,6 +72,10 @@ const SchoolLabels = ({ schools }) =>
     <span style={{ display: "block" }}>Searching In</span>
     {schools.map((name, idx) => <ChipCustom key={idx} text={name} />)}
   </ContentBlockTitleCustom>;
+
+SchoolLabels.propTypes = {
+  schools: PropTypes.arrayOf(PropTypes.string).isRequired
+};
 
 const Search = () =>
   <Page>
