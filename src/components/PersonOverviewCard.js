@@ -31,14 +31,13 @@ const HorizontalRule = styled.hr`
 `;
 
 const Button = styled.button.attrs({
-  type: "button",
-  onClick: props => props.onClick
+  type: "button"
 })`
   border: none;
   background: inherit;
   font-size: 13px;
   padding: 0;
-  flex-basis: 100%;
+  flex-basis: ${props => props.flexBasis || "100%"};
   text-align: ${props => props.textAlign};
   &:focus { outline: none; }
   i {
@@ -106,7 +105,8 @@ RatingCategory.propTypes = {
 };
 
 const RatingCategories = ({ ratings }) => {
-  const ratingsLength = ratings.length;
+  const ratingsLength: number = ratings.length;
+
   return (
     <div style={{ marginTop: "7.5px" }}>
       {ratings.map((rating, idx) =>
@@ -157,7 +157,7 @@ const PersonRatings = ({ ratings }) =>
         <Button
           onClick={() => console.log("onClick")}
           textAlign="left"
-          iconMargin="0 0 0 3px"
+          iconMargin="0 0 0 5px"
         >
           Quick Overview
           <Icon material="arrow_downward" />
@@ -166,7 +166,7 @@ const PersonRatings = ({ ratings }) =>
       <Button
         onClick={() => console.log("onClick")}
         textAlign="right"
-        iconMargin="0 3px 0 0"
+        iconMargin="0 5px 0 0"
       >
         <Icon material="person" />
         Show Profile
@@ -188,7 +188,17 @@ const PersonOverviewCard = (props: PersonOverview) =>
       <HorizontalRule margin="6px auto" width="90%" />
       <PersonRatings {...props} />
     </CardContent>
-    <CardFooter>CardFooter</CardFooter>
+    <CardFooter style={{ flexDirection: "row-reverse" }}>
+      <Button
+        onClick={() => console.log("onClick")}
+        textAlign="right"
+        iconMargin="0 0 0 7.5px"
+        flexBasis="75px"
+      >
+        Saved
+        <Icon material="bookmark" />
+      </Button>
+    </CardFooter>
   </Card>;
 
 export default PersonOverviewCard;
