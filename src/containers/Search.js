@@ -21,7 +21,7 @@ import {
 const ChipCustom = styled(Chip)`
   margin: 7.5px 5px 0 0 !important;
   letter-spacing: 1.5px;
-  background: #A09FA3 !important;
+  background: #808080 !important;
 `;
 
 const ContentBlockTitleCustom = styled(ContentBlockTitle)`
