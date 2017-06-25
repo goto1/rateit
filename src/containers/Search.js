@@ -24,11 +24,6 @@ const ChipCustom = styled(Chip)`
   background: #808080 !important;
 `;
 
-const ContentBlockTitleCustom = styled(ContentBlockTitle)`
-  margin: 15px 15px 0 15px !important;
-  white-space: normal !important;
-`;
-
 const CardHeaderCustom = styled(CardHeader)`
   text-transform: uppercase;
   letter-spacing: 1.1px;
@@ -68,10 +63,10 @@ const NoResults = () =>
   </List>;
 
 const SchoolLabels = ({ schools }) =>
-  <ContentBlockTitleCustom>
+  <ContentBlockTitle style={{ marginTop: "15px", whiteSpace: "normal" }}>
     <span style={{ display: "block" }}>Showing results for</span>
     {schools.map((name, idx) => <ChipCustom key={idx} text={name} />)}
-  </ContentBlockTitleCustom>;
+  </ContentBlockTitle>;
 
 SchoolLabels.propTypes = {
   schools: PropTypes.arrayOf(PropTypes.string).isRequired
