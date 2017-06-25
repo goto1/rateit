@@ -69,7 +69,7 @@ const NoResults = () =>
 
 const SchoolLabels = ({ schools }) =>
   <ContentBlockTitleCustom>
-    <span style={{ display: "block" }}>Searching In</span>
+    <span style={{ display: "block" }}>Showing results for</span>
     {schools.map((name, idx) => <ChipCustom key={idx} text={name} />)}
   </ContentBlockTitleCustom>;
 
@@ -93,7 +93,12 @@ const Search = () =>
     />
     <SchoolLabels schools={["NJIT", "Rutgers", "TCNJ"]} />
     <NoResults />
-    <List className="searchbar-found" id="search-list" inset>
+    <List
+      className="searchbar-found"
+      id="search-list"
+      inset
+      style={{ marginTop: "25px" }}
+    >
       {people.map(person => <PersonListItem key={person.id} {...person} />)}
     </List>
   </Page>;
