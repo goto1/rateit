@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import ContentBlockTitleCustom from "../layouts/ContentBlockTitleCustom";
 import PersonListItem from "../components/PersonListItem";
 import people from "../dummy-data";
 import {
@@ -63,10 +64,10 @@ const NoResults = () =>
   </List>;
 
 const SchoolLabels = ({ schools }) =>
-  <ContentBlockTitle style={{ marginTop: "15px", whiteSpace: "normal" }}>
+  <ContentBlockTitleCustom>
     <span style={{ display: "block" }}>Showing results for</span>
     {schools.map((name, idx) => <ChipCustom key={idx} text={name} />)}
-  </ContentBlockTitle>;
+  </ContentBlockTitleCustom>;
 
 SchoolLabels.propTypes = {
   schools: PropTypes.arrayOf(PropTypes.string).isRequired
