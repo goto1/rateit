@@ -1,13 +1,12 @@
 import React from "react";
-import ContentBlockTitleCustom from "../components/f7/ContentBlockTitleCustom";
-import { ListItemLinkCustom } from "../components/f7/ListItems";
+import { ContentBlockTitleCustom, ListItemCustom } from "../components/f7";
 import { Page, Navbar, List } from "framework7-react";
 
 const AccountSettings = () =>
   <div>
     <ContentBlockTitleCustom text="Account settings" />
     <List inset>
-      <ListItemLinkCustom
+      <ListItemCustom
         icon="account_circle"
         link="/settings/general"
         text="General"
@@ -19,12 +18,8 @@ const HelpAndSupport = () =>
   <div>
     <ContentBlockTitleCustom text="Help and support" />
     <List inset>
-      <ListItemLinkCustom
-        icon="help"
-        link="/settings/help/"
-        text="Help Center"
-      />
-      <ListItemLinkCustom
+      <ListItemCustom icon="help" link="/settings/help/" text="Help Center" />
+      <ListItemCustom
         icon="assignment"
         link="/settings/terms/"
         text="Terms & Policies"
@@ -35,12 +30,12 @@ const HelpAndSupport = () =>
 const UserSettings = () =>
   <div>
     <List inset>
-      <ListItemLinkCustom
+      <ListItemCustom
         icon="sentiment_very_satisfied"
         link="/profile/id/"
         text="Profile Page"
       />
-      <ListItemLinkCustom icon="exit_to_app" link="/signout/" text="Sign Out" />
+      <ListItemCustom icon="exit_to_app" link="/signout/" text="Sign Out" />
     </List>
   </div>;
 
