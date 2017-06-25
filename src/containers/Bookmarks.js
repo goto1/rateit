@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import people from "../dummy-data"; // To Be Deleted...
+import ContentBlockTitleCustom from "../layouts/ContentBlockTitleCustom";
 import PersonOverviewCard from "../components/PersonOverviewCard";
 import {
   Page,
@@ -10,15 +11,16 @@ import {
   Button,
   Tabs,
   Tab,
-  ContentBlock,
-  ContentBlockTitle
+  ContentBlock
 } from "framework7-react";
 
 const ContentBlockCustom = ({ title, children }) =>
-  <ContentBlock style={{ padding: "0" }}>
-    <ContentBlockTitle>{title.toUpperCase()}</ContentBlockTitle>
-    {children}
-  </ContentBlock>;
+  <div>
+    <ContentBlockTitleCustom>{title}</ContentBlockTitleCustom>
+    <ContentBlock style={{ padding: "0" }}>
+      {children}
+    </ContentBlock>
+  </div>;
 
 ContentBlockCustom.propTypes = {
   title: PropTypes.string.isRequired,
