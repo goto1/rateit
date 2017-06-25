@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import people from "../dummy-data"; // To Be Deleted...
-import ContentBlockTitleCustom from "../layouts/ContentBlockTitleCustom";
+import { ContentBlockTitleCustom } from "../components/f7";
 import PersonOverviewCard from "../components/PersonOverviewCard";
 import {
   Page,
@@ -16,7 +16,7 @@ import {
 
 const ContentBlockCustom = ({ title, children }) =>
   <div>
-    <ContentBlockTitleCustom>{title}</ContentBlockTitleCustom>
+    <ContentBlockTitleCustom text={title} />
     <ContentBlock style={{ padding: "0" }}>
       {children}
     </ContentBlock>

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import ContentBlockTitleCustom from "../layouts/ContentBlockTitleCustom";
+import { ContentBlockTitleCustom } from "../components/f7";
 import PersonListItem from "../components/PersonListItem";
 import people from "../dummy-data";
 import {
@@ -64,9 +64,10 @@ const NoResults = () =>
   </List>;
 
 const SchoolLabels = ({ schools }) =>
-  <ContentBlockTitleCustom>
-    <span style={{ display: "block" }}>Showing results for</span>
-    {schools.map((name, idx) => <ChipCustom key={idx} text={name} />)}
+  <ContentBlockTitleCustom text="Showing results for">
+    <div>
+      {schools.map((name, idx) => <ChipCustom key={idx} text={name} />)}
+    </div>
   </ContentBlockTitleCustom>;
 
 SchoolLabels.propTypes = {
