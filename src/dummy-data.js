@@ -1,3 +1,103 @@
+export const schools = [
+  {
+    id: "1jf1of1",
+    name: "NJIT"
+  },
+  {
+    id: "2jf21of1",
+    name: "Rutgers"
+  },
+  {
+    id: "3jf1o1f1",
+    name: "NYU"
+  },
+  {
+    id: "4f1of1",
+    name: "University of Washington"
+  },
+  {
+    id: "5j2gf1of1",
+    name: "University of California, Berkeley"
+  },
+  {
+    id: "6j2f2of1",
+    name: "Princton University"
+  },
+  {
+    id: "7fff1",
+    name: "Kean University"
+  }
+];
+
+export const majors = [
+  {
+    id: "jf01jf010",
+    name: "Architecture"
+  },
+  {
+    id: "1jf01jf010",
+    name: "Computer Science"
+  },
+  {
+    id: "2jf01jf010",
+    name: "Information Systems"
+  },
+  {
+    id: "3jf01jf010",
+    name: "Bio-Medical Engineering"
+  },
+  {
+    id: "4jf01jf010",
+    name: "Civil & Environmental Engineering"
+  },
+  {
+    id: "5jf01jf010",
+    name: "Eletrical & Computer Engineering"
+  },
+  {
+    id: "6jf01jf010",
+    name: "Mechanical & Industrial Engineering"
+  },
+  {
+    id: "7jf01jf010",
+    name: "Engineering Technology"
+  },
+  {
+    id: "8jf01jf010",
+    name: "Mathematics"
+  },
+  {
+    id: "9jf01jf010",
+    name: "Physics"
+  },
+  {
+    id: "10jf01jf010",
+    name: "Biology"
+  }
+];
+
+export const currentUser = {
+  info: {
+    email: "jeff@njit.edu"
+  },
+  schools: [
+    {
+      id: "1jf1of1",
+      name: "NJIT"
+    },
+    {
+      id: "2jf21of1",
+      name: "Rutgers University"
+    }
+  ],
+  majors: [
+    {
+      id: "1jf01jf010",
+      name: "Computer Science"
+    }
+  ]
+};
+
 const people = [
   {
     id: "009404973009374595",
