@@ -10,4 +10,4 @@ RateIt is an app similar to `RateMyProfessors` but improved with extra functiona
 
 ### Link
 
-* **[RateIt](https://goto1.github.io/is661/docs/)**
+* **[RateIt](https://rateit-8e36f.firebaseapp.com/)**
