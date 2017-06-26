@@ -8,7 +8,7 @@ const AccountSettings = () =>
     <List inset>
       <ListItemCustom
         icon="account_circle"
-        link="/settings/general"
+        link="/settings/general/"
         text="General"
       />
     </List>
