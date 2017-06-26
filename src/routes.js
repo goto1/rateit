@@ -1,6 +1,6 @@
-import React from "react";
 import Search from "./containers/Search";
 import Settings from "./containers/Settings";
+import General from "./containers/General";
 import Bookmarks, {
   SavedProfessors,
   SavedStudents
@@ -30,6 +30,10 @@ const routes = [
   {
     path: "/settings/",
     component: Settings
+  },
+  {
+    path: "/settings/general/",
+    component: General
   }
 ];
 
