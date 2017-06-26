@@ -17,8 +17,17 @@ import "framework7/dist/css/framework7.ios.min.css";
 import "framework7/dist/css/framework7.ios.colors.min.css";
 
 let NavLink = ({ path, name, icon, currentPage }) => {
+  let active = false;
+
+  if (path.length === 1) {
+    active = currentPage === path ? true : false;
+  }
+  if (path.length > 1) {
+    active = currentPage.indexOf(path) !== -1 ? true : false;
+  }
+
   return (
-    <Link href={`${path}`} className={path === currentPage ? "active" : ""}>
+    <Link href={`${path}`} className={active ? "active" : ""}>
       <Icon material={icon} style={{ fontSize: "23px", paddingTop: "5px" }} />
       <span style={{ fontSize: "12px" }}>{name}</span>
     </Link>
