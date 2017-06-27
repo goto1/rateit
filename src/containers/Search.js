@@ -9,7 +9,6 @@ import {
   Navbar,
   Searchbar,
   List,
-  ContentBlockTitle,
   Chip,
   Card,
   CardHeader,

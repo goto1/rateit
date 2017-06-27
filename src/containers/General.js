@@ -7,7 +7,7 @@ import {
   ListBlockCustom,
   SubmitButtonCustom
 } from "../components/f7";
-import { Page, Navbar, List, Button } from "framework7-react";
+import { Page, Navbar, List } from "framework7-react";
 
 const AccountInformation = () =>
   <div>
