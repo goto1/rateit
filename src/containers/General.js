@@ -4,9 +4,10 @@ import {
   ContentBlockTitleCustom,
   FormInputCustom,
   SmartSelectCustom,
-  ListBlockCustom
+  ListBlockCustom,
+  SubmitButtonCustom
 } from "../components/f7";
-import { Page, Navbar, List } from "framework7-react";
+import { Page, Navbar, List, Button } from "framework7-react";
 
 const AccountInformation = () =>
   <div>
@@ -23,7 +24,7 @@ const AccountInformation = () =>
         icon="lock"
         type="password"
         name="password"
-        placeholder="Confirm Password"
+        placeholder="Current Password"
         onChange={event => console.log(event.target.value)}
       />
     </List>
@@ -60,11 +61,49 @@ const SchoolInformation = () => {
   );
 };
 
+// prettier-ignore
+const PasswordReset = () => (
+  <div>
+    <ContentBlockTitleCustom text='Password Reset'></ContentBlockTitleCustom>
+    <List form inset>
+      <FormInputCustom
+        icon="lock"
+        type="password"
+        name="currentPassword"
+        placeholder="Current Password"
+        onChange={event => console.log(event.target.value)}
+      />
+      <FormInputCustom
+        icon="lock_outline"
+        type="password"
+        name="newPassword"
+        placeholder="New Password"
+        onChange={event => console.log(event.target.value)}
+      />
+      <FormInputCustom
+        icon="lock_outline"
+        type="password"
+        name="newPasswordRepeated"
+        placeholder="New Password Repeated"
+        onChange={event => console.log(event.target.value)}
+      />
+    </List>
+  </div>
+)
+
 const General = () =>
   <Page>
     <Navbar title="General" backLink="Back" sliding />
     <AccountInformation />
     <SchoolInformation />
+    <PasswordReset />
+    <SubmitButtonCustom
+      text="Submit changes"
+      disabled={false}
+      onClick={e => {
+        e.preventDefault();
+      }}
+    />
   </Page>;
 
 export default General;
