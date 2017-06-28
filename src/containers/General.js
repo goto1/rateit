@@ -61,10 +61,9 @@ const SchoolInformation = () => {
   );
 };
 
-// prettier-ignore
-const PasswordReset = () => (
+const PasswordReset = () =>
   <div>
-    <ContentBlockTitleCustom text='Password Reset'></ContentBlockTitleCustom>
+    <ContentBlockTitleCustom text="Password Reset" />
     <List form inset>
       <FormInputCustom
         icon="lock"
@@ -88,8 +87,7 @@ const PasswordReset = () => (
         onChange={event => console.log(event.target.value)}
       />
     </List>
-  </div>
-)
+  </div>;
 
 const General = () =>
   <Page>
