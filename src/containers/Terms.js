@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Page,
-  Navbar,
-  List,
-  Card,
-  CardHeader,
-  CardContent
-} from "framework7-react";
+import { Page, Navbar, Card, CardHeader, CardContent } from "framework7-react";
 
 const Terms = () =>
   <Page>
