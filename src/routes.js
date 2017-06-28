@@ -2,6 +2,7 @@ import Search from "./containers/Search";
 import Settings from "./containers/Settings";
 import General from "./containers/General";
 import Help from "./containers/Help";
+import Terms from "./containers/Terms";
 import Bookmarks, {
   SavedProfessors,
   SavedStudents
@@ -39,6 +40,10 @@ const routes = [
   {
     path: "/settings/help/",
     component: Help
+  },
+  {
+    path: "/settings/terms/",
+    component: Terms
   }
 ];
 
