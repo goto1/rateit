@@ -3,6 +3,7 @@ import Settings from "./containers/Settings";
 import General from "./containers/General";
 import Help from "./containers/Help";
 import Terms from "./containers/Terms";
+import Profile, { Overview, Ratings } from "./containers/Profile";
 import Bookmarks, {
   SavedProfessors,
   SavedStudents
@@ -44,7 +45,39 @@ const routes = [
   {
     path: "/settings/terms/",
     component: Terms
+  },
+  {
+    path: "/profile/:id",
+    component: Profile,
+    tabs: [
+      {
+        path: "/",
+        tabId: "overview",
+        component: Overview
+      },
+      {
+        path: "/ratings/",
+        tabId: "ratings",
+        component: Ratings
+      }
+    ]
   }
+  // {
+  //   path: "/profile/:id",
+  //   component: Overview,
+  //   tabs: [
+  //     {
+  //       path: "/",
+  //       tabId: "overview",
+  //       component: Overview
+  //     },
+  //     {
+  //       path: "/ratings/",
+  //       tabId: "ratings",
+  //       component: Ratings
+  //     }
+  //   ]
+  // }
 ];
 
 export default routes;
