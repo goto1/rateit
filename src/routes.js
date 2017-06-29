@@ -62,22 +62,6 @@ const routes = [
       }
     ]
   }
-  // {
-  //   path: "/profile/:id",
-  //   component: Overview,
-  //   tabs: [
-  //     {
-  //       path: "/",
-  //       tabId: "overview",
-  //       component: Overview
-  //     },
-  //     {
-  //       path: "/ratings/",
-  //       tabId: "ratings",
-  //       component: Ratings
-  //     }
-  //   ]
-  // }
 ];
 
 export default routes;
