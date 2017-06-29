@@ -56,7 +56,6 @@ const ViewsF7 = ({ children }) =>
     </View>
   </Views>;
 
-// prettify-ignore
 const handleChange = (event, reducer) => {
   // DEBUGING...
   const { params, route, path, url } = event;
