@@ -56,10 +56,35 @@ const ViewsF7 = ({ children }) =>
     </View>
   </Views>;
 
+// prettify-ignore
+const handleChange = (event, reducer) => {
+  // DEBUGING...
+  const { params, route, path, url } = event;
+  const paramsId = params.id || "N/A";
+  const currComponent = route.component.name || "N/A";
+  let currTab = "N/A";
+
+  try {
+    currTab = route.tab.component.name;
+  } catch (e) {
+    /* do nothing */
+  }
+
+  console.log("userID", paramsId);
+  console.log("path", path);
+  console.log("url", url);
+  console.log("currComponent", currComponent);
+  console.log("currTab", currTab);
+
+  reducer(path);
+};
+
 const F7App = ({ children, onRouteChange }) =>
   <Framework7App
     routes={routes}
-    onRouteChange={({ route }) => onRouteChange(route.pagePath)}
+    onRouteChange={event => {
+      handleChange(event, onRouteChange);
+    }}
   >
     <ViewsF7>
       {children}

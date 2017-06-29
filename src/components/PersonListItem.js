@@ -47,7 +47,7 @@ const PersonListItem = ({
   rating,
   numOfRatings
 }: PersonOverview) =>
-  <ListItem url={`/person/${id}/`}>
+  <ListItem url={`/profile/${id}/`}>
     <ListItemRow>
       <PersonName
         className="person-name"
