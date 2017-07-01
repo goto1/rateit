@@ -6,7 +6,7 @@ import { Icon } from "framework7-react";
 import StarsRating from "./StarsRating";
 import PersonName from "./PersonName";
 import PersonRole from "./PersonRole";
-import NumericRating from "./NumericRating";
+import NumericRatingChip from "./NumericRatingChip";
 import NumberOfRatings from "./NumberOfRatings";
 import type { PersonOverview } from "../types/index";
 
@@ -29,7 +29,9 @@ const ListItem = ({ url, children }) =>
   <li>
     <a href={url}>
       <div className="item-content">
-        <ItemInner className="item-inner">{children}</ItemInner>
+        <ItemInner className="item-inner">
+          {children}
+        </ItemInner>
       </div>
     </a>
   </li>;
@@ -55,7 +57,9 @@ const PersonListItem = ({
         name={name}
         maxNameLength={20}
       />
-      <NumericRating>{rating}</NumericRating>
+      <NumericRatingChip>
+        {rating}
+      </NumericRatingChip>
       <ArrowRight material="keyboard_arrow_right" />
     </ListItemRow>
     <ListItemRow>

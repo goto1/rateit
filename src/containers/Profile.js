@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+// import styled from "styled-components";
 import HorizontalRule from "../components/HorizontalRule";
+import NumericRating from "../components/NumericRating";
+import RatingCategories from "../components/RatingCategories";
 import {
   Page,
   Navbar,
@@ -16,31 +18,12 @@ import {
   Icon
 } from "framework7-react";
 
+import people from "../dummy-data"; // TO BE DELETED!
+
 const CardCustom = ({ children }) =>
-  <Card style={{ marginTop: "25px", marginBottom: "35px" }}>{children}</Card>;
-
-const NumericRating = ({ rating, fontSize }) => {
-  let color = "#A1BA37";
-  if (rating <= 3) {
-    color = "#DEB21C";
-  }
-  if (rating <= 2) {
-    color = "#D91948";
-  }
-
-  return (
-    <div style={{ letterSpacing: "2px" }}>
-      <span style={{ color: color, fontSize: fontSize, fontWeight: "500" }}>
-        {rating}
-      </span>/5
-    </div>
-  );
-};
-
-NumericRating.propTypes = {
-  rating: PropTypes.number.isRequired,
-  fontSize: PropTypes.string.isRequired
-};
+  <Card style={{ marginTop: "25px", marginBottom: "35px" }}>
+    {children}
+  </Card>;
 
 const CardHeaderCustom = ({ title, children }) =>
   <div className="card-header">
@@ -61,11 +44,25 @@ CardHeaderCustom.propTypes = {
   children: PropTypes.object
 };
 
+const CardContentCustom = ({ children }) =>
+  <div className="card-content">
+    <div
+      className="card-content-inner"
+      style={{ padding: "5px 15px 15px 15px" }}
+    >
+      {children}
+    </div>
+  </div>;
+
 const CardContentItem = ({ icon, text }) =>
   <div style={{ marginBottom: "5px" }}>
     <div style={{ display: "flex" }}>
-      <div style={{ marginRight: "10px" }}><Icon material={icon} /></div>
-      <div style={{ paddingTop: "3px" }}>{text}</div>
+      <div style={{ marginRight: "10px" }}>
+        <Icon material={icon} />
+      </div>
+      <div style={{ paddingTop: "3px" }}>
+        {text}
+      </div>
     </div>
     <HorizontalRule
       width="80%"
@@ -81,17 +78,28 @@ CardContentItem.propTypes = {
 };
 
 export const Overview = () =>
-  <CardCustom>
-    <CardHeaderCustom title="Randal Rivera">
-      <NumericRating rating={4.5} fontSize="20px" />
-    </CardHeaderCustom>
-    <CardContent>
-      <CardContentItem icon="portrait" text="Student" />
-      <CardContentItem icon="location_city" text="NJIT" />
-      <CardContentItem icon="school" text="Information Systems" />
-      <CardContentItem icon="email" text="ranr1141@njit.edu" />
-    </CardContent>
-  </CardCustom>;
+  <div>
+    <CardCustom>
+      <CardHeaderCustom title="Randal Rivera">
+        <NumericRating rating={4.5} fontSize={17} />
+      </CardHeaderCustom>
+      <CardContent>
+        <CardContentItem icon="portrait" text="Student" />
+        <CardContentItem icon="location_city" text="NJIT" />
+        <CardContentItem icon="school" text="Information Systems" />
+        <CardContentItem icon="email" text="ranr1141@njit.edu" />
+      </CardContent>
+    </CardCustom>
+    <CardCustom>
+      <CardHeaderCustom title="Based on 201 ratings" />
+      <CardContentCustom>
+        <RatingCategories
+          ratings={people[0].ratings}
+          hrColors={{ colorOne: "#FFFFFF", colorTwo: "#747475" }}
+        />
+      </CardContentCustom>
+    </CardCustom>
+  </div>;
 
 export const Ratings = () =>
   <CardCustom>
