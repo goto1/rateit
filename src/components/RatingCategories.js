@@ -38,7 +38,7 @@ Category.propTypes = {
   rating: PropTypes.number.isRequired
 };
 
-const RatingCategories = ({ ratings }) => {
+const RatingCategories = ({ ratings, hrColors }) => {
   const length = ratings.length;
 
   return (
@@ -53,8 +53,8 @@ const RatingCategories = ({ ratings }) => {
             <HorizontalRule
               margin="1px auto"
               width="70%"
-              colorOne="#e5e5e5"
-              colorTwo="#0b7eff"
+              colorOne={hrColors.colorOne}
+              colorTwo={hrColors.colorTwo}
             />}
         </div>
       )}
@@ -63,7 +63,8 @@ const RatingCategories = ({ ratings }) => {
 };
 
 RatingCategories.propTypes = {
-  ratings: PropTypes.array.isRequired
+  ratings: PropTypes.array.isRequired,
+  hrColors: PropTypes.object.isRequired
 };
 
 export default RatingCategories;

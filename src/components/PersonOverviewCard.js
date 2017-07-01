@@ -86,7 +86,10 @@ const PersonRatings = ({ ratings }) =>
       </Button>
     </CardContentRow>
     <AccordionContent>
-      <RatingCategories ratings={ratings} />
+      <RatingCategories
+        ratings={ratings}
+        hrColors={{ colorOne: "#E5E5E5", colorTwo: "#0B7EFF" }}
+      />
     </AccordionContent>
   </AccordionItem>;
 
