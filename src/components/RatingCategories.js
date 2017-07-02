@@ -11,14 +11,20 @@ const IconCustom = styled(Icon)`
   padding-top: 4px;
 `;
 
+const DescriptionWrapper = styled.div`
+  flex-grow: 1;
+  padding-top: 4px;
+  color: #000;
+`;
+
 const Description = ({ description }) => {
   const maxLength = 28;
   return (
-    <div style={{ flexGrow: "1", paddingTop: "4px", color: "#000" }}>
+    <DescriptionWrapper>
       {description.length > maxLength
         ? `${description.slice(0, maxLength - 2)}..`
         : description}
-    </div>
+    </DescriptionWrapper>
   );
 };
 
@@ -26,23 +32,29 @@ Description.propTypes = {
   description: PropTypes.string.isRequired
 };
 
+const CategoryWrapper = styled.div`
+  display: flex;
+  margin-bottom: 1px;
+`;
+
 const Category = ({ description, rating }) =>
-  <div style={{ display: "flex", marginBottom: "1px" }}>
+  <CategoryWrapper>
     <IconCustom material="forward" />
     <Description description={description} />
     <NumericRating rating={rating} fontSize={14} />
-  </div>;
+  </CategoryWrapper>;
 
 Category.propTypes = {
   description: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired
 };
 
+const RatingCategoriesWrapper = styled.div`margin-top: 7.5px;`;
+
 const RatingCategories = ({ ratings, hrColors }) => {
   const length = ratings.length;
-
   return (
-    <div style={{ marginTop: "7.5px" }}>
+    <RatingCategoriesWrapper>
       {ratings.map((category, index) =>
         <div key={index}>
           <Category
@@ -58,7 +70,7 @@ const RatingCategories = ({ ratings, hrColors }) => {
             />}
         </div>
       )}
-    </div>
+    </RatingCategoriesWrapper>
   );
 };
 
