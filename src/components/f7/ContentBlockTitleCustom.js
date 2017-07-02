@@ -1,14 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 import { ContentBlockTitle } from "framework7-react";
+
+const ContentBlockTitleWrapper = styled(ContentBlockTitle)`
+  margin-top: 25px !important;
+`;
 
 // <ContentBlockTitleCustom
 //   text='Description goes here...' />
 const ContentBlockTitleCustom = ({ text, children }) =>
-  <ContentBlockTitle style={{ marginTop: "25px", whiteSpace: "normal" }}>
+  <ContentBlockTitleWrapper>
     {text}
     {children !== undefined && children}
-  </ContentBlockTitle>;
+  </ContentBlockTitleWrapper>;
 
 ContentBlockTitleCustom.propTypes = {
   text: PropTypes.string.isRequired,
