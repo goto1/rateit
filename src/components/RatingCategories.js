@@ -41,7 +41,9 @@ const Category = ({ description, rating }) =>
   <CategoryWrapper>
     <IconCustom material="forward" />
     <Description description={description} />
-    <NumericRating rating={rating} fontSize={14} />
+    <NumericRating fontSize={14}>
+      {rating}
+    </NumericRating>
   </CategoryWrapper>;
 
 Category.propTypes = {
