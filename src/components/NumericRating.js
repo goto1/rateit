@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 `;
 
 const NumericRating = ({ fontSize, children }) => {
-  const rating = Number.parseInt(children, 10);
+  const rating = children;
 
   let color = "#A1BA37";
   if (rating <= 3) {
@@ -31,8 +31,8 @@ const NumericRating = ({ fontSize, children }) => {
 };
 
 NumericRating.propTypes = {
-  rating: PropTypes.number.isRequired,
-  children: PropTypes.string.isRequired
+  fontSize: PropTypes.number.isRequired,
+  children: PropTypes.number.isRequired
 };
 
 export default NumericRating;
