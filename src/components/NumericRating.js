@@ -12,6 +12,7 @@ const Wrapper = styled.div`
   }
 `;
 
+// <NumericRating fontSize={10}>{5}</NumericRating>
 const NumericRating = ({ fontSize, children }) => {
   const rating = children;
 
