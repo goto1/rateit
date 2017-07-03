@@ -98,12 +98,15 @@ export const currentUser = {
   ]
 };
 
+// NOTE: `ratings` should be called `overall ratings`
 const people = [
   {
     id: "009404973009374595",
     name: "Randall Rivera",
     type: "Student",
     school: "NJIT",
+    major: "Information Systems",
+    email: "ranr1141@njit.edu",
     rating: 4.5,
     numOfRatings: 201,
     ratings: [
@@ -131,6 +134,116 @@ const people = [
         description: "Contributes Significantly",
         rating: 3
       }
+    ],
+    usersRatings: [
+      {
+        username: "Eager Pig",
+        date: "11 Nov 2016",
+        recommends: true,
+        overallRating: 4.5,
+        likes: 9,
+        dislikes: 0,
+        comments:
+          "I have no issues with the guy, however, he was sometimes unavailable due to his job. Other than that he's pretty chill",
+        individualRatings: [
+          {
+            description: "Attends Group Meetings",
+            rating: 3
+          },
+          {
+            description: "Contributes to Discussions",
+            rating: 5
+          },
+          {
+            description: "Completes Tasks on Time",
+            rating: 4
+          },
+          {
+            description: "Quality of Completed Work",
+            rating: 2
+          },
+          {
+            description: "Cooperative & Supportive",
+            rating: 3
+          },
+          {
+            description: "Contributes Significantly",
+            rating: 3
+          }
+        ]
+      },
+      {
+        username: "Eager Pig",
+        date: "11 Nov 2016",
+        recommends: false,
+        overallRating: 4.5,
+        likes: 9,
+        dislikes: 0,
+        comments:
+          "I have no issues with the guy, however, he was sometimes unavailable due to his job. Other than that he's pretty chill",
+        individualRatings: [
+          {
+            description: "Attends Group Meetings",
+            rating: 3
+          },
+          {
+            description: "Contributes to Discussions",
+            rating: 5
+          },
+          {
+            description: "Completes Tasks on Time",
+            rating: 4
+          },
+          {
+            description: "Quality of Completed Work",
+            rating: 2
+          },
+          {
+            description: "Cooperative & Supportive",
+            rating: 3
+          },
+          {
+            description: "Contributes Significantly",
+            rating: 3
+          }
+        ]
+      },
+      {
+        username: "Eager Pig",
+        date: "11 Nov 2016",
+        recommends: true,
+        overallRating: 4.5,
+        likes: 9,
+        dislikes: 0,
+        comments:
+          "I have no issues with the guy, however, he was sometimes unavailable due to his job. Other than that he's pretty chill",
+        individualRatings: [
+          {
+            description: "Attends Group Meetings",
+            rating: 3
+          },
+          {
+            description: "Contributes to Discussions",
+            rating: 5
+          },
+          {
+            description: "Completes Tasks on Time",
+            rating: 4
+          },
+          {
+            description: "Quality of Completed Work",
+            rating: 2
+          },
+          {
+            description: "Cooperative & Supportive",
+            rating: 3
+          },
+          {
+            description: "Contributes Significantly",
+            rating: 3
+          }
+        ]
+      }
     ]
   },
   {
@@ -138,6 +251,8 @@ const people = [
     name: "Renee Porter",
     type: "Professor",
     school: "NJIT",
+    major: "Information Systems",
+    email: "ranr1141@njit.edu",
     rating: 3,
     numOfRatings: 110,
     ratings: [
@@ -161,6 +276,44 @@ const people = [
         description: "Overall Teaching Effectivness",
         rating: 3
       }
+    ],
+    usersRatings: [
+      {
+        username: "Eager Pig",
+        date: "11 Nov 2016",
+        recommends: true,
+        overallRating: 4.5,
+        likes: 9,
+        dislikes: 0,
+        comments:
+          "I have no issues with the guy, however, he was sometimes unavailable due to his job. Other than that he's pretty chill",
+        individualRatings: [
+          {
+            description: "Attends Group Meetings",
+            rating: 3
+          },
+          {
+            description: "Contributes to Discussions",
+            rating: 5
+          },
+          {
+            description: "Completes Tasks on Time",
+            rating: 4
+          },
+          {
+            description: "Quality of Completed Work",
+            rating: 2
+          },
+          {
+            description: "Cooperative & Supportive",
+            rating: 3
+          },
+          {
+            description: "Contributes Significantly",
+            rating: 3
+          }
+        ]
+      }
     ]
   },
   {
@@ -168,6 +321,8 @@ const people = [
     name: "Lionel Ford",
     type: "Student",
     school: "Rutgers",
+    major: "Information Systems",
+    email: "ranr1141@njit.edu",
     rating: 2.5,
     numOfRatings: 30,
     ratings: [
@@ -195,6 +350,44 @@ const people = [
         description: "Contributes Significantly",
         rating: 3
       }
+    ],
+    usersRatings: [
+      {
+        username: "Eager Pig",
+        date: "11 Nov 2016",
+        recommends: true,
+        overallRating: 4.5,
+        likes: 9,
+        dislikes: 0,
+        comments:
+          "I have no issues with the guy, however, he was sometimes unavailable due to his job. Other than that he's pretty chill",
+        individualRatings: [
+          {
+            description: "Attends Group Meetings",
+            rating: 3
+          },
+          {
+            description: "Contributes to Discussions",
+            rating: 5
+          },
+          {
+            description: "Completes Tasks on Time",
+            rating: 4
+          },
+          {
+            description: "Quality of Completed Work",
+            rating: 2
+          },
+          {
+            description: "Cooperative & Supportive",
+            rating: 3
+          },
+          {
+            description: "Contributes Significantly",
+            rating: 3
+          }
+        ]
+      }
     ]
   },
   {
@@ -202,6 +395,8 @@ const people = [
     name: "Jonathon Sims",
     type: "Professor",
     school: "Rutgers",
+    major: "Information Systems",
+    email: "ranr1141@njit.edu",
     rating: 5,
     numOfRatings: 63,
     ratings: [
@@ -228,6 +423,44 @@ const people = [
       {
         description: "Contributes Significantly",
         rating: 3
+      }
+    ],
+    usersRatings: [
+      {
+        username: "Eager Pig",
+        date: "11 Nov 2016",
+        recommends: true,
+        overallRating: 4.5,
+        likes: 9,
+        dislikes: 0,
+        comments:
+          "I have no issues with the guy, however, he was sometimes unavailable due to his job. Other than that he's pretty chill",
+        individualRatings: [
+          {
+            description: "Attends Group Meetings",
+            rating: 3
+          },
+          {
+            description: "Contributes to Discussions",
+            rating: 5
+          },
+          {
+            description: "Completes Tasks on Time",
+            rating: 4
+          },
+          {
+            description: "Quality of Completed Work",
+            rating: 2
+          },
+          {
+            description: "Cooperative & Supportive",
+            rating: 3
+          },
+          {
+            description: "Contributes Significantly",
+            rating: 3
+          }
+        ]
       }
     ]
   }
