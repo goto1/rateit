@@ -3,10 +3,13 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Icon } from "framework7-react";
 
-const Star = styled(Icon)`
-  font-size: 19px;
-  color: #FEBA72;
-  width: 19px;
+const Wrapper = styled.div`
+  width: 95px;
+  i.icon {
+    font-size: 19px;
+    color: #feba72;
+    width: 19px;
+  }
 `;
 
 const StarsRating = ({ rating }) => {
@@ -21,17 +24,17 @@ const StarsRating = ({ rating }) => {
   const emptyStars = NUMBER_OF_STARS - halfStar - wholeStars;
 
   return (
-    <div style={{ width: "95px" }}>
+    <Wrapper>
       {Array.apply(null, Array(wholeStars)).map((item, idx) =>
-        <Star key={idx} material="start" />
+        <Icon key={idx} material="start" />
       )}
 
-      {halfStar === 1 && <Star material="star_half" />}
+      {halfStar === 1 && <Icon material="star_half" />}
 
       {Array.apply(null, Array(emptyStars)).map((item, idx) =>
-        <Star key={idx} material="star_border" />
+        <Icon key={idx} material="star_border" />
       )}
-    </div>
+    </Wrapper>
   );
 };
 
