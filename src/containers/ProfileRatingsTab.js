@@ -4,7 +4,7 @@ import styled from "styled-components";
 import HorizontalRule from "../components/HorizontalRule";
 import RatingCategories from "../components/RatingCategories";
 import StarsRating from "../components/StarsRating";
-import { ContentBlockTitleCustom } from "../components/f7";
+import { ContentBlockTitleWrapper } from "../components/f7";
 import {
   AccordionItem,
   AccordionToggle,
@@ -16,15 +16,19 @@ import {
   Icon
 } from "framework7-react";
 
-const CardCustom = styled(Card)`
-  margin-bottom: 20px !important;
-`;
-
-const CardHeaderCustom = styled(CardHeader)`
+const HeaderContainer = styled(CardHeader)`
   div:nth-of-type(1) {
     padding-top: 2px;
   }
 `;
+
+const Header = ({ username, overallRating }) =>
+  <HeaderContainer>
+    <div>
+      {username}
+    </div>
+    <StarsRating rating={overallRating} />
+  </HeaderContainer>;
 
 const DatePosted = styled.div`
   text-align: right;
@@ -40,7 +44,7 @@ const RecommendationWrapper = styled.div`
   display: flex;
   div {
     text-transform: uppercase;
-    font-size: 10px;
+    font-size: 10.5px;
     text-align: right;
     padding-top: 3px;
     margin-left: 5px;
@@ -53,23 +57,15 @@ const RecommendationWrapper = styled.div`
   }
 `;
 
-const Recommendation = ({ recommends }) => {
-  if (recommends) {
-    return (
-      <RecommendationWrapper iconColor="#00B232">
-        <Icon material="done" />
-        <div>I would recommend this student!</div>
-      </RecommendationWrapper>
-    );
-  } else {
-    return (
-      <RecommendationWrapper iconColor="#FF0000">
-        <Icon material="clear" />
-        <div>I would not recommend this student!</div>
-      </RecommendationWrapper>
-    );
-  }
-};
+const Recommendation = ({ recommends }) =>
+  <RecommendationWrapper iconColor={recommends ? "#00B232" : "#FF0000"}>
+    <Icon material={recommends ? "done" : "clear"} />
+    <div>
+      {recommends
+        ? "I would recommend this student!"
+        : `I wouldn't recommend this student!`}
+    </div>
+  </RecommendationWrapper>;
 
 const DetailsWrapper = styled.div`
   .accordion-item {
@@ -103,43 +99,85 @@ const Details = ({ individualRatings }) =>
     </AccordionItem>
   </DetailsWrapper>;
 
-const Rating = ({
-  username,
-  comments,
-  recommends,
-  date,
-  individualRatings,
-  overallRating
-}) =>
-  <CardCustom>
-    <CardHeaderCustom>
-      <div>
-        {username}
-      </div>
-      <StarsRating rating={overallRating} />
-    </CardHeaderCustom>
-    <CardContent>
-      <DatePosted>
-        {date}
-      </DatePosted>
-      <Comment>
-        {comments}
-      </Comment>
-      <Recommendation recommends={recommends} />
-      <Details individualRatings={individualRatings} />
-    </CardContent>
-  </CardCustom>;
+const Content = ({ date, comments, recommends, individualRatings }) =>
+  <CardContent>
+    <DatePosted>
+      {date}
+    </DatePosted>
+    <Comment>
+      {comments}
+    </Comment>
+    <Recommendation recommends={recommends} />
+    <HorizontalRule
+      margin="1px auto"
+      width="90%"
+      colorOne="#FFF"
+      colorTwo="#000"
+    />
+    <Details individualRatings={individualRatings} />
+  </CardContent>;
 
-const UserRatings = ({ userRatings }) =>
-  <div>
-    {userRatings.map((rating, index) => <Rating key={index} {...rating} />)}
-  </div>;
+const FooterButtonWrapper = styled.button.attrs({
+  type: "button",
+  onClick: props => props.onClick
+})`
+  border: none;
+  background-color: inherit;
+  display: flex;
+  padding-right: 0px;
+  &:focus {
+    outline: none;
+  }
+  span {
+    margin: 0 5px;
+    font-size: 15px;
+    padding-top: 2px;
+  }
+`;
 
-const ProfileRatingsTab = ({ numOfRatings, usersRatings }) => {
+const FooterButton = ({ icon, onClick, children }) =>
+  <FooterButtonWrapper onClick={onClick}>
+    <Icon material={icon} />
+    <span>
+      {children}
+    </span>
+  </FooterButtonWrapper>;
+
+const CardFooterContainer = styled(CardFooter)`
+  justify-content: flex-start !important;
+`;
+
+const Footer = ({ numOfLikes, numOfDislikes }) =>
+  <CardFooterContainer>
+    <FooterButton icon="thumb_up" onClick={() => console.log("liked")}>
+      {numOfLikes}
+    </FooterButton>
+    <FooterButton icon="thumb_down" onClick={() => console.log("disliked")}>
+      {numOfDislikes}
+    </FooterButton>
+  </CardFooterContainer>;
+
+const CardContainer = styled(Card)`
+  margin-bottom: 20px !important;
+`;
+
+const UserRating = props =>
+  <CardContainer>
+    <Header {...props} />
+    <Content {...props} />
+    <Footer numOfLikes={9} numOfDislikes={0} />
+  </CardContainer>;
+
+const ProfileRatingsTab = ({ usersRatings }) => {
+  const numOfRatings = usersRatings.length;
   return (
     <div>
-      <ContentBlockTitleCustom text={`Showing ${numOfRatings} comments`} />
-      <UserRatings userRatings={usersRatings} />
+      <ContentBlockTitleWrapper>
+        {`Showing ${numOfRatings} comments`}
+      </ContentBlockTitleWrapper>
+      {usersRatings.map((rating, index) =>
+        <UserRating key={index} {...rating} />
+      )}
     </div>
   );
 };
