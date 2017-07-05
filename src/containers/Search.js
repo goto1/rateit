@@ -1,15 +1,13 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { ContentBlockTitleCustom } from "../components/f7";
-import PersonListItem from "../components/PersonListItem";
-import people from "../dummy-data";
+import UserListItem from "../components/UserListItem";
+import { ContentBlockTitleWrapper } from "../components/f7";
 import {
   Page,
   Navbar,
   Searchbar,
   List,
-  Chip,
   Card,
   CardHeader,
   CardContent,
@@ -18,19 +16,10 @@ import {
   Button
 } from "framework7-react";
 
-const ChipCustom = styled(Chip)`
-  margin: 7.5px 5px 0 0 !important;
-  letter-spacing: 1.5px;
-  background: #808080 !important;
-`;
+// DELETE WHEN DONE TESTING...
+import * as API from "../utils/";
 
-const CardHeaderCustom = styled(CardHeader)`
-  text-transform: uppercase;
-  letter-spacing: 1.1px;
-  font-weight: 500;
-`;
-
-const ButtonCustom = styled(Button)`
+const ButtonWrapper = styled(Button)`
   color: ${props => props.color} !important;
   border: 2px solid ${props => props.color} !important;
   font-size: 11px !important;
@@ -38,65 +27,133 @@ const ButtonCustom = styled(Button)`
   text-transform: uppercase !important;
 `;
 
-const NoResults = () =>
-  <List className="searchbar-not-found" style={{ marginTop: "30px" }}>
-    <Card>
-      <CardHeaderCustom>
-        <span style={{ display: "inline-block", margin: "0 auto" }}>
-          No Results Found
-        </span>
-      </CardHeaderCustom>
-      <CardContent style={{ textAlign: "center" }}>
-        Can't find what you're looking for? You can rate {" "}
-        <span style={{ fontWeight: "500" }}>professors</span> or {" "}
-        <span style={{ fontWeight: "500" }}>classmates</span> down below!
-      </CardContent>
-    </Card>
-    <GridRow style={{ margin: "20px 10px" }}>
-      <GridCol>
-        <ButtonCustom big color="#9595A8">Rate a professor</ButtonCustom>
-      </GridCol>
-      <GridCol>
-        <ButtonCustom big color="#A8A284">Rate a classmate</ButtonCustom>
-      </GridCol>
-    </GridRow>
-  </List>;
+const NoResultsFoundContainer = styled.div`
+  .list-block {
+    margin-top: 30px;
+  }
+  .card-header {
+    text-transform: uppercase;
+    letter-spacing: 1.1px;
+    font-weight: 500;
+    text-align: center;
+  }
+  .card-header > span {
+    display: inline-block;
+    margin: 0 auto;
+  }
+  .card-content {
+    text-align: center;
+  }
+  .card-content-inner > span {
+    font-weight: 500 !important;
+  }
+  .row {
+    margin: 20px 10px;
+  }
+`;
 
-const SchoolLabels = ({ schools }) =>
-  <ContentBlockTitleCustom text="Showing results for">
-    <div>
-      {schools.map((name, idx) => <ChipCustom key={idx} text={name} />)}
-    </div>
-  </ContentBlockTitleCustom>;
+const NoResultsFound = () =>
+  <NoResultsFoundContainer>
+    <List className="searchbar-not-found">
+      <Card>
+        <CardHeader>
+          <span>No Results Found</span>
+        </CardHeader>
+        <CardContent>
+          Can't find what you're looking for? You can rate{" "}
+          <span>professors</span> or <span>classmates</span> down below!
+        </CardContent>
+      </Card>
+      <GridRow>
+        <GridCol>
+          <ButtonWrapper big color="#9595A8">
+            Rate a professor
+          </ButtonWrapper>
+        </GridCol>
+        <GridCol>
+          <ButtonWrapper big color="#A8A284">
+            Rate a classmate
+          </ButtonWrapper>
+        </GridCol>
+      </GridRow>
+    </List>
+  </NoResultsFoundContainer>;
 
-SchoolLabels.propTypes = {
-  schools: PropTypes.arrayOf(PropTypes.string).isRequired
+const ChipWrapper = styled.span`
+  margin: 7.5px 5px 0 0 !important;
+  letter-spacing: 1.5px;
+  background: #808080 !important;
+`;
+
+const Chip = ({ children }) =>
+  <ChipWrapper className="chip">
+    <span className="chip-label">
+      {children}
+    </span>
+  </ChipWrapper>;
+
+Chip.propTypes = {
+  children: PropTypes.string.isRequired
 };
 
-const Search = () =>
-  <Page>
-    <Navbar title="RateIt" sliding />
-    <Searchbar
-      cancelLink="Cancel"
-      placeholder="Search professors and students"
-      clearButton={true}
-      searchList="#search-list"
-      searchIn=".person-name"
-      onSearchbarSearch={() => console.log("onSearchbarSearch")}
-      onSearchbarEnable={() => console.log("onSearchbarEnable")}
-      onSearchbarDisable={() => console.log("onSearchbarDisable")}
-      onSearchbarClear={() => console.log("onSearchbarClear")}
-    />
-    <SchoolLabels schools={["NJIT", "Rutgers", "TCNJ"]} />
-    <NoResults />
-    <List
-      className="searchbar-found"
-      id="search-list"
-      inset
-      style={{ marginTop: "25px" }}
-    >
-      {people.map(person => <PersonListItem key={person.id} {...person} />)}
-    </List>
-  </Page>;
+const SchoolLabels = ({ schools }) =>
+  <ContentBlockTitleWrapper>
+    Showing results for
+    <div>
+      {schools.map(school =>
+        <Chip key={school.id}>
+          {school.abbreviation}
+        </Chip>
+      )}
+    </div>
+  </ContentBlockTitleWrapper>;
+
+SchoolLabels.propTypes = {
+  schools: PropTypes.array.isRequired
+};
+
+const ListContainer = styled(List)`
+  margin-top: 25px !important;
+`;
+
+const UserList = ({ users }) =>
+  <ListContainer className="searchbar-found" id="search-list" inset>
+    {users.map(user => <UserListItem key={user.id} {...user} />)}
+  </ListContainer>;
+
+UserList.propTypes = {
+  users: PropTypes.array.isRequired
+};
+
+// DELETE THIS WHEN DONE TESTING
+const allUsers = API.getUsers();
+const currentUser = API.getUserDetails("UArjrbxWHX");
+
+class Search extends Component {
+  render() {
+    const users = allUsers.map(user => API.getUserDetails(user.id));
+    const userSchools = currentUser.schools;
+
+    return (
+      <Page>
+        <Navbar title="RateIt" sliding />
+        <Searchbar
+          cancelLink="Cancel"
+          placeholder="Search professors and students"
+          clearButton={true}
+          searchList="#search-list"
+          searchIn=".username"
+          onSearchbarSearch={() => console.log("onSearchbarSearch")}
+          onSearchbarEnable={() => console.log("onSearchbarEnable")}
+          onSearchbarDisable={() => console.log("onSearchbarDisable")}
+          onSearchbarClear={() => console.log("onSearchbarClear")}
+        />
+        <SchoolLabels schools={userSchools} />
+        <NoResultsFound />
+        <UserList users={users} />
+      </Page>
+    );
+  }
+}
 
 export default Search;
