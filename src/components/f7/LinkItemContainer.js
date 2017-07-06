@@ -32,7 +32,7 @@ const LinkItemContainer = ({ url, children }) =>
 
 LinkItemContainer.propTypes = {
   url: PropTypes.string.isRequired,
-  children: PropTypes.array.isRequired
+  children: PropTypes.object.isRequired
 };
 
 export default LinkItemContainer;
