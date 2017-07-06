@@ -128,6 +128,7 @@ UserList.propTypes = {
 // DELETE THIS WHEN DONE TESTING
 const allUsers = API.getUsers();
 const currentUser = API.getUserDetails("UArjrbxWHX");
+// DELETE THIS WHEN DONE TESTING
 
 class Search extends Component {
   render() {
