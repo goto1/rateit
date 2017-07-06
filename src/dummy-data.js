@@ -1,78 +1,178 @@
+// prettier-ignore
 export const schools = [
-  {
-    id: "1jf1of1",
-    name: "NJIT"
-  },
-  {
-    id: "2jf21of1",
-    name: "Rutgers"
-  },
-  {
-    id: "3jf1o1f1",
-    name: "NYU"
-  },
-  {
-    id: "4f1of1",
-    name: "University of Washington"
-  },
-  {
-    id: "5j2gf1of1",
-    name: "University of California, Berkeley"
-  },
-  {
-    id: "6j2f2of1",
-    name: "Princton University"
-  },
-  {
-    id: "7fff1",
-    name: "Kean University"
+  { 
+    id: 'bruHy', 
+    name: 'New Jersey Institute of Technology, Newark',
+    abbreviation: 'NJIT' 
+  }, { 
+    id: '5y7fh', 
+    name: 'Rutgers University, New Brunswick',
+    abbreviation: 'RU',
+  }, { 
+    id: 'B9DB3', 
+    name: 'New York University, New York',
+    abbreviation: 'NYU' 
+  }, { 
+    id: 'lOK36', 
+    name: 'University of Washington, Seattle',
+    abbreviation: 'UW'
+  }, { 
+    id: 'JZaOC', 
+    name: 'University of California, Berkeley',
+    abbreviation: 'UC Berkeley'
+  }, { 
+    id: 'xpUFY', 
+    name: 'Princeton University, Princeton',
+    abbreviation: 'PU' 
   }
 ];
 
+// prettier-ignore
 export const majors = [
+  { 
+    id: 'vUmMIDE', 
+    name: 'Architecture',
+    abbreviation: 'ARCH'
+  }, { 
+    id: 'hvdMFjM', 
+    name: 'Computer Science',
+    abbreviation: 'CS',
+  }, { 
+    id: 'e2LejDg', 
+    name: 'Information Systems',
+    abbreviation: 'IS'
+  }, { 
+    id: 'iZhwNHy', 
+    name: 'Civil & Environmental Engineering',
+    abbreviation: 'CEE' 
+  }, { 
+    id: 'REbF7ax', 
+    name: 'Mechanical & Industrial Engineering',
+    abbreviation: 'MIE'
+  }
+];
+
+// prettier-ignore
+export const ratingCategories = {
+  student: [
+    { id: 'DRFJY9jd', description: 'Attends Group Meetings' },
+    { id: 'j84WAR77', description: 'Contributes to Discussions' },
+    { id: 'wXe02QBg', description: 'Completes Tasks on Time' },
+    { id: 'zoQCOOJO', description: 'Quality of Completed Work' },
+    { id: 'Gb1tXreK', description: 'Cooperative & Supportive' },
+    { id: 'TrK3zUiV', description: 'Contributes Significantly' }
+  ],
+  professor: [
+    { id: 'T5wKYAmI', description: 'Ability to Communicate Course Content' },
+    { id: 'jUtauYzO', description: 'Availability Outside of Class Hours' },
+    { id: 'mh4m4LcX', description: 'Fairness & Consistency in Grading' },
+    { id: 'yZyycMRm', description: 'Knowledge of Course Material' },
+    { id: 'sBuPhZef', description: 'Overall Teaching Effectivness' }
+  ]
+};
+
+export const userRatings = [
   {
-    id: "jf01jf010",
-    name: "Architecture"
+    id: "gXv6EmCRJ",
+    user: "UArjrbxWHX",
+    date: "1499183677321",
+    madeBy: "TxjkPq46BG",
+    fakeName: "EagerPig",
+    comment:
+      "I have no issues with the guy, however, he was sometimes unavailable due to his job.",
+    likes: 9,
+    dislikes: 0,
+    aggregateRating: 4.5,
+    individualRatings: [
+      { id: "DRFJY9jd", rating: 3 },
+      { id: "j84WAR77", rating: 5 },
+      { id: "wXe02QBg", rating: 4 },
+      { id: "zoQCOOJO", rating: 2 },
+      { id: "Gb1tXreK", rating: 3 },
+      { id: "TrK3zUiV", rating: 3 }
+    ]
   },
   {
-    id: "1jf01jf010",
-    name: "Computer Science"
+    id: "uZYDYqry3",
+    user: "UArjrbxWHX",
+    date: "1499183677321",
+    madeBy: "kyN3z7k8jp",
+    fakeName: "EagerPig",
+    comment:
+      "I have no issues with the guy, however, he was sometimes unavailable due to his job.",
+    likes: 0,
+    dislikes: 1,
+    aggregateRating: 2,
+    individualRatings: [
+      { id: "DRFJY9jd", rating: 3 },
+      { id: "j84WAR77", rating: 4 },
+      { id: "wXe02QBg", rating: 4 },
+      { id: "zoQCOOJO", rating: 4 },
+      { id: "Gb1tXreK", rating: 1 },
+      { id: "TrK3zUiV", rating: 3 }
+    ]
   },
   {
-    id: "2jf01jf010",
-    name: "Information Systems"
-  },
+    id: "KtFNT4cvT",
+    user: "UArjrbxWHX",
+    date: "1499183677321",
+    madeBy: "3nrw9EzdUo",
+    fakeName: "EagerPig",
+    comment:
+      "I have no issues with the guy, however, he was sometimes unavailable due to his job.",
+    likes: 4,
+    dislikes: 1,
+    aggregateRating: 4,
+    individualRatings: [
+      { id: "DRFJY9jd", rating: 3 },
+      { id: "j84WAR77", rating: 5 },
+      { id: "wXe02QBg", rating: 2 },
+      { id: "zoQCOOJO", rating: 2 },
+      { id: "Gb1tXreK", rating: 5 },
+      { id: "TrK3zUiV", rating: 1 }
+    ]
+  }
+];
+
+// prettier-ignore
+export const users = [
   {
-    id: "3jf01jf010",
-    name: "Bio-Medical Engineering"
-  },
-  {
-    id: "4jf01jf010",
-    name: "Civil & Environmental Engineering"
-  },
-  {
-    id: "5jf01jf010",
-    name: "Eletrical & Computer Engineering"
-  },
-  {
-    id: "6jf01jf010",
-    name: "Mechanical & Industrial Engineering"
-  },
-  {
-    id: "7jf01jf010",
-    name: "Engineering Technology"
-  },
-  {
-    id: "8jf01jf010",
-    name: "Mathematics"
-  },
-  {
-    id: "9jf01jf010",
-    name: "Physics"
-  },
-  {
-    id: "10jf01jf010",
-    name: "Biology"
+    id: 'UArjrbxWHX',
+    name: 'Randall Rivera',
+    type: 'student',
+    schools: ['bruHy', '5y7fh'],
+    majors: ['hvdMFjM', 'e2LejDg'],
+    emails: ['ranr1141@njit.edu', 'rr3n@rutgers.edu'],
+    overallRating: 4.5,
+    aggregateRatings: [
+      { id: 'DRFJY9jd', rating: 3 },
+      { id: 'j84WAR77', rating: 5 },
+      { id: 'wXe02QBg', rating: 4 },
+      { id: 'zoQCOOJO', rating: 2 },
+      { id: 'Gb1tXreK', rating: 3 },
+      { id: 'TrK3zUiV', rating: 3 },
+    ],
+    userRatings: ['gXv6EmCRJ', 'uZYDYqry3', 'KtFNT4cvT'],
+    registered: true,
+    password: '5f4dcc3b5aa765d61d8327deb882cf99',
+    username: 'rarn1141@njit.edu'
+  }, {
+    id: 'sxlmp3a3BP',
+    name: 'Renee Porter',
+    type: 'professor',
+    schools: ['bruHy'],
+    majors: ['hvdMFjM', 'e2LejDg'],
+    emails: ['reneeporter@njit.edu'],
+    overallRating: 3,
+    aggregateRatings: [
+      { id: 'T5wKYAmI', rating: 3 },
+      { id: 'jUtauYzO', rating: 5 },
+      { id: 'mh4m4LcX', rating: 4 },
+      { id: 'yZyycMRm', rating: 2 },
+      { id: 'sBuPhZef', rating: 3 },
+    ],
+    userRatings: [],
+    registered: false
   }
 ];
 
