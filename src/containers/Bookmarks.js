@@ -1,8 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
-import people from "../dummy-data"; // To Be Deleted...
-import { ContentBlockTitleCustom } from "../components/f7";
-import PersonOverviewCard from "../components/PersonOverviewCard";
+import styled from "styled-components";
+import UserCard from "../components/UserCard";
+import { ContentBlockTitleWrapper } from "../components/f7";
 import {
   Page,
   Navbar,
@@ -13,29 +12,37 @@ import {
   Tab,
   ContentBlock
 } from "framework7-react";
+import * as API from "../utils/"; // DELETE WHEN DONE TESTING
 
-const ContentBlockCustom = ({ title, children }) =>
-  <div>
-    <ContentBlockTitleCustom text={title} />
-    <ContentBlock style={{ padding: "0" }}>
-      {children}
-    </ContentBlock>
-  </div>;
+const allUsers = API.getUsers();
 
-ContentBlockCustom.propTypes = {
-  title: PropTypes.string.isRequired,
-  children: PropTypes.array.isRequired
+const ContentBlockContainer = styled(ContentBlock)`
+  padding: 0 !important;
+`;
+
+export const SavedProfessors = () => {
+  const users = allUsers.map(user => API.getUserDetails(user.id));
+  return (
+    <div>
+      <ContentBlockTitleWrapper>Your saved professors</ContentBlockTitleWrapper>
+      <ContentBlockContainer>
+        {users.map(user => <UserCard key={user.id} {...user} />)}
+      </ContentBlockContainer>
+    </div>
+  );
 };
 
-export const SavedProfessors = () =>
-  <ContentBlockCustom title="Your saved professors">
-    {people.map(person => <PersonOverviewCard key={person.id} {...person} />)}
-  </ContentBlockCustom>;
-
-export const SavedStudents = () =>
-  <ContentBlockCustom title="Your saved students">
-    {people.map(person => <PersonOverviewCard key={person.id} {...person} />)}
-  </ContentBlockCustom>;
+export const SavedStudents = () => {
+  const users = allUsers.map(user => API.getUserDetails(user.id));
+  return (
+    <div>
+      <ContentBlockTitleWrapper>Your saved students</ContentBlockTitleWrapper>
+      <ContentBlockContainer>
+        {users.map(user => <UserCard key={user.id} {...user} />)}
+      </ContentBlockContainer>
+    </div>
+  );
+};
 
 const Bookmarks = () =>
   <Page withSubnavbar>
