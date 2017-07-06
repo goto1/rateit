@@ -16,6 +16,7 @@ export const getUserDetails = userId => {
 
   clone.schools = getSchoolDetails(user.schools);
   clone.majors = getMajorDetails(user.majors);
+  clone.userRatings = getUserRatings(user.id);
 
   if (clone.type === "student") {
     clone.aggregateRatings = getStudentAggrRatingDetails(
@@ -35,6 +36,9 @@ const getSchoolDetails = schoolIds =>
 
 const getMajorDetails = majorIds =>
   majorIds.map(majorId => majors.find(major => major.id === majorId));
+
+const getUserRatings = userId =>
+  userRatings.filter(rating => rating.user === userId);
 
 const getStudentAggrRatingDetails = aggrRatings =>
   aggrRatings.map(rating => {
