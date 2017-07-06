@@ -8,21 +8,26 @@ import {
   users
 } from "../dummy-data";
 
-const getUserDetails = userId => {
+export const getUsers = () => users;
+
+export const getUserDetails = userId => {
   const user = users.find(user => user.id === userId);
+  const clone = { ...user };
 
-  user.schools = getSchoolDetails(user.schools);
-  user.majors = getMajorDetails(user.majors);
+  clone.schools = getSchoolDetails(user.schools);
+  clone.majors = getMajorDetails(user.majors);
 
-  if (user.type === "student") {
-    user.aggregateRatings = getStudentAggrRatingDetails(user.aggregateRatings);
+  if (clone.type === "student") {
+    clone.aggregateRatings = getStudentAggrRatingDetails(
+      clone.aggregateRatings
+    );
   } else {
-    user.aggregateRatings = getProfessorAggrRatingDetails(
-      user.aggregateRatings
+    clone.aggregateRatings = getProfessorAggrRatingDetails(
+      clone.aggregateRatings
     );
   }
 
-  return user;
+  return clone;
 };
 
 const getSchoolDetails = schoolIds =>
@@ -46,7 +51,3 @@ const getProfessorAggrRatingDetails = aggrRatings =>
     );
     return { description: details.description, rating: rating.rating };
   });
-
-export default {
-  getUserDetails
-};
