@@ -1,5 +1,3 @@
-import find from "lodash/find";
-
 import {
   schools,
   majors,
