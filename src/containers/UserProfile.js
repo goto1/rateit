@@ -15,8 +15,6 @@ import * as API from "../utils";
 
 const user = API.getUserDetails("UArjrbxWHX");
 
-console.log(user);
-
 const UserProfile = () => {
   const title = `${capitalize(user.type)} Details`;
   const overviewUrl = `/profile/${user.id}`;
