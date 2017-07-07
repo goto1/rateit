@@ -3,7 +3,9 @@ import Settings from "./containers/Settings";
 import General from "./containers/General";
 import Help from "./containers/Help";
 import Terms from "./containers/Terms";
-import Profile, { Overview, Ratings } from "./containers/Profile";
+import UserProfile from "./containers/UserProfile";
+import UserProfileRatingsTab from "./containers/UserProfileRatingsTab";
+import UserProfileOverviewTab from "./containers/UserProfileOverviewTab";
 import Bookmarks, {
   SavedProfessors,
   SavedStudents
@@ -48,17 +50,17 @@ const routes = [
   },
   {
     path: "/profile/:id",
-    component: Profile,
+    component: UserProfile,
     tabs: [
       {
         path: "/",
         tabId: "overview",
-        component: Overview
+        component: UserProfileOverviewTab
       },
       {
         path: "/ratings/",
         tabId: "ratings",
-        component: Ratings
+        component: UserProfileRatingsTab
       }
     ]
   }
