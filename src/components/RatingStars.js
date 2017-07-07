@@ -9,10 +9,11 @@ const Wrapper = styled.div`
     font-size: 19px;
     color: #feba72;
     width: 19px;
+    padding-bottom: 2px;
   }
 `;
 
-const StarsRating = ({ rating }) => {
+const RatingStars = ({ rating }) => {
   const NUMBER_OF_STARS = 5;
   const stringified = rating.toString();
   const decimalPointIndex = stringified.indexOf(".");
@@ -38,8 +39,8 @@ const StarsRating = ({ rating }) => {
   );
 };
 
-StarsRating.propTypes = {
+RatingStars.propTypes = {
   rating: PropTypes.number.isRequired
 };
 
-export default StarsRating;
+export default RatingStars;
