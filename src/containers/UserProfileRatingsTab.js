@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import HorizontalRule from "../components/HorizontalRule";
 import RatingCategories from "../components/RatingCategories";
-import StarsRating from "../components/StarsRating";
+import RatingStars from "../components/RatingStars";
 import { ContentBlockTitleWrapper } from "../components/f7";
 import {
   AccordionItem,
@@ -16,19 +16,28 @@ import {
   Icon
 } from "framework7-react";
 
+// DELETE WHEN DONE TESTING
+import * as API from "../utils";
+
 const HeaderContainer = styled(CardHeader)`
   div:nth-of-type(1) {
     padding-top: 2px;
+    font-weight: 500;
   }
 `;
 
-const Header = ({ username, overallRating }) =>
+const Header = ({ authorName, aggregateRating }) =>
   <HeaderContainer>
     <div>
-      {username}
+      {authorName.length > 15 ? `${authorName.slice(0, 13)}..` : authorName}
     </div>
-    <StarsRating rating={overallRating} />
+    <RatingStars rating={aggregateRating} />
   </HeaderContainer>;
+
+Header.propTypes = {
+  authorName: PropTypes.string.isRequired,
+  aggregateRating: PropTypes.number.isRequired
+};
 
 const DatePosted = styled.div`
   text-align: right;
@@ -57,15 +66,19 @@ const RecommendationWrapper = styled.div`
   }
 `;
 
-const Recommendation = ({ recommends }) =>
-  <RecommendationWrapper iconColor={recommends ? "#00B232" : "#FF0000"}>
-    <Icon material={recommends ? "done" : "clear"} />
+const Recommendation = ({ recommendUser }) =>
+  <RecommendationWrapper iconColor={recommendUser ? "#00B232" : "#FF0000"}>
+    <Icon material={recommendUser ? "done" : "clear"} />
     <div>
-      {recommends
+      {recommendUser
         ? "I would recommend this student!"
         : `I wouldn't recommend this student!`}
     </div>
   </RecommendationWrapper>;
+
+Recommendation.propTypes = {
+  recommendUser: PropTypes.bool.isRequired
+};
 
 const DetailsWrapper = styled.div`
   .accordion-item {
@@ -99,15 +112,19 @@ const Details = ({ individualRatings }) =>
     </AccordionItem>
   </DetailsWrapper>;
 
-const Content = ({ date, comments, recommends, individualRatings }) =>
+Details.propTypes = {
+  individualRatings: PropTypes.array.isRequired
+};
+
+const Content = ({ date, comment, recommendUser, individualRatings }) =>
   <CardContent>
     <DatePosted>
       {date}
     </DatePosted>
     <Comment>
-      {comments}
+      {comment}
     </Comment>
-    <Recommendation recommends={recommends} />
+    <Recommendation recommendUser={recommendUser} />
     <HorizontalRule
       margin="1px auto"
       width="90%"
@@ -116,6 +133,13 @@ const Content = ({ date, comments, recommends, individualRatings }) =>
     />
     <Details individualRatings={individualRatings} />
   </CardContent>;
+
+Content.propTypes = {
+  date: PropTypes.string.isRequired,
+  comment: PropTypes.string.isRequired,
+  recommendUser: PropTypes.bool.isRequired,
+  individualRatings: PropTypes.array.isRequired
+};
 
 const FooterButtonWrapper = styled.button.attrs({
   type: "button",
@@ -143,17 +167,23 @@ const FooterButton = ({ icon, onClick, children }) =>
     </span>
   </FooterButtonWrapper>;
 
+FooterButton.propTypes = {
+  icon: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  children: PropTypes.number.isRequired
+};
+
 const CardFooterContainer = styled(CardFooter)`
   justify-content: flex-start !important;
 `;
 
-const Footer = ({ numOfLikes, numOfDislikes }) =>
+const Footer = ({ likes, dislikes }) =>
   <CardFooterContainer>
     <FooterButton icon="thumb_up" onClick={() => console.log("liked")}>
-      {numOfLikes}
+      {likes}
     </FooterButton>
     <FooterButton icon="thumb_down" onClick={() => console.log("disliked")}>
-      {numOfDislikes}
+      {dislikes}
     </FooterButton>
   </CardFooterContainer>;
 
@@ -165,21 +195,36 @@ const UserRating = props =>
   <CardContainer>
     <Header {...props} />
     <Content {...props} />
-    <Footer numOfLikes={9} numOfDislikes={0} />
+    <Footer {...props} />
   </CardContainer>;
 
-const ProfileRatingsTab = ({ usersRatings }) => {
-  const numOfRatings = usersRatings.length;
+UserRating.propTypes = {
+  id: PropTypes.string.isRequired,
+  authorName: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  comment: PropTypes.string.isRequired,
+  aggregateRating: PropTypes.number.isRequired,
+  dislikes: PropTypes.number.isRequired,
+  likes: PropTypes.number.isRequired,
+  individualRatings: PropTypes.array.isRequired,
+  recommendUser: PropTypes.bool.isRequired
+};
+
+// DELETE WHEN DONE TESTING
+const user = API.getUserDetails("UArjrbxWHX");
+
+const UserProfileRatingsTab = () => {
+  const numOfRatings = user.userRatings.length;
+  const ratings = user.userRatings;
+
   return (
     <div>
       <ContentBlockTitleWrapper>
         {`Showing ${numOfRatings} comments`}
       </ContentBlockTitleWrapper>
-      {usersRatings.map((rating, index) =>
-        <UserRating key={index} {...rating} />
-      )}
+      {ratings.map(rating => <UserRating key={rating.id} {...rating} />)}
     </div>
   );
 };
 
-export default ProfileRatingsTab;
+export default UserProfileRatingsTab;
