@@ -20,10 +20,18 @@ export const getUserDetails = userId => {
     clone.aggregateRatings = getStudentAggrRatingDetails(
       clone.aggregateRatings
     );
+    clone.userRatings = clone.userRatings.map(rating => ({
+      ...rating,
+      individualRatings: getStudentAggrRatingDetails(rating.individualRatings)
+    }));
   } else {
     clone.aggregateRatings = getProfessorAggrRatingDetails(
       clone.aggregateRatings
     );
+    clone.userRatings = clone.userRatings.map(rating => ({
+      ...rating,
+      individualRatings: getProfessorAggrRatingDetails(rating.individualRatings)
+    }));
   }
 
   return clone;
@@ -36,7 +44,7 @@ const getMajorDetails = majorIds =>
   majorIds.map(majorId => majors.find(major => major.id === majorId));
 
 const getUserRatings = userId =>
-  userRatings.filter(rating => rating.user === userId);
+  userRatings.filter(rating => rating.userId === userId);
 
 const getStudentAggrRatingDetails = aggrRatings =>
   aggrRatings.map(rating => {
