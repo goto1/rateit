@@ -1,20 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 import { Icon } from "framework7-react";
 
-// <FormInputCustom
-//   icon='help'
-//   type='text'
-//   name='help'
-//   placeholder='Questions'
-//   onChange={(event) => { console.log(event.target.value); }} />
-const FormInputCustom = ({ icon, type, name, placeholder, onChange }) =>
-  <li>
+const Wrapper = styled.li`
+  .item-input {
+    margin-left: 15px;
+  }
+`;
+
+const FormInput = ({ icon, type, name, placeholder, onChange }) =>
+  <Wrapper>
     <div className="item-content">
       <div className="item-media">
         <Icon material={icon} />
       </div>
-      <div className="item-input" style={{ marginLeft: "15px" }}>
+      <div className="item-input">
         <input
           type={type}
           name={name}
@@ -23,9 +24,9 @@ const FormInputCustom = ({ icon, type, name, placeholder, onChange }) =>
         />
       </div>
     </div>
-  </li>;
+  </Wrapper>;
 
-FormInputCustom.propTypes = {
+FormInput.propTypes = {
   icon: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
@@ -33,4 +34,4 @@ FormInputCustom.propTypes = {
   onChange: PropTypes.func.isRequired
 };
 
-export default FormInputCustom;
+export default FormInput;

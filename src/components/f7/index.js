@@ -1,23 +1,19 @@
-import ListBlockCustom from "./ListBlockCustom";
-import ContentBlockTitleCustom from "./ContentBlockTitleCustom";
 import ContentBlockTitleWrapper from "./ContentBlockTitleWrapper";
-import FormInputCustom from "./FormInputCustom";
-import SmartSelectCustom from "./SmartSelectCustom";
-import SubmitButtonCustom from "./SubmitButtonCustom";
-import TextAreaCustom from "./TextAreaCustom";
-
+import FormInput from "./FormInput";
 import LinkItemContainer from "./LinkItemContainer";
+import ListBlock from "./ListBlock";
 import ListItemWrapper from "./ListItemWrapper";
+import SmartSelect from "./SmartSelect";
+import SubmitButton from "./SubmitButton";
+import TextArea from "./TextArea";
 
-// TODO: delete `ContentBlockTitleCustom` after refactoring
 export {
-  ListBlockCustom,
-  ListItemWrapper,
-  ContentBlockTitleCustom,
   ContentBlockTitleWrapper,
-  FormInputCustom,
-  TextAreaCustom,
-  SmartSelectCustom,
-  SubmitButtonCustom,
-  LinkItemContainer
+  FormInput,
+  LinkItemContainer,
+  ListBlock,
+  ListItemWrapper,
+  SmartSelect,
+  SubmitButton,
+  TextArea
 };
