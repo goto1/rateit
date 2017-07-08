@@ -1,4 +1,3 @@
-import ListItemCustom from "./ListItemCustom";
 import ListBlockCustom from "./ListBlockCustom";
 import ContentBlockTitleCustom from "./ContentBlockTitleCustom";
 import ContentBlockTitleWrapper from "./ContentBlockTitleWrapper";
@@ -8,11 +7,12 @@ import SubmitButtonCustom from "./SubmitButtonCustom";
 import TextAreaCustom from "./TextAreaCustom";
 
 import LinkItemContainer from "./LinkItemContainer";
+import ListItemWrapper from "./ListItemWrapper";
 
 // TODO: delete `ContentBlockTitleCustom` after refactoring
 export {
-  ListItemCustom,
   ListBlockCustom,
+  ListItemWrapper,
   ContentBlockTitleCustom,
   ContentBlockTitleWrapper,
   FormInputCustom,

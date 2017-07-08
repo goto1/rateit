@@ -1,41 +1,39 @@
 import React from "react";
-import { ContentBlockTitleCustom, ListItemCustom } from "../components/f7";
+import { ContentBlockTitleWrapper, ListItemWrapper } from "../components/f7";
 import { Page, Navbar, List } from "framework7-react";
 
 const AccountSettings = () =>
   <div>
-    <ContentBlockTitleCustom text="Account settings" />
+    <ContentBlockTitleWrapper>Account settings</ContentBlockTitleWrapper>
     <List inset>
-      <ListItemCustom
-        icon="account_circle"
-        link="/settings/general/"
-        text="General"
-      />
+      <ListItemWrapper icon="account_circle" url="/settings/general">
+        General
+      </ListItemWrapper>
     </List>
   </div>;
 
 const HelpAndSupport = () =>
   <div>
-    <ContentBlockTitleCustom text="Help and support" />
+    <ContentBlockTitleWrapper>Help and support</ContentBlockTitleWrapper>
     <List inset>
-      <ListItemCustom icon="help" link="/settings/help/" text="Help Center" />
-      <ListItemCustom
-        icon="assignment"
-        link="/settings/terms/"
-        text="Terms & Policies"
-      />
+      <ListItemWrapper icon="help" url="/settings/help/">
+        Help Center
+      </ListItemWrapper>
+      <ListItemWrapper icon="assignment" url="/settings/help/">
+        Terms & Policies
+      </ListItemWrapper>
     </List>
   </div>;
 
 const UserSettings = () =>
   <div>
     <List inset>
-      <ListItemCustom
-        icon="sentiment_very_satisfied"
-        link="/profile/id/"
-        text="Profile Page"
-      />
-      <ListItemCustom icon="exit_to_app" link="/signout/" text="Sign Out" />
+      <ListItemWrapper icon="sentiment_very_satisfied" url="/profile/id/">
+        Profile Page
+      </ListItemWrapper>
+      <ListItemWrapper icon="exit_to_app" url="/signout/">
+        Sign Out
+      </ListItemWrapper>
     </List>
   </div>;
 
