@@ -8,6 +8,10 @@ import {
 
 export const getUsers = () => users;
 
+export const getSchools = () => schools;
+
+export const getMajors = () => majors;
+
 export const getUserDetails = userId => {
   const user = users.find(user => user.id === userId);
   const clone = { ...user };
