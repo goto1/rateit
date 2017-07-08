@@ -1,26 +1,28 @@
 import React from "react";
-import { schools, currentUser, majors } from "../dummy-data";
 import {
-  ContentBlockTitleCustom,
-  FormInputCustom,
-  SmartSelectCustom,
-  ListBlockCustom,
-  SubmitButtonCustom
+  ContentBlockTitleWrapper,
+  FormInput,
+  SmartSelect,
+  ListBlock,
+  SubmitButton
 } from "../components/f7";
 import { Page, Navbar, List } from "framework7-react";
 
+// DELETE AFTER TESTING
+import * as API from "../utils";
+
 const AccountInformation = () =>
   <div>
-    <ContentBlockTitleCustom text="Account information" />
+    <ContentBlockTitleWrapper>Account information</ContentBlockTitleWrapper>
     <List form inset>
-      <FormInputCustom
+      <FormInput
         icon="email"
         type="email"
         name="email"
         placeholder="example@gmail.com"
         onChange={event => console.log(event.target.value)}
       />
-      <FormInputCustom
+      <FormInput
         icon="lock"
         type="password"
         name="password"
@@ -31,55 +33,56 @@ const AccountInformation = () =>
   </div>;
 
 const SchoolInformation = () => {
-  const allSchools = schools;
-  const userSchools = currentUser.schools.map(school => school.id);
-  const allMajors = majors;
-  const userMajors = currentUser.majors.map(major => major.id);
+  const user = API.getUserDetails("UArjrbxWHX");
+  const schools = API.getSchools();
+  const majors = API.getMajors();
+  const selectedSchools = user.schools.map(school => school.id);
+  const selectedMajors = user.majors.map(major => major.id);
 
   return (
     <div>
-      <ContentBlockTitleCustom text="School information" />
-      <ListBlockCustom>
-        <SmartSelectCustom
+      <ContentBlockTitleWrapper>School information</ContentBlockTitleWrapper>
+      <ListBlock>
+        <SmartSelect
           name="schools"
-          options={allSchools}
-          selected={userSchools}
+          options={schools}
+          selected={selectedSchools}
           searchbarPlaceholder="Search for a school..."
           onChange={event =>
             console.log(event.target.options, event.target.name)}
         />
-        <SmartSelectCustom
+        <SmartSelect
           name="majors"
-          options={allMajors}
-          selected={userMajors}
+          options={majors}
+          selected={selectedMajors}
           searchbarPlaceholder="Search for a major..."
           onChange={event =>
             console.log(event.target.options, event.target.name)}
         />
-      </ListBlockCustom>
+      </ListBlock>
     </div>
   );
 };
 
 const PasswordReset = () =>
   <div>
-    <ContentBlockTitleCustom text="Password Reset" />
+    <ContentBlockTitleWrapper>Password reset</ContentBlockTitleWrapper>
     <List form inset>
-      <FormInputCustom
+      <FormInput
         icon="lock"
         type="password"
         name="currentPassword"
         placeholder="Current Password"
         onChange={event => console.log(event.target.value)}
       />
-      <FormInputCustom
+      <FormInput
         icon="lock_outline"
         type="password"
         name="newPassword"
         placeholder="New Password"
         onChange={event => console.log(event.target.value)}
       />
-      <FormInputCustom
+      <FormInput
         icon="lock_outline"
         type="password"
         name="newPasswordRepeated"
@@ -95,13 +98,14 @@ const General = () =>
     <AccountInformation />
     <SchoolInformation />
     <PasswordReset />
-    <SubmitButtonCustom
-      text="Submit changes"
+    <SubmitButton
       disabled={false}
       onClick={e => {
         e.preventDefault();
       }}
-    />
+    >
+      Submit changes
+    </SubmitButton>
   </Page>;
 
 export default General;

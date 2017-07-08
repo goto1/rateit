@@ -2,6 +2,9 @@ import React from "react";
 import { ContentBlockTitleWrapper, ListItemWrapper } from "../components/f7";
 import { Page, Navbar, List } from "framework7-react";
 
+// DELETE WHEN DONE TESTING
+import * as API from "../utils";
+
 const AccountSettings = () =>
   <div>
     <ContentBlockTitleWrapper>Account settings</ContentBlockTitleWrapper>
@@ -25,10 +28,15 @@ const HelpAndSupport = () =>
     </List>
   </div>;
 
+const user = API.getUserDetails("UArjrbxWHX");
+
 const UserSettings = () =>
   <div>
     <List inset>
-      <ListItemWrapper icon="sentiment_very_satisfied" url="/profile/id/">
+      <ListItemWrapper
+        icon="sentiment_very_satisfied"
+        url={`/profile/${user.id}`}
+      >
         Profile Page
       </ListItemWrapper>
       <ListItemWrapper icon="exit_to_app" url="/signout/">
