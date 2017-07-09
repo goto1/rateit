@@ -63,31 +63,32 @@ const ContentItemContainer = styled.div`
   }
 `;
 
-const ContentItem = ({ icon, text }) =>
+const ContentItem = ({ icon, hr, children }) =>
   <ContentItemContainer>
     <div>
       <div>
         <Icon material={icon} />
       </div>
       <div>
-        {text.length > 23 ? `${text.slice(0, 23)}..` : text}
+        {children.length > 23 ? `${children.slice(0, 23)}..` : children}
       </div>
     </div>
-    <HorizontalRule
-      width="80%"
-      margin="0 auto"
-      colorOne="#FFFFFF"
-      colorTwo="#747475"
-    />
+    {hr &&
+      <HorizontalRule
+        width="80%"
+        margin="0 auto"
+        colorOne="#FFF"
+        colorTwo="#747475"
+      />}
   </ContentItemContainer>;
 
 ContentItem.propTypes = {
   icon: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired
+  hr: PropTypes.bool.isRequired,
+  children: PropTypes.string.isRequired
 };
 
 // DELETE WHEN DONE TESTING
-const user = API.getUserDetails("UArjrbxWHX");
 const arrStringify = (arr, attr) => {
   let str = null;
   if (arr.length > 1) {
@@ -99,49 +100,78 @@ const arrStringify = (arr, attr) => {
   return str;
 };
 
-const UserProfileOverviewTab = () => {
-  const {
-    name,
-    type,
-    schools,
-    majors,
-    emails,
-    overallRating,
-    aggregateRatings,
-    userRatings
-  } = user;
-
+const UserInformation = ({
+  name,
+  overallRating,
+  type,
+  schools,
+  majors,
+  emails
+}) => {
   const schoolNames = arrStringify(schools, "abbreviation");
   const majorNames = arrStringify(majors, "abbreviation");
   const userEmails = emails.map(email => email).join(", ");
-  const numOfRatings = userRatings.length;
-
   return (
-    <div>
-      <CardContainer>
-        <Header title={name}>
-          <NumericRating fontSize={17}>
-            {overallRating}
-          </NumericRating>
-        </Header>
-        <Content>
-          <ContentItem icon="portrait" text={capitalize(type)} />
-          <ContentItem icon="location_city" text={schoolNames} />
-          <ContentItem icon="school" text={majorNames} />
-          <ContentItem icon="email" text={userEmails} />
-        </Content>
-      </CardContainer>
-      <CardContainer>
-        <Header title={`Based on ${numOfRatings} ratings`} />
-        <Content>
-          <RatingCategories
-            ratings={aggregateRatings}
-            hrColors={{ colorOne: "#FFF", colorTwo: "#747475" }}
-          />
-        </Content>
-      </CardContainer>
-    </div>
+    <CardContainer>
+      <Header title={name}>
+        <NumericRating fontSize={17}>
+          {overallRating}
+        </NumericRating>
+      </Header>
+      <Content>
+        <ContentItem icon="portrait" hr={true}>
+          {capitalize(type)}
+        </ContentItem>
+        <ContentItem icon="location_city" hr={true}>
+          {schoolNames}
+        </ContentItem>
+        <ContentItem icon="school" hr={true}>
+          {majorNames}
+        </ContentItem>
+        <ContentItem icon="email" hr={false}>
+          {userEmails}
+        </ContentItem>
+      </Content>
+    </CardContainer>
   );
 };
+
+UserInformation.propTypes = {
+  name: PropTypes.string.isRequired,
+  overallRating: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
+  schools: PropTypes.array.isRequired,
+  majors: PropTypes.array.isRequired,
+  emails: PropTypes.array.isRequired
+};
+
+const UserAggregateRatings = ({ userRatings, aggregateRatings }) => {
+  const numOfRatings = userRatings.length;
+  return (
+    <CardContainer>
+      <Header title={`Based on ${numOfRatings} ratings`} />
+      <Content>
+        <RatingCategories
+          ratings={aggregateRatings}
+          hrColors={{ colorOne: "#FFF", colorTwo: "#747475" }}
+        />
+      </Content>
+    </CardContainer>
+  );
+};
+
+UserAggregateRatings.propTypes = {
+  userRatings: PropTypes.array.isRequired,
+  aggregateRatings: PropTypes.array.isRequired
+};
+
+// DELETE WHEN DONE TESTING
+const user = API.getUserDetails("UArjrbxWHX");
+
+const UserProfileOverviewTab = () =>
+  <div>
+    <UserInformation {...user} />
+    <UserAggregateRatings {...user} />
+  </div>;
 
 export default UserProfileOverviewTab;
