@@ -88,6 +88,7 @@ const DetailsWrapper = styled.div`
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 500;
+    text-align: right;
   }
   .accordion-item-toggle > .icon {
     font-size: 17px;
@@ -106,7 +107,7 @@ const Details = ({ individualRatings }) =>
       <AccordionContent>
         <RatingCategories
           ratings={individualRatings}
-          hrColors={{ colorOne: "#FFF", colorTwo: "#000" }}
+          hrColors={{ colorOne: "#e5e5e5", colorTwo: "#0b7eff" }}
         />
       </AccordionContent>
     </AccordionItem>
@@ -128,8 +129,8 @@ const Content = ({ date, comment, recommendUser, individualRatings }) =>
     <HorizontalRule
       margin="1px auto"
       width="90%"
-      colorOne="#FFF"
-      colorTwo="#000"
+      colorOne="#e5e5e5"
+      colorTwo="#0b7eff"
     />
     <Details individualRatings={individualRatings} />
   </CardContent>;
@@ -220,7 +221,7 @@ const UserProfileRatingsTab = () => {
   return (
     <div>
       <ContentBlockTitleWrapper>
-        {`Showing ${numOfRatings} comments`}
+        {`Showing ${numOfRatings} ratings`}
       </ContentBlockTitleWrapper>
       {ratings.map(rating => <UserRating key={rating.id} {...rating} />)}
     </div>
