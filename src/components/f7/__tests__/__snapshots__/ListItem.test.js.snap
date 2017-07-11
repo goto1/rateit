@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListItem renders correctly 1`] = `
+<li>
+  <a
+    className="item-link item-content"
+    href="/home"
+  >
+    <div
+      className="item-media"
+    >
+      <i
+        className="material-icons icon"
+      >
+        home
+      </i>
+    </div>
+    <div
+      className="item-inner"
+    >
+      HelloWorld!
+    </div>
+  </a>
+</li>
+`;

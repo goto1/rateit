@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Icon } from "framework7-react";
+import Icon from "./Icon";
 
-const ListItemWrapper = ({ icon, url, children }) =>
+const ListItem = ({ icon, url, children }) =>
   <li>
     <a href={url} className="item-link item-content">
       <div className="item-media">
@@ -14,10 +14,10 @@ const ListItemWrapper = ({ icon, url, children }) =>
     </a>
   </li>;
 
-ListItemWrapper.propTypes = {
+ListItem.propTypes = {
   icon: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   children: PropTypes.string.isRequired
 };
 
-export default ListItemWrapper;
+export default ListItem;
