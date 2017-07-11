@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LinkItem renders correctly 1`] = `
+<li>
+  <a
+    href="/home"
+  >
+    <div
+      className="item-content sc-bdVaJa lfVYTe"
+    >
+      <div
+        className="item-inner sc-bwzfXH fvZPbp"
+      >
+        <i
+          className="material-icons icon sc-htpNat daQlbB"
+        >
+          keyboard_arrow_right
+        </i>
+        <div>
+          HelloWorld!
+        </div>
+      </div>
+    </div>
+  </a>
+</li>
+`;

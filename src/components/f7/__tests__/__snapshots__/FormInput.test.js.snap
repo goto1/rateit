@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormInput renders correctly 1`] = `
+<div
+  className="item-content"
+>
+  <div
+    className="item-media"
+  >
+    <i
+      className="material-icons icon"
+    >
+      account_box
+    </i>
+  </div>
+  <div
+    className="item-input sc-bdVaJa bSLHOK"
+  >
+    <input
+      name="username"
+      onChange={[Function]}
+      placeholder="Type your username"
+      type="text"
+    />
+  </div>
+</div>
+`;
