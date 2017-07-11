@@ -10,7 +10,7 @@ const ContentBlockTitle = ({ children }) =>
   </Wrapper>;
 
 ContentBlockTitle.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+  children: PropTypes.node.isRequired
 };
 
 export default ContentBlockTitle;

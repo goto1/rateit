@@ -13,7 +13,7 @@ const Inner = styled.div`
 
 const Arrow = styled(Icon)`
   color: #C7C7CC;
-  position: absolute;
+  position: absolute !important;
   right: 0;
   width: 17px;
 `;
@@ -32,7 +32,7 @@ const LinkItem = ({ url, children }) =>
 
 LinkItem.propTypes = {
   url: PropTypes.string.isRequired,
-  children: PropTypes.object.isRequired
+  children: PropTypes.node.isRequired
 };
 
 export default LinkItem;
