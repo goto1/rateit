@@ -1,30 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Icon } from "framework7-react";
+import Icon from "./Icon";
 
-const Wrapper = styled.li`
-  .item-input {
-    margin-left: 15px;
-  }
-`;
+const InputWrapper = styled.div`margin-left: 15px;`;
 
 const FormInput = ({ icon, type, name, placeholder, onChange }) =>
-  <Wrapper>
-    <div className="item-content">
-      <div className="item-media">
-        <Icon material={icon} />
-      </div>
-      <div className="item-input">
-        <input
-          type={type}
-          name={name}
-          placeholder={placeholder}
-          onChange={onChange}
-        />
-      </div>
+  <div className="item-content">
+    <div className="item-media">
+      <Icon material={icon} />
     </div>
-  </Wrapper>;
+    <InputWrapper className="item-input">
+      <input
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        onChange={onChange}
+      />
+    </InputWrapper>
+  </div>;
 
 FormInput.propTypes = {
   icon: PropTypes.string.isRequired,
