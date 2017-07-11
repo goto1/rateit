@@ -1,21 +1,28 @@
 import React from "react";
-import ContentBlockTitle from "../ContentBlockTitle";
+import ListBlock from "../ListBlock";
 import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
 import "jest-enzyme";
 
-describe("ContentBlockTitle", () => {
+describe("ListBlock", () => {
+  const HelloWorld = <div>HelloWorld!</div>;
+
   it("renders correctly", () => {
-    const tree = renderer.create(<ContentBlockTitle />).toJSON();
+    const tree = renderer
+      .create(
+        <ListBlock>
+          {HelloWorld}
+        </ListBlock>
+      )
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it("contains `HelloWorld` component", () => {
-    const HelloWorld = <div>HelloWorld!</div>;
     const wrapper = shallow(
-      <ContentBlockTitle>
+      <ListBlock>
         {HelloWorld}
-      </ContentBlockTitle>
+      </ListBlock>
     );
     expect(wrapper).toContainReact(HelloWorld);
   });
