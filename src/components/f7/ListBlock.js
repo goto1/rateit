@@ -9,7 +9,7 @@ const ListBlock = ({ children }) =>
   </div>;
 
 ListBlock.propTypes = {
-  children: PropTypes.array.isRequired
+  children: PropTypes.object.isRequired
 };
 
 export default ListBlock;
