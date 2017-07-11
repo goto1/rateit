@@ -18,7 +18,11 @@ const SmartSelect = ({
     >
       <select value={selected} name={name} onChange={onChange} multiple>
         {options.map(option =>
-          <option key={option.id} value={option.id}>
+          <option
+            key={option.id}
+            value={option.id}
+            data-display-as={option.abbreviation}
+          >
             {option.name}
           </option>
         )}
