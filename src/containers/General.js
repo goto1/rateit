@@ -4,9 +4,9 @@ import {
   FormInput,
   SmartSelect,
   ListBlock,
-  SubmitButton
+  Button
 } from "../components/f7";
-import { Page, Navbar, List } from "framework7-react";
+import { Page, Navbar, List, ContentBlock } from "framework7-react";
 
 // DELETE AFTER TESTING
 import * as API from "../utils";
@@ -98,14 +98,11 @@ const General = () =>
     <AccountInformation />
     <SchoolInformation />
     <PasswordReset />
-    <SubmitButton
-      disabled={false}
-      onClick={e => {
-        e.preventDefault();
-      }}
-    >
-      Submit changes
-    </SubmitButton>
+    <ContentBlock>
+      <Button type="success" onClick={e => e.preventDefault()}>
+        Submit Changes
+      </Button>
+    </ContentBlock>
   </Page>;
 
 export default General;

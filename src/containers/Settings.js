@@ -22,7 +22,7 @@ const HelpAndSupport = () =>
       <ListItemWrapper icon="help" url="/settings/help/">
         Help Center
       </ListItemWrapper>
-      <ListItemWrapper icon="assignment" url="/settings/help/">
+      <ListItemWrapper icon="assignment" url="/settings/terms/">
         Terms & Policies
       </ListItemWrapper>
     </List>

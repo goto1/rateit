@@ -3,9 +3,9 @@ import {
   ContentBlockTitleWrapper,
   FormInput,
   TextArea,
-  SubmitButton
+  Button
 } from "../components/f7";
-import { Page, Navbar, List } from "framework7-react";
+import { Page, Navbar, List, ContentBlock } from "framework7-react";
 
 const Help = () =>
   <Page>
@@ -26,9 +26,11 @@ const Help = () =>
         onChange={e => console.log(e.target.name, e.target.value)}
       />
     </List>
-    <SubmitButton disabled={false} onClick={e => e.preventDefault()}>
-      Submit
-    </SubmitButton>
+    <ContentBlock>
+      <Button type="success" onClick={e => e.preventDefault()}>
+        Submit Changes
+      </Button>
+    </ContentBlock>
   </Page>;
 
 export default Help;
