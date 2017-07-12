@@ -1,9 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LinkItem renders correctly 1`] = `
+exports[`LinkItem component renders correctly 1`] = `
+.lfVYTe {
+  padding-right: 15px;
+}
+
+.fvZPbp {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding-right: 0 !important;
+  position: relative;
+}
+
+.bNzvmb {
+  color: #C7C7CC;
+  position: absolute !important;
+  right: 0;
+  width: 17px;
+}
+
 <li>
   <a
-    href="/home"
+    href="/"
   >
     <div
       className="item-content sc-bdVaJa lfVYTe"
@@ -16,9 +35,7 @@ exports[`LinkItem renders correctly 1`] = `
         >
           keyboard_arrow_right
         </i>
-        <div>
-          HelloWorld!
-        </div>
+        HelloWorldComponent
       </div>
     </div>
   </a>

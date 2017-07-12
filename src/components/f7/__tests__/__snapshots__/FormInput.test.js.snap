@@ -1,6 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FormInput renders correctly 1`] = `
+exports[`FormInput component renders correctly 1`] = `
+.bSLHOK {
+  margin-left: 15px;
+}
+
 <div
   className="item-content"
 >
@@ -19,7 +23,7 @@ exports[`FormInput renders correctly 1`] = `
     <input
       name="username"
       onChange={[Function]}
-      placeholder="Type your username"
+      placeholder="Type your name"
       type="text"
     />
   </div>

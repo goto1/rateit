@@ -3,37 +3,28 @@ import FormInput from "../FormInput";
 import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
 import "jest-enzyme";
+import "jest-styled-components";
 
-describe("FormInput", () => {
-  const mockFn = jest.fn();
+const props = {
+  icon: "account_box",
+  type: "text",
+  name: "username",
+  placeholder: "Type your name",
+  onChange: jest.fn()
+};
+
+describe("FormInput component", () => {
+  const tree = renderer.create(<FormInput {...props} />).toJSON();
 
   it("renders correctly", () => {
-    const tree = renderer
-      .create(
-        <FormInput
-          icon="account_box"
-          type="text"
-          name="username"
-          placeholder="Type your username"
-          onChange={mockFn}
-        />
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(tree).toMatchStyledComponentsSnapshot();
   });
 
   it("calls a function when input changes", () => {
-    const wrapper = shallow(
-      <FormInput
-        icon="account_box"
-        type="text"
-        name="username"
-        placeholder="Type your username"
-        onChange={mockFn}
-      />
-    );
-    wrapper.find("input").simulate("change");
+    const wrapper = shallow(<FormInput {...props} />);
+    const onChange = props.onChange;
 
-    expect(mockFn.mock.calls.length).toBe(1);
+    wrapper.find("input").simulate("change");
+    expect(onChange.mock.calls.length).toBe(1);
   });
 });

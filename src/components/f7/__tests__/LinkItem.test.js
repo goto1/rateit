@@ -3,24 +3,25 @@ import LinkItem from "../LinkItem";
 import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
 import "jest-enzyme";
+import "jest-styled-components";
 
-describe("LinkItem", () => {
-  const HelloWorld = <div>HelloWorld!</div>;
+const props = {
+  url: "/"
+};
+
+describe("LinkItem component", () => {
+  const HelloWorld = <div>HelloWorld</div>;
+  const tree = renderer
+    .create(<LinkItem {...props}>HelloWorldComponent</LinkItem>)
+    .toJSON();
 
   it("renders correctly", () => {
-    const tree = renderer
-      .create(
-        <LinkItem url="/home">
-          {HelloWorld}
-        </LinkItem>
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(tree).toMatchStyledComponentsSnapshot();
   });
 
-  it("contains `HelloWorld` component", () => {
+  it("contains a component", () => {
     const wrapper = shallow(
-      <LinkItem url="/home">
+      <LinkItem {...props}>
         {HelloWorld}
       </LinkItem>
     );

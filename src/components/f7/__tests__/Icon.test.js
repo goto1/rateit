@@ -4,7 +4,7 @@ import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
 import "jest-enzyme";
 
-describe("Icon", () => {
+describe("Icon component", () => {
   const iconName = "thumbs_down";
 
   it("renders correctly", () => {

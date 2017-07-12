@@ -4,7 +4,7 @@ import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
 import "jest-enzyme";
 
-describe("ListItem", () => {
+describe("ListItem component", () => {
   const HelloWorld = "HelloWorld!";
 
   it("renders correctly", () => {

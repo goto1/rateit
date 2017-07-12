@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SmartSelect renders correctly 1`] = `
+exports[`SmartSelect component renders correctly 1`] = `
 <li>
   <a
     className="item-link smart-select"

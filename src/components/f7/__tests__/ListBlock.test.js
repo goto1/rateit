@@ -4,7 +4,7 @@ import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
 import "jest-enzyme";
 
-describe("ListBlock", () => {
+describe("ListBlock component", () => {
   const HelloWorld = <div>HelloWorld!</div>;
 
   it("renders correctly", () => {
@@ -18,7 +18,7 @@ describe("ListBlock", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it("contains `HelloWorld` component", () => {
+  it("contains a component", () => {
     const wrapper = shallow(
       <ListBlock>
         {HelloWorld}

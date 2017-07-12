@@ -1,6 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ContentBlockTitle renders correctly 1`] = `
+exports[`ContentBlockTitle component renders correctly 1`] = `
+.ewlKZX {
+  margin-top: 25px !important;
+}
+
 <div
   className="content-block-title sc-bdVaJa ewlKZX"
 >

@@ -3,13 +3,19 @@ import ContentBlockTitle from "../ContentBlockTitle";
 import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
 import "jest-enzyme";
+import "jest-styled-components";
 
-describe("ContentBlockTitle", () => {
+describe("ContentBlockTitle component", () => {
+  const tree = renderer
+    .create(<ContentBlockTitle>HelloWorld!</ContentBlockTitle>)
+    .toJSON();
+
   it("renders correctly", () => {
-    const tree = renderer
-      .create(<ContentBlockTitle>HelloWorld!</ContentBlockTitle>)
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(tree).toMatchStyledComponentsSnapshot();
+  });
+
+  it("renders with a style rule `margin-top` equal to 25px", () => {
+    expect(tree).toHaveStyleRule("margin-top", "25px !important");
   });
 
   it("contains `HelloWorld` component", () => {

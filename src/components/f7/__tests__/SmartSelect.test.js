@@ -23,18 +23,17 @@ const props = {
   onChange: jest.fn()
 };
 
-describe("SmartSelect", () => {
+describe("SmartSelect component", () => {
   it("renders correctly", () => {
     const tree = renderer.create(<SmartSelect {...props} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it("calls a function with selection changes", () => {
+    const { onChange } = props;
     const wrapper = shallow(<SmartSelect {...props} />);
+
     wrapper.find("select").simulate("change");
-
-    const onChange = props.onChange;
-
     expect(onChange.mock.calls.length).toBe(1);
   });
 });
