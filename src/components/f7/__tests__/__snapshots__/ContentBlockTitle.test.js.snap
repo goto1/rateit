@@ -3,5 +3,7 @@
 exports[`ContentBlockTitle renders correctly 1`] = `
 <div
   className="content-block-title sc-bdVaJa ewlKZX"
-/>
+>
+  HelloWorld!
+</div>
 `;

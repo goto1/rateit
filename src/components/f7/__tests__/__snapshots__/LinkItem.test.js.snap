@@ -12,7 +12,7 @@ exports[`LinkItem renders correctly 1`] = `
         className="item-inner sc-bwzfXH fvZPbp"
       >
         <i
-          className="material-icons icon sc-htpNat daQlbB"
+          className="material-icons icon sc-htpNat bNzvmb"
         >
           keyboard_arrow_right
         </i>

@@ -6,7 +6,9 @@ import "jest-enzyme";
 
 describe("ContentBlockTitle", () => {
   it("renders correctly", () => {
-    const tree = renderer.create(<ContentBlockTitle />).toJSON();
+    const tree = renderer
+      .create(<ContentBlockTitle>HelloWorld!</ContentBlockTitle>)
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
