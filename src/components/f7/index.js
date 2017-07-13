@@ -11,7 +11,6 @@ import SmartSelect from "./SmartSelect";
 import TextArea from "./TextArea";
 
 const ContentBlockTitleWrapper = ContentBlockTitle;
-const LinkItemContainer = LinkItem;
 const ListItemWrapper = ListItem;
 
 export {
@@ -22,7 +21,7 @@ export {
   ContentBlockTitleWrapper,
   FormInput,
   Icon,
-  LinkItemContainer,
+  LinkItem,
   ListBlock,
   ListItemWrapper,
   SmartSelect,

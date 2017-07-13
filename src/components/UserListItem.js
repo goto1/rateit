@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { LinkItemContainer } from "./f7";
+import { LinkItem } from "./f7";
 import UserItemContents from "./UserItemContents";
 
 const UserListItem = props => {
   const userId = props.id;
   return (
-    <LinkItemContainer url={`/profile/${userId}/`}>
+    <LinkItem url={`/profile/${userId}/`}>
       <UserItemContents margin="0 20px 0 0" {...props} />
-    </LinkItemContainer>
+    </LinkItem>
   );
 };
 
