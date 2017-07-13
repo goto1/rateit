@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import UserCard from "../components/UserCard";
-import { ContentBlockTitleWrapper } from "../components/f7";
+import { ContentBlock, ContentBlockTitle } from "../components/f7";
 import {
   Page,
   Navbar,
@@ -9,8 +9,7 @@ import {
   ButtonsSegmented,
   Button,
   Tabs,
-  Tab,
-  ContentBlock
+  Tab
 } from "framework7-react";
 import * as API from "../utils/"; // DELETE WHEN DONE TESTING
 
@@ -24,7 +23,7 @@ export const SavedProfessors = () => {
   const users = allUsers.map(user => API.getUserDetails(user.id));
   return (
     <div>
-      <ContentBlockTitleWrapper>Your saved professors</ContentBlockTitleWrapper>
+      <ContentBlockTitle>Your saved professors</ContentBlockTitle>
       <ContentBlockContainer>
         {users.map(user => <UserCard key={user.id} {...user} />)}
       </ContentBlockContainer>
@@ -36,7 +35,7 @@ export const SavedStudents = () => {
   const users = allUsers.map(user => API.getUserDetails(user.id));
   return (
     <div>
-      <ContentBlockTitleWrapper>Your saved students</ContentBlockTitleWrapper>
+      <ContentBlockTitle>Your saved students</ContentBlockTitle>
       <ContentBlockContainer>
         {users.map(user => <UserCard key={user.id} {...user} />)}
       </ContentBlockContainer>
