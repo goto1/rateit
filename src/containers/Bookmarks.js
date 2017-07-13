@@ -15,7 +15,7 @@ import * as API from "../utils/"; // DELETE WHEN DONE TESTING
 
 const allUsers = API.getUsers();
 
-const ContentBlockContainer = styled(ContentBlock)`
+const ContentBlockStyled = styled(ContentBlock)`
   padding: 0 !important;
 `;
 
@@ -24,9 +24,9 @@ export const SavedProfessors = () => {
   return (
     <div>
       <ContentBlockTitle>Your saved professors</ContentBlockTitle>
-      <ContentBlockContainer>
+      <ContentBlockStyled>
         {users.map(user => <UserCard key={user.id} {...user} />)}
-      </ContentBlockContainer>
+      </ContentBlockStyled>
     </div>
   );
 };
@@ -36,9 +36,9 @@ export const SavedStudents = () => {
   return (
     <div>
       <ContentBlockTitle>Your saved students</ContentBlockTitle>
-      <ContentBlockContainer>
+      <ContentBlockStyled>
         {users.map(user => <UserCard key={user.id} {...user} />)}
-      </ContentBlockContainer>
+      </ContentBlockStyled>
     </div>
   );
 };
