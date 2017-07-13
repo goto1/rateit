@@ -1,16 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Card component renders correctly 1`] = `
-.elpbvZ {
-  margin: 10px;
-}
-
 <div
-  className="card sc-bdVaJa elpbvZ"
+  className="card"
 >
   <div>
     Lorem ipsum dolor sit amet
+    <span>
+      Lorem ipsum dolor sit amet
+    </span>
   </div>
-  Lorem ipsum dolor sit amet
 </div>
 `;
