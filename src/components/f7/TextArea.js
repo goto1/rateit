@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Icon } from "framework7-react";
+import Icon from "./Icon";
 
-const TextArea = ({ icon, name, placeholder, onChange }) =>
+const Textarea = ({ icon, name, placeholder, onChange }) =>
   <li className="align-top">
     <div className="item-content">
       <div className="item-media">
@@ -16,11 +16,11 @@ const TextArea = ({ icon, name, placeholder, onChange }) =>
     </div>
   </li>;
 
-TextArea.propTypes = {
+Textarea.propTypes = {
   icon: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired
 };
 
-export default TextArea;
+export default Textarea;

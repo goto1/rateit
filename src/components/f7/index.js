@@ -8,7 +8,7 @@ import LinkItem from "./LinkItem";
 import ListBlock from "./ListBlock";
 import ListItem from "./ListItem";
 import SmartSelect from "./SmartSelect";
-import TextArea from "./TextArea";
+import Textarea from "./Textarea";
 
 const ContentBlockTitleWrapper = ContentBlockTitle;
 const ListItemWrapper = ListItem;
@@ -25,5 +25,5 @@ export {
   ListBlock,
   ListItemWrapper,
   SmartSelect,
-  TextArea
+  Textarea
 };
