@@ -35,4 +35,13 @@ describe("ContentBlock component", () => {
     );
     expect(wrapper).not.toHaveClassName("inset");
   });
+
+  it("renders with a specific styling class", () => {
+    const wrapper = shallow(
+      <ContentBlock className="custom-class">
+        {Content}
+      </ContentBlock>
+    );
+    expect(wrapper).toHaveClassName("custom-class");
+  });
 });

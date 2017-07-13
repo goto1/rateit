@@ -2,7 +2,7 @@
 
 exports[`ContentBlock component renders correctly 1`] = `
 <div
-  className="content-block"
+  className="content-block  "
 >
   <div>
     Lorem ipsum dolor sit amet

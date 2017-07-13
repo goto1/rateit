@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const ContentBlock = ({ inset = false, children }) => {
-  const classNames = inset ? "content-block inset" : "content-block";
+const ContentBlock = ({ inset = false, className, children }) => {
+  const classNames = `content-block ${inset ? "inset" : ""} ${className
+    ? className
+    : ""}`;
   return (
     <div className={classNames}>
       {children}
@@ -12,6 +14,7 @@ const ContentBlock = ({ inset = false, children }) => {
 
 ContentBlock.propTypes = {
   inset: PropTypes.bool,
+  className: PropTypes.string,
   children: PropTypes.node.isRequired
 };
 
