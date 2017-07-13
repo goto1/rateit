@@ -1,4 +1,5 @@
 import Button from "./Button";
+import Card from "./Card";
 import ContentBlockTitle from "./ContentBlockTitle";
 import FormInput from "./FormInput";
 import Icon from "./Icon";
@@ -14,6 +15,7 @@ const ListItemWrapper = ListItem;
 
 export {
   Button,
+  Card,
   ContentBlockTitleWrapper,
   FormInput,
   Icon,
