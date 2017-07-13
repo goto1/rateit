@@ -99,7 +99,7 @@ const General = () =>
     <SchoolInformation />
     <PasswordReset />
     <ContentBlock>
-      <Button type="success" onClick={e => e.preventDefault()}>
+      <Button type="success" disabled={true} onClick={e => e.preventDefault()}>
         Submit Changes
       </Button>
     </ContentBlock>

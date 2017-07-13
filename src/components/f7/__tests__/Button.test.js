@@ -6,6 +6,7 @@ import "jest-enzyme";
 import "jest-styled-components";
 
 const props = {
+  disabled: false,
   onClick: jest.fn()
 };
 
@@ -43,6 +44,14 @@ describe("Button component", () => {
     expect(tree).toHaveStyleRule("background-color", "#369947 !important");
     expect(tree).toHaveStyleRule("border-color", "#369947 !important");
     expect(tree).toHaveStyleRule("color", "#F1F1F5 !important");
+  });
+
+  it("renders with disabled style properties", () => {
+    const newProps = { ...props, disabled: true };
+    const tree = renderer
+      .create(<Button {...newProps}>Submit</Button>)
+      .toJSON();
+    expect(tree).toHaveStyleRule("opacity", ".65");
   });
 
   it("calls a function when clicked", () => {

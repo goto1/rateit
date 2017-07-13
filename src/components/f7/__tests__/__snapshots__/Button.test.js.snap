@@ -1,10 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Button component renders correctly 1`] = `
-.ddvIbK {
+.iruTvw {
   background-color: inherit !important;
   border-color: #057AFF !important;
   color: #057AFF !important;
+  opacity: 1;
   -webkit-text-transform: uppercase;
   text-transform: uppercase;
   -webkit-letter-spacing: .5px;
@@ -14,7 +15,8 @@ exports[`Button component renders correctly 1`] = `
 }
 
 <a
-  className="button button-big sc-bdVaJa ddvIbK"
+  className="button button-big sc-bdVaJa iruTvw"
+  disabled={false}
   href="#"
   onClick={[Function]}
 >

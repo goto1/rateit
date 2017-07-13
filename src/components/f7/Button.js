@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-const btnColorPicker = type => {
+const colorPicker = type => {
   switch (type) {
     case "primary":
       return {
@@ -31,12 +31,13 @@ const Wrapper = styled.a`
   background-color: ${props => props.bgColor} !important;
   border-color: ${props => props.borderColor} !important;
   color: ${props => props.textColor} !important;
+  opacity: ${props => (props.disabled ? ".65" : "1")};
   text-transform: uppercase;
   letter-spacing: .5px;
 `;
 
-const Button = ({ type, onClick, children }) => {
-  const { bgColor, borderColor, textColor } = btnColorPicker(type);
+const Button = ({ type, disabled, onClick, children }) => {
+  const { bgColor, borderColor, textColor } = colorPicker(type);
   return (
     <Wrapper
       href="#"
@@ -45,6 +46,7 @@ const Button = ({ type, onClick, children }) => {
       bgColor={bgColor}
       borderColor={borderColor}
       textColor={textColor}
+      disabled={disabled}
     >
       {children}
     </Wrapper>
@@ -53,6 +55,7 @@ const Button = ({ type, onClick, children }) => {
 
 Button.propTypes = {
   type: PropTypes.oneOf(["default", "primary", "success"]),
+  disabled: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
   children: PropTypes.string.isRequired
 };
