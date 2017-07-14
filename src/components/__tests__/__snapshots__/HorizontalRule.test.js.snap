@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HorizontalRule component renders correctly 1`] = `
+.dwHqCE {
+  border: 0px;
+  height: 1px;
+  width: 90%;
+  margin: 5px;
+  background-image: linear-gradient(    to left,    #E5E5E5,    #0B7EFF,    #E5E5E5  );
+}
+
+<hr
+  className="sc-bdVaJa dwHqCE"
+  width="90%"
+/>
+`;
