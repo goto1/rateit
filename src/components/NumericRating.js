@@ -2,12 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-const Wrapper = styled.div`
-  letter-spacing: 2px;
-  span {
-    font-weight: 500;
-    color: ${props => props.ratingColor};
-  }
+const Wrapper = styled.div`letter-spacing: 2px;`;
+
+export const Rating = styled.span`
+  font-weight: 500;
+  color: ${props => props.color};
 `;
 
 const NumericRating = ({ rating, className }) => {
@@ -21,8 +20,8 @@ const NumericRating = ({ rating, className }) => {
   }
 
   return (
-    <Wrapper ratingColor={color} className={className || ""}>
-      <span>{rating}</span>/5
+    <Wrapper className={className || ""}>
+      <Rating color={color}>{rating}</Rating>/5
     </Wrapper>
   );
 };

@@ -1,22 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NumericRating component renders correctly 1`] = `
-.kCuTZJ {
+.ecEnce {
   -webkit-letter-spacing: 2px;
   -moz-letter-spacing: 2px;
   -ms-letter-spacing: 2px;
   letter-spacing: 2px;
 }
 
-.kCuTZJ span {
+.fxvkdv {
   font-weight: 500;
   color: #A1BA37;
 }
 
 <div
-  className="sc-bdVaJa kCuTZJ"
+  className="sc-bdVaJa ecEnce"
 >
-  <span>
+  <span
+    className="sc-bwzfXH fxvkdv"
+    color="#A1BA37"
+  >
     4.5
   </span>
   /5
