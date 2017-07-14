@@ -6,7 +6,6 @@ exports[`SmartSelect component renders correctly 1`] = `
     className="item-link smart-select"
     data-searchbar="true"
     data-searchbar-placeholder="Search for schools..."
-    href="#"
   >
     <select
       multiple={true}

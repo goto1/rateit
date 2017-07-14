@@ -11,7 +11,6 @@ const SmartSelect = ({
 }) =>
   <li>
     <a
-      href="#"
       className="item-link smart-select"
       data-searchbar="true"
       data-searchbar-placeholder={searchbarPlaceholder}
