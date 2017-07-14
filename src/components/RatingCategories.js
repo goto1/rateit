@@ -3,13 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import NumericRating from "./NumericRating";
 import HorizontalRule from "./HorizontalRule";
-import { Icon } from "framework7-react";
-
-const IconCustom = styled(Icon)`
-  flex-basis: 22px;
-  font-size: 19px;
-  padding-top: 4px;
-`;
+import { Icon } from "./f7";
 
 const DescriptionWrapper = styled.div`
   flex-grow: 1;
@@ -32,6 +26,17 @@ Description.propTypes = {
   description: PropTypes.string.isRequired
 };
 
+const StyledIcon = styled(Icon)`
+  flex-basis: 22px;
+  font-size: 19px;
+  padding-top: 4px;
+`;
+
+const StyledNumericRating = styled(NumericRating)`
+  font-size: 14px;
+  span { font-size: 17px; }
+`;
+
 const CategoryWrapper = styled.div`
   display: flex;
   margin-bottom: 1px;
@@ -39,11 +44,9 @@ const CategoryWrapper = styled.div`
 
 const Category = ({ description, rating }) =>
   <CategoryWrapper>
-    <IconCustom material="forward" />
+    <StyledIcon material="forward" />
     <Description description={description} />
-    <NumericRating fontSize={14}>
-      {rating}
-    </NumericRating>
+    <StyledNumericRating rating={rating} />
   </CategoryWrapper>;
 
 Category.propTypes = {
