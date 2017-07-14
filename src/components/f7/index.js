@@ -10,20 +10,16 @@ import ListItem from "./ListItem";
 import SmartSelect from "./SmartSelect";
 import Textarea from "./Textarea";
 
-const ContentBlockTitleWrapper = ContentBlockTitle;
-const ListItemWrapper = ListItem;
-
 export {
   Button,
   Card,
   ContentBlock,
   ContentBlockTitle,
-  ContentBlockTitleWrapper,
   FormInput,
   Icon,
   LinkItem,
   ListBlock,
-  ListItemWrapper,
+  ListItem,
   SmartSelect,
   Textarea
 };

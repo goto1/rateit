@@ -17,10 +17,14 @@
     "styled-components": "^2.1.0"
   },
   "devDependencies": {
+    "enzyme": "^2.9.1",
     "firebase-tools": "^3.9.1",
     "flow-bin": "^0.48.0",
+    "jest-enzyme": "^3.4.0",
+    "jest-styled-components": "^3.3.2",
     "prettier": "^1.5.2",
     "react-scripts": "1.0.7",
+    "react-test-renderer": "^15.6.1",
     "redux-logger": "^3.0.6"
   },
   "scripts": {

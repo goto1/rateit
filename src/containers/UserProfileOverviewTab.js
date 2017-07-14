@@ -4,14 +4,14 @@ import styled from "styled-components";
 import capitalize from "lodash/capitalize";
 import HorizontalRule from "../components/HorizontalRule";
 import NumericRating from "../components/NumericRating";
-import RatingCategories from "../components/RatingCategories";
-import { Card } from "../components/f7";
-import { Icon, CardHeader, CardContent } from "framework7-react";
+import RatingCategoriesList from "../components/RatingCategoriesList";
+import { Icon, Card } from "../components/f7";
+import { CardHeader, CardContent } from "framework7-react";
 
 // DELETE WHEN DONE TESTING
 import * as API from "../utils";
 
-const CardStyled = styled(Card)`
+const StyledCard = styled(Card)`
   margin: 25px 10px !important;
 `;
 
@@ -101,6 +101,11 @@ const arrStringify = (arr, attr) => {
   return str;
 };
 
+const NumericRatingStyled = styled(NumericRating)`
+  font-size: 17px;
+  span { font-size: 20px; }
+`;
+
 const UserInformation = ({
   name,
   overallRating,
@@ -113,11 +118,9 @@ const UserInformation = ({
   const majorNames = arrStringify(majors, "abbreviation");
   const userEmails = emails.map(email => email).join(", ");
   return (
-    <CardStyled>
+    <StyledCard>
       <Header title={name}>
-        <NumericRating fontSize={17}>
-          {overallRating}
-        </NumericRating>
+        <NumericRatingStyled rating={overallRating} />
       </Header>
       <Content>
         <ContentItem icon="portrait" hr={true}>
@@ -133,7 +136,7 @@ const UserInformation = ({
           {userEmails}
         </ContentItem>
       </Content>
-    </CardStyled>
+    </StyledCard>
   );
 };
 
@@ -152,7 +155,7 @@ const UserAggregateRatings = ({ userRatings, aggregateRatings }) => {
     <Card>
       <Header title={`Based on ${numOfRatings} ratings`} />
       <Content>
-        <RatingCategories
+        <RatingCategoriesList
           ratings={aggregateRatings}
           hrColors={{ colorOne: "#FFF", colorTwo: "#747475" }}
         />

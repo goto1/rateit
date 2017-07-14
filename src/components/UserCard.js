@@ -2,16 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import UserItemContents from "./UserItemContents";
-import RatingCategories from "./RatingCategories";
+import RatingCategoriesList from "./RatingCategoriesList";
 import HorizontalRule from "./HorizontalRule";
+import { Card, Icon } from "./f7";
 import {
   AccordionItem,
   AccordionToggle,
   AccordionContent,
-  Card,
   CardContent,
-  CardFooter,
-  Icon
+  CardFooter
 } from "framework7-react";
 
 const Row = styled.div`display: flex;`;
@@ -32,14 +31,14 @@ const Button = styled.button.attrs({
   }
 `;
 
-const AccordionToggleWrapper = styled(AccordionToggle)`
+const AccordionToggleStyled = styled(AccordionToggle)`
   flex-basis: 100%;
 `;
 
 const Actions = ({ aggregateRatings }) =>
   <AccordionItem>
     <Row>
-      <AccordionToggleWrapper>
+      <AccordionToggleStyled>
         <Button
           onClick={() => console.log("quick overview")}
           textAlign="left"
@@ -48,7 +47,7 @@ const Actions = ({ aggregateRatings }) =>
           Quick Overview
           <Icon material="arrow_downward" />
         </Button>
-      </AccordionToggleWrapper>
+      </AccordionToggleStyled>
       <Button
         onClick={() => console.log("see profile")}
         textAlign="right"
@@ -59,7 +58,7 @@ const Actions = ({ aggregateRatings }) =>
       </Button>
     </Row>
     <AccordionContent>
-      <RatingCategories
+      <RatingCategoriesList
         ratings={aggregateRatings}
         hrColors={{ colorOne: "#E5E5E5", colorTwo: "#0B7EFF" }}
       />
@@ -71,7 +70,7 @@ Actions.propTypes = {
   aggregateRatings: PropTypes.array.isRequired
 };
 
-const CardFooterContainer = styled(CardFooter)`
+const CardFooterStyled = styled(CardFooter)`
   flex-direction: row-reverse;
 `;
 
@@ -87,7 +86,7 @@ const UserCard = props =>
       />
       <Actions aggregateRatings={props.aggregateRatings} />
     </CardContent>
-    <CardFooterContainer>
+    <CardFooterStyled>
       <Button
         onClick={() => console.log("toggle bookmarked")}
         textAlign="right"
@@ -97,7 +96,7 @@ const UserCard = props =>
         Saved
         <Icon material="bookmark" />
       </Button>
-    </CardFooterContainer>
+    </CardFooterStyled>
   </Card>;
 
 UserCard.propTypes = {

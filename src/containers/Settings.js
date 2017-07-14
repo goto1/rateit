@@ -1,5 +1,5 @@
 import React from "react";
-import { ContentBlockTitleWrapper, ListItemWrapper } from "../components/f7";
+import { ContentBlockTitle, ListItem } from "../components/f7";
 import { Page, Navbar, List } from "framework7-react";
 
 // DELETE WHEN DONE TESTING
@@ -7,24 +7,24 @@ import * as API from "../utils";
 
 const AccountSettings = () =>
   <div>
-    <ContentBlockTitleWrapper>Account settings</ContentBlockTitleWrapper>
+    <ContentBlockTitle>Account settings</ContentBlockTitle>
     <List inset>
-      <ListItemWrapper icon="account_circle" url="/settings/general">
+      <ListItem icon="account_circle" url="/settings/general">
         General
-      </ListItemWrapper>
+      </ListItem>
     </List>
   </div>;
 
 const HelpAndSupport = () =>
   <div>
-    <ContentBlockTitleWrapper>Help and support</ContentBlockTitleWrapper>
+    <ContentBlockTitle>Help and support</ContentBlockTitle>
     <List inset>
-      <ListItemWrapper icon="help" url="/settings/help/">
+      <ListItem icon="help" url="/settings/help/">
         Help Center
-      </ListItemWrapper>
-      <ListItemWrapper icon="assignment" url="/settings/terms/">
+      </ListItem>
+      <ListItem icon="assignment" url="/settings/terms/">
         Terms & Policies
-      </ListItemWrapper>
+      </ListItem>
     </List>
   </div>;
 
@@ -33,15 +33,12 @@ const user = API.getUserDetails("UArjrbxWHX");
 const UserSettings = () =>
   <div>
     <List inset>
-      <ListItemWrapper
-        icon="sentiment_very_satisfied"
-        url={`/profile/${user.id}`}
-      >
+      <ListItem icon="sentiment_very_satisfied" url={`/profile/${user.id}`}>
         Profile Page
-      </ListItemWrapper>
-      <ListItemWrapper icon="exit_to_app" url="/signout/">
+      </ListItem>
+      <ListItem icon="exit_to_app" url="/signout/">
         Sign Out
-      </ListItemWrapper>
+      </ListItem>
     </List>
   </div>;
 

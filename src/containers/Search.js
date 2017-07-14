@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import UserListItem from "../components/UserListItem";
-import { ContentBlockTitleWrapper } from "../components/f7";
+import { Card, ContentBlockTitle } from "../components/f7";
 import {
   Page,
   Navbar,
   Searchbar,
   List,
-  Card,
   CardHeader,
   CardContent,
   GridRow,
@@ -97,7 +96,7 @@ Chip.propTypes = {
 };
 
 const SchoolLabels = ({ schools }) =>
-  <ContentBlockTitleWrapper>
+  <ContentBlockTitle>
     Showing results for
     <div>
       {schools.map(school =>
@@ -106,7 +105,7 @@ const SchoolLabels = ({ schools }) =>
         </Chip>
       )}
     </div>
-  </ContentBlockTitleWrapper>;
+  </ContentBlockTitle>;
 
 SchoolLabels.propTypes = {
   schools: PropTypes.array.isRequired

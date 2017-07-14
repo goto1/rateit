@@ -1,16 +1,17 @@
 import React from "react";
 import {
-  ContentBlockTitleWrapper,
+  ContentBlock,
+  ContentBlockTitle,
   FormInput,
-  TextArea,
+  Textarea,
   Button
 } from "../components/f7";
-import { Page, Navbar, List, ContentBlock } from "framework7-react";
+import { Page, Navbar, List } from "framework7-react";
 
 const Help = () =>
   <Page>
     <Navbar title="Help Center" backLink="Back" sliding />
-    <ContentBlockTitleWrapper>Contact form</ContentBlockTitleWrapper>
+    <ContentBlockTitle>Contact form</ContentBlockTitle>
     <List inset>
       <FormInput
         icon="info"
@@ -19,7 +20,7 @@ const Help = () =>
         placeholder="Title..."
         onChange={e => console.log(e.target.name, e.target.value)}
       />
-      <TextArea
+      <Textarea
         icon="comment"
         name="message"
         placeholder="Your message here..."

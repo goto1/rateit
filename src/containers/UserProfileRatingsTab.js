@@ -2,24 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import HorizontalRule from "../components/HorizontalRule";
-import RatingCategories from "../components/RatingCategories";
+import RatingCategoriesList from "../components/RatingCategoriesList";
 import RatingStars from "../components/RatingStars";
-import { ContentBlockTitleWrapper } from "../components/f7";
+import { Card, Icon, ContentBlockTitle } from "../components/f7";
 import {
   AccordionItem,
   AccordionToggle,
   AccordionContent,
-  Card,
   CardHeader,
   CardContent,
-  CardFooter,
-  Icon
+  CardFooter
 } from "framework7-react";
 
 // DELETE WHEN DONE TESTING
 import * as API from "../utils";
 
-const HeaderContainer = styled(CardHeader)`
+const StyledHeader = styled(CardHeader)`
   div:nth-of-type(1) {
     padding-top: 2px;
     font-weight: 500;
@@ -27,12 +25,12 @@ const HeaderContainer = styled(CardHeader)`
 `;
 
 const Header = ({ authorName, aggregateRating }) =>
-  <HeaderContainer>
+  <StyledHeader>
     <div>
       {authorName.length > 15 ? `${authorName.slice(0, 13)}..` : authorName}
     </div>
     <RatingStars rating={aggregateRating} />
-  </HeaderContainer>;
+  </StyledHeader>;
 
 Header.propTypes = {
   authorName: PropTypes.string.isRequired,
@@ -105,7 +103,7 @@ const Details = ({ individualRatings }) =>
         Show Details <Icon material="arrow_downward" />
       </AccordionToggle>
       <AccordionContent>
-        <RatingCategories
+        <RatingCategoriesList
           ratings={individualRatings}
           hrColors={{ colorOne: "#e5e5e5", colorTwo: "#0b7eff" }}
         />
@@ -142,7 +140,7 @@ Content.propTypes = {
   individualRatings: PropTypes.array.isRequired
 };
 
-const FooterButtonWrapper = styled.button.attrs({
+const ButtonWrapper = styled.button.attrs({
   type: "button",
   onClick: props => props.onClick
 })`
@@ -160,44 +158,44 @@ const FooterButtonWrapper = styled.button.attrs({
   }
 `;
 
-const FooterButton = ({ icon, onClick, children }) =>
-  <FooterButtonWrapper onClick={onClick}>
+const Button = ({ icon, onClick, children }) =>
+  <ButtonWrapper onClick={onClick}>
     <Icon material={icon} />
     <span>
       {children}
     </span>
-  </FooterButtonWrapper>;
+  </ButtonWrapper>;
 
-FooterButton.propTypes = {
+Button.propTypes = {
   icon: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   children: PropTypes.number.isRequired
 };
 
-const CardFooterContainer = styled(CardFooter)`
+const StyledFooter = styled(CardFooter)`
   justify-content: flex-start !important;
 `;
 
 const Footer = ({ likes, dislikes }) =>
-  <CardFooterContainer>
-    <FooterButton icon="thumb_up" onClick={() => console.log("liked")}>
+  <StyledFooter>
+    <Button icon="thumb_up" onClick={() => console.log("liked")}>
       {likes}
-    </FooterButton>
-    <FooterButton icon="thumb_down" onClick={() => console.log("disliked")}>
+    </Button>
+    <Button icon="thumb_down" onClick={() => console.log("disliked")}>
       {dislikes}
-    </FooterButton>
-  </CardFooterContainer>;
+    </Button>
+  </StyledFooter>;
 
-const CardContainer = styled(Card)`
+const StyledCard = styled(Card)`
   margin-bottom: 20px !important;
 `;
 
 const UserRating = props =>
-  <CardContainer>
+  <StyledCard>
     <Header {...props} />
     <Content {...props} />
     <Footer {...props} />
-  </CardContainer>;
+  </StyledCard>;
 
 UserRating.propTypes = {
   id: PropTypes.string.isRequired,
@@ -220,9 +218,9 @@ const UserProfileRatingsTab = () => {
 
   return (
     <div>
-      <ContentBlockTitleWrapper>
+      <ContentBlockTitle>
         {`Showing ${numOfRatings} ratings`}
-      </ContentBlockTitleWrapper>
+      </ContentBlockTitle>
       {ratings.map(rating => <UserRating key={rating.id} {...rating} />)}
     </div>
   );

@@ -1,19 +1,20 @@
 import React from "react";
 import {
-  ContentBlockTitleWrapper,
+  ContentBlock,
+  ContentBlockTitle,
   FormInput,
   SmartSelect,
   ListBlock,
   Button
 } from "../components/f7";
-import { Page, Navbar, List, ContentBlock } from "framework7-react";
+import { Page, Navbar, List } from "framework7-react";
 
 // DELETE AFTER TESTING
 import * as API from "../utils";
 
 const AccountInformation = () =>
   <div>
-    <ContentBlockTitleWrapper>Account information</ContentBlockTitleWrapper>
+    <ContentBlockTitle>Account information</ContentBlockTitle>
     <List form inset>
       <FormInput
         icon="email"
@@ -41,7 +42,7 @@ const SchoolInformation = () => {
 
   return (
     <div>
-      <ContentBlockTitleWrapper>School information</ContentBlockTitleWrapper>
+      <ContentBlockTitle>School information</ContentBlockTitle>
       <ListBlock>
         <SmartSelect
           name="schools"
@@ -66,7 +67,7 @@ const SchoolInformation = () => {
 
 const PasswordReset = () =>
   <div>
-    <ContentBlockTitleWrapper>Password reset</ContentBlockTitleWrapper>
+    <ContentBlockTitle>Password reset</ContentBlockTitle>
     <List form inset>
       <FormInput
         icon="lock"
