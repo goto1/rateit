@@ -4,19 +4,15 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   letter-spacing: 2px;
-  font-size: ${props => (props.fontSize ? `${props.fontSize}px` : "1em")};
   span {
     font-weight: 500;
-    color: ${props => props.ratingColor || "#000"};
-    font-size: ${props => (props.fontSize ? `${props.fontSize + 3}px` : "1em")};
+    color: ${props => props.ratingColor};
   }
 `;
 
-// <NumericRating fontSize={10}>{5}</NumericRating>
-const NumericRating = ({ fontSize, children }) => {
-  const rating = children;
-
+const NumericRating = ({ rating, className }) => {
   let color = "#A1BA37";
+
   if (rating <= 3) {
     color = "#DEB21C";
   }
@@ -25,15 +21,15 @@ const NumericRating = ({ fontSize, children }) => {
   }
 
   return (
-    <Wrapper fontSize={fontSize} ratingColor={color}>
+    <Wrapper ratingColor={color} className={className || ""}>
       <span>{rating}</span>/5
     </Wrapper>
   );
 };
 
 NumericRating.propTypes = {
-  fontSize: PropTypes.number.isRequired,
-  children: PropTypes.number.isRequired
+  rating: PropTypes.number.isRequired,
+  className: PropTypes.string
 };
 
 export default NumericRating;

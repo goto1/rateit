@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RatingStars component renders correctly 1`] = `
+<div
+  className="sc-bZQynM kyDniL"
+>
+  <i
+    className="material-icons icon sc-gzVnrw bhRAOQ"
+  >
+    star
+  </i>
+  <i
+    className="material-icons icon sc-gzVnrw bhRAOQ"
+  >
+    star
+  </i>
+  <i
+    className="material-icons icon sc-gzVnrw bhRAOQ"
+  >
+    star
+  </i>
+  <i
+    className="material-icons icon sc-gzVnrw bhRAOQ"
+  >
+    star
+  </i>
+  <i
+    className="material-icons icon sc-gzVnrw bhRAOQ"
+  >
+    star_border
+  </i>
+</div>
+`;

@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NumericRating component renders correctly 1`] = `
+.kCuTZJ {
+  -webkit-letter-spacing: 2px;
+  -moz-letter-spacing: 2px;
+  -ms-letter-spacing: 2px;
+  letter-spacing: 2px;
+}
+
+.kCuTZJ span {
+  font-weight: 500;
+  color: #A1BA37;
+}
+
+<div
+  className="sc-bdVaJa kCuTZJ"
+>
+  <span>
+    4.5
+  </span>
+  /5
+</div>
+`;
