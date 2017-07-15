@@ -3,43 +3,45 @@ import RatingStars from "../RatingStars";
 import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
 
-const getWrapper = rating => shallow(<RatingStars rating={rating} />);
+const getShallowRatingStars = props => shallow(<RatingStars {...props} />);
 
 describe("RatingStars component", () => {
-  it("renders correctly", () => {
+  it("should render correctly", () => {
     const tree = renderer.create(<RatingStars rating={4} />);
     expect(tree).toMatchSnapshot();
   });
 
-  it("renders the correct amount of stars", () => {
-    const wrapper = getWrapper(4);
-    expect(wrapper.children()).toHaveLength(5);
+  it("should render the correct amount of stars", () => {
+    const wrapper = getShallowRatingStars({ rating: 4 });
+    const actual = wrapper.children().length;
+    const expected = 5;
+    expect(actual).toBe(expected);
   });
 
-  it("renders the correct amount of empty stars", () => {
-    const wrapper = getWrapper(2.5);
-    const emptyStars = wrapper
+  it("should render the correct amount of empty stars", () => {
+    const wrapper = getShallowRatingStars({ rating: 2.5 });
+    const actual = wrapper
       .children()
-      .filterWhere(star => star.render().text() === "star_border");
-
-    expect(emptyStars).toHaveLength(2);
+      .filterWhere(star => star.render().text() === "star_border").length;
+    const expected = 2;
+    expect(actual).toBe(expected);
   });
 
-  it("renders the correct amount of half stars", () => {
-    const wrapper = getWrapper(3.5);
-    const halfStars = wrapper
+  it("should render the correct amount of half stars", () => {
+    const wrapper = getShallowRatingStars({ rating: 3.5 });
+    const actual = wrapper
       .children()
-      .filterWhere(star => star.render().text() === "star_half");
-
-    expect(halfStars).toHaveLength(1);
+      .filterWhere(star => star.render().text() === "star_half").length;
+    const expected = 1;
+    expect(actual).toBe(expected);
   });
 
-  it("renders the correct amount of full stars", () => {
-    const wrapper = getWrapper(3.5);
-    const fullStars = wrapper
+  it("should render the correct amount of full stars", () => {
+    const wrapper = getShallowRatingStars({ rating: 3.5 });
+    const actual = wrapper
       .children()
-      .filterWhere(star => star.render().text() === "star");
-
-    expect(fullStars).toHaveLength(3);
+      .filterWhere(star => star.render().text() === "star").length;
+    const expected = 3;
+    expect(actual).toBe(expected);
   });
 });

@@ -1,6 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RatingStars component renders correctly 1`] = `
+exports[`RatingStars component should render correctly 1`] = `
+.kyDniL {
+  width: 95px;
+}
+
+.bhRAOQ {
+  font-size: 19px;
+  color: #FEBA72;
+  width: 19px;
+  padding-bottom: 2px;
+}
+
 <div
   className="sc-bZQynM kyDniL"
 >
