@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NumericRating component renders correctly 1`] = `
+exports[`NumericRating component should render correctly 1`] = `
 .ecEnce {
   -webkit-letter-spacing: 2px;
   -moz-letter-spacing: 2px;

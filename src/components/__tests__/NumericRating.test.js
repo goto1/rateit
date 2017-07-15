@@ -3,32 +3,39 @@ import NumericRating, { Rating } from "../NumericRating";
 import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
 
-const getWrapper = rating => shallow(<NumericRating rating={rating} />);
+const getShallowNumericRating = props => shallow(<NumericRating {...props} />);
 
 describe("NumericRating component", () => {
-  it("renders correctly", () => {
+  it("should render correctly", () => {
     const tree = renderer.create(<NumericRating rating={4.5} />).toJSON();
     expect(tree).toMatchStyledComponentsSnapshot();
   });
 
-  it("renders the rating number in a green color", () => {
-    const wrapper = getWrapper(4);
-    const ratingColor = wrapper.find(Rating).at(0).props().color;
-
-    expect(ratingColor).toBe("#A1BA37");
+  it("should render the correct rating", () => {
+    const wrapper = getShallowNumericRating({ rating: 4.5 });
+    const actual = wrapper.find(Rating).children().at(0).text();
+    const expected = "4.5";
+    expect(actual).toBe(expected);
   });
 
-  it("renders the rating number in a yellow color", () => {
-    const wrapper = getWrapper(3);
-    const ratingColor = wrapper.find(Rating).at(0).props().color;
-
-    expect(ratingColor).toBe("#DEB21C");
+  it("should render the rating number in green", () => {
+    const wrapper = getShallowNumericRating({ rating: 4 });
+    const actual = wrapper.find(Rating).at(0).props().color;
+    const expected = "#A1BA37";
+    expect(actual).toBe(expected);
   });
 
-  it("renders the rating number in a red color", () => {
-    const wrapper = getWrapper(1);
-    const ratingColor = wrapper.find(Rating).at(0).props().color;
+  it("should render the rating number in yellow", () => {
+    const wrapper = getShallowNumericRating({ rating: 3 });
+    const actual = wrapper.find(Rating).at(0).props().color;
+    const expected = "#DEB21C";
+    expect(actual).toBe(expected);
+  });
 
-    expect(ratingColor).toBe("#D91948");
+  it("should render the rating number in red", () => {
+    const wrapper = getShallowNumericRating({ rating: 1.5 });
+    const actual = wrapper.find(Rating).at(0).props().color;
+    const expected = "#D91948";
+    expect(actual).toBe(expected);
   });
 });
