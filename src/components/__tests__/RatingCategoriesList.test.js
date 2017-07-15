@@ -33,7 +33,7 @@ describe("RatingCategoriesList component", () => {
     expect(actual).toBe(expected);
   });
 
-  it("should render the correct rating category", () => {
+  it("should render the specified rating category", () => {
     const wrapper = render(<RatingCategoriesList {...props} />);
     const actual = wrapper.html().includes("Attends Group Meetings");
     const expected = true;
