@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RatingCategoriesList component should render correctly 1`] = `
+.ecEnce {
+  -webkit-letter-spacing: 2px;
+  -moz-letter-spacing: 2px;
+  -ms-letter-spacing: 2px;
+  letter-spacing: 2px;
+}
+
+.eYvYrI {
+  font-weight: 500;
+  color: #DEB21C;
+}
+
+.fxvkdv {
+  font-weight: 500;
+  color: #A1BA37;
+}
+
+.ixBfIh {
+  border: 0px;
+  height: 1px;
+  width: 70%;
+  margin: 1px auto;
+  background-image: linear-gradient(    to left,    #FFF,    #000,    #FFF  );
+}
+
+.hEpqdO {
+  -webkit-flex-grow: 1;
+  -ms-flex-grow: 1;
+  flex-grow: 1;
+  padding-top: 4px;
+  color: #000;
+}
+
+.jvsQwZ {
+  -webkit-flex-basis: 22px;
+  -ms-flex-basis: 22px;
+  flex-basis: 22px;
+  font-size: 19px;
+  padding-top: 4px;
+}
+
+.eltzjY {
+  font-size: 14px;
+}
+
+.eltzjY span {
+  font-size: 17px;
+}
+
+.hBlVJw {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 1px;
+}
+
+.djMceD {
+  margin-top: 7.5px;
+}
+
+<div
+  className="sc-VigVT djMceD"
+>
+  <div>
+    <div
+      className="sc-gqjmRU hBlVJw"
+    >
+      <i
+        className="material-icons icon sc-iwsKbI jvsQwZ"
+      >
+        forward
+      </i>
+      <div
+        className="sc-dnqmqq hEpqdO"
+      >
+        Attends Group Meetings
+      </div>
+      <div
+        className="sc-gZMcBi eltzjY sc-bdVaJa ecEnce"
+      >
+        <span
+          className="sc-bwzfXH eYvYrI"
+          color="#DEB21C"
+        >
+          3
+        </span>
+        /5
+      </div>
+    </div>
+    <hr
+      className="sc-htpNat ixBfIh"
+      width="70%"
+    />
+  </div>
+  <div>
+    <div
+      className="sc-gqjmRU hBlVJw"
+    >
+      <i
+        className="material-icons icon sc-iwsKbI jvsQwZ"
+      >
+        forward
+      </i>
+      <div
+        className="sc-dnqmqq hEpqdO"
+      >
+        Contributes to Discussions
+      </div>
+      <div
+        className="sc-gZMcBi eltzjY sc-bdVaJa ecEnce"
+      >
+        <span
+          className="sc-bwzfXH fxvkdv"
+          color="#A1BA37"
+        >
+          5
+        </span>
+        /5
+      </div>
+    </div>
+  </div>
+</div>
+`;
