@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccordionContent component should render correctly 1`] = `
+
+
+<div
+  className="accordion-item-content"
+>
+  <span>
+    HelloWorld!
+  </span>
+</div>
+`;
