@@ -4,18 +4,19 @@ import PropTypes from "prop-types";
 import UserItemContents from "./UserItemContents";
 import RatingCategoriesList from "./RatingCategoriesList";
 import HorizontalRule from "./HorizontalRule";
-import { Card, Icon } from "./f7";
 import {
+  AccordionContent,
   AccordionItem,
   AccordionToggle,
-  AccordionContent,
+  Card,
   CardContent,
-  CardFooter
-} from "framework7-react";
+  CardFooter,
+  Icon
+} from "./f7";
 
 const Row = styled.div`display: flex;`;
 
-const Button = styled.button.attrs({
+export const Button = styled.button.attrs({
   type: "button"
 })`
   border: none;
@@ -63,7 +64,6 @@ const Actions = ({ aggregateRatings }) =>
         hrColors={{ colorOne: "#E5E5E5", colorTwo: "#0B7EFF" }}
       />
     </AccordionContent>
-    <AccordionContent />
   </AccordionItem>;
 
 Actions.propTypes = {
