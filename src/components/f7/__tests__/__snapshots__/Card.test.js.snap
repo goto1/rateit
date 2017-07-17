@@ -1,14 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Card component renders correctly 1`] = `
+exports[`Card component should render correctly 1`] = `
+
+
 <div
   className="card"
 >
-  <div>
-    Lorem ipsum dolor sit amet
-    <span>
-      Lorem ipsum dolor sit amet
-    </span>
+  <div
+    className="card-header"
+  >
+    HelloWorld
+  </div>
+  <div
+    className="card-content"
+  >
+    <div
+      className="card-content-inner"
+    >
+      HelloWorld
+    </div>
+  </div>
+  <div
+    className="card-footer"
+  >
+    HelloWorld
   </div>
 </div>
 `;
