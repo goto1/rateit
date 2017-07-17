@@ -4,15 +4,17 @@ import styled from "styled-components";
 import HorizontalRule from "../components/HorizontalRule";
 import RatingCategoriesList from "../components/RatingCategoriesList";
 import RatingStars from "../components/RatingStars";
-import { Card, Icon, ContentBlockTitle } from "../components/f7";
 import {
   AccordionItem,
-  AccordionToggle,
   AccordionContent,
-  CardHeader,
+  AccordionToggle,
+  Card,
   CardContent,
-  CardFooter
-} from "framework7-react";
+  CardFooter,
+  CardHeader,
+  ContentBlockTitle,
+  Icon
+} from "../components/f7";
 
 // DELETE WHEN DONE TESTING
 import * as API from "../utils";
