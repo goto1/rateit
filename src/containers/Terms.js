@@ -1,11 +1,31 @@
 import React from "react";
-import { Page, Navbar, Card, CardHeader, CardContent } from "framework7-react";
+import styled from "styled-components";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  Navbar,
+  NavLeft,
+  NavCenter
+} from "../components/f7";
+import { Page } from "framework7-react";
+
+const StyledCardHeader = styled(CardHeader)`
+  font-weight: 500;
+`;
+
+const StyledCard = styled(Card)`
+  margin: 25px 10px !important;
+`;
 
 const Terms = () =>
   <Page>
-    <Navbar title="Terms & Policies" backLink="Back" sliding />
-    <Card>
-      <CardHeader style={{ fontWeight: "500" }}>1. Terms</CardHeader>
+    <Navbar>
+      <NavLeft backLink="Back" sliding={true} />
+      <NavCenter sliding={true}>Terms & Policies</NavCenter>
+    </Navbar>
+    <StyledCard>
+      <StyledCardHeader>1. Terms</StyledCardHeader>
       <CardContent>
         By accessing this web site, you are agreeing to be bound by these web
         site Terms and Conditions of Use, all applicable laws and regulations,
@@ -14,9 +34,9 @@ const Terms = () =>
         prohibited from using or accessing this site. The materials contained in
         this web site are protected by applicable copyright and trade mark law.
       </CardContent>
-    </Card>
-    <Card>
-      <CardHeader style={{ fontWeight: "500" }}>2. User License</CardHeader>
+    </StyledCard>
+    <StyledCard>
+      <StyledCardHeader>2. User License</StyledCardHeader>
       <CardContent>
         This license shall automatically terminate if you violate any of these
         restrictions and may be terminated by RateIt at any time. Upon
@@ -24,9 +44,9 @@ const Terms = () =>
         this license, you must destroy any downloaded materials in your
         possession whether in electronic or printed format.
       </CardContent>
-    </Card>
-    <Card>
-      <CardHeader style={{ fontWeight: "500" }}>3. User License</CardHeader>
+    </StyledCard>
+    <StyledCard>
+      <StyledCardHeader>3. User License</StyledCardHeader>
       <CardContent>
         The materials on RateIt's web site are provided "as is". RateIt makes no
         warranties, expressed or implied, and hereby disclaims and negates all
@@ -38,7 +58,7 @@ const Terms = () =>
         on its Internet web site or otherwise relating to such materials or on
         any sites linked to this site.
       </CardContent>
-    </Card>
+    </StyledCard>
   </Page>;
 
 export default Terms;
