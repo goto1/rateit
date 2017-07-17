@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navbar component should render correctly 1`] = `
+
+
+<div
+  className="navbar"
+>
+  <div
+    className="navbar-inner"
+  >
+    <div
+      className="left"
+    >
+      <a
+        className="back link"
+      >
+        <i
+          className="icon icon-back"
+        />
+        <span>
+          Back
+        </span>
+      </a>
+    </div>
+    <div
+      className="center"
+    >
+      Home
+    </div>
+    <div
+      className="right"
+    >
+      See More
+    </div>
+  </div>
+</div>
+`;

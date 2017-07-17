@@ -40,8 +40,10 @@ NavCenter.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-export const NavRight = ({ className, children }) => {
-  const classNames = `right ${className ? className : ""}`.trim();
+export const NavRight = ({ sliding = false, className, children }) => {
+  const classNames = `right ${sliding ? "sliding" : ""} ${className
+    ? className
+    : ""}`.trim();
   return (
     <div className={classNames}>
       {children}
@@ -50,6 +52,7 @@ export const NavRight = ({ className, children }) => {
 };
 
 NavRight.propTypes = {
+  sliding: PropTypes.bool,
   className: PropTypes.string,
   children: PropTypes.node.isRequired
 };
@@ -71,66 +74,3 @@ Navbar.propTypes = {
 };
 
 export default Navbar;
-
-// const Navbar = ({ title, backLink, sliding, className }) => {
-//   const classNames = `navbar ${className ? className : ''}`.trim()
-//   return (
-//     <div className={classNames}>
-//       <div className="navbar-inner">
-//         <NavLeft backLink={backLink} sliding={sliding}></NavLeft>
-//       </div>
-//     </div>
-//   )
-// }
-
-// const Navbar = ({ title, backLink, sliding, className }) => {
-//   return (
-//     <div className="navbar">
-//       <div className="navbar-inner">
-//         <div className="left sliding">
-//           <a href="#" className="back link">
-//             <i className="icon icon-back" />
-//             <span>Back</span>
-//           </a>
-//         </div>
-//         <div className="center-sliding">My App</div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// const Navbar = ({ title, backLink, sliding, className }) => {
-//   console.log(title, backLink, sliding);
-//   const navbarClassNames = `navbar ${className ? className : ""}`.trim();
-//   const backLinkClassNames = `left ${sliding ? "sliding" : ""}`.trim();
-//   const titleClassNames = `center ${sliding ? "sliding" : ""}`.trim();
-//   return (
-//     <div className={navbarClassNames}>
-//       {backLink &&
-//         <div className="navbar-inner">
-//           <div className={backLinkClassNames}>
-//             <a href="#" className="back link">
-//               <i className="icon icon-back" />
-//               <span>
-//                 {backLink}
-//               </span>
-//             </a>
-//           </div>
-//         </div>}
-//       <div className="navbar-inner">
-//         <div className={titleClassNames}>
-//           {title}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// Navbar.propTypes = {
-//   title: PropTypes.string.isRequired,
-//   backLink: PropTypes.string,
-//   sliding: PropTypes.bool,
-//   classNames: PropTypes.string
-// };
-
-// export default Navbar;
