@@ -1,6 +1,8 @@
-import AccordionContent from "./AccordionContent";
-import AccordionItem from "./AccordionItem";
-import AccordionToggle from "./AccordionToggle";
+import Accordion, {
+  AccordionContent,
+  AccordionItem,
+  AccordionToggle
+} from "./Accordion";
 import Button from "./Button";
 import Card, { CardContent, CardFooter, CardHeader } from "./Card";
 import ContentBlock from "./ContentBlock";
@@ -15,6 +17,7 @@ import SmartSelect from "./SmartSelect";
 import Textarea from "./Textarea";
 
 export {
+  Accordion,
   AccordionContent,
   AccordionItem,
   AccordionToggle,

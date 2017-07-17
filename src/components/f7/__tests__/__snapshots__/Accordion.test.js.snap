@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Accordion component should render correctly 1`] = `
+
+
+<div
+  className="accordion-list"
+>
+  <div
+    className="accordion-item"
+  >
+    HelloWorld
+  </div>
+  <div
+    className="accordion-item-toggle"
+  >
+    HelloWorld
+  </div>
+  <div
+    className="accordion-item-content"
+  >
+    HelloWorld
+  </div>
+</div>
+`;
