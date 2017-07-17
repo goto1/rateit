@@ -5,8 +5,7 @@ import capitalize from "lodash/capitalize";
 import HorizontalRule from "../components/HorizontalRule";
 import NumericRating from "../components/NumericRating";
 import RatingCategoriesList from "../components/RatingCategoriesList";
-import { Icon, Card } from "../components/f7";
-import { CardHeader, CardContent } from "framework7-react";
+import { Icon, Card, CardContent, CardHeader } from "../components/f7";
 
 // DELETE WHEN DONE TESTING
 import * as API from "../utils";
