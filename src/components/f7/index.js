@@ -14,6 +14,7 @@ import ListBlock from "./ListBlock";
 import ListItem from "./ListItem";
 import Navbar, { NavLeft, NavCenter, NavRight } from "./Navbar";
 import SmartSelect from "./SmartSelect";
+import Tabs from "./Tabs";
 import Textarea from "./Textarea";
 
 export {
@@ -38,5 +39,6 @@ export {
   NavRight,
   Navbar,
   SmartSelect,
+  Tabs,
   Textarea
 };

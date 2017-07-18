@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tabs component should render correctly 1`] = `
+
+
+<div
+  className="tabs"
+>
+  <span>
+    HelloWorld!
+  </span>
+</div>
+`;
