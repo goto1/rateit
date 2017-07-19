@@ -9,6 +9,7 @@ import ContentBlock from "./ContentBlock";
 import ContentBlockTitle from "./ContentBlockTitle";
 import FormInput from "./FormInput";
 import Icon from "./Icon";
+import InputElement from "./InputElement";
 import LinkItem from "./LinkItem";
 import ListBlock from "./ListBlock";
 import ListItem from "./ListItem";
@@ -31,6 +32,7 @@ export {
   ContentBlockTitle,
   FormInput,
   Icon,
+  InputElement,
   LinkItem,
   ListBlock,
   ListItem,

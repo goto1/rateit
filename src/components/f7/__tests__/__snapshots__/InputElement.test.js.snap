@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InputElement component should renders correctly 1`] = `
+.bSLHOK {
+  margin-left: 15px;
+}
+
+<div
+  className="item-content"
+>
+  <div
+    className="item-media"
+  >
+    <i
+      className="material-icons icon"
+    >
+      account
+    </i>
+  </div>
+  <div
+    className="item-input sc-bdVaJa bSLHOK"
+  >
+    <input
+      id="user_name"
+      name="user_name"
+      onChange={[Function]}
+      placeholder="Your name goes here.."
+      type="text"
+      value="Jim"
+    />
+  </div>
+</div>
+`;
