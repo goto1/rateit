@@ -11,6 +11,7 @@ import FormInput from "./FormInput";
 import Icon from "./Icon";
 import InputElement from "./InputElement";
 import LinkItem from "./LinkItem";
+import List from "./List";
 import ListBlock from "./ListBlock";
 import ListItem from "./ListItem";
 import Navbar, { NavLeft, NavCenter, NavRight } from "./Navbar";
@@ -34,6 +35,7 @@ export {
   Icon,
   InputElement,
   LinkItem,
+  List,
   ListBlock,
   ListItem,
   NavCenter,
