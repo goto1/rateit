@@ -2,29 +2,32 @@ import React from "react";
 import ContentBlockTitle from "../ContentBlockTitle";
 import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
-import "jest-enzyme";
-import "jest-styled-components";
 
 describe("ContentBlockTitle component", () => {
-  const tree = renderer
-    .create(<ContentBlockTitle>HelloWorld!</ContentBlockTitle>)
-    .toJSON();
-
-  it("renders correctly", () => {
+  it("should render correctly", () => {
+    const tree = renderer
+      .create(<ContentBlockTitle>HelloWorld!</ContentBlockTitle>)
+      .toJSON();
     expect(tree).toMatchStyledComponentsSnapshot();
   });
 
-  it("renders with a style rule `margin-top` equal to 25px", () => {
-    expect(tree).toHaveStyleRule("margin-top", "25px !important");
-  });
-
-  it("contains `HelloWorld` component", () => {
-    const HelloWorld = <div>HelloWorld!</div>;
+  it("should render a span element", () => {
     const wrapper = shallow(
       <ContentBlockTitle>
-        {HelloWorld}
+        <span>HelloWorld!</span>
       </ContentBlockTitle>
     );
-    expect(wrapper).toContainReact(HelloWorld);
+    const actual = wrapper.find("span").length;
+    const expected = 1;
+    expect(actual).toBe(expected);
+  });
+
+  it("should render with a custom styling class", () => {
+    const wrapper = shallow(
+      <ContentBlockTitle className="custom">HelloWorld!</ContentBlockTitle>
+    );
+    const actual = wrapper.props().className.includes("custom");
+    const expected = true;
+    expect(actual).toBe(expected);
   });
 });

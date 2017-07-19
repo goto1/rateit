@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ContentBlockTitle component renders correctly 1`] = `
+exports[`ContentBlockTitle component should render correctly 1`] = `
 .ewlKZX {
   margin-top: 25px !important;
 }

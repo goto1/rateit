@@ -4,12 +4,17 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`margin-top: 25px !important;`;
 
-const ContentBlockTitle = ({ children }) =>
-  <Wrapper className="content-block-title">
-    {children}
-  </Wrapper>;
+const ContentBlockTitle = ({ className, children }) => {
+  const classNames = `content-block-title ${className ? className : ""}`.trim();
+  return (
+    <Wrapper className={classNames}>
+      {children}
+    </Wrapper>
+  );
+};
 
 ContentBlockTitle.propTypes = {
+  className: PropTypes.string,
   children: PropTypes.node.isRequired
 };
 
