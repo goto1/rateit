@@ -8,6 +8,7 @@ import Card, { CardContent, CardFooter, CardHeader } from "./Card";
 import ContentBlock from "./ContentBlock";
 import ContentBlockTitle from "./ContentBlockTitle";
 import FormInput from "./FormInput";
+import GridRow, { GridCol } from "./GridRow";
 import Icon from "./Icon";
 import InputElement from "./InputElement";
 import LinkItem from "./LinkItem";
@@ -32,6 +33,8 @@ export {
   ContentBlock,
   ContentBlockTitle,
   FormInput,
+  GridRow,
+  GridCol,
   Icon,
   InputElement,
   LinkItem,
