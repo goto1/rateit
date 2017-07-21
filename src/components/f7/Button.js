@@ -1,63 +1,100 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import omitBy from "lodash/omitBy";
+import isNil from "lodash/isNil";
 
-const colorPicker = type => {
-  switch (type) {
-    case "primary":
-      return {
-        bgColor: "#057AFF",
-        borderColor: "#057AFF",
-        textColor: "#F1F1F5"
-      };
-    case "success": {
-      return {
-        bgColor: "#369947",
-        borderColor: "#369947",
-        textColor: "#F1F1F5"
-      };
-    }
-    default: {
-      return {
-        bgColor: "inherit",
-        borderColor: "#057AFF",
-        textColor: "#057AFF"
-      };
-    }
+const themePicker = (color, fill) => {
+  const colors = {
+    blue: "#057AFF",
+    green: "#369947",
+    red: "#C9302C",
+    white: "#F1F1F5"
+  };
+  let theme = {
+    background: "inherit",
+    border: colors.blue,
+    text: colors.blue
+  };
+
+  switch (color) {
+    case "green":
+      theme = fill
+        ? { background: colors.green, border: colors.green, text: colors.white }
+        : { ...theme, border: colors.green, text: colors.green };
+      break;
+    case "red":
+      theme = fill
+        ? {
+            background: colors.red,
+            border: colors.red,
+            text: colors.white
+          }
+        : { ...theme, border: colors.red, text: colors.red };
+      break;
+    default:
+      theme = fill
+        ? {
+            ...theme,
+            background: colors.blue,
+            text: colors.white
+          }
+        : theme;
   }
+  return theme;
 };
 
 const Wrapper = styled.a`
-  background-color: ${props => props.bgColor} !important;
-  border-color: ${props => props.borderColor} !important;
-  color: ${props => props.textColor} !important;
+  background-color: ${props => props.background} !important;
+  border-color: ${props => props.border} !important;
+  color: ${props => props.text} !important;
   opacity: ${props => (props.disabled ? ".65" : "1")};
   text-transform: uppercase;
   letter-spacing: .5px;
 `;
 
-const Button = ({ type, disabled, onClick, children }) => {
-  const { bgColor, borderColor, textColor } = colorPicker(type);
+const Button = ({
+  big,
+  fill,
+  href,
+  disabled,
+  color,
+  onClick,
+  className,
+  children
+}) => {
+  const { background, border, text } = themePicker(color, fill);
+  const classNames = `button ${big ? "button-big" : ""} ${className
+    ? className
+    : ""}`.trim();
+  const props = omitBy(
+    {
+      background,
+      border,
+      text,
+      href,
+      disabled,
+      onClick,
+      className: classNames
+    },
+    isNil
+  );
+
   return (
-    <Wrapper
-      href="#"
-      onClick={onClick}
-      className="button button-big"
-      bgColor={bgColor}
-      borderColor={borderColor}
-      textColor={textColor}
-      disabled={disabled}
-    >
+    <Wrapper {...props}>
       {children}
     </Wrapper>
   );
 };
 
 Button.propTypes = {
-  type: PropTypes.oneOf(["default", "primary", "success"]),
-  disabled: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
-  children: PropTypes.string.isRequired
+  big: PropTypes.bool,
+  fill: PropTypes.bool,
+  href: PropTypes.string,
+  disabled: PropTypes.bool,
+  color: PropTypes.oneOf(["green", "red"]),
+  className: PropTypes.string,
+  children: PropTypes.node.isRequired
 };
 
 export default Button;

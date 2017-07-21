@@ -2,62 +2,49 @@ import React from "react";
 import Button from "../Button";
 import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
-import "jest-enzyme";
-import "jest-styled-components";
-
-const props = {
-  disabled: false,
-  onClick: jest.fn()
-};
 
 describe("Button component", () => {
-  it("renders correctly", () => {
-    const tree = renderer.create(<Button {...props}>Submit</Button>).toJSON();
-    expect(tree).toMatchStyledComponentsSnapshot();
+  const getButton = props => shallow(<Button {...props} />);
+
+  it("should render as a `big` button", () => {
+    const wrapper = getButton({ big: true, children: "HelloWorld" });
+    const actual = wrapper.props().className.includes("button-big");
+    const expected = true;
+    expect(actual).toBe(expected);
   });
 
-  it("renders with the `default` color scheme", () => {
-    const newProps = { ...props };
-    const tree = renderer
-      .create(<Button {...newProps}>Submit</Button>)
-      .toJSON();
-    expect(tree).toHaveStyleRule("background-color", "inherit !important");
-    expect(tree).toHaveStyleRule("border-color", "#057AFF !important");
-    expect(tree).toHaveStyleRule("color", "#057AFF !important");
+  it("should render as a `filled` button", () => {
+    const wrapper = getButton({ fill: true, children: "HelloWorld" });
+    const actual = wrapper.props().background.includes("#057AFF");
+    const expected = true;
+    expect(actual).toBe(expected);
   });
 
-  it("renders with the `primary` color scheme", () => {
-    const newProps = { ...props, type: "primary" };
-    const tree = renderer
-      .create(<Button {...newProps}>Submit</Button>)
-      .toJSON();
-    expect(tree).toHaveStyleRule("background-color", "#057AFF !important");
-    expect(tree).toHaveStyleRule("border-color", "#057AFF !important");
-    expect(tree).toHaveStyleRule("color", "#F1F1F5 !important");
+  it("should render as a red button", () => {
+    const wrapper = getButton({ color: "red", children: "HelloWorld" });
+    const actual = wrapper.props().border.includes("#C9302C");
+    const expected = true;
+    expect(actual).toBe(expected);
   });
 
-  it("renders with the `success` color scheme", () => {
-    const newProps = { ...props, type: "success" };
-    const tree = renderer
-      .create(<Button {...newProps}>Submit</Button>)
-      .toJSON();
-    expect(tree).toHaveStyleRule("background-color", "#369947 !important");
-    expect(tree).toHaveStyleRule("border-color", "#369947 !important");
-    expect(tree).toHaveStyleRule("color", "#F1F1F5 !important");
+  it("should render a span as its child", () => {
+    const wrapper = getButton({ children: <span>HelloWorld</span> });
+    const actual = wrapper.children().at(0).is("span");
+    const expected = true;
+    expect(actual).toBe(expected);
   });
 
-  it("renders with disabled style properties", () => {
-    const newProps = { ...props, disabled: true };
-    const tree = renderer
-      .create(<Button {...newProps}>Submit</Button>)
-      .toJSON();
-    expect(tree).toHaveStyleRule("opacity", ".65");
+  it("should render with an `href` attribute", () => {
+    const wrapper = getButton({ href: "/", children: "HelloWorld" });
+    const actual = wrapper.props().href.includes("/");
+    const expected = true;
+    expect(actual).toBe(expected);
   });
 
-  it("calls a function when clicked", () => {
-    const { onClick } = props;
-    const wrapper = shallow(<Button {...props}>Submit</Button>);
-    wrapper.simulate("click");
-    expect(onClick.mock.calls.length).toBe(1);
+  it("should render with a custom styling class", () => {
+    const wrapper = getButton({ className: "custom", children: "HelloWorld" });
+    const actual = wrapper.props().className.includes("custom");
+    const expected = true;
+    expect(actual).toBe(expected);
   });
 });
