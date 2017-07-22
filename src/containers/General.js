@@ -1,13 +1,18 @@
 import React from "react";
 import {
+  Button,
   ContentBlock,
   ContentBlockTitle,
   FormInput,
-  SmartSelect,
+  InputElement,
+  List,
   ListBlock,
-  Button
+  NavCenter,
+  NavLeft,
+  Navbar,
+  SmartSelect
 } from "../components/f7";
-import { Page, Navbar, List } from "framework7-react";
+import { Page } from "framework7-react";
 
 // DELETE AFTER TESTING
 import * as API from "../utils";
@@ -15,7 +20,7 @@ import * as API from "../utils";
 const AccountInformation = () =>
   <div>
     <ContentBlockTitle>Account information</ContentBlockTitle>
-    <List form inset>
+    <List inset={true}>
       <FormInput
         icon="email"
         type="email"
@@ -68,7 +73,7 @@ const SchoolInformation = () => {
 const PasswordReset = () =>
   <div>
     <ContentBlockTitle>Password reset</ContentBlockTitle>
-    <List form inset>
+    <List inset={true}>
       <FormInput
         icon="lock"
         type="password"
@@ -95,12 +100,15 @@ const PasswordReset = () =>
 
 const General = () =>
   <Page>
-    <Navbar title="General" backLink="Back" sliding />
+    <Navbar>
+      <NavLeft backLink="Back" sliding />
+      <NavCenter sliding>General</NavCenter>
+    </Navbar>
     <AccountInformation />
     <SchoolInformation />
     <PasswordReset />
     <ContentBlock>
-      <Button type="success" disabled={true} onClick={e => e.preventDefault()}>
+      <Button color="green" onClick={() => "onClick"} big fill>
         Submit Changes
       </Button>
     </ContentBlock>
