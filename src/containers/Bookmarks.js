@@ -8,8 +8,8 @@ import {
   Subnavbar,
   ButtonsSegmented,
   Button,
-  Tabs,
-  Tab
+  Tab,
+  Tabs
 } from "framework7-react";
 import * as API from "../utils/"; // DELETE WHEN DONE TESTING
 
@@ -58,7 +58,7 @@ const Bookmarks = () =>
       </Subnavbar>
     </Navbar>
 
-    <Tabs>
+    <Tabs animated>
       <Tab routeTabId="professors" />
       <Tab routeTabId="students" />
     </Tabs>
