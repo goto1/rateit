@@ -1,18 +1,19 @@
 import React from "react";
 import {
+  Button,
   ContentBlock,
   ContentBlockTitle,
   FormInput,
-  Textarea,
-  Button
+  List,
+  Textarea
 } from "../components/f7";
-import { Page, Navbar, List } from "framework7-react";
+import { Page, Navbar } from "framework7-react";
 
 const Help = () =>
   <Page>
     <Navbar title="Help Center" backLink="Back" sliding />
     <ContentBlockTitle>Contact form</ContentBlockTitle>
-    <List inset>
+    <List inset={true}>
       <FormInput
         icon="info"
         type="text"
@@ -28,8 +29,8 @@ const Help = () =>
       />
     </List>
     <ContentBlock>
-      <Button type="success" disabled={true} onClick={e => e.preventDefault()}>
-        Submit Changes
+      <Button color="green" onClick={() => "onClick"} big fill>
+        Submit
       </Button>
     </ContentBlock>
   </Page>;
