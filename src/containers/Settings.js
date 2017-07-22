@@ -1,6 +1,12 @@
 import React from "react";
-import { ContentBlockTitle, ListItem } from "../components/f7";
-import { Page, Navbar, List } from "framework7-react";
+import {
+  ContentBlockTitle,
+  ListItem,
+  List,
+  Navbar,
+  NavCenter
+} from "../components/f7";
+import { Page } from "framework7-react";
 
 // DELETE WHEN DONE TESTING
 import * as API from "../utils";
@@ -44,7 +50,9 @@ const UserSettings = () =>
 
 const Settings = () =>
   <Page>
-    <Navbar title="Settings" sliding />
+    <Navbar>
+      <NavCenter sliding>Settings</NavCenter>
+    </Navbar>
     <AccountSettings />
     <HelpAndSupport />
     <UserSettings />
