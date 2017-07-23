@@ -34,16 +34,23 @@ describe("Button component", () => {
     expect(actual).toBe(expected);
   });
 
-  it("should render with an `href` attribute", () => {
-    const wrapper = getButton({ href: "/", children: "HelloWorld" });
-    const actual = wrapper.props().href.includes("/");
+  it("should render with a custom styling class", () => {
+    const wrapper = getButton({ className: "custom", children: "HelloWorld" });
+    const actual = wrapper.props().className.includes("custom");
     const expected = true;
     expect(actual).toBe(expected);
   });
 
-  it("should render with a custom styling class", () => {
-    const wrapper = getButton({ className: "custom", children: "HelloWorld" });
-    const actual = wrapper.props().className.includes("custom");
+  it("should render with an attribute `type` of `button`", () => {
+    const wrapper = getButton({ children: "HelloWorld" });
+    const actual = wrapper.props().type.includes("button");
+    const expected = true;
+    expect(actual).toBe(expected);
+  });
+
+  it("should render with an attribute `type` of `submit`", () => {
+    const wrapper = getButton({ type: "submit", children: "HelloWorld" });
+    const actual = wrapper.props().type.includes("submit");
     const expected = true;
     expect(actual).toBe(expected);
   });

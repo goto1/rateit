@@ -44,22 +44,23 @@ const themePicker = (color, fill) => {
   return theme;
 };
 
-const Wrapper = styled.a`
+const Wrapper = styled.button`
   background-color: ${props => props.background} !important;
   border-color: ${props => props.border} !important;
   color: ${props => props.text} !important;
   opacity: ${props => (props.disabled ? ".65" : "1")};
   text-transform: uppercase;
   letter-spacing: .5px;
+  width: 100%;
 `;
 
 const Button = ({
-  big,
-  fill,
-  href,
-  disabled,
+  type = "button",
+  disabled = false,
   color,
   onClick,
+  big,
+  fill,
   className,
   children
 }) => {
@@ -72,7 +73,7 @@ const Button = ({
       background,
       border,
       text,
-      href,
+      type,
       disabled,
       onClick,
       className: classNames
@@ -88,12 +89,12 @@ const Button = ({
 };
 
 Button.propTypes = {
-  big: PropTypes.bool,
-  fill: PropTypes.bool,
-  href: PropTypes.string,
+  type: PropTypes.oneOf(["submit", "reset", "button", "menu"]),
   disabled: PropTypes.bool,
   color: PropTypes.oneOf(["green", "red"]),
   className: PropTypes.string,
+  big: PropTypes.bool,
+  fill: PropTypes.bool,
   children: PropTypes.node.isRequired
 };
 
