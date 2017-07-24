@@ -56,8 +56,5 @@ describe("RatingCategoryInput component", () => {
       const expected = 5;
       expect(actual).toBe(expected);
     });
-
-    // it("should change the `checked` attribute when change is triggered", () => {
-    // });
   });
 });
