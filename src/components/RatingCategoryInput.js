@@ -107,15 +107,14 @@ const RatingCirclesContainer = styled.div`
 export class RatingCircles extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { checked: "1" };
+    this.state = { checked: "0" };
   }
 
   setChecked = e => {
-    const { name, value } = e.target;
-
+    const event = { ...e };
     this.setState((prevState, props) => {
-      this.props.onChange(name, value);
-      return { checked: value };
+      this.props.onChange(event);
+      return { checked: event.target.value };
     });
   };
 
