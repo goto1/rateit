@@ -2,81 +2,68 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import UserListItem from "../components/UserListItem";
-import { Card, ContentBlockTitle } from "../components/f7";
 import {
-  Page,
-  Navbar,
-  Searchbar,
-  List,
-  CardHeader,
+  Button,
+  Card,
   CardContent,
-  GridRow,
+  CardHeader,
+  ContentBlock,
+  ContentBlockTitle,
   GridCol,
-  Button
-} from "framework7-react";
+  GridRow,
+  List
+} from "../components/f7";
+import { Page, Navbar, Searchbar } from "framework7-react";
 
 // DELETE WHEN DONE TESTING...
 import * as API from "../utils/";
 
-const ButtonWrapper = styled(Button)`
+const StyledButton = styled(Button)`
   color: ${props => props.color} !important;
   border: 2px solid ${props => props.color} !important;
-  font-size: 11px !important;
+  font-size: 9px !important;
   font-weight: 500 !important;
   text-transform: uppercase !important;
 `;
 
-const NoResultsFoundContainer = styled.div`
-  .list-block {
-    margin-top: 30px;
-  }
-  .card-header {
-    text-transform: uppercase;
-    letter-spacing: 1.1px;
-    font-weight: 500;
-    text-align: center;
-  }
-  .card-header > span {
-    display: inline-block;
-    margin: 0 auto;
-  }
-  .card-content {
-    text-align: center;
-  }
-  .card-content-inner > span {
-    font-weight: 500 !important;
-  }
-  .row {
-    margin: 20px 10px;
-  }
+const StyledCard = styled(Card)`
+  margin: 30px 0 !important;
 `;
 
-const NoResultsFound = () =>
-  <NoResultsFoundContainer>
-    <List className="searchbar-not-found">
-      <Card>
-        <CardHeader>
-          <span>No Results Found</span>
-        </CardHeader>
-        <CardContent>
-          Can't find what you're looking for? You can rate{" "}
-          <span>professors</span> or <span>classmates</span> down below!
-        </CardContent>
-      </Card>
-      <GridRow>
-        <GridCol>
-          <ButtonWrapper big color="#9595A8">
-            Rate a professor
-          </ButtonWrapper>
-        </GridCol>
-        <GridCol>
-          <ButtonWrapper big color="#A8A284">
-            Rate a classmate
-          </ButtonWrapper>
-        </GridCol>
-      </GridRow>
-    </List>
-  </NoResultsFoundContainer>;
+const StyledCardHeader = styled(CardHeader)`
+  text-transform: uppercase;
+  letter-spacing: 1.1px;
+  font-weight: 500;
+  justify-content: center !important;
+`;
+
+const StyledCardContent = styled(CardContent)`
+  text-align: center;
+  span { font-weight: 500 !important; }
+`;
+
+const NoResults = () =>
+  <ContentBlock className="searchbar-not-found">
+    <StyledCard>
+      <StyledCardHeader>No Results Found</StyledCardHeader>
+      <StyledCardContent>
+        Can't find what you're looking for? You can rate <span>professors</span>{" "}
+        or <span>classmates</span> down below!
+      </StyledCardContent>
+    </StyledCard>
+    <GridRow>
+      <GridCol>
+        <StyledButton color="#9595A8" big>
+          Rate a professor
+        </StyledButton>
+      </GridCol>
+      <GridCol>
+        <StyledButton color="#A8A284" big>
+          Rate a classmate
+        </StyledButton>
+      </GridCol>
+    </GridRow>
+  </ContentBlock>;
 
 const ChipWrapper = styled.span`
   margin: 7.5px 5px 0 0 !important;
@@ -111,14 +98,14 @@ SchoolLabels.propTypes = {
   schools: PropTypes.array.isRequired
 };
 
-const ListContainer = styled(List)`
+const StyledList = styled(List)`
   margin-top: 25px !important;
 `;
 
 const UserList = ({ users }) =>
-  <ListContainer className="searchbar-found" id="search-list" inset>
+  <StyledList id="search-list" className="searchbar-found" inset>
     {users.map(user => <UserListItem key={user.id} {...user} />)}
-  </ListContainer>;
+  </StyledList>;
 
 UserList.propTypes = {
   users: PropTypes.array.isRequired
@@ -149,7 +136,7 @@ class Search extends Component {
           onSearchbarClear={() => console.log("onSearchbarClear")}
         />
         <SchoolLabels schools={userSchools} />
-        <NoResultsFound />
+        <NoResults />
         <UserList users={users} />
       </Page>
     );
