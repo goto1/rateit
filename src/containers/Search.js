@@ -98,29 +98,26 @@ SchoolLabels.propTypes = {
   schools: PropTypes.array.isRequired
 };
 
-const StyledList = styled(List)`
-  margin-top: 25px !important;
-`;
-
-const UserList = ({ users }) =>
-  <StyledList id="search-list" className="searchbar-found" inset>
-    {users.map(user => <UserListItem key={user.id} {...user} />)}
-  </StyledList>;
-
-UserList.propTypes = {
-  users: PropTypes.array.isRequired
-};
-
 // DELETE THIS WHEN DONE TESTING
 const allUsers = API.getUsers();
 const currentUser = API.getUserDetails("UArjrbxWHX");
 // DELETE THIS WHEN DONE TESTING
 
-class Search extends Component {
-  render() {
-    const users = allUsers.map(user => API.getUserDetails(user.id));
-    const userSchools = currentUser.schools;
+const StyledList = styled(List)`
+  margin-top: 25px !important;
+`;
 
+class Search extends Component {
+  renderUserList = () =>
+    this.users.map(user => <UserListItem key={user.id} {...user} />);
+
+  render() {
+    this.users = allUsers.map(user => API.getUserDetails(user.id));
+
+    console.log(<StyledList id="search-list" className="searchbar-found" />);
+
+    const userSchools = currentUser.schools;
+    const userList = this.renderUserList();
     return (
       <Page>
         <Navbar title="RateIt" sliding />
@@ -137,7 +134,9 @@ class Search extends Component {
         />
         <SchoolLabels schools={userSchools} />
         <NoResults />
-        <UserList users={users} />
+        <StyledList id="search-list" className="searchbar-found" inset>
+          {userList}
+        </StyledList>
       </Page>
     );
   }

@@ -39,4 +39,11 @@ describe("List component", () => {
     const expected = true;
     expect(actual).toBe(expected);
   });
+
+  it("should render with an `id` attribute set to `search-results`", () => {
+    const wrapper = shallow(<List id="search-results">HelloWorld!</List>);
+    const actual = wrapper.props().id.includes("search-results");
+    const expected = true;
+    expect(actual).toBe(expected);
+  });
 });
