@@ -91,7 +91,7 @@ const Button = ({
 Button.propTypes = {
   type: PropTypes.oneOf(["submit", "reset", "button", "menu"]),
   disabled: PropTypes.bool,
-  color: PropTypes.oneOf(["green", "red"]),
+  color: PropTypes.string,
   className: PropTypes.string,
   big: PropTypes.bool,
   fill: PropTypes.bool,
