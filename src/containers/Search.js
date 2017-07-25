@@ -21,7 +21,7 @@ import * as API from "../utils/";
 const StyledButton = styled(Button)`
   color: ${props => props.color} !important;
   border: 2px solid ${props => props.color} !important;
-  font-size: 9px !important;
+  font-size: 14.5px !important;
   font-weight: 500 !important;
   text-transform: uppercase !important;
 `;
@@ -54,12 +54,12 @@ const NoResults = () =>
     <GridRow>
       <GridCol>
         <StyledButton color="#9595A8" big>
-          Rate a professor
+          Professor
         </StyledButton>
       </GridCol>
       <GridCol>
         <StyledButton color="#A8A284" big>
-          Rate a classmate
+          Classmate
         </StyledButton>
       </GridCol>
     </GridRow>
@@ -113,9 +113,6 @@ class Search extends Component {
 
   render() {
     this.users = allUsers.map(user => API.getUserDetails(user.id));
-
-    console.log(<StyledList id="search-list" className="searchbar-found" />);
-
     const userSchools = currentUser.schools;
     const userList = this.renderUserList();
     return (
