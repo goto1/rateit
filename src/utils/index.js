@@ -12,6 +12,8 @@ export const getSchools = () => schools;
 
 export const getMajors = () => majors;
 
+export const getRatingCategories = () => ratingCategories;
+
 export const getUserDetails = userId => {
   const user = users.find(user => user.id === userId);
   const clone = { ...user };

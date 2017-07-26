@@ -11,6 +11,7 @@ import FormInput from "./FormInput";
 import GridRow, { GridCol } from "./GridRow";
 import Icon from "./Icon";
 import InputElement from "./InputElement";
+import LinkButton from "./LinkButton";
 import LinkItem from "./LinkItem";
 import List from "./List";
 import ListBlock from "./ListBlock";
@@ -38,6 +39,7 @@ export {
   GridCol,
   Icon,
   InputElement,
+  LinkButton,
   LinkItem,
   List,
   ListBlock,
