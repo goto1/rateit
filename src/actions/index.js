@@ -1,6 +1,6 @@
 export const ROUTE_CHANGE = "ROUTE_CHANGE";
 
-export const routeChange = route => ({
+export const routeChange = event => ({
   type: ROUTE_CHANGE,
-  route
+  event
 });

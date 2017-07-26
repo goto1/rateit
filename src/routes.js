@@ -1,15 +1,16 @@
-import Search from "./containers/Search";
-import Settings from "./containers/Settings";
-import General from "./containers/General";
-import Help from "./containers/Help";
-import Terms from "./containers/Terms";
-import UserProfile from "./containers/UserProfile";
-import UserProfileRatingsTab from "./containers/UserProfileRatingsTab";
-import UserProfileOverviewTab from "./containers/UserProfileOverviewTab";
 import Bookmarks, {
   SavedProfessors,
   SavedStudents
 } from "./containers/Bookmarks";
+import General from "./containers/General";
+import Help from "./containers/Help";
+import RateUser from "./containers/RateUser";
+import Search from "./containers/Search";
+import Settings from "./containers/Settings";
+import Terms from "./containers/Terms";
+import UserProfile from "./containers/UserProfile";
+import UserProfileOverviewTab from "./containers/UserProfileOverviewTab";
+import UserProfileRatingsTab from "./containers/UserProfileRatingsTab";
 
 const routes = [
   {
@@ -49,7 +50,11 @@ const routes = [
     component: Terms
   },
   {
-    path: "/profile/:id",
+    path: "/rate/",
+    component: RateUser
+  },
+  {
+    path: "/user/:id",
     component: UserProfile,
     tabs: [
       {

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import UserListItem from "../components/UserListItem";
 import {
-  Button,
+  LinkButton,
   Card,
   CardContent,
   CardHeader,
@@ -18,7 +18,7 @@ import { Page, Navbar, Searchbar } from "framework7-react";
 // DELETE WHEN DONE TESTING...
 import * as API from "../utils/";
 
-const StyledButton = styled(Button)`
+const StyledLinkButton = styled(LinkButton)`
   color: ${props => props.color} !important;
   border: 2px solid ${props => props.color} !important;
   font-size: 14.5px !important;
@@ -42,7 +42,7 @@ const StyledCardContent = styled(CardContent)`
   span { font-weight: 500 !important; }
 `;
 
-const NoResults = () =>
+let NoResults = () =>
   <ContentBlock className="searchbar-not-found">
     <StyledCard>
       <StyledCardHeader>No Results Found</StyledCardHeader>
@@ -53,14 +53,14 @@ const NoResults = () =>
     </StyledCard>
     <GridRow>
       <GridCol>
-        <StyledButton color="#9595A8" big>
+        <StyledLinkButton href="/rate/?type=professor" color="#9595A8" big>
           Professor
-        </StyledButton>
+        </StyledLinkButton>
       </GridCol>
       <GridCol>
-        <StyledButton color="#A8A284" big>
+        <StyledLinkButton href="/rate/?type=student" color="#A8A284" big>
           Classmate
-        </StyledButton>
+        </StyledLinkButton>
       </GridCol>
     </GridRow>
   </ContentBlock>;
