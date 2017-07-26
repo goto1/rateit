@@ -27,16 +27,16 @@ const NavigationLinkWrapper = styled.a`
   }
 `;
 
-let NavigationLink = ({ path, icon, currentPage, children }) => {
+let NavigationLink = ({ path, icon, currentRoute, children }) => {
   let active = false;
   if (path.length === 1) {
-    active = currentPage === path ? true : false;
+    active = currentRoute.path === path ? true : false;
   }
   if (path.length > 1) {
-    active = currentPage.indexOf(path) !== -1 ? true : false;
+    active = currentRoute.path.includes(path);
   }
 
-  const classNames = `${active ? "active" : ""} link`;
+  const classNames = `link ${active ? "active" : ""}`.trim();
 
   return (
     <NavigationLinkWrapper href={path} className={classNames}>
@@ -51,11 +51,11 @@ let NavigationLink = ({ path, icon, currentPage, children }) => {
 NavigationLink.propTypes = {
   path: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
-  currentPage: PropTypes.string.isRequired,
+  currentRoute: PropTypes.object.isRequired,
   children: PropTypes.string.isRequired
 };
 
-const mapStateToProps = state => ({ currentPage: state.currentPage });
+const mapStateToProps = state => ({ currentRoute: state.currentRoute });
 
 NavigationLink = connect(mapStateToProps)(NavigationLink);
 
@@ -83,43 +83,16 @@ const Views = ({ children }) =>
     </View>
   </div>;
 
-const handleChange = (event, reducer) => {
-  // DEBUGING...
-  const { params, route, path, url } = event;
-  const paramsId = params.id || "N/A";
-  const currComponent = route.component.name || "N/A";
-  let currTab = "N/A";
-
-  try {
-    currTab = route.tab.component.name;
-  } catch (e) {
-    /* do nothing */
-  }
-
-  console.log("userID", paramsId);
-  console.log("path", path);
-  console.log("url", url);
-  console.log("currComponent", currComponent);
-  console.log("currTab", currTab);
-
-  reducer(path);
-};
-
-let Framework7 = ({ children, onRouteChange }) =>
-  <Framework7App
-    routes={routes}
-    onRouteChange={event => {
-      handleChange(event, onRouteChange);
-    }}
-  >
+let Framework7 = ({ onRouteChange, children }) =>
+  <Framework7App routes={routes} onRouteChange={onRouteChange}>
     <Views>
       {children}
     </Views>
   </Framework7App>;
 
 const mapDispatchToProps = dispatch => ({
-  onRouteChange: path => {
-    dispatch(routeChange(path));
+  onRouteChange: event => {
+    dispatch(routeChange(event));
   }
 });
 
