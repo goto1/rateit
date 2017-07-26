@@ -6,7 +6,7 @@ import UserItemContents from "./UserItemContents";
 const UserListItem = props => {
   const userId = props.id;
   return (
-    <LinkItem url={`/profile/${userId}/`}>
+    <LinkItem url={`/user/${userId}/`}>
       <UserItemContents margin="0 20px 0 0" {...props} />
     </LinkItem>
   );
