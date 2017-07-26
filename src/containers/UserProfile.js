@@ -17,8 +17,8 @@ const user = API.getUserDetails("UArjrbxWHX");
 
 const UserProfile = () => {
   const title = `${capitalize(user.type)} Details`;
-  const overviewUrl = `/profile/${user.id}`;
-  const ratingsUrl = `/profile/${user.id}/ratings`;
+  const overviewUrl = `/user/${user.id}`;
+  const ratingsUrl = `/user/${user.id}/ratings`;
 
   return (
     <Page withSubnavbar>
