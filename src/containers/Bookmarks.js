@@ -51,14 +51,14 @@ const Bookmarks = () =>
           <Button routeTabLink="#professors" href="/bookmarks/">
             Professors
           </Button>
-          <Button routeTabLink="#students" href="/bookmarks/students">
+          <Button routeTabLink="#students" href="/bookmarks/students/">
             Students
           </Button>
         </ButtonsSegmented>
       </Subnavbar>
     </Navbar>
 
-    <Tabs animated>
+    <Tabs>
       <Tab routeTabId="professors" />
       <Tab routeTabId="students" />
     </Tabs>
