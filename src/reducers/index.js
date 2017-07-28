@@ -6,17 +6,9 @@ import isNil from "lodash/isNil";
 const handleRouteChange = event => {
   const { params, route, path, url } = event;
   const query = JSON.stringify(event.query);
-  let userId;
-  let currentComponent;
-  let currentTab;
-
-  try {
-    userId = params.id || null;
-    currentComponent = route.component.name || null;
-    currentTab = route.tab.component.name || null;
-  } catch (e) {
-    /* do nothing */
-  }
+  const userId = params.id || null;
+  const currentComponent = route.component ? route.component.name : null;
+  const currentTab = route.tab ? route.tab.component.name : null;
 
   return omitBy(
     { path, url, userId, query, currentComponent, currentTab },
