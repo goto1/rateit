@@ -53,6 +53,7 @@ const SchoolInformation = () => {
           name="schools"
           options={schools}
           selected={selectedSchools}
+          multiple={true}
           searchbarPlaceholder="Search for a school..."
           onChange={event =>
             console.log(event.target.options, event.target.name)}
@@ -61,6 +62,7 @@ const SchoolInformation = () => {
           name="majors"
           options={majors}
           selected={selectedMajors}
+          multiple={true}
           searchbarPlaceholder="Search for a major..."
           onChange={event =>
             console.log(event.target.options, event.target.name)}
