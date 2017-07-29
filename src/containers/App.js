@@ -28,16 +28,8 @@ const NavigationLinkWrapper = styled.a`
 `;
 
 let NavigationLink = ({ path, icon, currentRoute, children }) => {
-  let active = false;
-  if (path.length === 1) {
-    active = currentRoute.path === path ? true : false;
-  }
-  if (path.length > 1) {
-    active = currentRoute.path.includes(path);
-  }
-
+  const active = path === currentRoute.mainPath;
   const classNames = `link ${active ? "active" : ""}`.trim();
-
   return (
     <NavigationLinkWrapper href={path} className={classNames}>
       <Icon material={icon} />
