@@ -5,7 +5,8 @@ import capitalize from "lodash/capitalize";
 const SmartSelect = ({
   name,
   options,
-  selected,
+  selected = [],
+  multiple = false,
   searchbarPlaceholder,
   onChange
 }) =>
@@ -15,7 +16,12 @@ const SmartSelect = ({
       data-searchbar="true"
       data-searchbar-placeholder={searchbarPlaceholder}
     >
-      <select value={selected} name={name} onChange={onChange} multiple>
+      <select
+        value={selected}
+        name={name}
+        onChange={onChange}
+        multiple={multiple}
+      >
         {options.map(option =>
           <option
             key={option.id}
@@ -40,7 +46,8 @@ const SmartSelect = ({
 SmartSelect.propTypes = {
   name: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
-  selected: PropTypes.array.isRequired,
+  multiple: PropTypes.bool,
+  selected: PropTypes.array,
   searchbarPlaceholder: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired
 };

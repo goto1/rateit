@@ -1,39 +1,57 @@
 import React from "react";
 import SmartSelect from "../SmartSelect";
-import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
-import "jest-enzyme";
-
-const props = {
-  name: "schools",
-  options: [
-    {
-      id: "bruHy",
-      name: "New Jersey Institute of Technology, Newark",
-      abbreviation: "NJIT"
-    },
-    {
-      id: "5y7fh",
-      name: "Rutgers University, New Brunswick",
-      abbreviation: "RU"
-    }
-  ],
-  selected: ["bruHy"],
-  searchbarPlaceholder: "Search for schools...",
-  onChange: jest.fn()
-};
 
 describe("SmartSelect component", () => {
-  it("renders correctly", () => {
-    const tree = renderer.create(<SmartSelect {...props} />).toJSON();
-    expect(tree).toMatchSnapshot();
+  const getSmartSelectWrapper = () => {
+    const props = {
+      name: "schools",
+      options: [
+        {
+          id: "bruHy",
+          name: "New Jersey Institute of Technology, Newark",
+          abbreviation: "NJIT"
+        },
+        {
+          id: "5y7fh",
+          name: "Rutgers University, New Brunswick",
+          abbreviation: "RU"
+        }
+      ],
+      selected: ["bruHy"],
+      multiple: true,
+      searchbarPlaceholder: "Search for schools...",
+      onChange: jest.fn()
+    };
+    return shallow(<SmartSelect {...props} />);
+  };
+
+  it("should render with 2 options", () => {
+    const wrapper = getSmartSelectWrapper();
+    const actual = wrapper.find("option").length;
+    const expected = 2;
+    expect(actual).toBe(expected);
   });
 
-  it("calls a function with selection changes", () => {
-    const { onChange } = props;
-    const wrapper = shallow(<SmartSelect {...props} />);
+  it("should a specific option as selected", () => {
+    const wrapper = getSmartSelectWrapper();
+    const actual = wrapper.find("select").props().value.includes("bruHy");
+    const expected = true;
+    expect(actual).toBe(expected);
+  });
 
+  it("should call a function when selection changes", () => {
+    const wrapper = getSmartSelectWrapper();
     wrapper.find("select").simulate("change");
-    expect(onChange.mock.calls.length).toBe(1);
+    const actual = wrapper.find("select").props().onChange.mock.calls.length;
+    const expected = 1;
+    expect(actual).toBe(expected);
+  });
+
+  it("should render with the `multiple` property set to true", () => {
+    const wrapper = getSmartSelectWrapper();
+    const actual = wrapper.find("select").props().multiple;
+    const expected = true;
+    expect(actual).toBe(expected);
   });
 });
