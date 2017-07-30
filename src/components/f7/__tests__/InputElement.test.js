@@ -1,35 +1,39 @@
 import React from "react";
-import InputElement from "../InputElement";
-import renderer from "react-test-renderer";
+import InputElement, { StyledIcon } from "../InputElement";
 import { shallow } from "enzyme";
 
-const props = {
-  icon: "account",
-  type: "text",
-  name: "user_name",
-  id: "user_name",
-  placeholder: "Your name goes here..",
-  value: "Jim",
-  onChange: jest.fn()
-};
-
 describe("InputElement component", () => {
-  it("should renders correctly", () => {
-    const tree = renderer.create(<InputElement {...props} />).toJSON();
-    expect(tree).toMatchStyledComponentsSnapshot();
-  });
+  const getInputElement = newProps => {
+    const defaultProps = {
+      icon: "account_circle",
+      name: "username",
+      onChange: jest.fn(),
+      placeholder: "John Doe",
+      type: "text",
+      valid: true
+    };
+    const props = { ...defaultProps, ...newProps };
+    return shallow(<InputElement {...props} />);
+  };
 
-  it("should render the input element with specified attributes", () => {
-    const wrapper = shallow(<InputElement {...props} />);
-    const actual = wrapper.find("input").props().name;
-    const expected = "user_name";
+  it("should render an input element with the type of `text`", () => {
+    const wrapper = getInputElement();
+    const actual = wrapper.find("input").props().type;
+    const expected = "text";
     expect(actual).toBe(expected);
   });
 
-  it("should call a function when input changes", () => {
-    const wrapper = shallow(<InputElement {...props} />);
+  it("should render a `warning` icon when the input fields is invalid", () => {
+    const wrapper = getInputElement({ valid: false });
+    const actual = wrapper.find(StyledIcon).props().material;
+    const expected = "warning";
+    expect(actual).toBe(expected);
+  });
+
+  it("should call the passed in function when input changes", () => {
+    const wrapper = getInputElement();
     wrapper.find("input").simulate("change");
-    const actual = props.onChange.mock.calls.length;
+    const actual = wrapper.find("input").props().onChange.mock.calls.length;
     const expected = 1;
     expect(actual).toBe(expected);
   });

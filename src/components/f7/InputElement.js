@@ -4,10 +4,29 @@ import styled from "styled-components";
 import Icon from "./Icon";
 import pick from "lodash/pick";
 
-const InputWrapper = styled.div`margin-left: 15px;`;
+const InputWrapper = styled.div`
+  margin-left: 15px;
+  input {
+    color: ${props => (props.valid !== true ? "red !important" : "black")};
+  }
+`;
+
+export const StyledIcon = styled(Icon)`
+  position: absolute !important;
+  right: 6px;
+  opacity: .7;
+  color: red;
+  font-size: 20px;
+`;
+
+const Container = styled.div.attrs({
+  className: "item-content"
+})`
+  position: relative;
+`;
 
 const InputElement = props => {
-  const { icon } = props;
+  const { icon, valid } = props;
   const inputAttrs = pick(props, [
     "id",
     "name",
@@ -17,14 +36,15 @@ const InputElement = props => {
     "onChange"
   ]);
   return (
-    <div className="item-content">
+    <Container>
+      {!valid && <StyledIcon material="warning" />}
       <div className="item-media">
         <Icon material={icon} />
       </div>
-      <InputWrapper className="item-input">
+      <InputWrapper valid={valid} className="item-input">
         <input {...inputAttrs} />
       </InputWrapper>
-    </div>
+    </Container>
   );
 };
 
@@ -35,7 +55,12 @@ InputElement.propTypes = {
   id: PropTypes.string,
   placeholder: PropTypes.string,
   value: PropTypes.string,
+  valid: PropTypes.bool,
   onChange: PropTypes.func
+};
+
+InputElement.defaultProps = {
+  valid: true
 };
 
 export default InputElement;
