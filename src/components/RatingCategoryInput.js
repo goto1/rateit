@@ -111,11 +111,13 @@ export class RatingCircles extends React.Component {
   }
 
   setChecked = e => {
-    const event = { ...e };
-    this.setState((prevState, props) => {
-      this.props.onChange(event);
-      return { checked: event.target.value };
-    });
+    this.props.onChange(e);
+    this.setState({ checked: e.target.value });
+    // const event = { ...e };
+    // this.setState((prevState, ))
+    // this.setState((prevState, props) => {
+    //   return { checked: event.target.value };
+    // });
   };
 
   render() {
