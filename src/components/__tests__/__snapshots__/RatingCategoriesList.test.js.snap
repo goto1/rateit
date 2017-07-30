@@ -26,7 +26,7 @@ exports[`RatingCategoriesList component should render correctly 1`] = `
   background-image: linear-gradient(    to left,    #FFF,    #000,    #FFF  );
 }
 
-.hwKSBR {
+.JPbbO {
   -webkit-flex-grow: 1;
   -ms-flex-grow: 1;
   flex-grow: 1;
@@ -34,7 +34,7 @@ exports[`RatingCategoriesList component should render correctly 1`] = `
   color: #000;
 }
 
-.gQZwKx {
+.hgCCCR {
   -webkit-flex-basis: 22px;
   -ms-flex-basis: 22px;
   flex-basis: 22px;
@@ -42,15 +42,15 @@ exports[`RatingCategoriesList component should render correctly 1`] = `
   padding-top: 4px;
 }
 
-.kXakhP {
+.hkjErY {
   font-size: 14px;
 }
 
-.kXakhP span {
+.hkjErY span {
   font-size: 17px;
 }
 
-.bqFfKq {
+.gySVtt {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -58,29 +58,29 @@ exports[`RatingCategoriesList component should render correctly 1`] = `
   margin-bottom: 1px;
 }
 
-.dpfDkV {
+.iWaPeA {
   margin-top: 7.5px;
 }
 
 <div
-  className="sc-jzJRlG dpfDkV"
+  className="sc-kAzzGY iWaPeA"
 >
   <div>
     <div
-      className="sc-fjdhpX bqFfKq"
+      className="sc-cSHVUG gySVtt"
     >
       <i
-        className="material-icons icon sc-VigVT gQZwKx"
+        className="material-icons icon sc-fjdhpX hgCCCR"
       >
         forward
       </i>
       <div
-        className="sc-gqjmRU hwKSBR"
+        className="sc-jTzLTM JPbbO"
       >
         Attends Group Meetings
       </div>
       <div
-        className="sc-jTzLTM kXakhP sc-bdVaJa ecEnce"
+        className="sc-jzJRlG hkjErY sc-bdVaJa ecEnce"
       >
         <span
           className="sc-bwzfXH eYvYrI"
@@ -98,20 +98,20 @@ exports[`RatingCategoriesList component should render correctly 1`] = `
   </div>
   <div>
     <div
-      className="sc-fjdhpX bqFfKq"
+      className="sc-cSHVUG gySVtt"
     >
       <i
-        className="material-icons icon sc-VigVT gQZwKx"
+        className="material-icons icon sc-fjdhpX hgCCCR"
       >
         forward
       </i>
       <div
-        className="sc-gqjmRU hwKSBR"
+        className="sc-jTzLTM JPbbO"
       >
         Contributes to Discussions
       </div>
       <div
-        className="sc-jTzLTM kXakhP sc-bdVaJa ecEnce"
+        className="sc-jzJRlG hkjErY sc-bdVaJa ecEnce"
       >
         <span
           className="sc-bwzfXH fxvkdv"
