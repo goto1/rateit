@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Icon from "./Icon";
 
-const Textarea = ({ icon, name, placeholder, onChange }) =>
+const Textarea = ({ icon, name, placeholder, onChange, onBlur }) =>
   <li className="align-top">
     <div className="item-content">
       <div className="item-media">
@@ -10,7 +10,12 @@ const Textarea = ({ icon, name, placeholder, onChange }) =>
       </div>
       <div className="item-inner">
         <div className="item-input">
-          <textarea placeholder={placeholder} name={name} onChange={onChange} />
+          <textarea
+            placeholder={placeholder}
+            name={name}
+            onChange={onChange}
+            onBlur={onBlur}
+          />
         </div>
       </div>
     </div>
@@ -20,7 +25,8 @@ Textarea.propTypes = {
   icon: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func
 };
 
 export default Textarea;
