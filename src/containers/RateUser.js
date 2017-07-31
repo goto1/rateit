@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { isFormValid } from "../utils/FormUtils";
 import { connect } from "react-redux";
 import RatingCategoryInput from "../components/RatingCategoryInput";
 import { Formik } from "formik";
@@ -23,16 +24,26 @@ import { Page } from "framework7-react";
 // DELETE WHEN DONE TESTING
 import * as API from "../utils";
 
-const StyledList = styled(List)`
-  margin-bottom: 25px !important;
+const StyledContentBlock = styled(ContentBlock)`
+  margin: 0 !important;
+  text-transform: uppercase;
+  text-align: center;
+  color: red !important;
+  font-size: 12.5px;
+  letter-spacing: .5px;
 `;
 
-const FormSection = ({ title, children }) =>
+const StyledList = styled(List)`
+  margin-bottom: ${props =>
+    `${props.margin ? props.margin : "25"}px !important`};
+`;
+
+const FormSection = ({ title, margin, children }) =>
   <div>
     <ContentBlockTitle>
       {title}
     </ContentBlockTitle>
-    <StyledList inset>
+    <StyledList margin={margin} inset>
       {children}
     </StyledList>
   </div>;
@@ -50,97 +61,124 @@ let StudentForm = ({
   isSubmitting,
   handleChange,
   handleSubmit,
+  handleBlur,
   ratingCategories,
   selectedSchools,
   selectedMajors,
   schools,
   majors
-}) =>
-  <form onSubmit={handleSubmit}>
-    <FormSection title="Student Information">
-      <InputElement
-        icon="account_circle"
-        name="student_name"
-        type="text"
-        value={values.student_name}
-        placeholder="John Doe"
-        onChange={handleChange}
-      />
-      <InputElement
-        icon="email"
-        name="email"
-        type="email"
-        value={values.email}
-        placeholder="john@school.edu"
-        onChange={handleChange}
-      />
-    </FormSection>
-    <FormSection title="School Information">
-      <SmartSelect
-        name="school"
-        options={schools}
-        selected={selectedSchools}
-        multiple={false}
-        searchbarPlaceholder="Search for a school..."
-        onChange={handleChange}
-      />
-      <SmartSelect
-        name="major"
-        options={majors}
-        selected={selectedMajors}
-        multiple={false}
-        searchbarPlaceholder="Search for a major..."
-        onChange={handleChange}
-      />
-    </FormSection>
-    {ratingCategories.map(category => {
-      const props = {
-        ...category,
-        key: category.id,
-        onChange: handleChange
-      };
-      return <RatingCategoryInput {...props} />;
-    })}
-    <FormSection title="Additional Information">
-      <Textarea
-        icon="comment"
-        name="comment"
-        value={values.comment}
-        placeholder="Your comment here..."
-        onChange={handleChange}
-      />
-      <RadioInput icon="done" name="recommend" onChange={handleChange} />
-    </FormSection>
-    <ContentBlock>
-      <Button type="submit" color="green" big fill>
-        Submit
-      </Button>
-    </ContentBlock>
-  </form>;
+}) => {
+  const validForm = isFormValid(values);
+  return (
+    <form onSubmit={handleSubmit}>
+      <FormSection title="Student Information">
+        <InputElement
+          icon="account_circle"
+          name="name"
+          type="text"
+          value={values.student_name}
+          placeholder="John Doe"
+          onChange={handleChange}
+          onBlur={handleBlur}
+          valid={errors.name && touched.name && false}
+        />
+        <InputElement
+          icon="email"
+          name="email"
+          type="email"
+          value={values.email}
+          placeholder="john@school.edu"
+          onChange={handleChange}
+          onBlur={handleBlur}
+          valid={errors.email && touched.email && false}
+        />
+      </FormSection>
+      <FormSection title="School Information">
+        <SmartSelect
+          name="school"
+          options={schools}
+          selected={selectedSchools}
+          multiple={false}
+          searchbarPlaceholder="Search for a school..."
+          onChange={handleChange}
+        />
+        <SmartSelect
+          name="major"
+          options={majors}
+          selected={selectedMajors}
+          multiple={false}
+          searchbarPlaceholder="Search for a major..."
+          onChange={handleChange}
+        />
+      </FormSection>
+      {ratingCategories.map(category => {
+        const props = {
+          ...category,
+          key: category.id,
+          onChange: handleChange,
+          onBlur: handleBlur
+        };
+        return <RatingCategoryInput {...props} />;
+      })}
+      <FormSection title="Additional Information" margin={5}>
+        <Textarea
+          icon="comment"
+          name="comment"
+          value={values.comment}
+          placeholder="Your comment here..."
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+        <RadioInput icon="done" name="recommend" onChange={handleChange} />
+      </FormSection>
+      {!validForm &&
+        <StyledContentBlock>Please fill out all fields</StyledContentBlock>}
+      <ContentBlock>
+        <Button
+          type="submit"
+          color="green"
+          disabled={isSubmitting || !validForm}
+          big
+          fill
+        >
+          Submit
+        </Button>
+      </ContentBlock>
+    </form>
+  );
+};
 
 StudentForm = Formik({
   mapPropsToValues: props => ({
-    student_name: "",
+    name: "",
     email: "",
     school: props.selectedSchools[0].id,
     major: props.selectedMajors[0].id,
+    comment: "",
+    recommend: false,
     DRFJY9jd: "",
     j84WAR77: "",
     wXe02QBg: "",
     zoQCOOJO: "",
     Gb1tXreK: "",
-    TrK3zUiV: "",
-    comment: "",
-    recommend: false
+    TrK3zUiV: ""
   }),
   validationSchema: Yup.object().shape({
-    professor_name: Yup.string(),
-    school: Yup.string(),
-    major: Yup.string()
+    name: Yup.string().required(),
+    email: Yup.string().email().required(),
+    school: Yup.string().required(),
+    major: Yup.string().required(),
+    comment: Yup.string().required(),
+    recommend: Yup.bool().required(),
+    DRFJY9jd: Yup.string().required(),
+    j84WAR77: Yup.string().required(),
+    wXe02QBg: Yup.string().required(),
+    zoQCOOJO: Yup.string().required(),
+    Gb1tXreK: Yup.string().required(),
+    TrK3zUiV: Yup.string().required()
   }),
   handleSubmit: (values, { props, setErrors, setSubmitting }) => {
     console.log(values);
-    console.log(props);
   }
 })(StudentForm);
 
@@ -148,26 +186,29 @@ let ProfessorForm = ({
   values,
   touched,
   errors,
-  dirty,
   isSubmitting,
   handleChange,
   handleSubmit,
+  handleBlur,
   ratingCategories,
   selectedSchools,
   selectedMajors,
   schools,
   majors
 }) => {
+  const validForm = isFormValid(values);
   return (
     <form onSubmit={handleSubmit}>
       <FormSection title="Professor Information">
         <InputElement
           icon="account_circle"
-          name="prof_name"
+          name="name"
           type="text"
-          value={values.prof_name}
+          value={values.name}
           placeholder="John Doe"
           onChange={handleChange}
+          onBlur={handleBlur}
+          valid={errors.name && touched.name && false}
         />
       </FormSection>
       <FormSection title="School Information">
@@ -179,6 +220,7 @@ let ProfessorForm = ({
           multiple={false}
           searchbarPlaceholder="Search for a school..."
           onChange={handleChange}
+          onBlur={handleBlur}
         />
         <SmartSelect
           name="major"
@@ -188,6 +230,7 @@ let ProfessorForm = ({
           multiple={false}
           searchbarPlaceholder="Search for a major..."
           onChange={handleChange}
+          onBlur={handleBlur}
         />
       </FormSection>
       {ratingCategories.map(category =>
@@ -195,10 +238,19 @@ let ProfessorForm = ({
           {...category}
           key={category.id}
           onChange={handleChange}
+          onBlur={handleBlur}
         />
       )}
+      {!validForm &&
+        <StyledContentBlock>Please fill out all fields</StyledContentBlock>}
       <ContentBlock>
-        <Button type="submit" color="green" disabled={isSubmitting} big fill>
+        <Button
+          type="submit"
+          color="green"
+          disabled={isSubmitting || !validForm}
+          big
+          fill
+        >
           Submit
         </Button>
       </ContentBlock>
@@ -208,7 +260,7 @@ let ProfessorForm = ({
 
 ProfessorForm = Formik({
   mapPropsToValues: props => ({
-    prof_name: "",
+    name: "",
     school: props.selectedSchools[0].id,
     major: props.selectedMajors[0].id,
     T5wKYAmI: "",
@@ -218,17 +270,16 @@ ProfessorForm = Formik({
     sBuPhZef: ""
   }),
   validationSchema: Yup.object().shape({
-    prof_name: Yup.string(),
-    school: Yup.string(),
-    major: Yup.string(),
-    T5wKYAmI: Yup.string(),
-    jUtauYzO: Yup.string(),
-    mh4m4LcX: Yup.string(),
-    yZyycMRm: Yup.string(),
-    sBuPhZef: Yup.string()
+    name: Yup.string().required(),
+    school: Yup.string().required(),
+    major: Yup.string().required(),
+    T5wKYAmI: Yup.string().required(),
+    jUtauYzO: Yup.string().required(),
+    mh4m4LcX: Yup.string().required(),
+    yZyycMRm: Yup.string().required(),
+    sBuPhZef: Yup.string().required()
   }),
   handleSubmit: (values, { props, setErrors, setSubmitting }) => {
-    console.log(props);
     console.log(values);
   }
 })(ProfessorForm);
