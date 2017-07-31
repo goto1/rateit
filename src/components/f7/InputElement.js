@@ -33,7 +33,8 @@ const InputElement = props => {
     "type",
     "value",
     "placeholder",
-    "onChange"
+    "onChange",
+    "onBlur"
   ]);
   return (
     <Container>
@@ -56,7 +57,8 @@ InputElement.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.string,
   valid: PropTypes.bool,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  onBlur: PropTypes.func
 };
 
 InputElement.defaultProps = {

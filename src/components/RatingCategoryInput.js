@@ -81,7 +81,8 @@ export const RatingCircle = props => {
     "value",
     "name",
     "checked",
-    "onChange"
+    "onChange",
+    "onBlur"
   ]);
   return (
     <RatingCircleWrapper color={color} checked={checked}>
@@ -96,7 +97,8 @@ RatingCircle.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
   checked: PropTypes.bool.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func
 };
 
 const RatingCirclesContainer = styled.div`
@@ -113,16 +115,11 @@ export class RatingCircles extends React.Component {
   setChecked = e => {
     this.props.onChange(e);
     this.setState({ checked: e.target.value });
-    // const event = { ...e };
-    // this.setState((prevState, ))
-    // this.setState((prevState, props) => {
-    //   return { checked: event.target.value };
-    // });
   };
 
   render() {
     const colors = ["D91518", "E6665B", "DEB21C", "BCC75E", "A1BA37"];
-    const { name } = this.props;
+    const { name, onBlur } = this.props;
     return (
       <RatingCirclesContainer>
         {colors.map((color, index) => {
@@ -136,6 +133,7 @@ export class RatingCircles extends React.Component {
               value={value}
               checked={checked}
               onChange={this.setChecked}
+              onBlur={onBlur}
               color={`#${color}`}
             />
           );
@@ -147,7 +145,8 @@ export class RatingCircles extends React.Component {
 
 RatingCircles.propTypes = {
   name: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func
 };
 
 const StyledCardContent = styled(CardContent)`
@@ -170,13 +169,13 @@ const StyledCardContent = styled(CardContent)`
   }
 `;
 
-const RatingCategoryInput = ({ id, description, onChange }) =>
+const RatingCategoryInput = ({ id, description, onChange, onBlur }) =>
   <Card>
     <StyledCardContent>
       <div className="header">
         {description}
       </div>
-      <RatingCircles name={id} onChange={onChange} />
+      <RatingCircles name={id} onChange={onChange} onBlur={onBlur} />
       <div className="footer">
         <div>
           <Icon material="trending_flat" /> Awful
@@ -191,7 +190,8 @@ const RatingCategoryInput = ({ id, description, onChange }) =>
 RatingCategoryInput.propTypes = {
   id: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func
 };
 
 export default RatingCategoryInput;
