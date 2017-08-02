@@ -116,7 +116,7 @@ let Form = props => {
     handleSubmit,
     isSubmitting
   } = props;
-  const validForm = isFormValid(values);
+  const validForm = Object.keys(errors).length === 0;
   return (
     <form onSubmit={handleSubmit}>
       <AccountInformation {...props} />

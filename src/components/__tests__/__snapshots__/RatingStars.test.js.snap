@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RatingStars component should render correctly 1`] = `
-.eckCOS {
+.gDYObI {
   width: 95px;
 }
 
-.fpYmUJ {
+.bHnJJA {
   font-size: 19px;
   color: #FEBA72;
   width: 19px;
@@ -13,30 +13,30 @@ exports[`RatingStars component should render correctly 1`] = `
 }
 
 <div
-  className="sc-gZMcBi eckCOS"
+  className="sc-iwsKbI gDYObI"
 >
   <i
-    className="material-icons icon sc-gqjmRU fpYmUJ"
+    className="material-icons icon sc-gZMcBi bHnJJA"
   >
     star
   </i>
   <i
-    className="material-icons icon sc-gqjmRU fpYmUJ"
+    className="material-icons icon sc-gZMcBi bHnJJA"
   >
     star
   </i>
   <i
-    className="material-icons icon sc-gqjmRU fpYmUJ"
+    className="material-icons icon sc-gZMcBi bHnJJA"
   >
     star
   </i>
   <i
-    className="material-icons icon sc-gqjmRU fpYmUJ"
+    className="material-icons icon sc-gZMcBi bHnJJA"
   >
     star
   </i>
   <i
-    className="material-icons icon sc-gqjmRU fpYmUJ"
+    className="material-icons icon sc-gZMcBi bHnJJA"
   >
     star_border
   </i>

@@ -22,6 +22,7 @@ exports[`FormInput component renders correctly 1`] = `
   >
     <input
       name="username"
+      onBlur={undefined}
       onChange={[Function]}
       placeholder="Type your name"
       type="text"

@@ -3,7 +3,7 @@ import {
   Button,
   ContentBlock,
   ContentBlockTitle,
-  FormInput,
+  InputElement,
   List,
   Textarea
 } from "../components/f7";
@@ -14,7 +14,7 @@ const Help = () =>
     <Navbar title="Help Center" backLink="Back" sliding />
     <ContentBlockTitle>Contact form</ContentBlockTitle>
     <List inset={true}>
-      <FormInput
+      <InputElement
         icon="info"
         type="text"
         name="title"
