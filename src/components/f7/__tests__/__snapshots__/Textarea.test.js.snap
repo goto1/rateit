@@ -26,6 +26,7 @@ exports[`Textarea component renders correctly 1`] = `
       >
         <textarea
           name="about"
+          onBlur={undefined}
           onChange={[Function]}
           placeholder="Tell us about yourself..."
         />
