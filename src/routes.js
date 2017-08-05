@@ -3,7 +3,7 @@ import Bookmarks, {
   SavedStudents
 } from "./containers/Bookmarks";
 import General from "./containers/General";
-import Help from "./containers/Help";
+import HelpCenter from "./containers/HelpCenter";
 import RateUser from "./containers/RateUser";
 import Search from "./containers/Search";
 import Settings from "./containers/Settings";
@@ -43,7 +43,7 @@ const routes = [
   },
   {
     path: "/settings/help/",
-    component: Help
+    component: HelpCenter
   },
   {
     path: "/settings/terms/",

@@ -1,10 +1,32 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 import Icon from "./Icon";
 
-const Textarea = ({ icon, name, placeholder, onChange, onBlur }) =>
+const StyledIcon = styled(Icon)`
+  position: absolute !important;
+  color: red;
+  top: 35%;
+  right: 5px;
+`;
+
+const StyledItemContent = styled.div.attrs({
+  className: "item-content"
+})`
+  position: relative;
+`;
+
+const Textarea = ({
+  icon,
+  name,
+  placeholder,
+  valid = true,
+  onChange,
+  onBlur
+}) =>
   <li className="align-top">
-    <div className="item-content">
+    <StyledItemContent>
+      {!valid && <StyledIcon material="warning" />}
       <div className="item-media">
         <Icon material={icon} />
       </div>
@@ -18,13 +40,14 @@ const Textarea = ({ icon, name, placeholder, onChange, onBlur }) =>
           />
         </div>
       </div>
-    </div>
+    </StyledItemContent>
   </li>;
 
 Textarea.propTypes = {
   icon: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
+  valid: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func
 };

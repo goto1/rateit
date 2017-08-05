@@ -14,45 +14,49 @@ import {
 } from "../components/f7";
 import { Page } from "framework7-react";
 
-let Form = ({
-  values,
+let ContactForm = ({
   errors,
-  touched,
-  handleChange,
   handleBlur,
+  handleChange,
   handleSubmit,
-  isSubmitting
+  isSubmitting,
+  touched,
+  values
 }) => {
-  const invalidForm = Object.keys(errors).length !== 0;
+  const disableSubmission =
+    isSubmitting ||
+    Object.keys(errors).length !== 0 ||
+    Object.keys(touched).length === 0;
   return (
     <form onSubmit={handleSubmit}>
       <List inset>
         <InputElement
           icon="info"
-          type="text"
           name="title"
-          value={values.title}
-          placeholder="Title..."
-          onChange={handleChange}
           onBlur={handleBlur}
+          onChange={handleChange}
+          placeholder="Title..."
+          type="text"
           valid={errors.title && touched.title && false}
+          value={values.title}
         />
         <Textarea
           icon="comment"
           name="message"
-          value={values.message}
-          placeholder="Your message here..."
-          onChange={handleChange}
           onBlur={handleBlur}
+          onChange={handleChange}
+          placeholder="Your message here..."
+          valid={errors.message && touched.message && false}
+          value={values.message}
         />
       </List>
       <ContentBlock>
         <Button
-          type="submit"
-          color="green"
-          disabled={isSubmitting || invalidForm}
           big
+          color="green"
+          disabled={disableSubmission}
           fill
+          type="submit"
         >
           Submit
         </Button>
@@ -61,7 +65,7 @@ let Form = ({
   );
 };
 
-Form = Formik({
+ContactForm = Formik({
   mapPropsToValues: props => ({
     title: "",
     message: ""
@@ -73,16 +77,16 @@ Form = Formik({
   handleSubmit: (values, { props, setErrors, setSubmitting }) => {
     console.log(values);
   }
-})(Form);
+})(ContactForm);
 
-const Help = () =>
+const HelpCenter = () =>
   <Page>
     <Navbar>
       <NavLeft backLink="Back" sliding />
       <NavCenter sliding>Help Center</NavCenter>
     </Navbar>
     <ContentBlockTitle>Contact form</ContentBlockTitle>
-    <Form />
+    <ContactForm />
   </Page>;
 
-export default Help;
+export default HelpCenter;
