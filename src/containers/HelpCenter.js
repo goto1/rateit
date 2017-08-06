@@ -14,7 +14,7 @@ import {
 } from "../components/f7";
 import { Page } from "framework7-react";
 
-let ContactForm = ({
+export let ContactForm = ({
   errors,
   handleBlur,
   handleChange,
@@ -79,14 +79,19 @@ ContactForm = Formik({
   }
 })(ContactForm);
 
-const HelpCenter = () =>
-  <Page>
+export const Content = () =>
+  <div>
     <Navbar>
       <NavLeft backLink="Back" sliding />
       <NavCenter sliding>Help Center</NavCenter>
     </Navbar>
     <ContentBlockTitle>Contact form</ContentBlockTitle>
     <ContactForm />
+  </div>;
+
+const HelpCenter = () =>
+  <Page>
+    <Content />
   </Page>;
 
 export default HelpCenter;
