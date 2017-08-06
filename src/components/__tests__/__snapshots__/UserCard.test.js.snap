@@ -1,18 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`UserCard component should render correctly 1`] = `
-.gDYObI {
+.cqISHI {
   width: 95px;
 }
 
-.bHnJJA {
+.kXEDlD {
   font-size: 19px;
   color: #FEBA72;
   width: 19px;
   padding-bottom: 2px;
 }
 
-.jdUnTz {
+.fgWKlg {
   font-size: 15px;
   font-weight: 500;
   -webkit-flex-grow: 1;
@@ -21,7 +21,7 @@ exports[`UserCard component should render correctly 1`] = `
   color: #497B3C;
 }
 
-.japAsC {
+.dWXrjy {
   border-radius: 5px;
   background-color: #0b7eff;
   color: #fff;
@@ -34,7 +34,7 @@ exports[`UserCard component should render correctly 1`] = `
   margin: 0;
 }
 
-.bwZgj {
+.kVNQGV {
   color: rgb(0, 0, 0);
   font-size: 14px;
   font-weight: 500;
@@ -44,7 +44,7 @@ exports[`UserCard component should render correctly 1`] = `
   letter-spacing: .5px;
 }
 
-.kUbnZs {
+.jyiPTP {
   color: #8e8e93;
   font-size: 14px;
   -webkit-flex-grow: 1;
@@ -53,11 +53,11 @@ exports[`UserCard component should render correctly 1`] = `
   margin-top: 2px;
 }
 
-.kUbnZs span {
+.jyiPTP span {
   font-weight: 600;
 }
 
-.fytLlN {
+.gNYAYU {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -65,28 +65,28 @@ exports[`UserCard component should render correctly 1`] = `
   width: 100%;
 }
 
-.evPHuk {
+.jfGaMs {
   width: 100%;
 }
 
-.gwgIOg {
+.eTkWIx {
   -webkit-letter-spacing: 2px;
   -moz-letter-spacing: 2px;
   -ms-letter-spacing: 2px;
   letter-spacing: 2px;
 }
 
-.jcdmBy {
+.jJZhyj {
   font-weight: 500;
   color: #DEB21C;
 }
 
-.fVppDi {
+.bJzcFu {
   font-weight: 500;
   color: #A1BA37;
 }
 
-.kwacvB {
+.jFINBM {
   border: 0px;
   height: 1px;
   width: 90%;
@@ -94,7 +94,7 @@ exports[`UserCard component should render correctly 1`] = `
   background-image: linear-gradient(    to left,    #e5e5e5,    #0b7eff,    #e5e5e5  );
 }
 
-.gRrepE {
+.eDYRKH {
   border: 0px;
   height: 1px;
   width: 70%;
@@ -102,7 +102,7 @@ exports[`UserCard component should render correctly 1`] = `
   background-image: linear-gradient(    to left,    #E5E5E5,    #0B7EFF,    #E5E5E5  );
 }
 
-.fsjUfO {
+.dJwEYn {
   -webkit-flex-grow: 1;
   -ms-flex-grow: 1;
   flex-grow: 1;
@@ -110,7 +110,7 @@ exports[`UserCard component should render correctly 1`] = `
   color: #000;
 }
 
-.dympMJ {
+.eBUYwb {
   -webkit-flex-basis: 22px;
   -ms-flex-basis: 22px;
   flex-basis: 22px;
@@ -118,15 +118,15 @@ exports[`UserCard component should render correctly 1`] = `
   padding-top: 4px;
 }
 
-.lkfkxE {
+.eMhhnH {
   font-size: 14px;
 }
 
-.lkfkxE span {
+.eMhhnH span {
   font-size: 17px;
 }
 
-.hcoQbX {
+.zQFoY {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -134,18 +134,18 @@ exports[`UserCard component should render correctly 1`] = `
   margin-bottom: 1px;
 }
 
-.fqtxmW {
+.dorDaK {
   margin-top: 7.5px;
 }
 
-.bBkshi {
+.jnGuGo {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.PbLDY {
+.fbgClP {
   border: none;
   background: inherit;
   font-size: 13px;
@@ -157,16 +157,16 @@ exports[`UserCard component should render correctly 1`] = `
   text-align: left;
 }
 
-.PbLDY:focus {
+.fbgClP:focus {
   outline: none;
 }
 
-.PbLDY i {
+.fbgClP i {
   font-size: 17px;
   margin: 0 0 0 5px;
 }
 
-.bBpGfX {
+.iXErJR {
   border: none;
   background: inherit;
   font-size: 13px;
@@ -178,16 +178,16 @@ exports[`UserCard component should render correctly 1`] = `
   text-align: right;
 }
 
-.bBpGfX:focus {
+.iXErJR:focus {
   outline: none;
 }
 
-.bBpGfX i {
+.iXErJR i {
   font-size: 17px;
   margin: 0 5px 0 0;
 }
 
-.DZEMD {
+.boyVqA {
   border: none;
   background: inherit;
   font-size: 13px;
@@ -199,22 +199,22 @@ exports[`UserCard component should render correctly 1`] = `
   text-align: right;
 }
 
-.DZEMD:focus {
+.boyVqA:focus {
   outline: none;
 }
 
-.DZEMD i {
+.boyVqA i {
   font-size: 17px;
   margin: 0 0 0 7.5px;
 }
 
-.hcbgpn {
+.fQTHsC {
   -webkit-flex-basis: 100%;
   -ms-flex-basis: 100%;
   flex-basis: 100%;
 }
 
-.jEQbsV {
+.bbaXTp {
   -webkit-flex-direction: row-reverse;
   -ms-flex-direction: row-reverse;
   flex-direction: row-reverse;
@@ -230,28 +230,28 @@ exports[`UserCard component should render correctly 1`] = `
       className="card-content-inner"
     >
       <div
-        className="sc-cSHVUG evPHuk"
+        className="sc-chPdSV jfGaMs"
       >
         <div
-          className="sc-jzJRlG fytLlN"
+          className="sc-kAzzGY gNYAYU"
         >
           <div
-            className="username sc-gqjmRU jdUnTz"
+            className="username sc-jTzLTM fgWKlg"
             color="#497B3C"
           >
             Randall Rivera
           </div>
           <div
-            className="sc-VigVT japAsC"
+            className="sc-fjdhpX dWXrjy"
           >
             4.5
           </div>
         </div>
         <div
-          className="sc-jzJRlG fytLlN"
+          className="sc-kAzzGY gNYAYU"
         >
           <div
-            className="sc-jTzLTM bwZgj"
+            className="sc-jzJRlG kVNQGV"
           >
             Student
              at
@@ -260,10 +260,10 @@ exports[`UserCard component should render correctly 1`] = `
           </div>
         </div>
         <div
-          className="sc-jzJRlG fytLlN"
+          className="sc-kAzzGY gNYAYU"
         >
           <div
-            className="sc-fjdhpX kUbnZs"
+            className="sc-cSHVUG jyiPTP"
           >
             <span>
               1
@@ -271,30 +271,30 @@ exports[`UserCard component should render correctly 1`] = `
              ratings
           </div>
           <div
-            className="sc-iwsKbI gDYObI"
+            className="sc-gqjmRU cqISHI"
           >
             <i
-              className="material-icons icon sc-gZMcBi bHnJJA"
+              className="material-icons icon sc-VigVT kXEDlD"
             >
               star
             </i>
             <i
-              className="material-icons icon sc-gZMcBi bHnJJA"
+              className="material-icons icon sc-VigVT kXEDlD"
             >
               star
             </i>
             <i
-              className="material-icons icon sc-gZMcBi bHnJJA"
+              className="material-icons icon sc-VigVT kXEDlD"
             >
               star
             </i>
             <i
-              className="material-icons icon sc-gZMcBi bHnJJA"
+              className="material-icons icon sc-VigVT kXEDlD"
             >
               star
             </i>
             <i
-              className="material-icons icon sc-gZMcBi bHnJJA"
+              className="material-icons icon sc-VigVT kXEDlD"
             >
               star_half
             </i>
@@ -302,20 +302,20 @@ exports[`UserCard component should render correctly 1`] = `
         </div>
       </div>
       <hr
-        className="sc-kgoBCf kwacvB"
+        className="sc-kpOJdX jFINBM"
         width="90%"
       />
       <div
         className="accordion-item"
       >
         <div
-          className="sc-eNQAEJ bBkshi"
+          className="sc-kEYyzF jnGuGo"
         >
           <div
-            className="accordion-item-toggle sc-kEYyzF hcbgpn"
+            className="accordion-item-toggle sc-iAyFgw fQTHsC"
           >
             <button
-              className="sc-hMqMXs PbLDY"
+              className="sc-kkGfuU fbgClP"
               onClick={[Function]}
               type="button"
             >
@@ -328,7 +328,7 @@ exports[`UserCard component should render correctly 1`] = `
             </button>
           </div>
           <button
-            className="sc-hMqMXs bBpGfX"
+            className="sc-kkGfuU iXErJR"
             onClick={[Function]}
             type="button"
           >
@@ -344,27 +344,27 @@ exports[`UserCard component should render correctly 1`] = `
           className="accordion-item-content"
         >
           <div
-            className="sc-jKJlTe fqtxmW"
+            className="sc-hMqMXs dorDaK"
           >
             <div>
               <div
-                className="sc-ckVGcZ hcoQbX"
+                className="sc-eNQAEJ zQFoY"
               >
                 <i
-                  className="material-icons icon sc-kpOJdX dympMJ"
+                  className="material-icons icon sc-ckVGcZ eBUYwb"
                 >
                   forward
                 </i>
                 <div
-                  className="sc-kGXeez fsjUfO"
+                  className="sc-dxgOiQ dJwEYn"
                 >
                   Attends Group Meetings
                 </div>
                 <div
-                  className="sc-dxgOiQ lkfkxE sc-kAzzGY gwgIOg"
+                  className="sc-jKJlTe eMhhnH sc-kgoBCf eTkWIx"
                 >
                   <span
-                    className="sc-chPdSV jcdmBy"
+                    className="sc-kGXeez jJZhyj"
                     color="#DEB21C"
                   >
                     3
@@ -373,29 +373,29 @@ exports[`UserCard component should render correctly 1`] = `
                 </div>
               </div>
               <hr
-                className="sc-kgoBCf gRrepE"
+                className="sc-kpOJdX eDYRKH"
                 width="70%"
               />
             </div>
             <div>
               <div
-                className="sc-ckVGcZ hcoQbX"
+                className="sc-eNQAEJ zQFoY"
               >
                 <i
-                  className="material-icons icon sc-kpOJdX dympMJ"
+                  className="material-icons icon sc-ckVGcZ eBUYwb"
                 >
                   forward
                 </i>
                 <div
-                  className="sc-kGXeez fsjUfO"
+                  className="sc-dxgOiQ dJwEYn"
                 >
                   Contributes to Discussions
                 </div>
                 <div
-                  className="sc-dxgOiQ lkfkxE sc-kAzzGY gwgIOg"
+                  className="sc-jKJlTe eMhhnH sc-kgoBCf eTkWIx"
                 >
                   <span
-                    className="sc-chPdSV fVppDi"
+                    className="sc-kGXeez bJzcFu"
                     color="#A1BA37"
                   >
                     5
@@ -410,10 +410,10 @@ exports[`UserCard component should render correctly 1`] = `
     </div>
   </div>
   <div
-    className="card-footer sc-kkGfuU jEQbsV"
+    className="card-footer sc-hSdWYo bbaXTp"
   >
     <button
-      className="sc-hMqMXs DZEMD"
+      className="sc-kkGfuU boyVqA"
       onClick={[Function]}
       type="button"
     >
