@@ -18,7 +18,7 @@ import { Page } from "framework7-react";
 // DELETE AFTER TESTING
 import * as API from "../utils";
 
-const AccountInformation = ({
+export const EmailFormField = ({
   values,
   errors,
   touched,
@@ -41,7 +41,7 @@ const AccountInformation = ({
     </List>
   </div>;
 
-const SchoolInformation = ({
+export const SchoolInfoFormFields = ({
   values,
   schools,
   majors,
@@ -76,7 +76,13 @@ const SchoolInformation = ({
     </ListBlock>
   </div>;
 
-const PasswordReset = ({ values, touched, errors, handleChange, handleBlur }) =>
+export const PasswordResetFormFields = ({
+  values,
+  touched,
+  errors,
+  handleChange,
+  handleBlur
+}) =>
   <div>
     <ContentBlockTitle>Password reset</ContentBlockTitle>
     <List inset>
@@ -105,7 +111,7 @@ const PasswordReset = ({ values, touched, errors, handleChange, handleBlur }) =>
     </List>
   </div>;
 
-let Form = props => {
+export let AccountInfoForm = props => {
   const {
     values,
     errors,
@@ -115,12 +121,15 @@ let Form = props => {
     handleSubmit,
     isSubmitting
   } = props;
-  const validForm = Object.keys(errors).length === 0;
+  const disableSubmission =
+    isSubmitting ||
+    Object.keys(errors).length !== 0 ||
+    Object.keys(touched).length === 0;
   return (
     <form onSubmit={handleSubmit}>
-      <AccountInformation {...props} />
-      <SchoolInformation {...props} />
-      <PasswordReset {...props} />
+      <EmailFormField {...props} />
+      <SchoolInfoFormFields {...props} />
+      <PasswordResetFormFields {...props} />
       <List inset>
         <InputElement
           icon="lock"
@@ -137,7 +146,7 @@ let Form = props => {
         <Button
           type="submit"
           color="green"
-          disabled={isSubmitting || !validForm}
+          disabled={disableSubmission}
           big
           fill
         >
@@ -148,7 +157,7 @@ let Form = props => {
   );
 };
 
-Form = Formik({
+AccountInfoForm = Formik({
   mapPropsToValues: props => ({
     email: "",
     schools: props.selectedSchools,
@@ -168,7 +177,7 @@ Form = Formik({
   handleSubmit: (values, { props, setErrors, setSubmitting }) => {
     console.log(values);
   }
-})(Form);
+})(AccountInfoForm);
 
 class General extends React.Component {
   fetchUserInfo = () => {
@@ -197,7 +206,7 @@ class General extends React.Component {
           <NavLeft backLink="Back" sliding />
           <NavCenter sliding>General</NavCenter>
         </Navbar>
-        <Form {...formProps} />
+        <AccountInfoForm {...formProps} />
       </Page>
     );
   }

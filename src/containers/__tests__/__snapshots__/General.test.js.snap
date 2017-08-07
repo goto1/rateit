@@ -1,0 +1,292 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`General container AccountInfoForm should render correctly 1`] = `
+.jwltLt {
+  background-color: #369947 !important;
+  border-color: #369947 !important;
+  color: #F1F1F5 !important;
+  opacity: .65;
+  -webkit-text-transform: uppercase;
+  text-transform: uppercase;
+  -webkit-letter-spacing: .5px;
+  -moz-letter-spacing: .5px;
+  -ms-letter-spacing: .5px;
+  letter-spacing: .5px;
+  width: 100%;
+}
+
+.cYrpQX {
+  margin-top: 25px !important;
+}
+
+.fYkctb {
+  margin-left: 15px;
+}
+
+.fYkctb input {
+  color: black;
+}
+
+.bqyzQp {
+  position: relative;
+}
+
+<form
+  onSubmit={[Function]}
+>
+  <div>
+    <div
+      className="content-block-title sc-bwzfXH cYrpQX"
+    >
+      Account information
+    </div>
+    <div
+      className="list-block inset"
+    >
+      <ul>
+        <div
+          className="sc-ifAKCX item-content bqyzQp"
+        >
+          <div
+            className="item-media"
+          >
+            <i
+              className="material-icons icon"
+            >
+              email
+            </i>
+          </div>
+          <div
+            className="item-input sc-htpNat fYkctb"
+          >
+            <input
+              name="email"
+              onBlur={[Function]}
+              onChange={[Function]}
+              placeholder="example@gmail.com"
+              type="email"
+              value=""
+            />
+          </div>
+        </div>
+      </ul>
+    </div>
+  </div>
+  <div>
+    <div
+      className="content-block-title sc-bwzfXH cYrpQX"
+    >
+      School information
+    </div>
+    <div
+      className="list-block"
+    >
+      <ul>
+        <li>
+          <a
+            className="item-link smart-select"
+            data-searchbar="true"
+            data-searchbar-placeholder="Search for a school..."
+          >
+            <select
+              multiple={true}
+              name="schools"
+              onBlur={[Function]}
+              onChange={[Function]}
+              value={
+                Array [
+                  "bruHy",
+                  "5y7fh",
+                ]
+              }
+            >
+              <option
+                data-display-as="NJIT"
+                value="bruHy"
+              >
+                New Jersey Institute of Technology, Newark
+              </option>
+              <option
+                data-display-as="RU"
+                value="5y7fh"
+              >
+                Rutgers University, New Brunswick
+              </option>
+            </select>
+            <div
+              className="item-content"
+            >
+              <div
+                className="item-inner"
+              >
+                <div
+                  className="item-title"
+                >
+                  Schools
+                </div>
+                <div
+                  className="item-after"
+                />
+              </div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a
+            className="item-link smart-select"
+            data-searchbar="true"
+            data-searchbar-placeholder="Search for a major..."
+          >
+            <select
+              multiple={true}
+              name="majors"
+              onBlur={[Function]}
+              onChange={[Function]}
+              value={
+                Array [
+                  "hvdMFjM",
+                  "e2LejDg",
+                ]
+              }
+            >
+              <option
+                data-display-as="CS"
+                value="hvdMFjM"
+              >
+                Computer Science
+              </option>
+              <option
+                data-display-as="IS"
+                value="e2LejDg"
+              >
+                Information Systems
+              </option>
+            </select>
+            <div
+              className="item-content"
+            >
+              <div
+                className="item-inner"
+              >
+                <div
+                  className="item-title"
+                >
+                  Majors
+                </div>
+                <div
+                  className="item-after"
+                />
+              </div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div>
+    <div
+      className="content-block-title sc-bwzfXH cYrpQX"
+    >
+      Password reset
+    </div>
+    <div
+      className="list-block inset"
+    >
+      <ul>
+        <div
+          className="sc-ifAKCX item-content bqyzQp"
+        >
+          <div
+            className="item-media"
+          >
+            <i
+              className="material-icons icon"
+            >
+              lock_outline
+            </i>
+          </div>
+          <div
+            className="item-input sc-htpNat fYkctb"
+          >
+            <input
+              name="new_password"
+              onBlur={[Function]}
+              onChange={[Function]}
+              placeholder="New Password"
+              type="password"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          className="sc-ifAKCX item-content bqyzQp"
+        >
+          <div
+            className="item-media"
+          >
+            <i
+              className="material-icons icon"
+            >
+              lock_outline
+            </i>
+          </div>
+          <div
+            className="item-input sc-htpNat fYkctb"
+          >
+            <input
+              name="new_password_repeated"
+              onBlur={[Function]}
+              onChange={[Function]}
+              placeholder="New Password Repeated"
+              type="password"
+              value=""
+            />
+          </div>
+        </div>
+      </ul>
+    </div>
+  </div>
+  <div
+    className="list-block inset"
+  >
+    <ul>
+      <div
+        className="sc-ifAKCX item-content bqyzQp"
+      >
+        <div
+          className="item-media"
+        >
+          <i
+            className="material-icons icon"
+          >
+            lock
+          </i>
+        </div>
+        <div
+          className="item-input sc-htpNat fYkctb"
+        >
+          <input
+            name="current_password"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder="Your Current Password"
+            type="password"
+            value=""
+          />
+        </div>
+      </div>
+    </ul>
+  </div>
+  <div
+    className="content-block  "
+  >
+    <button
+      className="button button-big sc-bdVaJa jwltLt"
+      disabled={true}
+      type="submit"
+    >
+      Submit Changes
+    </button>
+  </div>
+</form>
+`;
