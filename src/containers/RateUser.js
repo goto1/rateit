@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { isFormValid } from "../utils/FormUtils";
 import { connect } from "react-redux";
 import RatingCategoryInput from "../components/RatingCategoryInput";
 import { Formik } from "formik";
@@ -53,7 +52,7 @@ FormSection.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-let StudentForm = ({
+export let StudentForm = ({
   values,
   touched,
   errors,
@@ -68,47 +67,51 @@ let StudentForm = ({
   schools,
   majors
 }) => {
-  const validForm = isFormValid(values);
+  const disableSubmission =
+    isSubmitting &&
+    Object.keys(errors).length !== 0 &&
+    Object.keys(touched).length === 0;
+  const validForm = Object.keys(errors).length === 0;
   return (
     <form onSubmit={handleSubmit}>
       <FormSection title="Student Information">
         <InputElement
           icon="account_circle"
           name="name"
-          type="text"
-          value={values.student_name}
-          placeholder="John Doe"
-          onChange={handleChange}
           onBlur={handleBlur}
+          onChange={handleChange}
+          placeholder="John Doe"
+          type="text"
           valid={errors.name && touched.name && false}
+          value={values.student_name}
         />
         <InputElement
           icon="email"
           name="email"
-          type="email"
-          value={values.email}
-          placeholder="john@school.edu"
-          onChange={handleChange}
           onBlur={handleBlur}
+          onChange={handleChange}
+          placeholder="john@school.edu"
+          type="email"
           valid={errors.email && touched.email && false}
+          value={values.email}
         />
       </FormSection>
       <FormSection title="School Information">
         <SmartSelect
-          name="school"
-          options={schools}
-          selected={selectedSchools}
           multiple={false}
-          searchbarPlaceholder="Search for a school..."
+          name="school"
           onChange={handleChange}
+          options={schools}
+          searchbarPlaceholder="Search for a school..."
+          selected={selectedSchools}
         />
         <SmartSelect
-          name="major"
-          options={majors}
-          selected={selectedMajors}
           multiple={false}
-          searchbarPlaceholder="Search for a major..."
+          name="major"
           onChange={handleChange}
+          options={majors}
+          searchbarPlaceholder="Search for a major..."
+          selected={selectedMajors}
         />
       </FormSection>
       {ratingCategories.map(category => {
@@ -124,10 +127,10 @@ let StudentForm = ({
         <Textarea
           icon="comment"
           name="comment"
-          value={values.comment}
-          placeholder="Your comment here..."
-          onChange={handleChange}
           onBlur={handleBlur}
+          onChange={handleChange}
+          placeholder="Your comment here..."
+          value={values.comment}
         />
         <RadioInput icon="done" name="recommend" onChange={handleChange} />
       </FormSection>
@@ -137,7 +140,7 @@ let StudentForm = ({
         <Button
           type="submit"
           color="green"
-          disabled={isSubmitting || !validForm}
+          disabled={disableSubmission}
           big
           fill
         >
@@ -150,12 +153,12 @@ let StudentForm = ({
 
 StudentForm = Formik({
   mapPropsToValues: props => ({
-    name: "",
-    email: "",
-    school: props.selectedSchools[0].id,
-    major: props.selectedMajors[0].id,
     comment: "",
+    email: "",
+    major: props.selectedMajors[0].id,
+    name: "",
     recommend: false,
+    school: props.selectedSchools[0].id,
     DRFJY9jd: "",
     j84WAR77: "",
     wXe02QBg: "",
@@ -164,12 +167,12 @@ StudentForm = Formik({
     TrK3zUiV: ""
   }),
   validationSchema: Yup.object().shape({
-    name: Yup.string().required(),
-    email: Yup.string().email().required(),
-    school: Yup.string().required(),
-    major: Yup.string().required(),
     comment: Yup.string().required(),
+    email: Yup.string().email().required(),
+    major: Yup.string().required(),
+    name: Yup.string().required(),
     recommend: Yup.bool().required(),
+    school: Yup.string().required(),
     DRFJY9jd: Yup.string().required(),
     j84WAR77: Yup.string().required(),
     wXe02QBg: Yup.string().required(),
@@ -182,55 +185,59 @@ StudentForm = Formik({
   }
 })(StudentForm);
 
-let ProfessorForm = ({
-  values,
-  touched,
+export let ProfessorForm = ({
   errors,
-  isSubmitting,
+  handleBlur,
   handleChange,
   handleSubmit,
-  handleBlur,
+  isSubmitting,
+  majors,
   ratingCategories,
-  selectedSchools,
-  selectedMajors,
   schools,
-  majors
+  selectedMajors,
+  selectedSchools,
+  touched,
+  values
 }) => {
-  const validForm = isFormValid(values);
+  const disableSubmission =
+    isSubmitting ||
+    Object.keys(errors).length !== 0 ||
+    Object.keys(touched).length === 0;
+  const validForm = Object.keys(errors).length === 0;
   return (
     <form onSubmit={handleSubmit}>
       <FormSection title="Professor Information">
         <InputElement
           icon="account_circle"
           name="name"
-          type="text"
-          value={values.name}
-          placeholder="John Doe"
-          onChange={handleChange}
           onBlur={handleBlur}
+          onChange={handleChange}
+          placeholder="John Doe"
+          type="text"
           valid={errors.name && touched.name && false}
+          value={values.name}
         />
       </FormSection>
       <FormSection title="School Information">
         <SmartSelect
-          name="school"
-          value={values.school}
-          options={schools}
-          selected={selectedSchools}
           multiple={false}
-          searchbarPlaceholder="Search for a school..."
-          onChange={handleChange}
+          name="school"
           onBlur={handleBlur}
+          onChange={handleChange}
+          options={schools}
+          searchbarPlaceholder="Search for a school..."
+          selected={selectedSchools}
+          value={values.school}
         />
         <SmartSelect
-          name="major"
-          value={values.major}
-          options={majors}
-          selected={selectedMajors}
           multiple={false}
-          searchbarPlaceholder="Search for a major..."
-          onChange={handleChange}
+          name="major"
           onBlur={handleBlur}
+          onChange={handleChange}
+          options={majors}
+          searchbarPlaceholder="Search for a major..."
+          selected={selectedMajors}
+          value={values.major}
         />
       </FormSection>
       {ratingCategories.map(category =>
@@ -245,11 +252,11 @@ let ProfessorForm = ({
         <StyledContentBlock>Please fill out all fields</StyledContentBlock>}
       <ContentBlock>
         <Button
-          type="submit"
-          color="green"
-          disabled={isSubmitting || !validForm}
           big
+          color="green"
+          disabled={disableSubmission}
           fill
+          type="submit"
         >
           Submit
         </Button>
@@ -260,9 +267,9 @@ let ProfessorForm = ({
 
 ProfessorForm = Formik({
   mapPropsToValues: props => ({
+    major: props.selectedMajors[0].id,
     name: "",
     school: props.selectedSchools[0].id,
-    major: props.selectedMajors[0].id,
     T5wKYAmI: "",
     jUtauYzO: "",
     mh4m4LcX: "",
@@ -270,9 +277,9 @@ ProfessorForm = Formik({
     sBuPhZef: ""
   }),
   validationSchema: Yup.object().shape({
+    major: Yup.string().required(),
     name: Yup.string().required(),
     school: Yup.string().required(),
-    major: Yup.string().required(),
     T5wKYAmI: Yup.string().required(),
     jUtauYzO: Yup.string().required(),
     mh4m4LcX: Yup.string().required(),

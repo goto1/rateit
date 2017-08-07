@@ -7,7 +7,7 @@ import {
 } from "../General";
 import { Button, InputElement, SmartSelect } from "../../components/f7";
 import renderer from "react-test-renderer";
-import { shallow, mount } from "enzyme";
+import { mount } from "enzyme";
 
 describe("General container", () => {
   describe("AccountInfoForm", () => {
