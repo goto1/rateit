@@ -42,13 +42,15 @@ export const EmailFormField = ({
   </div>;
 
 export const SchoolInfoFormFields = ({
-  values,
-  schools,
-  majors,
-  selectedSchools,
-  selectedMajors,
+  handleBlur,
   handleChange,
-  handleBlur
+  handleChangeValue,
+  handleMultipleSelect,
+  majors,
+  schools,
+  selectedMajors,
+  selectedSchools,
+  values
 }) =>
   <div>
     <ContentBlockTitle>School information</ContentBlockTitle>
@@ -58,9 +60,9 @@ export const SchoolInfoFormFields = ({
         value={values.schools}
         options={schools}
         selected={selectedSchools}
-        multiple={true}
+        multiple
         searchbarPlaceholder="Search for a school..."
-        onChange={handleChange}
+        onChange={e => handleMultipleSelect(e, handleChangeValue)}
         onBlur={handleBlur}
       />
       <SmartSelect
@@ -68,9 +70,9 @@ export const SchoolInfoFormFields = ({
         value={values.majors}
         options={majors}
         selected={selectedMajors}
-        multiple={true}
+        multiple
         searchbarPlaceholder="Search for a major..."
-        onChange={handleChange}
+        onChange={e => handleMultipleSelect(e, handleChangeValue)}
         onBlur={handleBlur}
       />
     </ListBlock>
@@ -192,13 +194,22 @@ class General extends React.Component {
     this.selectedMajors = currUser.majors.map(major => major.id);
   };
 
+  handleMultipleSelect = (e, handleChange) => {
+    const selected = [...e.target.options]
+      .filter(option => option.selected === true)
+      .map(option => option.value);
+
+    handleChange(e.target.name, selected);
+  };
+
   render() {
     this.fetchUserInfo();
     const formProps = {
-      schools: this.schools,
+      handleMultipleSelect: this.handleMultipleSelect,
       majors: this.allMajors,
-      selectedSchools: this.selectedSchools,
-      selectedMajors: this.selectedMajors
+      schools: this.schools,
+      selectedMajors: this.selectedMajors,
+      selectedSchools: this.selectedSchools
     };
     return (
       <Page>
