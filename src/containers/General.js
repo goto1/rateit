@@ -198,7 +198,6 @@ class General extends React.Component {
     const selected = [...e.target.options]
       .filter(option => option.selected === true)
       .map(option => option.value);
-
     handleChange(e.target.name, selected);
   };
 

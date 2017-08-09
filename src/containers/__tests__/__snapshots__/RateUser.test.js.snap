@@ -191,13 +191,7 @@ exports[`RateUser container ProfessorForm should render correctly 1`] = `
               name="school"
               onBlur={[Function]}
               onChange={[Function]}
-              value={
-                Object {
-                  "abbreviation": "NJIT",
-                  "id": "bruHy",
-                  "name": "New Jersey Institute of Technology, Newark",
-                }
-              }
+              value="[object Object]"
             >
               <option
                 data-display-as="NJIT"
@@ -241,13 +235,7 @@ exports[`RateUser container ProfessorForm should render correctly 1`] = `
               name="major"
               onBlur={[Function]}
               onChange={[Function]}
-              value={
-                Object {
-                  "abbreviation": "CS",
-                  "id": "hvdMFjM",
-                  "name": "Computer Science",
-                }
-              }
+              value="[object Object]"
             >
               <option
                 data-display-as="CS"
@@ -885,13 +873,7 @@ exports[`RateUser container StudentForm should render correctly 1`] = `
               name="school"
               onBlur={undefined}
               onChange={[Function]}
-              value={
-                Object {
-                  "abbreviation": "NJIT",
-                  "id": "bruHy",
-                  "name": "New Jersey Institute of Technology, Newark",
-                }
-              }
+              value="bruHy"
             >
               <option
                 data-display-as="NJIT"
@@ -935,13 +917,7 @@ exports[`RateUser container StudentForm should render correctly 1`] = `
               name="major"
               onBlur={undefined}
               onChange={[Function]}
-              value={
-                Object {
-                  "abbreviation": "CS",
-                  "id": "hvdMFjM",
-                  "name": "Computer Science",
-                }
-              }
+              value="hvdMFjM"
             >
               <option
                 data-display-as="CS"
