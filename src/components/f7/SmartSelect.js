@@ -3,61 +3,71 @@ import PropTypes from "prop-types";
 import capitalize from "lodash/capitalize";
 import head from "lodash/head";
 
-const SmartSelect = ({
-  name,
-  options,
-  selected = [],
-  multiple = false,
-  searchbarPlaceholder,
-  onChange,
-  onBlur
-}) => {
-  const selectedOptions = multiple === false ? head(selected) : selected;
-  return (
-    <li>
-      <a
-        className="item-link smart-select"
-        data-searchbar="true"
-        data-searchbar-placeholder={searchbarPlaceholder}
+class SmartSelect extends React.Component {
+  renderOptions = () =>
+    this.props.options.map(option =>
+      <option
+        key={option.id}
+        value={option.id}
+        data-display-as={option.abbreviation}
       >
-        <select
-          value={selectedOptions}
-          name={name}
-          onChange={onChange}
-          onBlur={onBlur}
-          multiple={multiple}
+        {option.name}
+      </option>
+    );
+
+  render() {
+    const {
+      multiple,
+      name,
+      onBlur,
+      onChange,
+      searchbarPlaceholder,
+      value
+    } = this.props;
+    const options = this.renderOptions();
+    const title = capitalize(name);
+    return (
+      <li>
+        <a
+          data-searchbar-placeholder={searchbarPlaceholder}
+          data-searchbar="true"
+          className="item-link smart-select"
         >
-          {options.map(option =>
-            <option
-              key={option.id}
-              value={option.id}
-              data-display-as={option.abbreviation}
-            >
-              {option.name}
-            </option>
-          )}
-        </select>
-        <div className="item-content">
-          <div className="item-inner">
-            <div className="item-title">
-              {capitalize(name)}
+          <select
+            multiple={multiple}
+            name={name}
+            onChange={onChange}
+            onBlur={onBlur}
+            value={value}
+          >
+            {options}
+          </select>
+          <div className="item-content">
+            <div className="item-inner">
+              <div className="item-title">
+                {title}
+              </div>
+              <div className="item-after" />
             </div>
-            <div className="item-after" />
           </div>
-        </div>
-      </a>
-    </li>
-  );
-};
+        </a>
+      </li>
+    );
+  }
+}
 
 SmartSelect.propTypes = {
-  name: PropTypes.string.isRequired,
-  options: PropTypes.array.isRequired,
   multiple: PropTypes.bool,
-  selected: PropTypes.array,
-  searchbarPlaceholder: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  onBlur: PropTypes.func,
   onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func
+  options: PropTypes.array,
+  searchbarPlaceholder: PropTypes.string.isRequired
+};
+
+SmartSelect.defaultProps = {
+  multiple: false,
+  options: []
 };
 
 export default SmartSelect;

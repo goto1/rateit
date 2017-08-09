@@ -104,6 +104,7 @@ export let StudentForm = ({
           options={schools}
           searchbarPlaceholder="Search for a school..."
           selected={selectedSchools}
+          value={values.school}
         />
         <SmartSelect
           multiple={false}
@@ -112,6 +113,7 @@ export let StudentForm = ({
           options={majors}
           searchbarPlaceholder="Search for a major..."
           selected={selectedMajors}
+          value={values.major}
         />
       </FormSection>
       {ratingCategories.map(category => {
@@ -189,6 +191,8 @@ export let ProfessorForm = ({
   errors,
   handleBlur,
   handleChange,
+  handleChangeValue,
+  handleSelectChange,
   handleSubmit,
   isSubmitting,
   majors,
@@ -223,7 +227,9 @@ export let ProfessorForm = ({
           multiple={false}
           name="school"
           onBlur={handleBlur}
-          onChange={handleChange}
+          onChange={e => {
+            handleSelectChange(e, handleChangeValue);
+          }}
           options={schools}
           searchbarPlaceholder="Search for a school..."
           selected={selectedSchools}
@@ -233,7 +239,9 @@ export let ProfessorForm = ({
           multiple={false}
           name="major"
           onBlur={handleBlur}
-          onChange={handleChange}
+          onChange={e => {
+            handleSelectChange(e, handleChangeValue);
+          }}
           options={majors}
           searchbarPlaceholder="Search for a major..."
           selected={selectedMajors}
@@ -267,9 +275,9 @@ export let ProfessorForm = ({
 
 ProfessorForm = Formik({
   mapPropsToValues: props => ({
-    major: props.selectedMajors[0].id,
+    major: props.selectedMajors[0].toString(),
     name: "",
-    school: props.selectedSchools[0].id,
+    school: props.selectedSchools[0].toString(),
     T5wKYAmI: "",
     jUtauYzO: "",
     mh4m4LcX: "",
@@ -300,22 +308,28 @@ class RateUser extends React.Component {
     const t1 = currUser.schools.map(school => school.id);
     this.schools = allSchools.filter(school => t1.includes(school.id));
 
-    this.selectedSchools = this.schools.slice(0, 1);
-    this.selectedMajors = currUser.majors.slice(0, 1);
+    this.selectedSchools = this.schools.slice(0, 1).map(school => school.id);
+    this.selectedMajors = currUser.majors.slice(0, 1).map(major => major.id);
 
     this.profRatingCat = API.getRatingCategories().professor;
     this.studRatingCat = API.getRatingCategories().student;
+  };
+
+  handleSelectChange = (e, handleChange) => {
+    const selected = [...e.target.options].filter(option => option.selected);
+    handleChange(e.target.name, selected[0].value);
   };
 
   render() {
     this.fetchUserInfo();
     const userType = JSON.parse(this.props.currentRoute.query).type;
     const pFormProps = {
+      handleSelectChange: this.handleSelectChange,
+      majors: this.allMajors,
       ratingCategories: this.profRatingCat,
-      selectedSchools: this.selectedSchools,
-      selectedMajors: this.selectedMajors,
       schools: this.schools,
-      majors: this.allMajors
+      selectedMajors: this.selectedMajors,
+      selectedSchools: this.selectedSchools
     };
     const sFormProps = {
       ...pFormProps,
