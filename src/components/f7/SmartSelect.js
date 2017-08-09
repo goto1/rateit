@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import capitalize from "lodash/capitalize";
-import head from "lodash/head";
 
 class SmartSelect extends React.Component {
   renderOptions = () =>
