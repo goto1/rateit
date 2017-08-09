@@ -20,7 +20,8 @@ describe("SmartSelect component", () => {
       ],
       multiple: true,
       searchbarPlaceholder: "Search for schools...",
-      onChange: jest.fn()
+      onChange: jest.fn(),
+      value: ["bruHy"]
     };
     return shallow(<SmartSelect {...props} />);
   };
@@ -32,11 +33,12 @@ describe("SmartSelect component", () => {
     expect(actual).toBe(expected);
   });
 
-  // it("should a specific option as selected", () => {
-  //   const wrapper = getSmartSelectWrapper();
-  //   const actual = wrapper.find("select").props().value.includes("bruHy");
-  //   expect(actual).toBe(expected);
-  // });
+  it("should render a specific option as selected", () => {
+    const wrapper = getSmartSelectWrapper();
+    const actual = wrapper.find("select").props().value[0];
+    const expected = "bruHy";
+    expect(actual).toBe(expected);
+  });
 
   it("should call a function when selection changes", () => {
     const wrapper = getSmartSelectWrapper();
