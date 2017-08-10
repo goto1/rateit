@@ -7,7 +7,7 @@ export const schools = [
   }, { 
     id: '5y7fh', 
     name: 'Rutgers University, New Brunswick',
-    abbreviation: 'RU',
+    abbreviation: 'RU'
   }, { 
     id: 'B9DB3', 
     name: 'New York University, New York',
