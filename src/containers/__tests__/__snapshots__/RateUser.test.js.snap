@@ -191,7 +191,7 @@ exports[`RateUser container RateUserProfessorForm should render correctly 1`] = 
               name="school"
               onBlur={[Function]}
               onChange={[Function]}
-              value="[object Object]"
+              value={undefined}
             >
               <option
                 data-display-as="NJIT"
@@ -235,7 +235,7 @@ exports[`RateUser container RateUserProfessorForm should render correctly 1`] = 
               name="major"
               onBlur={[Function]}
               onChange={[Function]}
-              value="[object Object]"
+              value={undefined}
             >
               <option
                 data-display-as="CS"
@@ -873,7 +873,7 @@ exports[`RateUser container StudentForm should render correctly 1`] = `
               name="school"
               onBlur={undefined}
               onChange={[Function]}
-              value="bruHy"
+              value={undefined}
             >
               <option
                 data-display-as="NJIT"
@@ -917,7 +917,7 @@ exports[`RateUser container StudentForm should render correctly 1`] = `
               name="major"
               onBlur={undefined}
               onChange={[Function]}
-              value="hvdMFjM"
+              value={undefined}
             >
               <option
                 data-display-as="CS"

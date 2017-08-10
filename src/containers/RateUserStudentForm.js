@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import RatingCategoryInput from "../components/RatingCategoryInput";
-import { isFormValid, FormSection, StyledContentBlock } from "./RateUser";
+import { FormSection, StyledContentBlock } from "./RateUser";
 import { Formik } from "formik";
 import Yup from "yup";
+import { isFormValid } from "../utils/FormUtils";
 import {
   Button,
   ContentBlock,
@@ -131,10 +132,10 @@ RateUserStudentForm = Formik({
   mapPropsToValues: props => ({
     comment: "",
     email: "",
-    major: props.selectedMajors[0].id,
+    major: props.major,
     name: "",
     recommend: false,
-    school: props.selectedSchools[0].id,
+    school: props.school,
     DRFJY9jd: "",
     j84WAR77: "",
     wXe02QBg: "",
@@ -144,11 +145,11 @@ RateUserStudentForm = Formik({
   }),
   validationSchema: Yup.object().shape({
     comment: Yup.string().required(),
-    email: Yup.string().email().required(),
-    major: Yup.string().required(),
+    email: Yup.string().email().lowercase().required(),
+    major: Yup.string().max(10).required(),
     name: Yup.string().required(),
     recommend: Yup.boolean().required(),
-    school: Yup.string().required(),
+    school: Yup.string().max(10).required(),
     DRFJY9jd: Yup.string().required(),
     j84WAR77: Yup.string().required(),
     wXe02QBg: Yup.string().required(),

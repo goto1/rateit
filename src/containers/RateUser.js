@@ -17,11 +17,6 @@ import { Page } from "framework7-react";
 // DELETE WHEN DONE TESTING
 import * as API from "../utils";
 
-export const isFormValid = ({ isSubmitting, errors, touched }) =>
-  isSubmitting ||
-  Object.keys(errors).length !== 0 ||
-  Object.keys(touched).length === 0;
-
 export const StyledContentBlock = styled(ContentBlock)`
   margin: 0 !important;
   text-transform: uppercase;
@@ -63,6 +58,9 @@ class RateUser extends React.Component {
     this.selectedSchools = this.schools.slice(0, 1).map(school => school.id);
     this.selectedMajors = currUser.majors.slice(0, 1).map(major => major.id);
 
+    this.school = this.schools.slice(0, 1).map(school => school.id).toString();
+    this.major = currUser.majors.slice(0, 1).map(major => major.id).toString();
+
     this.profRatingCat = API.getRatingCategories().professor;
     this.studRatingCat = API.getRatingCategories().student;
   };
@@ -80,8 +78,8 @@ class RateUser extends React.Component {
       majors: this.allMajors,
       ratingCategories: this.profRatingCat,
       schools: this.schools,
-      selectedMajors: this.selectedMajors,
-      selectedSchools: this.selectedSchools
+      major: this.major,
+      school: this.school
     };
     const sFormProps = {
       ...pFormProps,

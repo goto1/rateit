@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import RatingCategoryInput from "../components/RatingCategoryInput";
-import { isFormValid, FormSection, StyledContentBlock } from "./RateUser";
+import { FormSection, StyledContentBlock } from "./RateUser";
 import { Formik } from "formik";
 import Yup from "yup";
+import { isFormValid } from "../utils/FormUtils";
 import {
   Button,
   ContentBlock,
@@ -107,9 +108,9 @@ RateUserProfessorForm.propTypes = {
 
 RateUserProfessorForm = Formik({
   mapPropsToValues: props => ({
-    major: props.selectedMajors[0].toString(),
+    major: props.major,
     name: "",
-    school: props.selectedSchools[0].toString(),
+    school: props.school,
     T5wKYAmI: "",
     jUtauYzO: "",
     mh4m4LcX: "",
