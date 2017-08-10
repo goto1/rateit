@@ -61,7 +61,8 @@ SmartSelect.propTypes = {
   onBlur: PropTypes.func,
   onChange: PropTypes.func.isRequired,
   options: PropTypes.array,
-  searchbarPlaceholder: PropTypes.string.isRequired
+  searchbarPlaceholder: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.array, PropTypes.string])
 };
 
 SmartSelect.defaultProps = {
