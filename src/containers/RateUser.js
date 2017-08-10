@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import RateUserProfessorForm from "./RateUserProfessorForm";
 import RateUserStudentForm from "./RateUserStudentForm";
-import RatingCategoryInput from "../components/RatingCategoryInput";
 import {
   ContentBlock,
   ContentBlockTitle,
