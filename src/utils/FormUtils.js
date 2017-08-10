@@ -1,5 +1,3 @@
-import omitBy from "lodash/omitBy";
-
 export const isFormValid = ({ isSubmitting, errors, touched }) =>
   isSubmitting ||
   Object.keys(errors).length !== 0 ||
