@@ -55,9 +55,6 @@ class RateUser extends React.Component {
     const t1 = currUser.schools.map(school => school.id);
     this.schools = allSchools.filter(school => t1.includes(school.id));
 
-    this.selectedSchools = this.schools.slice(0, 1).map(school => school.id);
-    this.selectedMajors = currUser.majors.slice(0, 1).map(major => major.id);
-
     this.school = this.schools.slice(0, 1).map(school => school.id).toString();
     this.major = currUser.majors.slice(0, 1).map(major => major.id).toString();
 

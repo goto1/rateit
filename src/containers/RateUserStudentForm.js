@@ -41,7 +41,7 @@ let RateUserStudentForm = ({
           placeholder="John Doe"
           type="text"
           valid={errors.name && touched.name && false}
-          value={values.student_name}
+          value={values.name}
         />
         <InputElement
           icon="email"

@@ -58,7 +58,7 @@ describe("RateUser container", () => {
       expect(tree).toMatchSnapshot();
     });
 
-    it("should render an `InputElement` with the `name` attribute set to `name`", () => {
+    it("should render an InputElement with the name attribute set to name", () => {
       const RateUserProfessorForm = getForm("professor");
       const wrapper = mount(RateUserProfessorForm);
       const actual = wrapper.find(InputElement).props().name;
@@ -66,7 +66,7 @@ describe("RateUser container", () => {
       expect(actual).toBe(expected);
     });
 
-    it("should render two `SmartSelect` components with options for school and major information", () => {
+    it("should render two SmartSelect components with options for school and major information", () => {
       const RateUserProfessorForm = getForm("professor");
       const wrapper = mount(RateUserProfessorForm);
       const schools = wrapper.find(SmartSelect).at(0).props().name === "school";
@@ -76,12 +76,38 @@ describe("RateUser container", () => {
       expect(actual).toBe(expected);
     });
 
-    it("should render two `RatingCategoryInput` components", () => {
+    it("should render two RatingCategoryInput components", () => {
       const RateUserProfessorForm = getForm("professor");
       const wrapper = mount(RateUserProfessorForm);
       const actual = wrapper.find(RatingCategoryInput).length;
       const expected = 2;
       expect(actual).toBe(expected);
+    });
+
+    it("should update an InputElement component when it is changed", () => {
+      const Form = getForm("professor");
+      const wrapper = mount(Form);
+      wrapper.find(InputElement).find("input").simulate("change", {
+        persist: () => {},
+        target: {
+          name: "name",
+          value: "John Doe"
+        }
+      });
+      const actual = wrapper.find(InputElement).find("input").props().value;
+      const expected = "John Doe";
+      expect(actual).toBe(expected);
+    });
+
+    it("should submit the form and disable the submit button", () => {
+      const Form = getForm("professor");
+      const wrapper = mount(Form);
+      wrapper.find("form").simulate("submit", {
+        preventDefault: () => {}
+      });
+      const actual = wrapper.find(Button).props().disabled;
+      const expected = true;
+      expect(actual).toBe(true);
     });
   });
 
@@ -92,7 +118,7 @@ describe("RateUser container", () => {
       expect(tree).toMatchSnapshot();
     });
 
-    it("should render two `InputElement` components", () => {
+    it("should render two InputElement components", () => {
       const RateUserStudentForm = getForm("student");
       const wrapper = mount(RateUserStudentForm);
       const actual = wrapper.find(InputElement).length;
@@ -100,7 +126,7 @@ describe("RateUser container", () => {
       expect(actual).toBe(expected);
     });
 
-    it("should render two `SmartSelect` components for picking school and major options", () => {
+    it("should render two SmartSelect components for picking school and major options", () => {
       const RateUserStudentForm = getForm("student");
       const wrapper = mount(RateUserStudentForm);
       const schools = wrapper.find(SmartSelect).at(0).props().name === "school";
@@ -110,7 +136,7 @@ describe("RateUser container", () => {
       expect(actual).toBe(expected);
     });
 
-    it("should render two `RatingCategoryInput` components", () => {
+    it("should render two RatingCategoryInput components", () => {
       const RateUserStudentForm = getForm("student");
       const wrapper = mount(RateUserStudentForm);
       const actual = wrapper.find(RatingCategoryInput).length;
@@ -118,7 +144,7 @@ describe("RateUser container", () => {
       expect(actual).toBe(expected);
     });
 
-    it("should render a `Textarea` component with the `name` attribute of `comment`", () => {
+    it("should render a Textarea component with the name attribute of comment", () => {
       const RateUserStudentForm = getForm("student");
       const wrapper = mount(RateUserStudentForm);
       const actual = wrapper.find(Textarea).exists();
@@ -126,12 +152,39 @@ describe("RateUser container", () => {
       expect(actual).toBe(expected);
     });
 
-    it("should render a `RadioInput` component with the `name` attribute of `recommend`", () => {
+    it("should render a RadioInput component with the name attribute of recommend", () => {
       const RateUserStudentForm = getForm("student");
       const wrapper = mount(RateUserStudentForm);
       const actual = wrapper.find(RadioInput).props().name;
       const expected = "recommend";
       expect(actual).toBe(expected);
+    });
+
+    it("should update an InputElement component when it is changed", () => {
+      const Form = getForm("student");
+      const wrapper = mount(Form);
+      wrapper.find(InputElement).at(0).find("input").simulate("change", {
+        persist: () => {},
+        target: {
+          name: "name",
+          value: "John Doe"
+        }
+      });
+      const actual = wrapper.find(InputElement).at(0).find("input").props()
+        .value;
+      const expected = "John Doe";
+      expect(actual).toBe(expected);
+    });
+
+    it("should submit the form and disable the submit button", () => {
+      const Form = getForm("student");
+      const wrapper = mount(Form);
+      wrapper.find("form").simulate("submit", {
+        preventDefault: () => {}
+      });
+      const actual = wrapper.find(Button).props().disabled;
+      const expected = true;
+      expect(actual).toBe(true);
     });
   });
 });

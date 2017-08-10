@@ -820,7 +820,7 @@ exports[`RateUser container StudentForm should render correctly 1`] = `
               onChange={[Function]}
               placeholder="John Doe"
               type="text"
-              value={undefined}
+              value=""
             />
           </div>
         </div>
