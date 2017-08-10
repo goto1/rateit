@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RateUser container ProfessorForm should render correctly 1`] = `
+exports[`RateUser container RateUserProfessorForm should render correctly 1`] = `
 .jwltLt {
   background-color: #369947 !important;
   border-color: #369947 !important;
@@ -638,11 +638,11 @@ exports[`RateUser container ProfessorForm should render correctly 1`] = `
 `;
 
 exports[`RateUser container StudentForm should render correctly 1`] = `
-.dYzSUq {
+.jwltLt {
   background-color: #369947 !important;
   border-color: #369947 !important;
   color: #F1F1F5 !important;
-  opacity: 1;
+  opacity: .65;
   -webkit-text-transform: uppercase;
   text-transform: uppercase;
   -webkit-letter-spacing: .5px;
@@ -1391,8 +1391,8 @@ exports[`RateUser container StudentForm should render correctly 1`] = `
     className="content-block  "
   >
     <button
-      className="button button-big sc-bdVaJa dYzSUq"
-      disabled={false}
+      className="button button-big sc-bdVaJa jwltLt"
+      disabled={true}
       type="submit"
     >
       Submit

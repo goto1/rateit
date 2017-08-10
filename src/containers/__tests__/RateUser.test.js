@@ -1,5 +1,6 @@
 import React from "react";
-import { ProfessorForm, StudentForm } from "../RateUser";
+import RateUserProfessorForm from "../RateUserProfessorForm";
+import RateUserStudentForm from "../RateUserStudentForm";
 import {
   Button,
   InputElement,
@@ -46,28 +47,28 @@ describe("RateUser container", () => {
       ]
     };
     return type === "professor"
-      ? <ProfessorForm {...props} />
-      : <StudentForm {...props} />;
+      ? <RateUserProfessorForm {...props} />
+      : <RateUserStudentForm {...props} />;
   };
 
-  describe("ProfessorForm", () => {
+  describe("RateUserProfessorForm", () => {
     it("should render correctly", () => {
-      const ProfessorForm = getForm("professor");
-      const tree = renderer.create(ProfessorForm).toJSON();
+      const RateUserProfessorForm = getForm("professor");
+      const tree = renderer.create(RateUserProfessorForm).toJSON();
       expect(tree).toMatchSnapshot();
     });
 
     it("should render an `InputElement` with the `name` attribute set to `name`", () => {
-      const ProfessorForm = getForm("professor");
-      const wrapper = mount(ProfessorForm);
+      const RateUserProfessorForm = getForm("professor");
+      const wrapper = mount(RateUserProfessorForm);
       const actual = wrapper.find(InputElement).props().name;
       const expected = "name";
       expect(actual).toBe(expected);
     });
 
     it("should render two `SmartSelect` components with options for school and major information", () => {
-      const ProfessorForm = getForm("professor");
-      const wrapper = mount(ProfessorForm);
+      const RateUserProfessorForm = getForm("professor");
+      const wrapper = mount(RateUserProfessorForm);
       const schools = wrapper.find(SmartSelect).at(0).props().name === "school";
       const majors = wrapper.find(SmartSelect).at(1).props().name === "major";
       const actual = schools && majors;
@@ -76,8 +77,8 @@ describe("RateUser container", () => {
     });
 
     it("should render two `RatingCategoryInput` components", () => {
-      const ProfessorForm = getForm("professor");
-      const wrapper = mount(ProfessorForm);
+      const RateUserProfessorForm = getForm("professor");
+      const wrapper = mount(RateUserProfessorForm);
       const actual = wrapper.find(RatingCategoryInput).length;
       const expected = 2;
       expect(actual).toBe(expected);
@@ -86,22 +87,22 @@ describe("RateUser container", () => {
 
   describe("StudentForm", () => {
     it("should render correctly", () => {
-      const StudentForm = getForm("student");
-      const tree = renderer.create(StudentForm).toJSON();
+      const RateUserStudentForm = getForm("student");
+      const tree = renderer.create(RateUserStudentForm).toJSON();
       expect(tree).toMatchSnapshot();
     });
 
     it("should render two `InputElement` components", () => {
-      const StudentForm = getForm("student");
-      const wrapper = mount(StudentForm);
+      const RateUserStudentForm = getForm("student");
+      const wrapper = mount(RateUserStudentForm);
       const actual = wrapper.find(InputElement).length;
       const expected = 2;
       expect(actual).toBe(expected);
     });
 
     it("should render two `SmartSelect` components for picking school and major options", () => {
-      const StudentForm = getForm("student");
-      const wrapper = mount(StudentForm);
+      const RateUserStudentForm = getForm("student");
+      const wrapper = mount(RateUserStudentForm);
       const schools = wrapper.find(SmartSelect).at(0).props().name === "school";
       const majors = wrapper.find(SmartSelect).at(1).props().name === "major";
       const actual = schools && majors;
@@ -110,24 +111,24 @@ describe("RateUser container", () => {
     });
 
     it("should render two `RatingCategoryInput` components", () => {
-      const StudentForm = getForm("student");
-      const wrapper = mount(StudentForm);
+      const RateUserStudentForm = getForm("student");
+      const wrapper = mount(RateUserStudentForm);
       const actual = wrapper.find(RatingCategoryInput).length;
       const expected = 2;
       expect(actual).toBe(expected);
     });
 
     it("should render a `Textarea` component with the `name` attribute of `comment`", () => {
-      const StudentForm = getForm("student");
-      const wrapper = mount(StudentForm);
+      const RateUserStudentForm = getForm("student");
+      const wrapper = mount(RateUserStudentForm);
       const actual = wrapper.find(Textarea).exists();
       const expected = true;
       expect(actual).toBe(expected);
     });
 
     it("should render a `RadioInput` component with the `name` attribute of `recommend`", () => {
-      const StudentForm = getForm("student");
-      const wrapper = mount(StudentForm);
+      const RateUserStudentForm = getForm("student");
+      const wrapper = mount(RateUserStudentForm);
       const actual = wrapper.find(RadioInput).props().name;
       const expected = "recommend";
       expect(actual).toBe(expected);
