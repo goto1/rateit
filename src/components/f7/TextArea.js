@@ -19,10 +19,11 @@ const StyledItemContent = styled.div.attrs({
 const Textarea = ({
   icon,
   name,
-  placeholder,
-  valid = true,
+  onBlur,
   onChange,
-  onBlur
+  placeholder,
+  valid,
+  value
 }) =>
   <li className="align-top">
     <StyledItemContent>
@@ -33,10 +34,11 @@ const Textarea = ({
       <div className="item-inner">
         <div className="item-input">
           <textarea
-            placeholder={placeholder}
             name={name}
-            onChange={onChange}
             onBlur={onBlur}
+            onChange={onChange}
+            placeholder={placeholder}
+            value={value}
           />
         </div>
       </div>
@@ -46,10 +48,16 @@ const Textarea = ({
 Textarea.propTypes = {
   icon: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
   valid: PropTypes.bool,
-  onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func
+  value: PropTypes.string
+};
+
+Textarea.defaultProps = {
+  valid: false,
+  value: ""
 };
 
 export default Textarea;
