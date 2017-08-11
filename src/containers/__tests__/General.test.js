@@ -1,16 +1,16 @@
 import React from "react";
 import {
-  AccountInfoForm,
-  EmailFormField,
-  PasswordResetFormFields,
-  SchoolInfoFormFields
+  AccountInformation,
+  SchoolInformation,
+  PasswordReset,
+  UserInformation
 } from "../General";
 import { Button, InputElement, SmartSelect } from "../../components/f7";
 import renderer from "react-test-renderer";
 import { mount } from "enzyme";
 
 describe("General container", () => {
-  describe("AccountInfoForm", () => {
+  describe("UserInformation", () => {
     const getForm = props => {
       const newProps = {
         majors: [
@@ -29,37 +29,43 @@ describe("General container", () => {
             abbreviation: "RU"
           }
         ],
-        selectedMajors: ["hvdMFjM", "e2LejDg"],
-        selectedSchools: ["bruHy", "5y7fh"],
+        major: ["hvdMFjM", "e2LejDg"],
+        school: ["bruHy", "5y7fh"],
         ...props
       };
-      return <AccountInfoForm {...newProps} />;
+      return <UserInformation {...newProps} />;
     };
 
     it("should render correctly", () => {
-      const AccountInfoForm = getForm();
-      const tree = renderer.create(AccountInfoForm).toJSON();
+      const Form = getForm();
+      const tree = renderer.create(Form).toJSON();
       expect(tree).toMatchSnapshot();
     });
 
-    it("should render with EmailFormField, SchoolInfoFormFields, and PasswordResetFormFields components", () => {
-      const AccountInfoForm = getForm();
-      const wrapper = mount(AccountInfoForm);
-      const emailFieldFound = wrapper.find(EmailFormField).exists();
-      const schoolFieldsFound = wrapper.find(SchoolInfoFormFields).exists();
-      const passFieldsFound = wrapper.find(PasswordResetFormFields).exists();
-      const actual = emailFieldFound && schoolFieldsFound && passFieldsFound;
+    it("should render AccountInformation, SchoolInformation, and PasswordReset components", () => {
+      const Form = getForm();
+      const wrapper = mount(Form);
+      const accInfoExists = wrapper.find(AccountInformation).exists();
+      const schoolInfoExists = wrapper.find(SchoolInformation).exists();
+      const passResetExists = wrapper.find(PasswordReset).exists();
+      const actual = accInfoExists && schoolInfoExists && passResetExists;
       const expected = true;
       expect(actual).toBe(expected);
     });
 
-    it("should render an InputElement of type `password` with a submit button", () => {
-      const AccountInfoForm = getForm();
-      const wrapper = mount(AccountInfoForm);
-      const inputElementType = wrapper.find(InputElement).at(3).props().type;
-      const submitButtonFound = wrapper.find(Button).exists();
-      const actual = inputElementType === "password" && submitButtonFound;
-      const expected = true;
+    it("should render an InputElement for current password information", () => {
+      const Form = getForm();
+      const wrapper = mount(Form);
+      const actual = wrapper.find(InputElement).at(3).props().name;
+      const expected = "current_password";
+      expect(actual).toBe(expected);
+    });
+
+    it("should render a Button for submitting the form", () => {
+      const Form = getForm();
+      const wrapper = mount(Form);
+      const actual = wrapper.find(Button).props().type;
+      const expected = "submit";
       expect(actual).toBe(expected);
     });
   });

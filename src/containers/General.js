@@ -1,6 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Formik } from "formik";
 import Yup from "yup";
+import { isFormValid } from "../utils/FormUtils";
 import {
   Button,
   ContentBlock,
@@ -14,143 +16,160 @@ import {
   SmartSelect
 } from "../components/f7";
 import { Page } from "framework7-react";
+import * as API from "../utils"; // DELETE WHEN DONE TESTING
 
-// DELETE AFTER TESTING
-import * as API from "../utils";
-
-export const EmailFormField = ({
-  values,
+export const AccountInformation = ({
   errors,
-  touched,
+  handleBlur,
   handleChange,
-  handleBlur
+  touched,
+  values
 }) =>
   <div>
     <ContentBlockTitle>Account information</ContentBlockTitle>
     <List inset>
       <InputElement
         icon="email"
-        type="email"
         name="email"
-        value={values.email}
-        placeholder="example@gmail.com"
-        onChange={handleChange}
         onBlur={handleBlur}
+        onChange={handleChange}
+        placeholder="example@gmail.com"
+        type="email"
         valid={errors.email && touched.email && false}
+        value={values.email}
       />
     </List>
   </div>;
 
-export const SchoolInfoFormFields = ({
+AccountInformation.propTypes = {
+  errors: PropTypes.object,
+  handleBlur: PropTypes.func,
+  handleChange: PropTypes.func,
+  touched: PropTypes.object,
+  values: PropTypes.object
+};
+
+export const SchoolInformation = ({
   handleBlur,
   handleChange,
   handleChangeValue,
   handleMultipleSelect,
   majors,
   schools,
-  selectedMajors,
-  selectedSchools,
   values
 }) =>
   <div>
     <ContentBlockTitle>School information</ContentBlockTitle>
     <ListBlock>
       <SmartSelect
-        name="schools"
-        value={values.schools}
+        name="school"
+        value={values.school}
         options={schools}
-        selected={selectedSchools}
         multiple
         searchbarPlaceholder="Search for a school..."
-        onChange={e => handleMultipleSelect(e, handleChangeValue)}
-        onBlur={handleBlur}
+        onChange={e => {
+          handleMultipleSelect(e, handleChangeValue);
+        }}
       />
       <SmartSelect
-        name="majors"
-        value={values.majors}
+        name="major"
+        value={values.major}
         options={majors}
-        selected={selectedMajors}
         multiple
         searchbarPlaceholder="Search for a major..."
-        onChange={e => handleMultipleSelect(e, handleChangeValue)}
-        onBlur={handleBlur}
+        onChange={e => {
+          handleMultipleSelect(e, handleChangeValue);
+        }}
       />
     </ListBlock>
   </div>;
 
-export const PasswordResetFormFields = ({
-  values,
-  touched,
+SchoolInformation.propTypes = {
+  handleBlur: PropTypes.func,
+  handleChange: PropTypes.func,
+  handleChangeValue: PropTypes.func,
+  handleMultipleSelect: PropTypes.func,
+  majors: PropTypes.array.isRequired,
+  schools: PropTypes.array.isRequired,
+  values: PropTypes.object
+};
+
+export const PasswordReset = ({
   errors,
+  handleBlur,
   handleChange,
-  handleBlur
+  touched,
+  values
 }) =>
   <div>
     <ContentBlockTitle>Password reset</ContentBlockTitle>
     <List inset>
       <InputElement
         icon="lock_outline"
-        type="password"
-        name="new_password"
-        value={values.new_password}
-        placeholder="New Password"
-        onChange={handleChange}
+        name="password"
         onBlur={handleBlur}
-        valid={errors.new_password && touched.new_password && false}
+        onChange={handleChange}
+        placeholder="New Password"
+        type="password"
+        valid={errors.password && touched.password && false}
+        value={values.password}
       />
       <InputElement
         icon="lock_outline"
-        type="password"
-        name="new_password_repeated"
-        value={values.new_password_repeated}
-        placeholder="New Password Repeated"
-        onChange={handleChange}
+        name="password_repeated"
         onBlur={handleBlur}
-        valid={
-          errors.new_password_repeated && touched.new_password_repeated && false
-        }
+        onChange={handleChange}
+        placeholder="New Password Repeated"
+        type="password"
+        valid={errors.password_repeated && touched.password_repeated && false}
+        value={values.password_repeated}
       />
     </List>
   </div>;
 
-export let AccountInfoForm = props => {
+PasswordReset.propTypes = {
+  errors: PropTypes.object,
+  handleBlur: PropTypes.func,
+  handleChange: PropTypes.func,
+  touched: PropTypes.object,
+  values: PropTypes.object
+};
+
+export let UserInformation = props => {
   const {
-    values,
     errors,
-    touched,
-    handleChange,
     handleBlur,
+    handleChange,
     handleSubmit,
-    isSubmitting
+    isSubmitting,
+    touched,
+    values
   } = props;
-  const disableSubmission =
-    isSubmitting ||
-    Object.keys(errors).length !== 0 ||
-    Object.keys(touched).length === 0;
+  const disableSubmission = isFormValid({ isSubmitting, errors, touched });
   return (
     <form onSubmit={handleSubmit}>
-      <EmailFormField {...props} />
-      <SchoolInfoFormFields {...props} />
-      <PasswordResetFormFields {...props} />
+      <AccountInformation {...props} />
+      <SchoolInformation {...props} />
+      <PasswordReset {...props} />
       <List inset>
         <InputElement
           icon="lock"
-          type="password"
           name="current_password"
-          value={values.current_password}
-          placeholder="Your Current Password"
-          onChange={handleChange}
           onBlur={handleBlur}
+          onChange={handleChange}
+          placeholder="Your Current Password"
+          type="password"
           valid={errors.current_password && touched.current_password && false}
+          value={values.current_password}
         />
       </List>
       <ContentBlock>
         <Button
-          type="submit"
+          big
           color="green"
           disabled={disableSubmission}
-          big
           fill
+          type="submit"
         >
           Submit Changes
         </Button>
@@ -159,27 +178,41 @@ export let AccountInfoForm = props => {
   );
 };
 
-AccountInfoForm = Formik({
+UserInformation.propTypes = {
+  errors: PropTypes.object,
+  handleBlur: PropTypes.func,
+  handleChange: PropTypes.func,
+  handleChangeValue: PropTypes.func,
+  handleMultipleSelect: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  isSubmitting: PropTypes.bool,
+  majors: PropTypes.array,
+  schools: PropTypes.array,
+  touched: PropTypes.object,
+  values: PropTypes.object
+};
+
+UserInformation = Formik({
   mapPropsToValues: props => ({
     email: "",
-    schools: props.selectedSchools,
-    majors: props.selectedMajors,
-    new_password: "",
-    new_password_repeated: "",
+    school: props.school,
+    major: props.major,
+    password: "",
+    password_repeated: "",
     current_password: ""
   }),
   validationSchema: Yup.object().shape({
     email: Yup.string().email(),
-    schools: Yup.array(),
-    majors: Yup.array(),
-    new_password: Yup.string(),
-    new_password_repeated: Yup.string(),
+    school: Yup.array(),
+    major: Yup.array(),
+    password: Yup.string(),
+    password_repeated: Yup.string(),
     current_password: Yup.string().required()
   }),
   handleSubmit: (values, { props, setErrors, setSubmitting }) => {
     console.log(values);
   }
-})(AccountInfoForm);
+})(UserInformation);
 
 class General extends React.Component {
   fetchUserInfo = () => {
@@ -190,8 +223,8 @@ class General extends React.Component {
     const t1 = currUser.schools.map(school => school.id);
     this.schools = allSchools.filter(school => t1.includes(school.id));
 
-    this.selectedSchools = this.schools.map(school => school.id);
-    this.selectedMajors = currUser.majors.map(major => major.id);
+    this.school = this.schools.map(school => school.id);
+    this.major = currUser.majors.map(major => major.id);
   };
 
   handleMultipleSelect = (e, handleChange) => {
@@ -207,8 +240,8 @@ class General extends React.Component {
       handleMultipleSelect: this.handleMultipleSelect,
       majors: this.allMajors,
       schools: this.schools,
-      selectedMajors: this.selectedMajors,
-      selectedSchools: this.selectedSchools
+      school: this.school,
+      major: this.major
     };
     return (
       <Page>
@@ -216,7 +249,7 @@ class General extends React.Component {
           <NavLeft backLink="Back" sliding />
           <NavCenter sliding>General</NavCenter>
         </Navbar>
-        <AccountInfoForm {...formProps} />
+        <UserInformation {...formProps} />
       </Page>
     );
   }
