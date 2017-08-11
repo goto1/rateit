@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Icon from "./Icon";
 import capitalize from "lodash/capitalize";
 
-const LabelTitleWrapper = styled.div.attrs({
+export const LabelTitleWrapper = styled.div.attrs({
   className: "item-title label"
 })`
   flex-grow: 1;
@@ -17,8 +17,9 @@ const ItemInputWrapper = styled.div.attrs({
   width: auto !important;
 `;
 
-const RadioInput = ({ icon, name, onChange, className }) => {
+const RadioInput = ({ className, icon, name, onBlur, onChange, value }) => {
   const classNames = `item-content ${className ? className : ""}`.trim();
+  const title = capitalize(name);
   return (
     <div className={classNames}>
       <div className="item-media">
@@ -26,14 +27,16 @@ const RadioInput = ({ icon, name, onChange, className }) => {
       </div>
       <div className="item-inner">
         <LabelTitleWrapper>
-          {capitalize(name)}
+          {title}
         </LabelTitleWrapper>
         <ItemInputWrapper>
           <label className="label-switch">
             <input
-              type="checkbox"
               name={name.toLowerCase()}
+              onBlur={onBlur}
               onChange={onChange}
+              type="checkbox"
+              value={value}
             />
             <div className="checkbox" />
           </label>
@@ -44,10 +47,12 @@ const RadioInput = ({ icon, name, onChange, className }) => {
 };
 
 RadioInput.propTypes = {
+  className: PropTypes.string,
   icon: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  onBlur: PropTypes.func,
   onChange: PropTypes.func.isRequired,
-  className: PropTypes.string
+  value: PropTypes.bool
 };
 
 export default RadioInput;
