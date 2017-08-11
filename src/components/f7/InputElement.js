@@ -30,11 +30,11 @@ const InputElement = props => {
   const inputAttrs = pick(props, [
     "id",
     "name",
-    "type",
-    "value",
-    "placeholder",
+    "onBlur",
     "onChange",
-    "onBlur"
+    "placeholder",
+    "type",
+    "value"
   ]);
   return (
     <Container>
@@ -51,14 +51,14 @@ const InputElement = props => {
 
 InputElement.propTypes = {
   icon: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
   id: PropTypes.string,
-  placeholder: PropTypes.string,
-  value: PropTypes.string,
-  valid: PropTypes.bool,
+  name: PropTypes.string.isRequired,
+  onBlur: PropTypes.func,
   onChange: PropTypes.func,
-  onBlur: PropTypes.func
+  placeholder: PropTypes.string,
+  type: PropTypes.string.isRequired,
+  valid: PropTypes.bool,
+  value: PropTypes.string
 };
 
 InputElement.defaultProps = {

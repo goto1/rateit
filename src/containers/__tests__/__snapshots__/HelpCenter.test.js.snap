@@ -31,6 +31,13 @@ exports[`HelpCenter container should render correctly 1`] = `
   position: relative;
 }
 
+.dgftDG {
+  position: absolute !important;
+  color: red;
+  top: 35%;
+  right: 5px;
+}
+
 .irilpd {
   position: relative;
 }
@@ -106,6 +113,11 @@ exports[`HelpCenter container should render correctly 1`] = `
           <div
             className="sc-gZMcBi item-content irilpd"
           >
+            <i
+              className="material-icons icon sc-iwsKbI dgftDG"
+            >
+              warning
+            </i>
             <div
               className="item-media"
             >
@@ -126,6 +138,7 @@ exports[`HelpCenter container should render correctly 1`] = `
                   onBlur={[Function]}
                   onChange={[Function]}
                   placeholder="Your message here..."
+                  value=""
                 />
               </div>
             </div>

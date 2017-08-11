@@ -680,6 +680,13 @@ exports[`RateUser container StudentForm should render correctly 1`] = `
   width: auto !important;
 }
 
+.dgftDG {
+  position: absolute !important;
+  color: red;
+  top: 35%;
+  right: 5px;
+}
+
 .irilpd {
   position: relative;
 }
@@ -1321,6 +1328,11 @@ exports[`RateUser container StudentForm should render correctly 1`] = `
           <div
             className="sc-gZMcBi item-content irilpd"
           >
+            <i
+              className="material-icons icon sc-iwsKbI dgftDG"
+            >
+              warning
+            </i>
             <div
               className="item-media"
             >
@@ -1341,6 +1353,7 @@ exports[`RateUser container StudentForm should render correctly 1`] = `
                   onBlur={[Function]}
                   onChange={[Function]}
                   placeholder="Your comment here..."
+                  value=""
                 />
               </div>
             </div>
@@ -1374,8 +1387,10 @@ exports[`RateUser container StudentForm should render correctly 1`] = `
               >
                 <input
                   name="recommend"
+                  onBlur={undefined}
                   onChange={[Function]}
                   type="checkbox"
+                  value={undefined}
                 />
                 <div
                   className="checkbox"
