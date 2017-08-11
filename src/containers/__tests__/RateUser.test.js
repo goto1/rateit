@@ -107,7 +107,7 @@ describe("RateUser container", () => {
       });
       const actual = wrapper.find(Button).props().disabled;
       const expected = true;
-      expect(actual).toBe(true);
+      expect(actual).toBe(expected);
     });
   });
 

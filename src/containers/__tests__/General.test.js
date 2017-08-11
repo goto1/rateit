@@ -11,7 +11,7 @@ import { mount } from "enzyme";
 
 describe("General container", () => {
   describe("UserInformation", () => {
-    const getForm = props => {
+    const getUserInfoComponent = props => {
       const newProps = {
         majors: [
           { id: "hvdMFjM", name: "Computer Science", abbreviation: "CS" },
@@ -37,14 +37,14 @@ describe("General container", () => {
     };
 
     it("should render correctly", () => {
-      const Form = getForm();
-      const tree = renderer.create(Form).toJSON();
+      const UserInformation = getUserInfoComponent();
+      const tree = renderer.create(UserInformation).toJSON();
       expect(tree).toMatchSnapshot();
     });
 
     it("should render AccountInformation, SchoolInformation, and PasswordReset components", () => {
-      const Form = getForm();
-      const wrapper = mount(Form);
+      const UserInformation = getUserInfoComponent();
+      const wrapper = mount(UserInformation);
       const accInfoExists = wrapper.find(AccountInformation).exists();
       const schoolInfoExists = wrapper.find(SchoolInformation).exists();
       const passResetExists = wrapper.find(PasswordReset).exists();
@@ -54,18 +54,29 @@ describe("General container", () => {
     });
 
     it("should render an InputElement for current password information", () => {
-      const Form = getForm();
-      const wrapper = mount(Form);
+      const UserInformation = getUserInfoComponent();
+      const wrapper = mount(UserInformation);
       const actual = wrapper.find(InputElement).at(3).props().name;
       const expected = "current_password";
       expect(actual).toBe(expected);
     });
 
     it("should render a Button for submitting the form", () => {
-      const Form = getForm();
-      const wrapper = mount(Form);
+      const UserInformation = getUserInfoComponent();
+      const wrapper = mount(UserInformation);
       const actual = wrapper.find(Button).props().type;
       const expected = "submit";
+      expect(actual).toBe(expected);
+    });
+
+    it("should disable the submit button when form is submitted", () => {
+      const UserInformation = getUserInfoComponent();
+      const wrapper = mount(UserInformation);
+      wrapper.find("form").simulate("submit", {
+        preventDefault: () => {}
+      });
+      const actual = wrapper.find(Button).props().disabled;
+      const expected = true;
       expect(actual).toBe(expected);
     });
   });
