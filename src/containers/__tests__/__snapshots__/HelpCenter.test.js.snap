@@ -1,6 +1,129 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HelpCenter container should render correctly 1`] = `
+exports[`HelpCenter container ContactForm should render correctly 1`] = `
+.jwltLt {
+  background-color: #369947 !important;
+  border-color: #369947 !important;
+  color: #F1F1F5 !important;
+  opacity: .65;
+  -webkit-text-transform: uppercase;
+  text-transform: uppercase;
+  -webkit-letter-spacing: .5px;
+  -moz-letter-spacing: .5px;
+  -ms-letter-spacing: .5px;
+  letter-spacing: .5px;
+  width: 100%;
+}
+
+.fYkctb {
+  margin-left: 15px;
+}
+
+.fYkctb input {
+  color: black;
+}
+
+.bqyzQp {
+  position: relative;
+}
+
+.dgftDG {
+  position: absolute !important;
+  color: red;
+  top: 35%;
+  right: 5px;
+}
+
+.irilpd {
+  position: relative;
+}
+
+<form
+  onSubmit={[Function]}
+>
+  <div
+    className="list-block inset"
+  >
+    <ul>
+      <div
+        className="sc-ifAKCX item-content bqyzQp"
+      >
+        <div
+          className="item-media"
+        >
+          <i
+            className="material-icons icon"
+          >
+            info
+          </i>
+        </div>
+        <div
+          className="item-input sc-htpNat fYkctb"
+        >
+          <input
+            name="title"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder="Title..."
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <li
+        className="align-top"
+      >
+        <div
+          className="sc-gZMcBi item-content irilpd"
+        >
+          <i
+            className="material-icons icon sc-iwsKbI dgftDG"
+          >
+            warning
+          </i>
+          <div
+            className="item-media"
+          >
+            <i
+              className="material-icons icon"
+            >
+              comment
+            </i>
+          </div>
+          <div
+            className="item-inner"
+          >
+            <div
+              className="item-input"
+            >
+              <textarea
+                name="message"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Your message here..."
+                value=""
+              />
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div
+    className="content-block  "
+  >
+    <button
+      className="button button-big sc-bdVaJa jwltLt"
+      disabled={true}
+      type="submit"
+    >
+      Submit
+    </button>
+  </div>
+</form>
+`;
+
+exports[`HelpCenter container Content should render correctly 1`] = `
 .jwltLt {
   background-color: #369947 !important;
   border-color: #369947 !important;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Formik } from "formik";
 import Yup from "yup";
 import { isSubmissionDisabled } from "../utils/FormUtils";
@@ -65,6 +66,16 @@ export let ContactForm = ({
       </ContentBlock>
     </form>
   );
+};
+
+ContactForm.propTypes = {
+  errors: PropTypes.object,
+  handleBlur: PropTypes.func,
+  handleChange: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  isSubmitting: PropTypes.bool,
+  touched: PropTypes.object,
+  values: PropTypes.object
 };
 
 ContactForm = Formik({
