@@ -4,7 +4,7 @@ import RatingCategoryInput from "../components/RatingCategoryInput";
 import { FormSection, StyledContentBlock } from "./RateUser";
 import { Formik } from "formik";
 import Yup from "yup";
-import { isFormValid } from "../utils/FormUtils";
+import { isSubmissionDisabled } from "../utils/FormUtils";
 import {
   Button,
   ContentBlock,
@@ -26,7 +26,11 @@ let RateUserProfessorForm = ({
   touched,
   values
 }) => {
-  const disableSubmission = isFormValid({ isSubmitting, errors, touched });
+  const disableSubmission = isSubmissionDisabled({
+    isSubmitting,
+    errors,
+    touched
+  });
   const validForm = Object.keys(errors).length === 0;
   return (
     <form onSubmit={handleSubmit}>

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Formik } from "formik";
 import Yup from "yup";
-import { isFormValid } from "../utils/FormUtils";
+import { isSubmissionDisabled } from "../utils/FormUtils";
 import {
   Button,
   ContentBlock,
@@ -145,7 +145,11 @@ export let UserInformation = props => {
     touched,
     values
   } = props;
-  const disableSubmission = isFormValid({ isSubmitting, errors, touched });
+  const disableSubmission = isSubmissionDisabled({
+    isSubmitting,
+    errors,
+    touched
+  });
   return (
     <form onSubmit={handleSubmit}>
       <AccountInformation {...props} />

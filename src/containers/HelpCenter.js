@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik } from "formik";
 import Yup from "yup";
+import { isSubmissionDisabled } from "../utils/FormUtils";
 import {
   Button,
   ContentBlock,
@@ -23,10 +24,11 @@ export let ContactForm = ({
   touched,
   values
 }) => {
-  const disableSubmission =
-    isSubmitting ||
-    Object.keys(errors).length !== 0 ||
-    Object.keys(touched).length === 0;
+  const disableSubmission = isSubmissionDisabled({
+    isSubmitting,
+    errors,
+    touched
+  });
   return (
     <form onSubmit={handleSubmit}>
       <List inset>
