@@ -14,6 +14,17 @@ export const getMajors = () => majors;
 
 export const getRatingCategories = () => ratingCategories;
 
+export const getUserDetailsPromisified = userId =>
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (!userId) {
+        reject("UserID is required");
+      } else {
+        resolve(getUserDetails(userId));
+      }
+    }, 1000);
+  });
+
 export const getUserDetails = userId => {
   const user = users.find(user => user.id === userId);
   const clone = { ...user };
