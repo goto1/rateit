@@ -27,6 +27,14 @@ describe("Icon component", () => {
     expect(actual).toBe(expected);
   });
 
+  it("should render with a `custom` styling class", () => {
+    const Icon = getIcon();
+    const wrapper = shallow(Icon);
+    const actual = wrapper.props().className.includes("custom");
+    const expected = true;
+    expect(actual).toBe(expected);
+  });
+
   it("should call `onClick` when the icon is clicked", () => {
     const Icon = getIcon();
     const wrapper = shallow(Icon);
