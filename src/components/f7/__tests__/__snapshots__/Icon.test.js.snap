@@ -1,10 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Icon component renders correctly 1`] = `
+exports[`Icon component should render correctly 1`] = `
 
 
 <i
-  className="material-icons icon"
+  className="material-icons icon custom"
+  onClick={[Function]}
 >
   thumbs_down
 </i>

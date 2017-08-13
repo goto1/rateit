@@ -2,24 +2,37 @@ import React from "react";
 import Icon from "../Icon";
 import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
-import "jest-enzyme";
 
 describe("Icon component", () => {
-  const iconName = "thumbs_down";
+  const getIcon = props => {
+    const newProps = {
+      material: "thumbs_down",
+      className: "custom",
+      onClick: jest.fn()
+    };
+    return <Icon {...newProps} />;
+  };
 
-  it("renders correctly", () => {
-    const tree = renderer.create(<Icon material={iconName} />).toJSON();
+  it("should render correctly", () => {
+    const Icon = getIcon();
+    const tree = renderer.create(Icon).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it("renders with custom `className` property", () => {
-    const className = "customStyles";
-    const wrapper = shallow(<Icon material={iconName} className={className} />);
-    expect(wrapper).toHaveClassName(className);
+  it("should render a `thumbs_down` icon", () => {
+    const Icon = getIcon();
+    const wrapper = shallow(Icon);
+    const actual = wrapper.props().children;
+    const expected = "thumbs_down";
+    expect(actual).toBe(expected);
   });
 
-  it("renders name of the icon", () => {
-    const wrapper = shallow(<Icon material={iconName} />);
-    expect(wrapper).toHaveText(iconName);
+  it("should call `onClick` when the icon is clicked", () => {
+    const Icon = getIcon();
+    const wrapper = shallow(Icon);
+    wrapper.simulate("click");
+    const actual = wrapper.props().onClick.mock.calls.length;
+    const expected = 1;
+    expect(actual).toBe(expected);
   });
 });
