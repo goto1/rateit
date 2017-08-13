@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const Wrapper = styled.span`
-  width: ${props => (props.size === "big" ? "44" : "22")}px;
-  height: ${props => (props.size === "big" ? "44" : "22")}px;
+  width: ${props => (props.size === "big" ? "44" : "22")}px !important;
+  height: ${props => (props.size === "big" ? "44" : "22")}px !important;
 `;
 
 const Preloader = ({ className, size }) => {

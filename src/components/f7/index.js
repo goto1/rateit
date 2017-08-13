@@ -16,6 +16,7 @@ import List from "./List";
 import ListBlock from "./ListBlock";
 import ListItem from "./ListItem";
 import Navbar, { NavLeft, NavCenter, NavRight } from "./Navbar";
+import Preloader from "./Preloader";
 import RadioInput from "./RadioInput";
 import SmartSelect from "./SmartSelect";
 import Tabs from "./Tabs";
@@ -46,6 +47,7 @@ export {
   NavLeft,
   NavRight,
   Navbar,
+  Preloader,
   RadioInput,
   SmartSelect,
   Tabs,
