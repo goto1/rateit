@@ -27,14 +27,14 @@ exports[`HelpCenter container ContactForm should render correctly 1`] = `
   position: relative;
 }
 
-.dgftDG {
+.icSudh {
   position: absolute !important;
   color: red;
   top: 35%;
   right: 5px;
 }
 
-.irilpd {
+.giWxzf {
   position: relative;
 }
 
@@ -74,10 +74,10 @@ exports[`HelpCenter container ContactForm should render correctly 1`] = `
         className="align-top"
       >
         <div
-          className="sc-gZMcBi item-content irilpd"
+          className="sc-gqjmRU item-content giWxzf"
         >
           <i
-            className="material-icons icon sc-iwsKbI dgftDG"
+            className="material-icons icon sc-gZMcBi icSudh"
           >
             warning
           </i>
@@ -154,14 +154,14 @@ exports[`HelpCenter container Content should render correctly 1`] = `
   position: relative;
 }
 
-.dgftDG {
+.icSudh {
   position: absolute !important;
   color: red;
   top: 35%;
   right: 5px;
 }
 
-.irilpd {
+.giWxzf {
   position: relative;
 }
 
@@ -234,10 +234,10 @@ exports[`HelpCenter container Content should render correctly 1`] = `
           className="align-top"
         >
           <div
-            className="sc-gZMcBi item-content irilpd"
+            className="sc-gqjmRU item-content giWxzf"
           >
             <i
-              className="material-icons icon sc-iwsKbI dgftDG"
+              className="material-icons icon sc-gZMcBi icSudh"
             >
               warning
             </i>
