@@ -5,13 +5,34 @@ import get from "lodash/get";
 const getMainPath = newPath =>
   ["/", "/bookmarks/", "/settings/"].includes(newPath);
 
+const extractComponentName = displayName => {
+  if (displayName.length < 0) {
+    return;
+  }
+
+  return displayName.slice(
+    displayName.indexOf("(") + 1,
+    displayName.length - 1
+  );
+};
+
+const getComponentName = (route, path) => {
+  const name = get(route, `${path}.displayName`, null);
+
+  const test = name
+    ? extractComponentName(name)
+    : get(route, `${path}.name`, null);
+
+  return name ? extractComponentName(name) : get(route, `${path}.name`, null);
+};
+
 export const handleRouteChange = (event, currState) => {
   const { params, route, path, url } = event;
   const mainPath = getMainPath(path) ? path : currState.mainPath;
-  const query = JSON.stringify(event.query);
+  const query = Object.keys(event.query)[0].length !== 0 ? event.query : {};
   const userId = params.id || null;
-  const currentComponent = get(route, "component.name", null);
-  const currentTab = get(route, "tab.component.name", null);
+  const currentComponent = getComponentName(route, "component");
+  const currentTab = getComponentName(route, "tab.component");
 
   return omitBy(
     {
