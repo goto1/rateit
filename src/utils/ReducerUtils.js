@@ -2,10 +2,13 @@ import omitBy from "lodash/omitBy";
 import isNil from "lodash/isNil";
 import get from "lodash/get";
 
-const getMainPath = newPath =>
+export const isMainPath = newPath =>
   ["/", "/bookmarks/", "/settings/"].includes(newPath);
 
-const extractComponentName = displayName => {
+export const getMainPath = newPath =>
+  ["/", "/bookmarks/", "/settings/"].includes(newPath);
+
+export const extractComponentName = displayName => {
   if (displayName.length < 0) {
     return;
   }
@@ -16,7 +19,7 @@ const extractComponentName = displayName => {
   );
 };
 
-const getComponentName = (route, path) => {
+export const getComponentName = (route, path) => {
   const name = get(route, `${path}.displayName`, null);
 
   const test = name
