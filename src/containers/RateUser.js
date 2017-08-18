@@ -69,7 +69,7 @@ class RateUser extends React.Component {
 
   render() {
     this.fetchUserInfo();
-    const userType = JSON.parse(this.props.currentRoute.query).type;
+    const userType = this.props.currentRoute.query.type;
     const pFormProps = {
       handleSelectChange: this.handleSelectChange,
       majors: this.allMajors,
