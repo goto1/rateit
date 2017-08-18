@@ -1,11 +1,23 @@
 import { combineReducers } from "redux";
 import * as ActionTypes from "../constants/ActionTypes";
-import { handleRouteChange } from "../utils/ReducerUtils";
+import { isMainPath } from "../utils/ReducerUtils";
 
-const currentRoute = (state = { path: "/", mainPath: "/" }, action) => {
+const currentRoute = (
+  state = {
+    path: "/",
+    mainPath: "/"
+  },
+  action
+) => {
   switch (action.type) {
     case ActionTypes.ROUTE_CHANGE:
-      return handleRouteChange(action.event, state);
+      return {
+        ...state,
+        ...action.route,
+        mainPath: isMainPath(action.route.path)
+          ? action.route.path
+          : state.mainPath
+      };
     default:
       return state;
   }

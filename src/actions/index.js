@@ -1,9 +1,25 @@
 import * as API from "../utils/API";
 import * as ActionTypes from "../constants/ActionTypes";
+import isNil from "lodash/isNil";
+import omitBy from "lodash/omitBy";
+import { getComponentName } from "../utils/ActionUtils";
+
+const extractRouteInfo = ({ params, path, query, route, url }) =>
+  omitBy(
+    {
+      currentComponent: getComponentName(route, "component"),
+      currentTab: getComponentName(route, "tab.component"),
+      path,
+      query: Object.keys(query)[0].length !== 0 ? query : {},
+      url,
+      userId: params.id || null
+    },
+    isNil
+  );
 
 export const routeChange = event => ({
   type: ActionTypes.ROUTE_CHANGE,
-  event
+  route: extractRouteInfo(event)
 });
 
 export const requestUserInfo = userId => ({
