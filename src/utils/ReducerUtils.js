@@ -18,11 +18,6 @@ export const extractComponentName = displayName => {
 
 export const getComponentName = (route, path) => {
   const name = get(route, `${path}.displayName`, null);
-
-  const test = name
-    ? extractComponentName(name)
-    : get(route, `${path}.name`, null);
-
   return name ? extractComponentName(name) : get(route, `${path}.name`, null);
 };
 
