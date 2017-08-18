@@ -9,8 +9,8 @@ import Search from "./containers/Search";
 import Settings from "./containers/Settings";
 import Terms from "./containers/Terms";
 import UserProfile from "./containers/UserProfile";
-import UserProfileOverviewTab from "./containers/UserProfileOverviewTab";
-import UserProfileRatingsTab from "./containers/UserProfileRatingsTab";
+import UserProfileOverview from "./containers/UserProfileOverview";
+import UserProfileRatings from "./containers/UserProfileRatings";
 
 const routes = [
   {
@@ -60,12 +60,12 @@ const routes = [
       {
         path: "/",
         tabId: "overview",
-        component: UserProfileOverviewTab
+        component: UserProfileOverview
       },
       {
         path: "/ratings/",
         tabId: "ratings",
-        component: UserProfileRatingsTab
+        component: UserProfileRatings
       }
     ]
   }
