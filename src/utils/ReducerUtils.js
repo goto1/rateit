@@ -5,9 +5,6 @@ import get from "lodash/get";
 export const isMainPath = newPath =>
   ["/", "/bookmarks/", "/settings/"].includes(newPath);
 
-export const getMainPath = newPath =>
-  ["/", "/bookmarks/", "/settings/"].includes(newPath);
-
 export const extractComponentName = displayName => {
   if (displayName.length < 0) {
     return;
@@ -31,12 +28,11 @@ export const getComponentName = (route, path) => {
 
 export const handleRouteChange = (event, currState) => {
   const { params, route, path, url } = event;
-  const mainPath = getMainPath(path) ? path : currState.mainPath;
+  const mainPath = isMainPath(path) ? path : currState.mainPath;
   const query = Object.keys(event.query)[0].length !== 0 ? event.query : {};
   const userId = params.id || null;
   const currentComponent = getComponentName(route, "component");
   const currentTab = getComponentName(route, "tab.component");
-
   return omitBy(
     {
       currentComponent,
