@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import { fetchUserInfoIfNeeded } from "../actions";
 import capitalize from "lodash/capitalize";
 import get from "lodash/get";
 import { Preloader } from "../components/f7";
@@ -13,9 +14,6 @@ import {
   Tab,
   Tabs
 } from "framework7-react";
-
-// DELETE WHEN DONE TESTING
-import * as API from "../utils";
 
 // TODO: add a bookmarked button & rate this student button
 
@@ -43,34 +41,41 @@ const ErrorWrapper = styled.div`
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { loading: true, error: false, user: {} };
+    this.state = {
+      userId: ""
+    };
   }
 
   componentDidMount() {
     const userId = get(this.props, "currentRoute.userId", null);
-    API.getUserDetailsPromisified(userId)
-      .then(user => {
-        this.setState((prevState, props) => ({
-          ...prevState,
-          loading: !prevState.loading,
-          user
-        }));
-      })
-      .catch(err => {
-        this.setState((prevState, props) => ({
-          ...prevState,
-          loading: !prevState.loading,
-          error: true
-        }));
-      });
+    const { dispatch } = this.props;
+    this.setState((prevState, props) => {
+      dispatch(fetchUserInfoIfNeeded(userId));
+      return {
+        ...prevState,
+        userId
+      };
+    });
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const { users } = nextProps;
+    const { userId } = nextState;
+    return users.hasOwnProperty(userId);
   }
 
   render() {
-    const { user, loading, error } = this.state;
-    const title = `${capitalize(user.type)} Details`;
+    const { userId } = this.state;
+    const { users } = this.props;
+    const user = users[userId];
+
+    const isFetching = user ? user.isFetching : null;
+    const title = user ? `${capitalize(user.type)} Details` : null;
+
+    const error = false;
     return (
       <Page withSubnavbar>
-        {loading || error
+        {!user || isFetching || error
           ? <Navbar title={title} backLink="Back" sliding />
           : <Navbar title={title} backLink="Back" sliding>
               <Subnavbar sliding>
@@ -88,7 +93,7 @@ class UserProfile extends React.Component {
               </Subnavbar>
             </Navbar>}
 
-        {loading || error
+        {!user || isFetching || error
           ? <PreloaderWrapper>
               <StyledPreloader size="big" />
               {error &&
@@ -105,7 +110,10 @@ class UserProfile extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({ currentRoute: state.currentRoute });
+const mapStateToProps = state => ({
+  currentRoute: state.currentRoute,
+  users: state.users
+});
 
 UserProfile = connect(mapStateToProps)(UserProfile);
 

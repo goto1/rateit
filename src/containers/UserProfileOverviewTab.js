@@ -3,10 +3,14 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import capitalize from "lodash/capitalize";
+import get from "lodash/get";
 import HorizontalRule from "../components/HorizontalRule";
 import NumericRating from "../components/NumericRating";
 import RatingCategoriesList from "../components/RatingCategoriesList";
 import { Icon, Card, CardContent, CardHeader } from "../components/f7";
+
+// DELETE WHEN DONE TESTING
+import * as API from "../utils";
 
 const StyledCard = styled(Card)`
   margin: ${props => (props.margin ? props.margin : "25px 10px")} !important;
@@ -178,26 +182,51 @@ UserAggregateRatings.propTypes = {
   aggregateRatings: PropTypes.array.isRequired
 };
 
-const Overview = ({ currentRoute, users }) => {
-  const user = users[currentRoute.userId];
-  return (
-    <div>
-      <UserInformation {...user} />
-      <UserAggregateRatings {...user} />
-    </div>
-  );
-};
+// DELETE WHEN DONE TESTING
+const user = API.getUserDetails("UArjrbxWHX");
 
-Overview.propTypes = {
-  currentRoute: PropTypes.object.isRequired,
-  users: PropTypes.object.isRequired
-};
+class UserProfileOverview extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: {}
+    };
+  }
 
-const mapStateToProps = state => ({
-  currentRoute: state.currentRoute,
-  users: state.users
-});
+  componentDidMount() {
+    const userId = get(this.props, "currentRoute.userId", null);
+    API.getUserDetailsPromisified(userId).then(user => {
+      this.setState((prevState, props) => ({
+        ...prevState,
+        user
+      }));
+    });
+  }
 
-const UserProfileOverview = connect(mapStateToProps)(Overview);
+  render() {
+    const { user } = this.state;
+    return (
+      <div>
+        {user.length > 1 &&
+          <div>
+            <UserInformation {...user} />
+            <UserAggregateRatings {...user} />
+          </div>}
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => ({ currentRoute: state.currentRoute });
+
+UserProfileOverview = connect(mapStateToProps)(UserProfileOverview);
 
 export default UserProfileOverview;
+
+// const UserProfileOverviewTab = () =>
+//   <div>
+//     <UserInformation {...user} />
+//     <UserAggregateRatings {...user} />
+//   </div>;
+
+// export default UserProfileOverviewTab;

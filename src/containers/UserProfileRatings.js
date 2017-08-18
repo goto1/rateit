@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import HorizontalRule from "../components/HorizontalRule";
 import RatingCategoriesList from "../components/RatingCategoriesList";
@@ -15,9 +16,6 @@ import {
   ContentBlockTitle,
   Icon
 } from "../components/f7";
-
-// DELETE WHEN DONE TESTING
-import * as API from "../utils";
 
 const StyledHeader = styled(CardHeader)`
   div:nth-of-type(1) {
@@ -211,21 +209,29 @@ UserRating.propTypes = {
   recommendUser: PropTypes.bool.isRequired
 };
 
-// DELETE WHEN DONE TESTING
-const user = API.getUserDetails("UArjrbxWHX");
-
-const UserProfileRatingsTab = () => {
-  const numOfRatings = user.userRatings.length;
+const Ratings = ({ currentRoute, users }) => {
+  const user = users[currentRoute.userId];
   const ratings = user.userRatings;
-
   return (
     <div>
       <ContentBlockTitle>
-        {`Showing ${numOfRatings} ratings`}
+        {`Showing ${ratings.length} ratings`}
       </ContentBlockTitle>
       {ratings.map(rating => <UserRating key={rating.id} {...rating} />)}
     </div>
   );
 };
 
-export default UserProfileRatingsTab;
+Ratings.propTypes = {
+  currentRoute: PropTypes.object.isRequired,
+  users: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  currentRoute: state.currentRoute,
+  users: state.users
+});
+
+const UserProfileRatings = connect(mapStateToProps)(Ratings);
+
+export default UserProfileRatings;
