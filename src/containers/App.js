@@ -4,7 +4,7 @@ import styled from "styled-components";
 import MainLayout from "../layouts/MainLayout";
 import Search from "../containers/Search";
 import { connect } from "react-redux";
-import { routeChange } from "../actions";
+import { handleRouteChange } from "../actions";
 import routes from "../routes";
 import {
   Framework7App,
@@ -84,7 +84,7 @@ let Framework7 = ({ onRouteChange, children }) =>
 
 const mapDispatchToProps = dispatch => ({
   onRouteChange: event => {
-    dispatch(routeChange(event));
+    dispatch(handleRouteChange(event));
   }
 });
 

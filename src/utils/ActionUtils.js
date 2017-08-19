@@ -1,5 +1,8 @@
 import get from "lodash/get";
 
+export const isMainPath = newPath =>
+  ["/", "/bookmarks/", "/settings/"].includes(newPath);
+
 export const extractComponentName = displayName => {
   if (displayName.length < 0) {
     return;

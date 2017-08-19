@@ -13,10 +13,7 @@ const currentRoute = (
     case ActionTypes.ROUTE_CHANGE:
       return {
         ...state,
-        ...action.route,
-        mainPath: isMainPath(action.route.path)
-          ? action.route.path
-          : state.mainPath
+        ...action.route
       };
     default:
       return state;

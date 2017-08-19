@@ -2,13 +2,21 @@ import * as API from "../utils/API";
 import * as ActionTypes from "../constants/ActionTypes";
 import isNil from "lodash/isNil";
 import omitBy from "lodash/omitBy";
-import { getComponentName } from "../utils/ActionUtils";
+import { getComponentName, isMainPath } from "../utils/ActionUtils";
 
-const extractRouteInfo = ({ params, path, query, route, url }) =>
-  omitBy(
+export const routeChange = route => ({
+  type: ActionTypes.ROUTE_CHANGE,
+  route
+});
+
+export const handleRouteChange = event => (dispatch, getState) => {
+  const { currentRoute } = getState();
+  const { params, path, query, route, url } = event;
+  const updatedRoute = omitBy(
     {
       currentComponent: getComponentName(route, "component"),
       currentTab: getComponentName(route, "tab.component"),
+      mainPath: isMainPath(route.path) ? route.path : currentRoute.mainPath,
       path,
       query: Object.keys(query)[0].length !== 0 ? query : {},
       url,
@@ -16,11 +24,8 @@ const extractRouteInfo = ({ params, path, query, route, url }) =>
     },
     isNil
   );
-
-export const routeChange = event => ({
-  type: ActionTypes.ROUTE_CHANGE,
-  route: extractRouteInfo(event)
-});
+  return dispatch(routeChange(updatedRoute));
+};
 
 export const requestUserInfo = userId => ({
   type: ActionTypes.REQUEST_USER_INFO,

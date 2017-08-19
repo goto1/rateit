@@ -1,6 +1,24 @@
-import { extractComponentName, getComponentName } from "../ActionUtils";
+import {
+  extractComponentName,
+  getComponentName,
+  isMainPath
+} from "../ActionUtils";
 
 describe("ActionUtils", () => {
+  describe("isMainPath()", () => {
+    it("should return `true` when the string `bookmarks` is in the path", () => {
+      const actual = isMainPath("/bookmarks/");
+      const expected = true;
+      expect(actual).toBe(expected);
+    });
+
+    it("should return `false` when the string `rate` is not in the path", () => {
+      const actual = isMainPath("/rate&type=professor");
+      const expected = false;
+      expect(actual).toBe(expected);
+    });
+  });
+
   describe("extractComponentName()", () => {
     it("should return `Bookmarks` as the component name", () => {
       const actual = extractComponentName("Connect(Bookmarks)");
