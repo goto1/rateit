@@ -80,3 +80,31 @@ export const fetchUser = id =>
       }
     }, 1000);
   });
+
+export const loginUser = credentials =>
+  new Promise((resolve, reject) => {
+    if (!credentials.email) {
+      reject({
+        error: {
+          code: 404,
+          message: "Missing credentials"
+        }
+      });
+    }
+    const user = users.find(user => user.username === credentials.email);
+
+    if (!user) {
+      reject({
+        error: {
+          code: 404,
+          message: "User not found"
+        }
+      });
+    } else {
+      resolve({
+        data: {
+          ...user
+        }
+      });
+    }
+  });
