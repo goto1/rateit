@@ -158,7 +158,8 @@ export const users = [
     userRatings: ['gXv6EmCRJ', 'uZYDYqry3', 'KtFNT4cvT'],
     registered: true,
     password: '5f4dcc3b5aa765d61d8327deb882cf99',
-    username: 'rarn1141@njit.edu'
+    username: 'rarn1141@njit.edu',
+    bookmarks: ['sxlmp3a3BP', 'uIyQLPNkmn', '0fQkCblQRG']
   }, {
     id: 'sxlmp3a3BP',
     name: 'Renee Porter',
@@ -176,6 +177,67 @@ export const users = [
     ],
     userRatings: [],
     registered: false
+  },
+  {
+    id: 'uIyQLPNkmn',
+    name: 'Lionel Ford',
+    type: 'student',
+    schools: ['bruHy', '5y7fh'],
+    majors: ['hvdMFjM', 'e2LejDg'],
+    emails: ['ranr1141@njit.edu', 'rr3n@rutgers.edu'],
+    overallRating: 4.5,
+    aggregateRatings: [
+      { id: 'DRFJY9jd', rating: 3 },
+      { id: 'j84WAR77', rating: 5 },
+      { id: 'wXe02QBg', rating: 4 },
+      { id: 'zoQCOOJO', rating: 2 },
+      { id: 'Gb1tXreK', rating: 3 },
+      { id: 'TrK3zUiV', rating: 3 },
+    ],
+    userRatings: ['gXv6EmCRJ', 'uZYDYqry3', 'KtFNT4cvT'],
+    registered: true,
+    password: '5f4dcc3b5aa765d61d8327deb882cf99',
+    username: 'lif492@rutgers.edu',
+  },
+  {
+    id: 'RpHYttsfy3',
+    name: 'Lionel Ford',
+    type: 'student',
+    schools: ['bruHy', '5y7fh'],
+    majors: ['hvdMFjM', 'e2LejDg'],
+    emails: ['ranr1141@njit.edu', 'rr3n@rutgers.edu'],
+    overallRating: 4.5,
+    aggregateRatings: [
+      { id: 'DRFJY9jd', rating: 3 },
+      { id: 'j84WAR77', rating: 5 },
+      { id: 'wXe02QBg', rating: 4 },
+      { id: 'zoQCOOJO', rating: 2 },
+      { id: 'Gb1tXreK', rating: 3 },
+      { id: 'TrK3zUiV', rating: 3 },
+    ],
+    userRatings: ['gXv6EmCRJ', 'uZYDYqry3', 'KtFNT4cvT'],
+    registered: false,
+  },
+  {
+    id: '0fQkCblQRG',
+    name: 'Joyce Salazar',
+    type: 'student',
+    schools: ['bruHy', '5y7fh'],
+    majors: ['hvdMFjM', 'e2LejDg'],
+    emails: ['ranr1141@njit.edu', 'rr3n@rutgers.edu'],
+    overallRating: 4.5,
+    aggregateRatings: [
+      { id: 'DRFJY9jd', rating: 3 },
+      { id: 'j84WAR77', rating: 5 },
+      { id: 'wXe02QBg', rating: 4 },
+      { id: 'zoQCOOJO', rating: 2 },
+      { id: 'Gb1tXreK', rating: 3 },
+      { id: 'TrK3zUiV', rating: 3 },
+    ],
+    userRatings: ['gXv6EmCRJ', 'uZYDYqry3', 'KtFNT4cvT'],
+    registered: true,
+    password: '5f4dcc3b5aa765d61d8327deb882cf99',
+    username: 'js3189@njit.edu',
   }
 ];
 

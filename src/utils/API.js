@@ -92,6 +92,10 @@ export const loginUser = credentials =>
       });
     }
     const user = users.find(user => user.username === credentials.email);
+    const bookmarked = [...user.bookmarks];
+    const bookmarks = users
+      .filter(user => bookmarked.includes(user.id))
+      .map(user => getUserDetails(user.id));
 
     if (!user) {
       reject({
@@ -103,7 +107,8 @@ export const loginUser = credentials =>
     } else {
       resolve({
         data: {
-          ...user
+          ...user,
+          bookmarks
         }
       });
     }

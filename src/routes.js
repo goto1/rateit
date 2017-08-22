@@ -1,7 +1,4 @@
-import Bookmarks, {
-  SavedProfessors,
-  SavedStudents
-} from "./containers/Bookmarks";
+import Bookmarks, { Professors, Students } from "./containers/Bookmarks";
 import General from "./containers/General";
 import HelpCenter from "./containers/HelpCenter";
 import RateUser from "./containers/RateUser";
@@ -24,12 +21,12 @@ const routes = [
       {
         path: "/",
         tabId: "professors",
-        component: SavedProfessors
+        component: Professors
       },
       {
         path: "/students/",
         tabId: "students",
-        component: SavedStudents
+        component: Students
       }
     ]
   },

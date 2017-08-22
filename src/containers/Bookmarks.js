@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import capitalize from "lodash/capitalize";
 import UserCard from "../components/UserCard";
 import { ContentBlock, ContentBlockTitle } from "../components/f7";
 import {
@@ -11,37 +13,42 @@ import {
   Tab,
   Tabs
 } from "framework7-react";
-import * as API from "../utils/"; // DELETE WHEN DONE TESTING
-
-const allUsers = API.getUsers();
 
 const ContentBlockStyled = styled(ContentBlock)`
   padding: 0 !important;
 `;
 
-export const SavedProfessors = () => {
-  const users = allUsers.map(user => API.getUserDetails(user.id));
-  return (
-    <div>
-      <ContentBlockTitle>Your saved professors</ContentBlockTitle>
-      <ContentBlockStyled>
-        {users.map(user => <UserCard key={user.id} {...user} />)}
-      </ContentBlockStyled>
-    </div>
-  );
-};
+const UserList = userType =>
+  class extends React.Component {
+    renderUsers = () => {
+      const { bookmarks } = this.props.currentUser;
+      return bookmarks
+        .filter(bookmark => bookmark.type === userType)
+        .map(user => <UserCard key={user.id} {...user} />);
+    };
 
-export const SavedStudents = () => {
-  const users = allUsers.map(user => API.getUserDetails(user.id));
-  return (
-    <div>
-      <ContentBlockTitle>Your saved students</ContentBlockTitle>
-      <ContentBlockStyled>
-        {users.map(user => <UserCard key={user.id} {...user} />)}
-      </ContentBlockStyled>
-    </div>
-  );
-};
+    render() {
+      const userList = this.renderUsers();
+      const title = `Your saved ${capitalize(userType)}s`;
+      return (
+        <div>
+          <ContentBlockTitle>
+            {title}
+          </ContentBlockTitle>
+          <ContentBlockStyled>
+            {userList}
+          </ContentBlockStyled>
+        </div>
+      );
+    }
+  };
+
+const mapStateToProps = state => ({
+  currentUser: state.currentUser
+});
+
+export const Professors = connect(mapStateToProps)(UserList("professor"));
+export const Students = connect(mapStateToProps)(UserList("student"));
 
 const Bookmarks = () =>
   <Page withSubnavbar>
