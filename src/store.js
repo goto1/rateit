@@ -12,3 +12,4 @@ if (process.env.NODE_ENV !== "production") {
 const store = createStore(reducer, applyMiddleware(...middleware));
 
 export default store;
+

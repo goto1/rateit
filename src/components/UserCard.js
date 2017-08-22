@@ -36,27 +36,26 @@ const AccordionToggleStyled = styled(AccordionToggle)`
   flex-basis: 100%;
 `;
 
-const Actions = ({ aggregateRatings }) =>
+const StyledLink = styled.a`
+  width: 100%;
+  text-align: right;
+`;
+
+const Actions = ({ aggregateRatings, userId }) =>
   <AccordionItem>
     <Row>
       <AccordionToggleStyled>
-        <Button
-          onClick={() => console.log("quick overview")}
-          textAlign="left"
-          iconMargin="0 0 0 5px"
-        >
+        <Button textAlign="left" iconMargin="0 0 0 5px">
           Quick Overview
           <Icon material="arrow_downward" />
         </Button>
       </AccordionToggleStyled>
-      <Button
-        onClick={() => console.log("see profile")}
-        textAlign="right"
-        iconMargin="0 5px 0 0"
-      >
-        <Icon material="person" />
-        See Profile
-      </Button>
+      <StyledLink href={`/user/${userId}`}>
+        <Button textAlign="right" iconMargin="0 5px 0 0">
+          <Icon material="person" />
+          See Profile
+        </Button>
+      </StyledLink>
     </Row>
     <AccordionContent>
       <RatingCategoriesList
@@ -84,7 +83,7 @@ const UserCard = props =>
         colorOne="#e5e5e5"
         colorTwo="#0b7eff"
       />
-      <Actions aggregateRatings={props.aggregateRatings} />
+      <Actions aggregateRatings={props.aggregateRatings} userId={props.id} />
     </CardContent>
     <CardFooterStyled>
       <Button

@@ -1,21 +1,26 @@
 import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { fetchUserInfoIfNeeded } from "../actions";
+import { fetchUserIfNeeded } from "../actions";
 import capitalize from "lodash/capitalize";
-import get from "lodash/get";
 import { Preloader } from "../components/f7";
 import {
   Page,
   Navbar,
+  NavLeft,
+  NavCenter,
+  Link,
   Subnavbar,
   ButtonsSegmented,
   Button,
   Tab,
-  Tabs
+  Tabs,
+  Icon
 } from "framework7-react";
 
 // TODO: add a bookmarked button & rate this student button
+
+const StyledText = styled.span`margin-left: 7px;`;
 
 const PreloaderWrapper = styled.div`
   height: 96.5%;
@@ -30,54 +35,69 @@ const StyledPreloader = styled(Preloader)`
 `;
 
 const ErrorWrapper = styled.div`
-  margin-top: 15px;
   color: red;
   font-size: 12.5px;
   text-transform: uppercase;
   letter-spacing: 1.25px;
   text-align: center;
+  height: 97%;
+  display: flex;
+  align-items: center;
 `;
 
 class UserProfile extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      userId: ""
-    };
-  }
-
   componentDidMount() {
-    const userId = get(this.props, "currentRoute.userId", null);
-    const { dispatch } = this.props;
-    this.setState((prevState, props) => {
-      dispatch(fetchUserInfoIfNeeded(userId));
-      return {
-        ...prevState,
-        userId
-      };
-    });
+    const { currentRoute, dispatch } = this.props;
+    const userId = currentRoute.userId;
+    dispatch(fetchUserIfNeeded(userId));
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    const { users } = nextProps;
-    const { userId } = nextState;
-    return users.hasOwnProperty(userId);
+    const { users, currentRoute } = nextProps;
+    const userId = currentRoute.userId;
+    return typeof users[userId] !== "undefined";
   }
 
   render() {
-    const { userId } = this.state;
-    const { users } = this.props;
-    const user = users[userId];
+    const { currentRoute, users } = this.props;
+    const user = users[currentRoute.userId];
 
-    const isFetching = user ? user.isFetching : null;
-    const title = user ? `${capitalize(user.type)} Details` : null;
+    const isFetching = user ? user.isFetching : true;
+    const title = user ? `${capitalize(user.type)} Details` : "Details";
+    const mainPath = currentRoute.mainPath;
 
-    const error = false;
+    const error = false; // TODO: handle error case
+
+    if (error) {
+      return (
+        <Page>
+          <ErrorWrapper>Couldn't retrieve user's information</ErrorWrapper>
+        </Page>
+      );
+    }
+
     return (
       <Page withSubnavbar>
-        {!user || isFetching || error
-          ? <Navbar title={title} backLink="Back" sliding />
-          : <Navbar title={title} backLink="Back" sliding>
+        {isFetching
+          ? <Navbar sliding>
+              <NavLeft sliding>
+                <Link href={mainPath}>
+                  <Icon icon="icon-back" /> <StyledText>Back</StyledText>
+                </Link>
+              </NavLeft>
+              <NavCenter sliding>
+                {title}
+              </NavCenter>
+            </Navbar>
+          : <Navbar>
+              <NavLeft sliding>
+                <Link href={mainPath}>
+                  <Icon icon="icon-back" /> <StyledText>Back</StyledText>
+                </Link>
+              </NavLeft>
+              <NavCenter sliding>
+                {title}
+              </NavCenter>
               <Subnavbar sliding>
                 <ButtonsSegmented>
                   <Button routeTabLink="#overview" href={`/user/${user.id}`}>
@@ -93,13 +113,9 @@ class UserProfile extends React.Component {
               </Subnavbar>
             </Navbar>}
 
-        {!user || isFetching || error
+        {isFetching
           ? <PreloaderWrapper>
               <StyledPreloader size="big" />
-              {error &&
-                <ErrorWrapper>
-                  Couldn't retrieve user's information
-                </ErrorWrapper>}
             </PreloaderWrapper>
           : <Tabs>
               <Tab routeTabId="overview" />
