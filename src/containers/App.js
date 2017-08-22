@@ -4,7 +4,7 @@ import styled from "styled-components";
 import MainLayout from "../layouts/MainLayout";
 import Search from "../containers/Search";
 import { connect } from "react-redux";
-import { handleRouteChange } from "../actions";
+import { handleRouteChange, loginUser } from "../actions";
 import routes from "../routes";
 import {
   Framework7App,
@@ -75,16 +75,32 @@ const Views = ({ children }) =>
     </View>
   </div>;
 
-let Framework7 = ({ onRouteChange, children }) =>
-  <Framework7App routes={routes} onRouteChange={onRouteChange}>
-    <Views>
-      {children}
-    </Views>
-  </Framework7App>;
+class Framework7 extends React.Component {
+  componentDidMount() {
+    const { loginUser } = this.props;
+    loginUser({
+      email: "rarn1141@njit.edu"
+    });
+  }
+
+  render() {
+    const { onRouteChange, children } = this.props;
+    return (
+      <Framework7App routes={routes} onRouteChange={onRouteChange}>
+        <Views>
+          {children}
+        </Views>
+      </Framework7App>
+    );
+  }
+}
 
 const mapDispatchToProps = dispatch => ({
   onRouteChange: event => {
     dispatch(handleRouteChange(event));
+  },
+  loginUser: credentials => {
+    dispatch(loginUser(credentials));
   }
 });
 
