@@ -13,16 +13,19 @@ export const receiveUserInfo = (userId, data) => ({
   receivedAt: Date.now()
 });
 
+export const userError = (userId, error) => ({
+  type: ActionTypes.USER_INFO_FAILURE,
+  userId,
+  error
+});
+
 const fetchUser = userId => dispatch => {
   dispatch(requestUserInfo(userId));
 
   return API.fetchUser(userId)
     .then(response => response.data)
     .then(data => dispatch(receiveUserInfo(userId, data)))
-    .catch(err => {
-      // TODO: handle error
-      // dispatch(failedUserInfoRequest(userId, err))
-    });
+    .catch(err => dispatch(userError(userId, err)));
 };
 
 const shouldFetchUserInfo = (state, userId) => {

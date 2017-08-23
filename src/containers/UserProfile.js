@@ -64,9 +64,9 @@ class UserProfile extends React.Component {
 
     const isFetching = user ? user.isFetching : true;
     const title = user ? `${capitalize(user.type)} Details` : "Details";
-    const mainPath = currentRoute.mainPath;
+    const prevPath = currentRoute.prevPath;
 
-    const error = false; // TODO: handle error case
+    const error = user.error || false;
 
     if (error) {
       return (
@@ -81,7 +81,7 @@ class UserProfile extends React.Component {
         {isFetching
           ? <Navbar sliding>
               <NavLeft sliding>
-                <Link href={mainPath}>
+                <Link href={prevPath}>
                   <Icon icon="icon-back" /> <StyledText>Back</StyledText>
                 </Link>
               </NavLeft>
@@ -91,7 +91,7 @@ class UserProfile extends React.Component {
             </Navbar>
           : <Navbar>
               <NavLeft sliding>
-                <Link href={mainPath}>
+                <Link href={prevPath}>
                   <Icon icon="icon-back" /> <StyledText>Back</StyledText>
                 </Link>
               </NavLeft>
