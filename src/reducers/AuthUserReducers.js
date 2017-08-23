@@ -1,9 +1,10 @@
 import * as ActionTypes from "../actions/ActionTypes";
 
-export const auth = (
+export const authUser = (
   state = {
     isFetching: false,
-    isAuthenticated: false
+    isAuthenticated: false,
+    isEditing: false
   },
   action
 ) => {
@@ -35,6 +36,23 @@ export const auth = (
         ...state,
         isFetching: true,
         isAuthenticated: false
+      };
+    case ActionTypes.BOOKMARK_USER_REQUEST:
+      return {
+        ...state,
+        isEditing: true
+      };
+    case ActionTypes.BOOKMARK_USER_SUCCESS:
+      return {
+        ...state,
+        isEditing: false,
+        bookmarks: [...state.bookmarks, action.payload]
+      };
+    case ActionTypes.BOOKMARK_USER_FAILURE:
+      return {
+        ...state,
+        isEditing: false,
+        errorMessage: action.error.message
       };
     default:
       return state;

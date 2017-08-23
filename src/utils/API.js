@@ -113,3 +113,22 @@ export const loginUser = credentials =>
       });
     }
   });
+
+export const bookmarkUser = (currUserId, userId) =>
+  new Promise((resolve, reject) => {
+    if (!userId) {
+      reject({
+        error: {
+          code: 404,
+          message: "Missing credentials"
+        }
+      });
+    } else {
+      const bookmarkedUser = users.find(user => user.id === userId);
+      resolve({
+        data: {
+          ...getUserDetails(userId)
+        }
+      });
+    }
+  });

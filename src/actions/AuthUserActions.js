@@ -1,6 +1,10 @@
 import * as ActionTypes from "./ActionTypes";
 import * as API from "../utils/API";
 
+/**
+ * Authentication Functionality
+ */
+
 export const requestLogin = credentials => ({
   type: ActionTypes.LOGIN_REQUEST,
   credentials
@@ -46,3 +50,40 @@ export const logoutUser = () => dispatch => {
 
 // reference
 // https://auth0.com/blog/secure-your-react-and-redux-app-with-jwt-authentication/
+
+/**
+ * Bookmark Functionality
+ */
+
+export const bookmarkRequest = () => ({
+  type: ActionTypes.BOOKMARK_USER_REQUEST
+});
+
+export const bookmarkSuccess = payload => ({
+  type: ActionTypes.BOOKMARK_USER_SUCCESS,
+  payload
+});
+
+export const bookmarkError = error => ({
+  type: ActionTypes.BOOKMARK_USER_FAILURE,
+  error
+});
+
+const bookmarkUser = (currUserId, userId) => dispatch =>
+  API.bookmarkUser(currUserId, userId)
+    .then(response => response.data)
+    .then(data => dispatch(bookmarkSuccess(data)))
+    .catch(err => dispatch(bookmarkError(err)));
+
+const shouldBookmarkUser = (state, userId) => {
+  const bookmarks = state.currentUser.bookmarks;
+  const shouldBookmark =
+    typeof bookmarks.find(user => user.id === userId) === "undefined";
+  return shouldBookmark;
+};
+
+export const bookmarkUserIfNeeded = userId => (dispatch, getState) => {
+  if (shouldBookmarkUser(getState(), userId)) {
+    return dispatch(bookmarkUser(getState().currentUser.id, userId));
+  }
+};
