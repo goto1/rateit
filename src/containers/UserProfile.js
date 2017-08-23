@@ -18,8 +18,6 @@ import {
   Icon
 } from "framework7-react";
 
-// TODO: add a bookmarked button & rate this student button
-
 const StyledText = styled.span`margin-left: 7px;`;
 
 const PreloaderWrapper = styled.div`
@@ -66,7 +64,7 @@ class UserProfile extends React.Component {
     const title = user ? `${capitalize(user.type)} Details` : "Details";
     const prevPath = currentRoute.prevPath;
 
-    const error = user.error || false;
+    const error = user ? user.error : false;
 
     if (error) {
       return (
