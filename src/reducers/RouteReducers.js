@@ -1,6 +1,6 @@
 import * as ActionTypes from "../actions/ActionTypes";
 
-export const currentRoute = (
+export const routeReducer = (
   state = {
     path: "/",
     mainPath: "/"

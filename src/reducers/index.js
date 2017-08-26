@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
-import { currentRoute } from "./RouteReducers";
-import { usersInfo } from "./UserReducers";
-import { authUser } from "./AuthUserReducers";
+import { routeReducer } from "./RouteReducers";
+import { usersReducer } from "./UserReducers";
+import { authUserReducer } from "./AuthUserReducers";
 
 const rootReducer = combineReducers({
-  currentRoute,
-  users: usersInfo,
-  currentUser: authUser
+  route: routeReducer,
+  users: usersReducer,
+  authUser: authUserReducer
 });
 
 export default rootReducer;

@@ -1,13 +1,17 @@
+import reduceReducers from "reduce-reducers";
 import * as ActionTypes from "../actions/ActionTypes";
 
-export const authUser = (
-  state = {
-    isFetching: false,
-    isAuthenticated: false,
-    isEditing: false
-  },
-  action
-) => {
+const initialState = {
+  isFetching: false,
+  isAuthenticated: false,
+  isEditing: false
+};
+
+/**
+ * USER AUTHENTICATION
+ */
+
+const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.LOGIN_REQUEST:
       return {
@@ -37,18 +41,48 @@ export const authUser = (
         isFetching: true,
         isAuthenticated: false
       };
-    case ActionTypes.BOOKMARK_USER_REQUEST:
+    default:
+      return state;
+  }
+};
+
+/**
+ * USER BOOKMARK FUNCTIONALITY
+ */
+
+const bookmarksReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case ActionTypes.ADD_USER_REQUEST:
       return {
         ...state,
         isEditing: true
       };
-    case ActionTypes.BOOKMARK_USER_SUCCESS:
+    case ActionTypes.ADD_USER_SUCCESS:
       return {
         ...state,
         isEditing: false,
         bookmarks: [...state.bookmarks, action.payload]
       };
-    case ActionTypes.BOOKMARK_USER_FAILURE:
+    case ActionTypes.ADD_USER_FAILURE:
+      return {
+        ...state,
+        isEditing: false,
+        errorMessage: action.error.message
+      };
+    case ActionTypes.REMOVE_USER_REQUEST:
+      return {
+        ...state,
+        isEditing: true
+      };
+    case ActionTypes.REMOVE_USER_SUCCESS:
+      return {
+        ...state,
+        isEditing: false,
+        bookmarks: [...state.bookmarks].filter(
+          bookmark => bookmark.id !== action.payload.id
+        )
+      };
+    case ActionTypes.REMOVE_USER_FAILURE:
       return {
         ...state,
         isEditing: false,
@@ -58,3 +92,5 @@ export const authUser = (
       return state;
   }
 };
+
+export const authUserReducer = reduceReducers(authReducer, bookmarksReducer);
