@@ -13,8 +13,8 @@ export const handleRouteChange = ({ params, path, query, route, url }) => (
   dispatch,
   getState
 ) => {
-  const currentRoute = getState().currentRoute;
-  const prevPath = get(getState(), "currentRoute.path", null);
+  const currentRoute = getState().route;
+  const prevPath = get(getState(), "route.path", null);
   const updatedRoute = omitBy(
     {
       currentComponent: getComponentName(route, "component"),

@@ -1,34 +1,34 @@
 import * as API from "../utils/API";
 import * as ActionTypes from "./ActionTypes";
 
-export const requestUserInfo = userId => ({
-  type: ActionTypes.USER_INFO_REQUEST,
+export const fetchUserRequest = userId => ({
+  type: ActionTypes.FETCH_USER_REQUEST,
   userId
 });
 
-export const receiveUserInfo = (userId, data) => ({
-  type: ActionTypes.USER_INFO_SUCCESS,
+export const fetchUserSuccess = (userId, data) => ({
+  type: ActionTypes.FETCH_USER_SUCCESS,
   userId,
   data,
   receivedAt: Date.now()
 });
 
-export const userError = (userId, error) => ({
-  type: ActionTypes.USER_INFO_FAILURE,
+export const fetchUserFailure = (userId, error) => ({
+  type: ActionTypes.FETCH_USER_FAILURE,
   userId,
   error
 });
 
 const fetchUser = userId => dispatch => {
-  dispatch(requestUserInfo(userId));
+  dispatch(fetchUserRequest(userId));
 
   return API.fetchUser(userId)
     .then(response => response.data)
-    .then(data => dispatch(receiveUserInfo(userId, data)))
-    .catch(err => dispatch(userError(userId, err)));
+    .then(data => dispatch(fetchUserSuccess(userId, data)))
+    .catch(err => dispatch(fetchUserFailure(userId, err)));
 };
 
-const shouldFetchUserInfo = (state, userId) => {
+const shouldFetchUser = (state, userId) => {
   const user = state.users[userId];
   if (!user) {
     return true;
@@ -40,7 +40,7 @@ const shouldFetchUserInfo = (state, userId) => {
 };
 
 export const fetchUserIfNeeded = userId => (dispatch, getState) => {
-  if (shouldFetchUserInfo(getState(), userId)) {
+  if (shouldFetchUser(getState(), userId)) {
     return dispatch(fetchUser(userId));
   }
 };
