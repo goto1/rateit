@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { addUserToBookmarks, removeUserFromBookmarks } from "../actions";
 import styled from "styled-components";
 import capitalize from "lodash/capitalize";
 import HorizontalRule from "../components/HorizontalRule";
@@ -90,7 +91,7 @@ ContentItem.propTypes = {
 // DELETE WHEN DONE TESTING
 const arrStringify = (arr, attr) => {
   let str = null;
-  if (arr.length > 1) {
+  if (arr.length > 0) {
     str = arr.map(item => item[attr]).join(", ");
   } else {
     str = arr[0]["name"];
@@ -111,17 +112,21 @@ const StyledIcon = styled(Icon)`
 `;
 
 const UserInformation = ({
-  bookmarked = false,
+  addUserToBookmarks,
+  removeUserFromBookmarks,
   emails,
+  id,
   majors,
   name,
   overallRating,
   schools,
-  type
+  type,
+  userBookmarks
 }) => {
-  const schoolNames = arrStringify(schools, "abbreviation");
-  const majorNames = arrStringify(majors, "abbreviation");
-  const userEmails = emails.map(email => email).join(", ");
+  const schoolNames = schools ? arrStringify(schools, "abbreviation") : "N/A";
+  const majorNames = majors ? arrStringify(majors, "abbreviation") : "N/A";
+  const userEmails = emails ? emails.map(email => email).join(", ") : "N/A";
+  const bookmarked = userBookmarks.includes(id);
   return (
     <StyledCard>
       <Header title={name}>
@@ -141,8 +146,14 @@ const UserInformation = ({
           {userEmails}
         </ContentItem>
         {bookmarked
-          ? <StyledIcon material="bookmark" />
-          : <StyledIcon material="bookmark_border" />}
+          ? <StyledIcon
+              material="bookmark"
+              onClick={() => removeUserFromBookmarks(id)}
+            />
+          : <StyledIcon
+              material="bookmark_border"
+              onClick={() => addUserToBookmarks(id)}
+            />}
       </Content>
     </StyledCard>
   );
@@ -159,7 +170,7 @@ UserInformation.propTypes = {
 };
 
 const UserAggregateRatings = ({ userRatings, aggregateRatings }) => {
-  const numOfRatings = userRatings.length;
+  const numOfRatings = userRatings ? userRatings.length : 0;
   return (
     <StyledCard margin="10px 10px 40px 10px">
       <Header title={`Based on ${numOfRatings} ratings`} />
@@ -178,26 +189,47 @@ UserAggregateRatings.propTypes = {
   aggregateRatings: PropTypes.array.isRequired
 };
 
-const Overview = ({ currentRoute, users }) => {
-  const user = users[currentRoute.userId];
+const Overview = ({
+  route,
+  users,
+  addUserToBookmarks,
+  removeUserFromBookmarks,
+  userBookmarks
+}) => {
+  const props = {
+    ...users[route.userId],
+    addUserToBookmarks,
+    removeUserFromBookmarks,
+    userBookmarks: userBookmarks.map(user => user.id)
+  };
   return (
     <div>
-      <UserInformation {...user} />
-      <UserAggregateRatings {...user} />
+      <UserInformation {...props} />
+      <UserAggregateRatings {...props} />
     </div>
   );
 };
 
 Overview.propTypes = {
-  currentRoute: PropTypes.object.isRequired,
-  users: PropTypes.object.isRequired
+  route: PropTypes.object.isRequired,
+  userBookmarks: PropTypes.array,
+  users: PropTypes.object.isRequired,
+  addUserToBookmarks: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  currentRoute: state.currentRoute,
+  route: state.route,
+  userBookmarks: state.authUser.bookmarks,
   users: state.users
 });
 
-const UserProfileOverview = connect(mapStateToProps)(Overview);
+const mapDispatchToProps = dispatch => ({
+  addUserToBookmarks: userId => dispatch(addUserToBookmarks(userId)),
+  removeUserFromBookmarks: userId => dispatch(removeUserFromBookmarks(userId))
+});
+
+const UserProfileOverview = connect(mapStateToProps, mapDispatchToProps)(
+  Overview
+);
 
 export default UserProfileOverview;

@@ -69,7 +69,7 @@ class RateUser extends React.Component {
 
   render() {
     this.fetchUserInfo();
-    const userType = this.props.currentRoute.query.type;
+    const userType = this.props.route.query.type;
     const pFormProps = {
       handleSelectChange: this.handleSelectChange,
       majors: this.allMajors,
@@ -96,7 +96,7 @@ class RateUser extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({ currentRoute: state.currentRoute });
+const mapStateToProps = state => ({ route: state.route });
 
 RateUser = connect(mapStateToProps)(RateUser);
 

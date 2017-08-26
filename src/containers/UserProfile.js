@@ -45,24 +45,24 @@ const ErrorWrapper = styled.div`
 
 class UserProfile extends React.Component {
   componentDidMount() {
-    const { currentRoute, dispatch } = this.props;
-    const userId = currentRoute.userId;
+    const { route, dispatch } = this.props;
+    const userId = route.userId;
     dispatch(fetchUserIfNeeded(userId));
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    const { users, currentRoute } = nextProps;
-    const userId = currentRoute.userId;
+    const { users, route } = nextProps;
+    const userId = route.userId;
     return typeof users[userId] !== "undefined";
   }
 
   render() {
-    const { currentRoute, users } = this.props;
-    const user = users[currentRoute.userId];
+    const { route, users } = this.props;
+    const user = users[route.userId];
 
     const isFetching = user ? user.isFetching : true;
     const title = user ? `${capitalize(user.type)} Details` : "Details";
-    const prevPath = currentRoute.prevPath;
+    const prevPath = route.prevPath;
 
     const error = user ? user.error : false;
 
@@ -125,7 +125,7 @@ class UserProfile extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  currentRoute: state.currentRoute,
+  route: state.route,
   users: state.users
 });
 

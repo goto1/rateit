@@ -21,7 +21,7 @@ const ContentBlockStyled = styled(ContentBlock)`
 const UserList = userType =>
   class extends React.Component {
     renderUsers = () => {
-      const { bookmarks } = this.props.currentUser;
+      const { bookmarks } = this.props.authUser;
       return bookmarks
         .filter(bookmark => bookmark.type === userType)
         .map(user => <UserCard key={user.id} {...user} />);
@@ -44,7 +44,7 @@ const UserList = userType =>
   };
 
 const mapStateToProps = state => ({
-  currentUser: state.currentUser
+  authUser: state.authUser
 });
 
 export const Professors = connect(mapStateToProps)(UserList("professor"));

@@ -209,8 +209,8 @@ UserRating.propTypes = {
   recommendUser: PropTypes.bool.isRequired
 };
 
-const Ratings = ({ currentRoute, users }) => {
-  const user = users[currentRoute.userId];
+const Ratings = ({ route, users }) => {
+  const user = users[route.userId];
   const ratings = user.userRatings;
   return (
     <div>
@@ -223,12 +223,12 @@ const Ratings = ({ currentRoute, users }) => {
 };
 
 Ratings.propTypes = {
-  currentRoute: PropTypes.object.isRequired,
+  route: PropTypes.object.isRequired,
   users: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  currentRoute: state.currentRoute,
+  route: state.route,
   users: state.users
 });
 

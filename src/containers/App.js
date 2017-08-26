@@ -27,8 +27,8 @@ const NavigationLinkWrapper = styled.a`
   }
 `;
 
-let NavigationLink = ({ path, icon, currentRoute, children }) => {
-  const active = path === currentRoute.mainPath;
+let NavigationLink = ({ path, icon, route, children }) => {
+  const active = path === route.mainPath;
   const classNames = `link ${active ? "active" : ""}`.trim();
   return (
     <NavigationLinkWrapper href={path} className={classNames}>
@@ -43,11 +43,11 @@ let NavigationLink = ({ path, icon, currentRoute, children }) => {
 NavigationLink.propTypes = {
   path: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
-  currentRoute: PropTypes.object.isRequired,
+  route: PropTypes.object.isRequired,
   children: PropTypes.string.isRequired
 };
 
-const mapStateToProps = state => ({ currentRoute: state.currentRoute });
+const mapStateToProps = state => ({ route: state.route });
 
 NavigationLink = connect(mapStateToProps)(NavigationLink);
 
