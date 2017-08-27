@@ -14,14 +14,12 @@ export const handleRouteChange = ({ params, path, query, route, url }) => (
   getState
 ) => {
   const currentRoute = getState().route;
-  const prevPath = get(getState(), "route.path", null);
   const updatedRoute = omitBy(
     {
       currentComponent: getComponentName(route, "component"),
       currentTab: getComponentName(route, "tab.component"),
       mainPath: isMainPath(route.path) ? route.path : currentRoute.mainPath,
       path,
-      prevPath,
       query: Object.keys(query)[0].length !== 0 ? query : {},
       url,
       userId: params.id || null
