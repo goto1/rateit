@@ -1,6 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import { removeUserFromBookmarks } from "../actions";
 import capitalize from "lodash/capitalize";
 import UserCard from "../components/UserCard";
 import { ContentBlock, ContentBlockTitle } from "../components/f7";
@@ -18,37 +20,79 @@ const ContentBlockStyled = styled(ContentBlock)`
   padding: 0 !important;
 `;
 
-const UserList = userType =>
-  class extends React.Component {
+const StyledText = styled.div`
+  font-size: 16px;
+  padding: 15px;
+  text-align: center;
+  letter-spacing: 1.5px;
+  line-height: 25px;
+  text-transform: uppercase;
+`;
+
+const UserList = type => {
+  class _UserList extends React.Component {
     renderUsers = () => {
-      const { bookmarks } = this.props.authUser;
-      return bookmarks
-        .filter(bookmark => bookmark.type === userType)
-        .map(user => <UserCard key={user.id} {...user} />);
+      const { authUser, removeUserFromBookmarks } = this.props;
+
+      return authUser.bookmarks
+        .filter(bookmark => bookmark.type === type)
+        .map(user =>
+          <UserCard
+            key={user.id}
+            removeUserFromBookmarks={removeUserFromBookmarks}
+            {...user}
+          />
+        );
     };
 
     render() {
       const userList = this.renderUsers();
-      const title = `Your saved ${capitalize(userType)}s`;
+      const userType = `${capitalize(type)}s`;
+      const text =
+        userList.length > 0
+          ? `Your saved ${userType}`
+          : `You do not have any saved ${userType}`;
+
       return (
         <div>
-          <ContentBlockTitle>
-            {title}
-          </ContentBlockTitle>
+          {userList.length > 0 &&
+            <ContentBlockTitle>
+              {text}
+            </ContentBlockTitle>}
           <ContentBlockStyled>
-            {userList}
+            {userList.length > 0
+              ? userList
+              : <StyledText>
+                  {text}
+                </StyledText>}
           </ContentBlockStyled>
         </div>
       );
     }
+  }
+
+  _UserList.propTypes = {
+    authUser: PropTypes.object.isRequired,
+    removeUserFromBookmarks: PropTypes.func.isRequired
   };
+
+  return _UserList;
+};
+
+const mapDispatchToProps = dispatch => ({
+  removeUserFromBookmarks: userId => dispatch(removeUserFromBookmarks(userId))
+});
 
 const mapStateToProps = state => ({
   authUser: state.authUser
 });
 
-export const Professors = connect(mapStateToProps)(UserList("professor"));
-export const Students = connect(mapStateToProps)(UserList("student"));
+export const Professors = connect(mapStateToProps, mapDispatchToProps)(
+  UserList("professor")
+);
+export const Students = connect(mapStateToProps, mapDispatchToProps)(
+  UserList("student")
+);
 
 const Bookmarks = () =>
   <Page withSubnavbar>
