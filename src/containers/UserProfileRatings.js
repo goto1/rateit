@@ -115,23 +115,29 @@ Details.propTypes = {
   individualRatings: PropTypes.array.isRequired
 };
 
-const Content = ({ date, comment, recommendUser, individualRatings }) =>
-  <CardContent>
-    <DatePosted>
-      {date}
-    </DatePosted>
-    <Comment>
-      {comment}
-    </Comment>
-    <Recommendation recommendUser={recommendUser} />
-    <HorizontalRule
-      margin="1px auto"
-      width="90%"
-      colorOne="#e5e5e5"
-      colorTwo="#0b7eff"
-    />
-    <Details individualRatings={individualRatings} />
-  </CardContent>;
+const Content = ({ date, comment, recommendUser, individualRatings }) => {
+  const postedOn = new Date(+date);
+  const parsedDate = `${postedOn.getMonth()}/${postedOn.getMonth()}/${postedOn.getFullYear()}`;
+
+  return (
+    <CardContent>
+      <DatePosted>
+        {parsedDate}
+      </DatePosted>
+      <Comment>
+        {comment}
+      </Comment>
+      <Recommendation recommendUser={recommendUser} />
+      <HorizontalRule
+        margin="1px auto"
+        width="90%"
+        colorOne="#e5e5e5"
+        colorTwo="#0b7eff"
+      />
+      <Details individualRatings={individualRatings} />
+    </CardContent>
+  );
+};
 
 Content.propTypes = {
   date: PropTypes.string.isRequired,
