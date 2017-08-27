@@ -73,30 +73,34 @@ const CardFooterStyled = styled(CardFooter)`
   flex-direction: row-reverse;
 `;
 
-const UserCard = props =>
-  <Card>
-    <CardContent>
-      <UserItemContents {...props} />
-      <HorizontalRule
-        margin="6px auto"
-        width="90%"
-        colorOne="#e5e5e5"
-        colorTwo="#0b7eff"
-      />
-      <Actions aggregateRatings={props.aggregateRatings} userId={props.id} />
-    </CardContent>
-    <CardFooterStyled>
-      <Button
-        onClick={() => console.log("toggle bookmarked")}
-        textAlign="right"
-        iconMargin="0 0 0 7.5px"
-        flexBasis="75px"
-      >
-        Saved
-        <Icon material="bookmark" />
-      </Button>
-    </CardFooterStyled>
-  </Card>;
+const UserCard = props => {
+  const { id, aggregateRatings, removeUserFromBookmarks } = props;
+  return (
+    <Card>
+      <CardContent>
+        <UserItemContents {...props} />
+        <HorizontalRule
+          margin="6px auto"
+          width="90%"
+          colorOne="#e5e5e5"
+          colorTwo="#0b7eff"
+        />
+        <Actions aggregateRatings={aggregateRatings} userId={id} />
+      </CardContent>
+      <CardFooterStyled>
+        <Button
+          onClick={() => removeUserFromBookmarks(id)}
+          textAlign="right"
+          iconMargin="0 0 0 7.5px"
+          flexBasis="75px"
+        >
+          Saved
+          <Icon material="bookmark" />
+        </Button>
+      </CardFooterStyled>
+    </Card>
+  );
+};
 
 UserCard.propTypes = {
   id: PropTypes.string.isRequired,
@@ -105,7 +109,8 @@ UserCard.propTypes = {
   schools: PropTypes.array.isRequired,
   overallRating: PropTypes.number.isRequired,
   userRatings: PropTypes.array.isRequired,
-  aggregateRatings: PropTypes.array.isRequired
+  aggregateRatings: PropTypes.array.isRequired,
+  removeUserFromBookmarks: PropTypes.func.isRequired
 };
 
 export default UserCard;
