@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { fetchUserIfNeeded, logoutUser } from "../actions/";
 import {
   ContentBlockTitle,
   ListItem,
@@ -7,9 +9,6 @@ import {
   NavCenter
 } from "../components/f7";
 import { Page } from "framework7-react";
-
-// DELETE WHEN DONE TESTING
-import * as API from "../utils";
 
 const AccountSettings = () =>
   <div>
@@ -34,28 +33,36 @@ const HelpAndSupport = () =>
     </List>
   </div>;
 
-const user = API.getUserDetails("UArjrbxWHX");
-
-const UserSettings = () =>
+const UserSettings = ({ user, logout }) =>
   <div>
     <List inset>
-      <ListItem icon="sentiment_very_satisfied" url={`/profile/${user.id}`}>
+      <ListItem icon="sentiment_very_satisfied" url={`/user/${user.id}`}>
         Profile Page
       </ListItem>
-      <ListItem icon="exit_to_app" url="/signout/">
+      <ListItem icon="exit_to_app" onClick={() => logout()}>
         Sign Out
       </ListItem>
     </List>
   </div>;
 
-const Settings = () =>
+let Settings = ({ user, logout }) =>
   <Page>
     <Navbar>
       <NavCenter sliding>Settings</NavCenter>
     </Navbar>
     <AccountSettings />
     <HelpAndSupport />
-    <UserSettings />
+    <UserSettings user={user} logout={logout} />
   </Page>;
+
+const mapStateToProps = state => ({
+  user: state.authUser
+});
+
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(logoutUser())
+});
+
+Settings = connect(mapStateToProps, mapDispatchToProps)(Settings);
 
 export default Settings;
