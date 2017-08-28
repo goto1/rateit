@@ -6,33 +6,55 @@ import {
   users
 } from "../dummy-data";
 
+function getRatingDetails(ratings, userType) {
+  const categories =
+    userType === "student"
+      ? [...ratingCategories.student]
+      : [...ratingCategories.professor];
+
+  return ratings.map(rating => {
+    const details = categories.find(category => category.id === rating.id);
+    return {
+      id: rating.id,
+      description: details.description,
+      rating: rating.rating
+    };
+  });
+}
+
 const getUserDetails = userId => {
-  const user = users.find(user => user.id === userId);
-  const clone = { ...user };
+  const user = users.filter(user => user.id === userId).pop();
+  let aggregateRatings = [];
+  let individualRatings = [];
 
-  clone.schools = getSchoolDetails(user.schools);
-  clone.majors = getMajorDetails(user.majors);
-  clone.userRatings = getUserRatings(user.id);
-
-  if (clone.type === "student") {
-    clone.aggregateRatings = getStudentAggrRatingDetails(
-      clone.aggregateRatings
-    );
-    clone.userRatings = clone.userRatings.map(rating => ({
-      ...rating,
-      individualRatings: getStudentAggrRatingDetails(rating.individualRatings)
-    }));
+  if (user.type === "student") {
+    aggregateRatings = getRatingDetails(user.aggregateRatings, "student");
+    individualRatings = userRatings
+      .filter(rating => rating.userId === user.id)
+      .map(rating => ({
+        ...rating,
+        individualRatings: getRatingDetails(rating.individualRatings, "student")
+      }));
   } else {
-    clone.aggregateRatings = getProfessorAggrRatingDetails(
-      clone.aggregateRatings
-    );
-    clone.userRatings = clone.userRatings.map(rating => ({
-      ...rating,
-      individualRatings: getProfessorAggrRatingDetails(rating.individualRatings)
-    }));
+    aggregateRatings = getRatingDetails(user.aggregateRatings, "professor");
+    individualRatings = userRatings
+      .filter(rating => rating.userId === user.id)
+      .map(rating => ({
+        ...rating,
+        individualRatings: getRatingDetails(
+          rating.individualRatings,
+          "professor"
+        )
+      }));
   }
 
-  return clone;
+  return {
+    ...user,
+    schools: getSchoolDetails(user.schools),
+    majors: getMajorDetails(user.majors),
+    aggregateRatings,
+    userRatings: individualRatings
+  };
 };
 
 const getSchoolDetails = schoolIds =>
@@ -40,25 +62,6 @@ const getSchoolDetails = schoolIds =>
 
 const getMajorDetails = majorIds =>
   majorIds.map(majorId => majors.find(major => major.id === majorId));
-
-const getUserRatings = userId =>
-  userRatings.filter(rating => rating.userId === userId);
-
-const getStudentAggrRatingDetails = aggrRatings =>
-  aggrRatings.map(rating => {
-    const details = ratingCategories.student.find(
-      category => category.id === rating.id
-    );
-    return { description: details.description, rating: rating.rating };
-  });
-
-const getProfessorAggrRatingDetails = aggrRatings =>
-  aggrRatings.map(rating => {
-    const details = ratingCategories.professor.find(
-      category => category.id === rating.id
-    );
-    return { description: details.description, rating: rating.rating };
-  });
 
 export const fetchUser = id =>
   new Promise((resolve, reject) => {
@@ -107,7 +110,7 @@ export const loginUser = credentials =>
     } else {
       resolve({
         data: {
-          ...user,
+          ...getUserDetails(user.id),
           bookmarks
         }
       });
@@ -128,6 +131,25 @@ export const bookmarkUser = (currUserId, userId) =>
       resolve({
         data: {
           ...getUserDetails(userId)
+        }
+      });
+    }
+  });
+
+export const removeUser = (currUserId, userId) =>
+  new Promise((resolve, reject) => {
+    if (!userId) {
+      reject({
+        error: {
+          code: 404,
+          message: "Missing credentials"
+        }
+      });
+    } else {
+      const userToBeRemoved = users.find(user => user.id === userId);
+      resolve({
+        data: {
+          ...userToBeRemoved
         }
       });
     }
