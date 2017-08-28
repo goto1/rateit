@@ -190,18 +190,24 @@ UserAggregateRatings.propTypes = {
 };
 
 const Overview = ({
-  route,
-  users,
   addUserToBookmarks,
   removeUserFromBookmarks,
-  userBookmarks
+  userBookmarks,
+  user
 }) => {
   const props = {
-    ...users[route.userId],
+    ...user,
     addUserToBookmarks,
     removeUserFromBookmarks,
     userBookmarks: userBookmarks.map(user => user.id)
   };
+
+  const isFetching = user ? user.isFetching : true;
+
+  if (isFetching) {
+    return <div />;
+  }
+
   return (
     <div>
       <UserInformation {...props} />
@@ -211,16 +217,14 @@ const Overview = ({
 };
 
 Overview.propTypes = {
-  route: PropTypes.object.isRequired,
-  userBookmarks: PropTypes.array,
-  users: PropTypes.object.isRequired,
-  addUserToBookmarks: PropTypes.func.isRequired
+  addUserToBookmarks: PropTypes.func.isRequired,
+  user: PropTypes.object,
+  userBookmarks: PropTypes.array
 };
 
 const mapStateToProps = state => ({
-  route: state.route,
-  userBookmarks: state.authUser.bookmarks,
-  users: state.users
+  user: state.users[state.route.userId],
+  userBookmarks: state.authUser.bookmarks
 });
 
 const mapDispatchToProps = dispatch => ({

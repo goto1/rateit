@@ -61,8 +61,8 @@ class UserProfile extends React.Component {
     const user = users[route.userId];
 
     const isFetching = user ? user.isFetching : true;
-    const title = user ? `${capitalize(user.type)} Details` : "Details";
-    const prevPath = route.prevPath;
+    const title = user ? `${capitalize(user.type)} Details` : "";
+    const prevPath = route.mainPath;
 
     const error = user ? user.error : false;
 

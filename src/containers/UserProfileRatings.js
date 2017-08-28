@@ -215,27 +215,32 @@ UserRating.propTypes = {
   recommendUser: PropTypes.bool.isRequired
 };
 
-const Ratings = ({ route, users }) => {
-  const user = users[route.userId];
-  const ratings = user.userRatings;
+const Ratings = ({ user }) => {
+  const isFetching = user ? user.isFetching : true;
+  const title = user ? `Showing ${user.userRatings.length} ratings` : "";
+
+  if (isFetching) {
+    return <div />;
+  }
+
   return (
     <div>
       <ContentBlockTitle>
-        {`Showing ${ratings.length} ratings`}
+        {title}
       </ContentBlockTitle>
-      {ratings.map(rating => <UserRating key={rating.id} {...rating} />)}
+      {user.userRatings.map(rating =>
+        <UserRating key={rating.id} {...rating} />
+      )}
     </div>
   );
 };
 
 Ratings.propTypes = {
-  route: PropTypes.object.isRequired,
-  users: PropTypes.object.isRequired
+  user: PropTypes.object
 };
 
 const mapStateToProps = state => ({
-  route: state.route,
-  users: state.users
+  user: state.users[state.route.userId]
 });
 
 const UserProfileRatings = connect(mapStateToProps)(Ratings);
