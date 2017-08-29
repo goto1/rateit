@@ -2,30 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Icon from "./Icon";
 
-// const ListItem = ({ icon, url, children }) =>
-//   <li>
-//     <a href={url} className="item-link item-content">
-//       <div className="item-media">
-//         <Icon material={icon} />
-//       </div>
-//       <div className="item-inner">
-//         {children}
-//       </div>
-//     </a>
-//   </li>;
-
 const ListItem = ({ icon, url, onClick, children }) => {
-  const content = (
-    <div>
-      <div className="item-media">
-        <Icon material={icon} />
-      </div>
-      <div className="item-inner">
-        {children}
-      </div>
-    </div>
-  );
-
   return (
     <li>
       {typeof onClick === "undefined"

@@ -1,6 +1,5 @@
 import isNil from "lodash/isNil";
 import omitBy from "lodash/omitBy";
-import get from "lodash/get";
 import { getComponentName, isMainPath } from "../utils/ActionUtils";
 import * as ActionTypes from "./ActionTypes";
 

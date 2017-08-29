@@ -1,29 +1,50 @@
 import React from "react";
 import ListItem from "../ListItem";
 import renderer from "react-test-renderer";
-import { shallow } from "enzyme";
-import "jest-enzyme";
+import { mount } from "enzyme";
 
 describe("ListItem component", () => {
-  const HelloWorld = "HelloWorld!";
+  function getListItem(props) {
+    const updatedProps = {
+      icon: "exit_to_app",
+      children: "Logout",
+      url: "/",
+      ...props
+    };
+    return <ListItem {...updatedProps} />;
+  }
 
-  it("renders correctly", () => {
-    const tree = renderer
-      .create(
-        <ListItem icon="home" url="/home">
-          {HelloWorld}
-        </ListItem>
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+  it("should render as an hyperlink", () => {
+    const ListItem = getListItem();
+    const wrapper = mount(ListItem);
+    const actual = wrapper.find("a").props().href;
+    const expected = "/";
+    expect(actual).toBe(expected);
   });
 
-  it("contains title of the item", () => {
-    const wrapper = shallow(
-      <ListItem icon="home" url="/home">
-        {HelloWorld}
-      </ListItem>
-    );
-    expect(wrapper.find(".item-inner")).toHaveText("HelloWorld!");
+  it("should render with the `exit_to_app` icon", () => {
+    const ListItem = getListItem();
+    const wrapper = mount(ListItem);
+    const actual = wrapper.find("i.icon").text();
+    const expected = "exit_to_app";
+    expect(actual).toBe(expected);
+  });
+
+  it("should render the text `Logout`", () => {
+    const ListItem = getListItem();
+    const wrapper = mount(ListItem);
+    const actual = wrapper.find(".item-inner").text();
+    const expected = "Logout";
+    expect(actual).toBe(expected);
+  });
+
+  it("should render as a `div` element when `onClick` is passed as a prop", () => {
+    const ListItem = getListItem({ onClick: jest.fn() });
+    const wrapper = mount(ListItem);
+    const hyperlinkNotFound = wrapper.find("a").length === 0;
+    const onClickHandlerFound =
+      typeof wrapper.find(".item-content").props().onClick !== "undefined";
+    expect(hyperlinkNotFound).toBe(true);
+    expect(onClickHandlerFound).toBe(true);
   });
 });
