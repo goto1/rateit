@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { fetchSchoolsIfNeeded } from "../actions";
 import { Formik } from "formik";
 import Yup from "yup";
 import { isSubmissionDisabled } from "../utils/FormUtils";
@@ -16,6 +18,7 @@ import {
   SmartSelect
 } from "../components/f7";
 import { Page } from "framework7-react";
+
 import * as API from "../utils"; // DELETE WHEN DONE TESTING
 
 export const AccountInformation = ({
@@ -219,6 +222,10 @@ UserInformation = Formik({
 })(UserInformation);
 
 class General extends React.Component {
+  componentDidMount() {
+    this.props.fetchSchoolsIfNeeded();
+  }
+
   fetchUserInfo = () => {
     const allSchools = API.getSchools();
     const currUser = API.getUserDetails("UArjrbxWHX");
@@ -238,8 +245,27 @@ class General extends React.Component {
     handleChange(e.target.name, selected);
   };
 
+  getFormProps = () => {
+    const { user, schools } = this.props;
+    const userMajors = user ? user.majors.map(major => major.id) : [];
+    const userSchools = user ? user.schools.map(school => school.id) : [];
+    const allSchools =
+      schools.length > 0
+        ? schools.filter(school => userSchools.includes(school.id))
+        : [];
+
+    return {
+      schools: allSchools,
+      school: userSchools,
+      major: userMajors
+    };
+  };
+
   render() {
     this.fetchUserInfo();
+
+    console.log("getFormProps() \n", this.getFormProps());
+
     const formProps = {
       handleMultipleSelect: this.handleMultipleSelect,
       majors: this.allMajors,
@@ -247,6 +273,8 @@ class General extends React.Component {
       school: this.school,
       major: this.major
     };
+
+    console.log("formProps \n", formProps);
     return (
       <Page>
         <Navbar>
@@ -259,4 +287,13 @@ class General extends React.Component {
   }
 }
 
-export default General;
+const mapStateToProps = state => ({
+  user: state.authUser,
+  schools: state.schools.all
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchSchoolsIfNeeded: () => dispatch(fetchSchoolsIfNeeded())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(General);

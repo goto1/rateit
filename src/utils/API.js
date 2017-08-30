@@ -6,6 +6,8 @@ import {
   users
 } from "../dummy-data";
 
+import * as DummyData from "../dummy-data";
+
 function getRatingDetails(ratings, userType) {
   const categories =
     userType === "student"
@@ -151,6 +153,42 @@ export const removeUser = (currUserId, userId) =>
         data: {
           ...userToBeRemoved
         }
+      });
+    }
+  });
+
+export const fetchSchools = () =>
+  new Promise((resolve, reject) => {
+    const schools = [...DummyData.schools];
+
+    if (schools.length === 0) {
+      reject({
+        error: {
+          code: 404,
+          message: "Could not fetch schools at the moment"
+        }
+      });
+    } else {
+      resolve({
+        data: schools
+      });
+    }
+  });
+
+export const fetchMajors = () =>
+  new Promise((resolve, reject) => {
+    const majors = [...DummyData.majors];
+
+    if (majors.length === 0) {
+      reject({
+        error: {
+          code: 404,
+          message: "Could not fetch majors at the moment"
+        }
+      });
+    } else {
+      resolve({
+        data: majors
       });
     }
   });
