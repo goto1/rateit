@@ -20,11 +20,17 @@ class SmartSelect extends React.Component {
       name,
       onBlur,
       onChange,
+      options,
       searchbarPlaceholder,
       value
     } = this.props;
-    const options = this.renderOptions();
     const title = capitalize(name);
+    const allOptions = this.renderOptions();
+    const selectedOptions = options
+      .filter(opt => value.includes(opt.id))
+      .map(selected => selected.abbreviation)
+      .join(", ");
+
     return (
       <li>
         <a
@@ -39,14 +45,16 @@ class SmartSelect extends React.Component {
             onBlur={onBlur}
             value={value}
           >
-            {options}
+            {allOptions}
           </select>
           <div className="item-content">
             <div className="item-inner">
               <div className="item-title">
                 {title}
               </div>
-              <div className="item-after" />
+              <div className="item-after">
+                {selectedOptions}
+              </div>
             </div>
           </div>
         </a>

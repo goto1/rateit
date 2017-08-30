@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { fetchSchoolsIfNeeded, fetchMajorsIfNeeded } from "../actions";
 import { Formik } from "formik";
 import Yup from "yup";
+import reduce from "lodash/reduce";
 import { isSubmissionDisabled } from "../utils/FormUtils";
 import {
   Button,
@@ -137,42 +138,22 @@ PasswordReset.propTypes = {
 };
 
 export let UserInformation = props => {
-  const {
-    errors,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    isSubmitting,
-    touched,
-    values
-  } = props;
-  const disableSubmission = isSubmissionDisabled({
-    isSubmitting,
-    errors,
-    touched
-  });
+  const { handleSubmit, isSubmitting, errors, touched } = props;
+  const shouldDisableSubmission =
+    isSubmitting ||
+    Object.keys(errors).length !== 0 ||
+    Object.keys(touched).length === 0;
+
   return (
     <form onSubmit={handleSubmit}>
       <AccountInformation {...props} />
       <SchoolInformation {...props} />
       <PasswordReset {...props} />
-      <List inset>
-        <InputElement
-          icon="lock"
-          name="current_password"
-          onBlur={handleBlur}
-          onChange={handleChange}
-          placeholder="Your Current Password"
-          type="password"
-          valid={errors.current_password && touched.current_password && false}
-          value={values.current_password}
-        />
-      </List>
       <ContentBlock>
         <Button
           big
           color="green"
-          disabled={disableSubmission}
+          disabled={shouldDisableSubmission}
           fill
           type="submit"
         >
@@ -203,16 +184,14 @@ UserInformation = Formik({
     school: props.school,
     major: props.major,
     password: "",
-    password_repeated: "",
-    current_password: ""
+    password_repeated: ""
   }),
   validationSchema: Yup.object().shape({
     email: Yup.string().email(),
     school: Yup.array(),
     major: Yup.array(),
     password: Yup.string(),
-    password_repeated: Yup.string(),
-    current_password: Yup.string().required()
+    password_repeated: Yup.string()
   }),
   handleSubmit: (values, { props, setErrors, setSubmitting }) => {
     console.log(values);
@@ -251,14 +230,12 @@ class General extends React.Component {
   };
 
   render() {
-    const { schools, majors } = this.props;
-    const numOfSchools = schools.all.length;
-    const numOfMajors = majors.all.length;
-
-    const formProps = {
-      handleMultipleSelect: this.handleMultipleSelect,
-      ...this.getFormProps()
-    };
+    const formProps = this.getFormProps();
+    const isDoneLoading = reduce(
+      formProps,
+      (res, val, key) => res && val.length !== 0,
+      true
+    );
 
     return (
       <Page>
@@ -266,9 +243,11 @@ class General extends React.Component {
           <NavLeft backLink="Back" sliding />
           <NavCenter sliding>General</NavCenter>
         </Navbar>
-        {numOfSchools > 0 &&
-          numOfMajors > 0 &&
-          <UserInformation {...formProps} />}
+        {isDoneLoading &&
+          <UserInformation
+            handleMultipleSelect={this.handleMultipleSelect}
+            {...formProps}
+          />}
       </Page>
     );
   }
