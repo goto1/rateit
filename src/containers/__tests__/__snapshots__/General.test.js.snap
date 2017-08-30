@@ -126,7 +126,9 @@ exports[`General container UserInformation should render correctly 1`] = `
                 </div>
                 <div
                   className="item-after"
-                />
+                >
+                  NJIT, RU
+                </div>
               </div>
             </div>
           </a>
@@ -175,7 +177,9 @@ exports[`General container UserInformation should render correctly 1`] = `
                 </div>
                 <div
                   className="item-after"
-                />
+                >
+                  CS, IS
+                </div>
               </div>
             </div>
           </a>
@@ -245,37 +249,6 @@ exports[`General container UserInformation should render correctly 1`] = `
         </div>
       </ul>
     </div>
-  </div>
-  <div
-    className="list-block inset"
-  >
-    <ul>
-      <div
-        className="sc-ifAKCX item-content bqyzQp"
-      >
-        <div
-          className="item-media"
-        >
-          <i
-            className="material-icons icon"
-          >
-            lock
-          </i>
-        </div>
-        <div
-          className="item-input sc-htpNat fYkctb"
-        >
-          <input
-            name="current_password"
-            onBlur={[Function]}
-            onChange={[Function]}
-            placeholder="Your Current Password"
-            type="password"
-            value=""
-          />
-        </div>
-      </div>
-    </ul>
   </div>
   <div
     className="content-block  "

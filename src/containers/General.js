@@ -5,7 +5,6 @@ import { fetchSchoolsIfNeeded, fetchMajorsIfNeeded } from "../actions";
 import { Formik } from "formik";
 import Yup from "yup";
 import reduce from "lodash/reduce";
-import { isSubmissionDisabled } from "../utils/FormUtils";
 import {
   Button,
   ContentBlock,
