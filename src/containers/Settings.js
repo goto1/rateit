@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchUserIfNeeded, logoutUser } from "../actions/";
+import { logoutUser } from "../actions/";
 import {
   ContentBlockTitle,
   ListItem,

@@ -1,6 +1,6 @@
 import * as ActionTypes from "../actions/ActionTypes";
 
-export const schoolsReducer = (
+export const majorsReducer = (
   state = {
     isFetching: false,
     all: []
@@ -8,19 +8,19 @@ export const schoolsReducer = (
   action
 ) => {
   switch (action.type) {
-    case ActionTypes.FETCH_SCHOOLS_REQUEST:
+    case ActionTypes.FETCH_MAJORS_REQUEST:
       return {
         ...state,
         isFetching: true
       };
-    case ActionTypes.FETCH_SCHOOLS_SUCCESS:
+    case ActionTypes.FETCH_MAJORS_SUCCESS:
       return {
         ...state,
         isFetching: false,
         receivedAt: action.receivedAt,
         all: [...action.payload]
       };
-    case ActionTypes.FETCH_SCHOOLS_FAILURE:
+    case ActionTypes.FETCH_MAJORS_FAILURE:
       return {
         ...state,
         error: action.error

@@ -134,6 +134,170 @@ export const userRatings = [
       { id: "Gb1tXreK", rating: 5 },
       { id: "TrK3zUiV", rating: 1 }
     ]
+  },
+  {
+    id: "gXv6EmCRJ",
+    userId: "sxlmp3a3BP",
+    authorId: "TxjkPq46BG",
+    authorName: "EagerPig",
+    date: "1499183677321",
+    comment:
+      "I have no issues with the guy, however, he was sometimes unavailable due to his job.",
+    likes: 9,
+    dislikes: 0,
+    aggregateRating: 4.5,
+    recommendUser: true,
+    individualRatings: [
+      { id: "T5wKYAmI", rating: 3 },
+      { id: "jUtauYzO", rating: 4 },
+      { id: "mh4m4LcX", rating: 4 },
+      { id: "yZyycMRm", rating: 4 },
+      { id: "sBuPhZef", rating: 1 }
+    ]
+  },
+  {
+    id: "uZYDYqry3",
+    userId: "sxlmp3a3BP",
+    authorId: "TxjkPq46BG",
+    authorName: "EagerPig",
+    date: "1499183677321",
+    comment:
+      "I have no issues with the guy, however, he was sometimes unavailable due to his job.",
+    likes: 0,
+    dislikes: 1,
+    aggregateRating: 2,
+    recommendUser: false,
+    individualRatings: [
+      { id: "T5wKYAmI", rating: 3 },
+      { id: "jUtauYzO", rating: 4 },
+      { id: "mh4m4LcX", rating: 4 },
+      { id: "yZyycMRm", rating: 4 },
+      { id: "sBuPhZef", rating: 1 }
+    ]
+  },
+  {
+    id: "uZYDYqry3",
+    userId: "uIyQLPNkmn",
+    authorId: "TxjkPq46BG",
+    authorName: "EagerPig",
+    date: "1499183677321",
+    comment:
+      "I have no issues with the guy, however, he was sometimes unavailable due to his job.",
+    likes: 0,
+    dislikes: 1,
+    aggregateRating: 2,
+    recommendUser: false,
+    individualRatings: [
+      { id: "DRFJY9jd", rating: 3 },
+      { id: "j84WAR77", rating: 4 },
+      { id: "wXe02QBg", rating: 4 },
+      { id: "zoQCOOJO", rating: 4 },
+      { id: "Gb1tXreK", rating: 1 },
+      { id: "TrK3zUiV", rating: 3 }
+    ]
+  },
+  {
+    id: "KtFNT4cvT",
+    userId: "uIyQLPNkmn",
+    authorId: "TxjkPq46BG",
+    authorName: "EagerPig",
+    date: "1499183677321",
+    comment:
+      "I have no issues with the guy, however, he was sometimes unavailable due to his job.",
+    likes: 4,
+    dislikes: 1,
+    aggregateRating: 4,
+    recommendUser: true,
+    individualRatings: [
+      { id: "DRFJY9jd", rating: 3 },
+      { id: "j84WAR77", rating: 5 },
+      { id: "wXe02QBg", rating: 2 },
+      { id: "zoQCOOJO", rating: 2 },
+      { id: "Gb1tXreK", rating: 5 },
+      { id: "TrK3zUiV", rating: 1 }
+    ]
+  },
+  {
+    id: "gXv6EmCRJ",
+    userId: "RpHYttsfy3",
+    authorId: "TxjkPq46BG",
+    authorName: "EagerPig",
+    date: "1499183677321",
+    comment:
+      "I have no issues with the guy, however, he was sometimes unavailable due to his job.",
+    likes: 9,
+    dislikes: 0,
+    aggregateRating: 4.5,
+    recommendUser: true,
+    individualRatings: [
+      { id: "T5wKYAmI", rating: 3 },
+      { id: "jUtauYzO", rating: 4 },
+      { id: "mh4m4LcX", rating: 4 },
+      { id: "yZyycMRm", rating: 4 },
+      { id: "sBuPhZef", rating: 1 }
+    ]
+  },
+  {
+    id: "uZYDYqry3",
+    userId: "RpHYttsfy3",
+    authorId: "TxjkPq46BG",
+    authorName: "EagerPig",
+    date: "1499183677321",
+    comment:
+      "I have no issues with the guy, however, he was sometimes unavailable due to his job.",
+    likes: 0,
+    dislikes: 1,
+    aggregateRating: 2,
+    recommendUser: false,
+    individualRatings: [
+      { id: "T5wKYAmI", rating: 3 },
+      { id: "jUtauYzO", rating: 4 },
+      { id: "mh4m4LcX", rating: 4 },
+      { id: "yZyycMRm", rating: 4 },
+      { id: "sBuPhZef", rating: 1 }
+    ]
+  },
+  {
+    id: "uZYDYqry3",
+    userId: "0fQkCblQRG",
+    authorId: "TxjkPq46BG",
+    authorName: "EagerPig",
+    date: "1499183677321",
+    comment:
+      "I have no issues with the guy, however, he was sometimes unavailable due to his job.",
+    likes: 0,
+    dislikes: 1,
+    aggregateRating: 2,
+    recommendUser: false,
+    individualRatings: [
+      { id: "DRFJY9jd", rating: 3 },
+      { id: "j84WAR77", rating: 4 },
+      { id: "wXe02QBg", rating: 4 },
+      { id: "zoQCOOJO", rating: 4 },
+      { id: "Gb1tXreK", rating: 1 },
+      { id: "TrK3zUiV", rating: 3 }
+    ]
+  },
+  {
+    id: "KtFNT4cvT",
+    userId: "0fQkCblQRG",
+    authorId: "TxjkPq46BG",
+    authorName: "EagerPig",
+    date: "1499183677321",
+    comment:
+      "I have no issues with the guy, however, he was sometimes unavailable due to his job.",
+    likes: 4,
+    dislikes: 1,
+    aggregateRating: 4,
+    recommendUser: true,
+    individualRatings: [
+      { id: "DRFJY9jd", rating: 3 },
+      { id: "j84WAR77", rating: 5 },
+      { id: "wXe02QBg", rating: 2 },
+      { id: "zoQCOOJO", rating: 2 },
+      { id: "Gb1tXreK", rating: 5 },
+      { id: "TrK3zUiV", rating: 1 }
+    ]
   }
 ];
 
@@ -175,10 +339,8 @@ export const users = [
       { id: 'yZyycMRm', rating: 2 },
       { id: 'sBuPhZef', rating: 3 },
     ],
-    userRatings: [],
-    registered: false
-  },
-  {
+    userRatings: ['gXv6EmCRJ', 'uZYDYqry3', 'KtFNT4cvT'],
+  }, {
     id: 'uIyQLPNkmn',
     name: 'Lionel Ford',
     type: 'student',
@@ -195,30 +357,25 @@ export const users = [
       { id: 'TrK3zUiV', rating: 3 },
     ],
     userRatings: ['gXv6EmCRJ', 'uZYDYqry3', 'KtFNT4cvT'],
-    registered: true,
-    password: '5f4dcc3b5aa765d61d8327deb882cf99',
-    username: 'lif492@rutgers.edu',
-  },
-  {
+
+  }, {
     id: 'RpHYttsfy3',
-    name: 'Lionel Ford',
-    type: 'student',
-    schools: ['bruHy', '5y7fh'],
+    name: 'Jonathon Sims',
+    type: 'professor',
+    schools: ['bruHy'],
     majors: ['hvdMFjM', 'e2LejDg'],
-    emails: ['ranr1141@njit.edu', 'rr3n@rutgers.edu'],
-    overallRating: 4.5,
+    emails: ['reneeporter@njit.edu'],
+    overallRating: 3,
     aggregateRatings: [
-      { id: 'DRFJY9jd', rating: 3 },
-      { id: 'j84WAR77', rating: 5 },
-      { id: 'wXe02QBg', rating: 4 },
-      { id: 'zoQCOOJO', rating: 2 },
-      { id: 'Gb1tXreK', rating: 3 },
-      { id: 'TrK3zUiV', rating: 3 },
+      { id: 'T5wKYAmI', rating: 3 },
+      { id: 'jUtauYzO', rating: 5 },
+      { id: 'mh4m4LcX', rating: 4 },
+      { id: 'yZyycMRm', rating: 2 },
+      { id: 'sBuPhZef', rating: 3 },
     ],
-    userRatings: ['gXv6EmCRJ', 'uZYDYqry3', 'KtFNT4cvT'],
-    registered: false,
-  },
-  {
+    userRatings: [],
+    registered: false
+  }, {
     id: '0fQkCblQRG',
     name: 'Joyce Salazar',
     type: 'student',
@@ -238,6 +395,7 @@ export const users = [
     registered: true,
     password: '5f4dcc3b5aa765d61d8327deb882cf99',
     username: 'js3189@njit.edu',
+    bookmarks: ['sxlmp3a3BP', 'uIyQLPNkmn', '0fQkCblQRG']
   }
 ];
 

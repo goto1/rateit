@@ -6,12 +6,16 @@ import {
   addUserToBookmarks,
   removeUserFromBookmarks
 } from "./AuthUserActions";
+import { fetchSchoolsIfNeeded } from "./SchoolActions";
+import { fetchMajorsIfNeeded } from "./MajorActions";
 
 export {
-  handleRouteChange,
+  addUserToBookmarks,
+  fetchMajorsIfNeeded,
+  fetchSchoolsIfNeeded,
   fetchUserIfNeeded,
+  handleRouteChange,
   loginUser,
   logoutUser,
-  addUserToBookmarks,
   removeUserFromBookmarks
 };

@@ -129,7 +129,6 @@ export const bookmarkUser = (currUserId, userId) =>
         }
       });
     } else {
-      const bookmarkedUser = users.find(user => user.id === userId);
       resolve({
         data: {
           ...getUserDetails(userId)

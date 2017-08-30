@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchSchoolsIfNeeded } from "../actions";
+import { fetchSchoolsIfNeeded, fetchMajorsIfNeeded } from "../actions";
 import { Formik } from "formik";
 import Yup from "yup";
 import { isSubmissionDisabled } from "../utils/FormUtils";
@@ -18,8 +18,6 @@ import {
   SmartSelect
 } from "../components/f7";
 import { Page } from "framework7-react";
-
-import * as API from "../utils"; // DELETE WHEN DONE TESTING
 
 export const AccountInformation = ({
   errors,
@@ -224,19 +222,8 @@ UserInformation = Formik({
 class General extends React.Component {
   componentDidMount() {
     this.props.fetchSchoolsIfNeeded();
+    this.props.fetchMajorsIfNeeded();
   }
-
-  fetchUserInfo = () => {
-    const allSchools = API.getSchools();
-    const currUser = API.getUserDetails("UArjrbxWHX");
-    this.allMajors = API.getMajors();
-
-    const t1 = currUser.schools.map(school => school.id);
-    this.schools = allSchools.filter(school => t1.includes(school.id));
-
-    this.school = this.schools.map(school => school.id);
-    this.major = currUser.majors.map(major => major.id);
-  };
 
   handleMultipleSelect = (e, handleChange) => {
     const selected = [...e.target.options]
@@ -246,42 +233,42 @@ class General extends React.Component {
   };
 
   getFormProps = () => {
-    const { user, schools } = this.props;
+    const { user, schools, majors } = this.props;
     const userMajors = user ? user.majors.map(major => major.id) : [];
     const userSchools = user ? user.schools.map(school => school.id) : [];
     const allSchools =
-      schools.length > 0
-        ? schools.filter(school => userSchools.includes(school.id))
+      schools.all.length > 0
+        ? schools.all.filter(school => userSchools.includes(school.id))
         : [];
+    const allMajors = majors.all.length > 0 ? majors.all : [];
 
     return {
-      schools: allSchools,
+      major: userMajors,
+      majors: allMajors,
       school: userSchools,
-      major: userMajors
+      schools: allSchools
     };
   };
 
   render() {
-    this.fetchUserInfo();
-
-    console.log("getFormProps() \n", this.getFormProps());
+    const { schools, majors } = this.props;
+    const numOfSchools = schools.all.length;
+    const numOfMajors = majors.all.length;
 
     const formProps = {
       handleMultipleSelect: this.handleMultipleSelect,
-      majors: this.allMajors,
-      schools: this.schools,
-      school: this.school,
-      major: this.major
+      ...this.getFormProps()
     };
 
-    console.log("formProps \n", formProps);
     return (
       <Page>
         <Navbar>
           <NavLeft backLink="Back" sliding />
           <NavCenter sliding>General</NavCenter>
         </Navbar>
-        <UserInformation {...formProps} />
+        {numOfSchools > 0 &&
+          numOfMajors > 0 &&
+          <UserInformation {...formProps} />}
       </Page>
     );
   }
@@ -289,11 +276,13 @@ class General extends React.Component {
 
 const mapStateToProps = state => ({
   user: state.authUser,
-  schools: state.schools.all
+  schools: state.schools,
+  majors: state.majors
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchSchoolsIfNeeded: () => dispatch(fetchSchoolsIfNeeded())
+  fetchSchoolsIfNeeded: () => dispatch(fetchSchoolsIfNeeded()),
+  fetchMajorsIfNeeded: () => dispatch(fetchMajorsIfNeeded())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(General);
