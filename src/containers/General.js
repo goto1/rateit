@@ -11,6 +11,7 @@ import reduce from "lodash/reduce";
 import isEqual from "lodash/isEqual";
 import filter from "lodash/filter";
 import isNil from "lodash/isNil";
+import SubmittedFormScreen from "../components/SubmittedFormScreen";
 import {
   Button,
   ContentBlock,
@@ -18,7 +19,6 @@ import {
   InputElement,
   List,
   ListBlock,
-  LinkButton,
   NavCenter,
   NavLeft,
   Navbar,
@@ -137,27 +137,6 @@ PasswordReset.propTypes = {
   values: PropTypes.object
 };
 
-const StyledContentBlock = styled(ContentBlock)`
-  margin: 0;
-  height: 97.5%;
-  position: relative;
-  margin: 0 !important;
-`;
-
-const SubmissionMessage = styled.div`
-  font-size: 20px;
-  text-align: center;
-  position: absolute;
-  top: 40%;
-  width: 90%;
-`;
-
-const StyledButton = styled(Button)`
-  width: 90%;
-  position: absolute !important;
-  bottom: 15px;
-`;
-
 class UserInformation extends React.Component {
   goBack = () => {
     const { status, setStatus, setSubmitting, resetForm } = this.props;
@@ -186,28 +165,17 @@ class UserInformation extends React.Component {
 
     if (successfulSubmission) {
       return (
-        <StyledContentBlock>
-          <SubmissionMessage>
-            Your account information was changed successfully!
-          </SubmissionMessage>
-          <StyledButton type="button" onClick={this.goBack} big fill>
-            Back
-          </StyledButton>
-        </StyledContentBlock>
+        <SubmittedFormScreen buttonName="Back" onClick={this.goBack}>
+          Your account information was changed successfully!
+        </SubmittedFormScreen>
       );
-      return <div>Success!</div>;
     }
 
     if (successfulSubmission === false) {
       return (
-        <StyledContentBlock>
-          <SubmissionMessage>
-            Looks like something went wrong! Please go back and try again.
-          </SubmissionMessage>
-          <StyledButton type="button" onClick={this.goBack} big fill>
-            Back
-          </StyledButton>
-        </StyledContentBlock>
+        <SubmittedFormScreen buttonName="Back" onClick={this.goBack}>
+          Looks like something went wrong! Please go back and try again.
+        </SubmittedFormScreen>
       );
     }
 
