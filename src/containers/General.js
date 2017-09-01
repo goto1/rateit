@@ -1,10 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 import { connect } from "react-redux";
 import { fetchSchoolsIfNeeded, fetchMajorsIfNeeded } from "../actions";
+import { submitGeneralForm as submitForm } from "../utils/API";
 import { Formik } from "formik";
 import Yup from "yup";
+import get from "lodash/get";
 import reduce from "lodash/reduce";
+import isEqual from "lodash/isEqual";
+import filter from "lodash/filter";
+import isNil from "lodash/isNil";
 import {
   Button,
   ContentBlock,
@@ -12,6 +18,7 @@ import {
   InputElement,
   List,
   ListBlock,
+  LinkButton,
   NavCenter,
   NavLeft,
   Navbar,
@@ -51,12 +58,11 @@ AccountInformation.propTypes = {
 };
 
 export const SchoolInformation = ({
-  handleBlur,
-  handleChange,
-  handleChangeValue,
   handleMultipleSelect,
   majors,
   schools,
+  setFieldTouched,
+  setFieldValue,
   values
 }) =>
   <div>
@@ -68,9 +74,7 @@ export const SchoolInformation = ({
         options={schools}
         multiple
         searchbarPlaceholder="Search for a school..."
-        onChange={e => {
-          handleMultipleSelect(e, handleChangeValue);
-        }}
+        onChange={e => handleMultipleSelect(e, setFieldValue, setFieldTouched)}
       />
       <SmartSelect
         name="major"
@@ -78,21 +82,18 @@ export const SchoolInformation = ({
         options={majors}
         multiple
         searchbarPlaceholder="Search for a major..."
-        onChange={e => {
-          handleMultipleSelect(e, handleChangeValue);
-        }}
+        onChange={e => handleMultipleSelect(e, setFieldValue, setFieldTouched)}
       />
     </ListBlock>
   </div>;
 
 SchoolInformation.propTypes = {
-  handleBlur: PropTypes.func,
-  handleChange: PropTypes.func,
-  handleChangeValue: PropTypes.func,
   handleMultipleSelect: PropTypes.func,
   majors: PropTypes.array.isRequired,
   schools: PropTypes.array.isRequired,
-  values: PropTypes.object
+  setFieldTouched: PropTypes.func.isRequired,
+  setFieldValue: PropTypes.func.isRequired,
+  values: PropTypes.object.isRequired
 };
 
 export const PasswordReset = ({
@@ -136,32 +137,100 @@ PasswordReset.propTypes = {
   values: PropTypes.object
 };
 
-export let UserInformation = props => {
-  const { handleSubmit, isSubmitting, errors, touched } = props;
-  const shouldDisableSubmission =
-    isSubmitting ||
-    Object.keys(errors).length !== 0 ||
-    Object.keys(touched).length === 0;
+const StyledContentBlock = styled(ContentBlock)`
+  margin: 0;
+  height: 97.5%;
+  position: relative;
+  margin: 0 !important;
+`;
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <AccountInformation {...props} />
-      <SchoolInformation {...props} />
-      <PasswordReset {...props} />
-      <ContentBlock>
-        <Button
-          big
-          color="green"
-          disabled={shouldDisableSubmission}
-          fill
-          type="submit"
-        >
-          Submit Changes
-        </Button>
-      </ContentBlock>
-    </form>
-  );
-};
+const SubmissionMessage = styled.div`
+  font-size: 20px;
+  text-align: center;
+  position: absolute;
+  top: 40%;
+  width: 90%;
+`;
+
+const StyledButton = styled(Button)`
+  width: 90%;
+  position: absolute !important;
+  bottom: 15px;
+`;
+
+class UserInformation extends React.Component {
+  goBack = () => {
+    const { status, setStatus, setSubmitting, resetForm } = this.props;
+    const successfulSubmission = status.submission.success;
+
+    if (successfulSubmission) {
+      resetForm();
+      setStatus({});
+    } else {
+      setStatus({});
+      setSubmitting(false);
+    }
+  };
+
+  render() {
+    const { handleSubmit, isSubmitting, errors, touched } = this.props;
+    const shouldDisableSubmission =
+      isSubmitting ||
+      Object.keys(errors).length !== 0 ||
+      Object.keys(touched).length === 0;
+    const successfulSubmission = get(
+      this.props,
+      "status.submission.success",
+      null
+    );
+
+    if (successfulSubmission) {
+      return (
+        <StyledContentBlock>
+          <SubmissionMessage>
+            Your account information was changed successfully!
+          </SubmissionMessage>
+          <StyledButton type="button" onClick={this.goBack} big fill>
+            Back
+          </StyledButton>
+        </StyledContentBlock>
+      );
+      return <div>Success!</div>;
+    }
+
+    if (successfulSubmission === false) {
+      return (
+        <StyledContentBlock>
+          <SubmissionMessage>
+            Looks like something went wrong! Please go back and try again.
+          </SubmissionMessage>
+          <StyledButton type="button" onClick={this.goBack} big fill>
+            Back
+          </StyledButton>
+        </StyledContentBlock>
+      );
+    }
+
+    return (
+      <form onSubmit={handleSubmit}>
+        <AccountInformation {...this.props} />
+        <SchoolInformation {...this.props} />
+        <PasswordReset {...this.props} />
+        <ContentBlock>
+          <Button
+            big
+            color="green"
+            disabled={shouldDisableSubmission}
+            fill
+            type="submit"
+          >
+            Submit Changes
+          </Button>
+        </ContentBlock>
+      </form>
+    );
+  }
+}
 
 UserInformation.propTypes = {
   errors: PropTypes.object,
@@ -192,8 +261,36 @@ UserInformation = Formik({
     password: Yup.string(),
     password_repeated: Yup.string()
   }),
-  handleSubmit: (values, { props, setErrors, setSubmitting }) => {
-    console.log(values);
+  handleSubmit: (values, { props, setErrors, setSubmitting, setStatus }) => {
+    const userId = props.userId;
+    const formData = filter(
+      {
+        ...values,
+        major: !isEqual(values.major, props.major) ? values.major : null,
+        school: !isEqual(values.school, props.school) ? values.school : null
+      },
+      item => (item === "" ? false : isNil(item) ? false : true)
+    );
+
+    setSubmitting(true);
+
+    submitForm(userId, formData)
+      .then(response => {
+        setStatus({
+          submission: {
+            success: true,
+            error: ""
+          }
+        });
+      })
+      .catch(error => {
+        setStatus({
+          submission: {
+            success: false,
+            error: "Could not submit the form."
+          }
+        });
+      });
   }
 })(UserInformation);
 
@@ -203,11 +300,14 @@ class General extends React.Component {
     this.props.fetchMajorsIfNeeded();
   }
 
-  handleMultipleSelect = (e, handleChange) => {
-    const selected = [...e.target.options]
+  handleMultipleSelect = (e, setFieldValue, setFieldTouched) => {
+    const { name, options } = e.target;
+    const selected = [...options]
       .filter(option => option.selected === true)
       .map(option => option.value);
-    handleChange(e.target.name, selected);
+
+    setFieldValue(name, selected);
+    setFieldTouched(name, true);
   };
 
   getFormProps = () => {
@@ -224,7 +324,8 @@ class General extends React.Component {
       major: userMajors,
       majors: allMajors,
       school: userSchools,
-      schools: allSchools
+      schools: allSchools,
+      userId: user.id
     };
   };
 
