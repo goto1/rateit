@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const ContentBlock = ({ inset = false, className, children }) => {
   const classNames = `content-block ${inset ? "inset" : ""} ${className
     ? className
-    : ""}`;
+    : ""}`.trim();
   return (
     <div className={classNames}>
       {children}
