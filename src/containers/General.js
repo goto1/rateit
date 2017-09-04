@@ -1,21 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import { connect } from "react-redux";
 import { fetchSchoolsIfNeeded, fetchMajorsIfNeeded } from "../actions";
 import { submitGeneralForm as submitForm } from "../utils/API";
 import { Formik } from "formik";
 import Yup from "yup";
-import get from "lodash/get";
-import reduce from "lodash/reduce";
-import isEqual from "lodash/isEqual";
-import filter from "lodash/filter";
-import isNil from "lodash/isNil";
+import { get, reduce, isEqual, isNil, filter } from "lodash";
+import * as FormUtils from "../utils/FormUtils";
+import PreloaderScreen from "../components/PreloaderScreen";
 import SubmittedFormScreen from "../components/SubmittedFormScreen";
+import InputLabel from "../components/InputLabel";
 import {
   Button,
   ContentBlock,
-  ContentBlockTitle,
   InputElement,
   List,
   ListBlock,
@@ -32,29 +29,40 @@ export const AccountInformation = ({
   handleChange,
   touched,
   values
-}) =>
-  <div>
-    <ContentBlockTitle>Account information</ContentBlockTitle>
-    <List inset>
-      <InputElement
-        icon="email"
-        name="email"
-        onBlur={handleBlur}
-        onChange={handleChange}
-        placeholder="example@gmail.com"
-        type="email"
-        valid={errors.email && touched.email && false}
-        value={values.email}
+}) => {
+  const validEmail = FormUtils.isInputFieldValid("email", {
+    touched,
+    errors
+  });
+  return (
+    <div>
+      <InputLabel
+        description="Account information"
+        error="Invalid email address"
+        valid={validEmail}
       />
-    </List>
-  </div>;
+      <List inset>
+        <InputElement
+          icon="email"
+          name="email"
+          onBlur={handleBlur}
+          onChange={handleChange}
+          placeholder="example@gmail.com"
+          type="email"
+          valid={validEmail}
+          value={values.email}
+        />
+      </List>
+    </div>
+  );
+};
 
 AccountInformation.propTypes = {
-  errors: PropTypes.object,
-  handleBlur: PropTypes.func,
-  handleChange: PropTypes.func,
-  touched: PropTypes.object,
-  values: PropTypes.object
+  errors: PropTypes.object.isRequired,
+  handleBlur: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  touched: PropTypes.object.isRequired,
+  values: PropTypes.object.isRequired
 };
 
 export const SchoolInformation = ({
@@ -64,31 +72,41 @@ export const SchoolInformation = ({
   setFieldTouched,
   setFieldValue,
   values
-}) =>
-  <div>
-    <ContentBlockTitle>School information</ContentBlockTitle>
-    <ListBlock>
-      <SmartSelect
-        name="school"
-        value={values.school}
-        options={schools}
-        multiple
-        searchbarPlaceholder="Search for a school..."
-        onChange={e => handleMultipleSelect(e, setFieldValue, setFieldTouched)}
+}) => {
+  const validInputs = values.school.length !== 0 && values.major.length !== 0;
+  return (
+    <div>
+      <InputLabel
+        description="School information"
+        error="School & major can't be blank"
+        valid={validInputs}
       />
-      <SmartSelect
-        name="major"
-        value={values.major}
-        options={majors}
-        multiple
-        searchbarPlaceholder="Search for a major..."
-        onChange={e => handleMultipleSelect(e, setFieldValue, setFieldTouched)}
-      />
-    </ListBlock>
-  </div>;
+      <ListBlock>
+        <SmartSelect
+          name="school"
+          value={values.school}
+          options={schools}
+          multiple
+          searchbarPlaceholder="Search for a school..."
+          onChange={e =>
+            handleMultipleSelect(e, setFieldValue, setFieldTouched)}
+        />
+        <SmartSelect
+          name="major"
+          value={values.major}
+          options={majors}
+          multiple
+          searchbarPlaceholder="Search for a major..."
+          onChange={e =>
+            handleMultipleSelect(e, setFieldValue, setFieldTouched)}
+        />
+      </ListBlock>
+    </div>
+  );
+};
 
 SchoolInformation.propTypes = {
-  handleMultipleSelect: PropTypes.func,
+  handleMultipleSelect: PropTypes.func.isRequired,
   majors: PropTypes.array.isRequired,
   schools: PropTypes.array.isRequired,
   setFieldTouched: PropTypes.func.isRequired,
@@ -102,68 +120,86 @@ export const PasswordReset = ({
   handleChange,
   touched,
   values
-}) =>
-  <div>
-    <ContentBlockTitle>Password reset</ContentBlockTitle>
-    <List inset>
-      <InputElement
-        icon="lock_outline"
-        name="password"
-        onBlur={handleBlur}
-        onChange={handleChange}
-        placeholder="New Password"
-        type="password"
-        valid={errors.password && touched.password && false}
-        value={values.password}
+}) => {
+  const validPassField = FormUtils.isInputFieldValid("password", {
+    touched,
+    errors
+  });
+  const validPassRepeatField = FormUtils.isInputFieldValid(
+    "password_repeated",
+    {
+      touched,
+      errors
+    }
+  );
+  const validInputs =
+    validPassField &&
+    validPassRepeatField &&
+    values.password === values.password_repeated;
+
+  return (
+    <div>
+      <InputLabel
+        description="Password reset"
+        error="Passwords are not matching"
+        valid={validInputs}
       />
-      <InputElement
-        icon="lock_outline"
-        name="password_repeated"
-        onBlur={handleBlur}
-        onChange={handleChange}
-        placeholder="New Password Repeated"
-        type="password"
-        valid={errors.password_repeated && touched.password_repeated && false}
-        value={values.password_repeated}
-      />
-    </List>
-  </div>;
+      <List inset>
+        <InputElement
+          icon="lock_outline"
+          name="password"
+          onBlur={handleBlur}
+          onChange={handleChange}
+          placeholder="New Password"
+          type="password"
+          valid={validPassField}
+          value={values.password}
+        />
+        <InputElement
+          icon="lock_outline"
+          name="password_repeated"
+          onBlur={handleBlur}
+          onChange={handleChange}
+          placeholder="New Password Repeated"
+          type="password"
+          valid={validPassRepeatField}
+          value={values.password_repeated}
+        />
+      </List>
+    </div>
+  );
+};
 
 PasswordReset.propTypes = {
-  errors: PropTypes.object,
-  handleBlur: PropTypes.func,
-  handleChange: PropTypes.func,
-  touched: PropTypes.object,
-  values: PropTypes.object
+  errors: PropTypes.object.isRequired,
+  handleBlur: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  touched: PropTypes.object.isRequired,
+  values: PropTypes.object.isRequired
 };
 
 class UserInformation extends React.Component {
   goBack = () => {
-    const { status, setStatus, setSubmitting, resetForm } = this.props;
-    const successfulSubmission = status.submission.success;
+    const props = this.props;
+    const submitStatus = get(props, "status.submission", null);
 
-    if (successfulSubmission) {
-      resetForm();
-      setStatus({});
-    } else {
-      setStatus({});
-      setSubmitting(false);
+    if (submitStatus && submitStatus.success) {
+      props.setStatus({});
+      props.resetForm();
+    }
+
+    if (submitStatus && !submitStatus.success) {
+      props.setStatus({});
+      props.setSubmitting(false);
     }
   };
 
   render() {
-    const { handleSubmit, isSubmitting, errors, touched } = this.props;
-    const shouldDisableSubmission =
-      isSubmitting ||
-      Object.keys(errors).length !== 0 ||
-      Object.keys(touched).length === 0;
-    const successfulSubmission = get(
-      this.props,
-      "status.submission.success",
-      null
-    );
+    const props = { ...this.props };
+    const disableSubmission = FormUtils.shouldDisableSubmission(props);
+    const submitStatus = get(props, "status.submission", null);
 
-    if (successfulSubmission) {
+    if (submitStatus && submitStatus.success) {
       return (
         <SubmittedFormScreen buttonName="Back" onClick={this.goBack}>
           Your account information was changed successfully!
@@ -171,7 +207,7 @@ class UserInformation extends React.Component {
       );
     }
 
-    if (successfulSubmission === false) {
+    if (submitStatus && !submitStatus.success) {
       return (
         <SubmittedFormScreen buttonName="Back" onClick={this.goBack}>
           Looks like something went wrong! Please go back and try again.
@@ -179,48 +215,48 @@ class UserInformation extends React.Component {
       );
     }
 
-    return (
-      <form onSubmit={handleSubmit}>
-        <AccountInformation {...this.props} />
-        <SchoolInformation {...this.props} />
-        <PasswordReset {...this.props} />
-        <ContentBlock>
-          <Button
-            big
-            color="green"
-            disabled={shouldDisableSubmission}
-            fill
-            type="submit"
-          >
-            Submit Changes
-          </Button>
-        </ContentBlock>
-      </form>
-    );
+    return props.isSubmitting
+      ? <PreloaderScreen size="big" />
+      : <form onSubmit={props.handleSubmit}>
+          <AccountInformation {...props} />
+          <SchoolInformation {...props} />
+          <PasswordReset {...props} />
+          <ContentBlock>
+            <Button
+              big
+              color="green"
+              disabled={disableSubmission}
+              fill
+              type="submit"
+            >
+              Submit Changes
+            </Button>
+          </ContentBlock>
+        </form>;
   }
 }
 
 UserInformation.propTypes = {
-  errors: PropTypes.object,
-  handleBlur: PropTypes.func,
-  handleChange: PropTypes.func,
-  handleChangeValue: PropTypes.func,
-  handleMultipleSelect: PropTypes.func,
-  handleSubmit: PropTypes.func,
-  isSubmitting: PropTypes.bool,
-  majors: PropTypes.array,
-  schools: PropTypes.array,
-  touched: PropTypes.object,
-  values: PropTypes.object
+  errors: PropTypes.object.isRequired,
+  handleBlur: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleChangeValue: PropTypes.func.isRequired,
+  handleMultipleSelect: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  isSubmitting: PropTypes.bool.isRequired,
+  majors: PropTypes.array.isRequired,
+  schools: PropTypes.array.isRequired,
+  touched: PropTypes.object.isRequired,
+  values: PropTypes.object.isRequired
 };
 
 UserInformation = Formik({
   mapPropsToValues: props => ({
-    email: "",
-    school: props.school,
-    major: props.major,
-    password: "",
-    password_repeated: ""
+    email: props.initialValues.email,
+    school: props.initialValues.school,
+    major: props.initialValues.major,
+    password: props.initialValues.password,
+    password_repeated: props.initialValues.password_repeated
   }),
   validationSchema: Yup.object().shape({
     email: Yup.string().email(),
@@ -234,8 +270,12 @@ UserInformation = Formik({
     const formData = filter(
       {
         ...values,
-        major: !isEqual(values.major, props.major) ? values.major : null,
-        school: !isEqual(values.school, props.school) ? values.school : null
+        major: !isEqual(values.major, props.initialValues.major)
+          ? values.major
+          : null,
+        school: !isEqual(values.school, props.initialValues.school)
+          ? values.school
+          : null
       },
       item => (item === "" ? false : isNil(item) ? false : true)
     );
@@ -264,8 +304,10 @@ UserInformation = Formik({
 
 class General extends React.Component {
   componentDidMount() {
-    this.props.fetchSchoolsIfNeeded();
-    this.props.fetchMajorsIfNeeded();
+    const props = this.props;
+
+    props.fetchSchoolsIfNeeded();
+    props.fetchMajorsIfNeeded();
   }
 
   handleMultipleSelect = (e, setFieldValue, setFieldTouched) => {
@@ -289,11 +331,16 @@ class General extends React.Component {
     const allMajors = majors.all.length > 0 ? majors.all : [];
 
     return {
-      major: userMajors,
       majors: allMajors,
-      school: userSchools,
       schools: allSchools,
-      userId: user.id
+      userId: user.id,
+      initialValues: {
+        email: "",
+        school: userSchools,
+        major: userMajors,
+        password: "",
+        password_repeated: ""
+      }
     };
   };
 
