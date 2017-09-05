@@ -4,18 +4,13 @@ import styled from "styled-components";
 import Icon from "./Icon";
 import pick from "lodash/pick";
 
-const InputWrapper = styled.div`
-  margin-left: 15px;
-  input {
-    color: ${props => (props.valid !== true ? "red !important" : "black")};
-  }
-`;
+const InputWrapper = styled.div`margin-left: 15px;`;
 
 export const StyledIcon = styled(Icon)`
   position: absolute !important;
-  right: 6px;
+  right: 12.5px;
   opacity: .7;
-  color: red;
+  color: #FF0000;
   font-size: 20px;
 `;
 
