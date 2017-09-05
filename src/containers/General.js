@@ -9,7 +9,7 @@ import { get, reduce, isEqual, isNil, filter } from "lodash";
 import * as FormUtils from "../utils/FormUtils";
 import PreloaderScreen from "../components/PreloaderScreen";
 import SubmittedFormScreen from "../components/SubmittedFormScreen";
-import InputLabel from "../components/InputLabel";
+import FormFieldLabel from "../components/FormFieldLabel";
 import {
   Button,
   ContentBlock,
@@ -30,16 +30,16 @@ export const AccountInformation = ({
   touched,
   values
 }) => {
-  const validEmail = FormUtils.isInputFieldValid("email", {
+  const emailFieldValid = FormUtils.isFormFieldValid("email", {
     touched,
     errors
   });
   return (
     <div>
-      <InputLabel
+      <FormFieldLabel
         description="Account information"
         error="Invalid email address"
-        valid={validEmail}
+        valid={emailFieldValid}
       />
       <List inset>
         <InputElement
@@ -49,7 +49,7 @@ export const AccountInformation = ({
           onChange={handleChange}
           placeholder="example@gmail.com"
           type="email"
-          valid={validEmail}
+          valid={emailFieldValid}
           value={values.email}
         />
       </List>
@@ -73,13 +73,13 @@ export const SchoolInformation = ({
   setFieldValue,
   values
 }) => {
-  const validInputs = values.school.length !== 0 && values.major.length !== 0;
+  const smartSelectsValid = values.school.length > 0 && values.major.length > 0;
   return (
     <div>
-      <InputLabel
+      <FormFieldLabel
         description="School information"
         error="School & major can't be blank"
-        valid={validInputs}
+        valid={smartSelectsValid}
       />
       <ListBlock>
         <SmartSelect
@@ -121,49 +121,42 @@ export const PasswordReset = ({
   touched,
   values
 }) => {
-  const validPassField = FormUtils.isInputFieldValid("password", {
+  const passFieldValid = FormUtils.isFormFieldValid("pass", {
     touched,
     errors
   });
-  const validPassRepeatField = FormUtils.isInputFieldValid(
-    "password_repeated",
-    {
-      touched,
-      errors
-    }
-  );
-  const validInputs =
-    validPassField &&
-    validPassRepeatField &&
-    values.password === values.password_repeated;
-
+  const passRepeatFieldValid = errors["pass_repeat"] ? false : true;
+  const formFieldsValid =
+    passFieldValid &&
+    passRepeatFieldValid &&
+    values.pass === values.pass_repeat;
   return (
     <div>
-      <InputLabel
+      <FormFieldLabel
         description="Password reset"
         error="Passwords are not matching"
-        valid={validInputs}
+        valid={formFieldsValid}
       />
       <List inset>
         <InputElement
           icon="lock_outline"
-          name="password"
+          name="pass"
           onBlur={handleBlur}
           onChange={handleChange}
           placeholder="New Password"
           type="password"
-          valid={validPassField}
-          value={values.password}
+          valid={passFieldValid}
+          value={values.pass}
         />
         <InputElement
           icon="lock_outline"
-          name="password_repeated"
+          name="pass_repeat"
           onBlur={handleBlur}
           onChange={handleChange}
-          placeholder="New Password Repeated"
+          placeholder="Repeat Password"
           type="password"
-          valid={validPassRepeatField}
-          value={values.password_repeated}
+          valid={passRepeatFieldValid}
+          value={values.pass_repeat}
         />
       </List>
     </div>
@@ -196,8 +189,10 @@ class UserInformation extends React.Component {
 
   render() {
     const props = { ...this.props };
-    const disableSubmission = FormUtils.shouldDisableSubmission(props);
     const submitStatus = get(props, "status.submission", null);
+    const disableSubmission =
+      FormUtils.shouldDisableSubmission(props) ||
+      props.values.pass !== props.values.pass_repeat;
 
     if (submitStatus && submitStatus.success) {
       return (
@@ -255,15 +250,19 @@ UserInformation = Formik({
     email: props.initialValues.email,
     school: props.initialValues.school,
     major: props.initialValues.major,
-    password: props.initialValues.password,
-    password_repeated: props.initialValues.password_repeated
+    pass: props.initialValues.pass,
+    pass_repeat: props.initialValues.pass_repeat
   }),
   validationSchema: Yup.object().shape({
     email: Yup.string().email(),
-    school: Yup.array(),
-    major: Yup.array(),
-    password: Yup.string(),
-    password_repeated: Yup.string()
+    school: Yup.array().required(),
+    major: Yup.array().required(),
+    pass: Yup.string(),
+    pass_repeat: Yup.string().when("pass", {
+      is: val => (val === undefined ? false : val.length > 0 ? true : false),
+      then: Yup.string().required(),
+      otherwise: Yup.string()
+    })
   }),
   handleSubmit: (values, { props, setErrors, setSubmitting, setStatus }) => {
     const userId = props.userId;
@@ -313,7 +312,7 @@ class General extends React.Component {
   handleMultipleSelect = (e, setFieldValue, setFieldTouched) => {
     const { name, options } = e.target;
     const selected = [...options]
-      .filter(option => option.selected === true)
+      .filter(option => option.selected)
       .map(option => option.value);
 
     setFieldValue(name, selected);
@@ -338,8 +337,8 @@ class General extends React.Component {
         email: "",
         school: userSchools,
         major: userMajors,
-        password: "",
-        password_repeated: ""
+        pass: "",
+        pass_repeat: ""
       }
     };
   };
@@ -367,6 +366,14 @@ class General extends React.Component {
     );
   }
 }
+
+General.propTypes = {
+  fetchMajorsIfNeeded: PropTypes.func.isRequired,
+  fetchSchoolsIfNeeded: PropTypes.func.isRequired,
+  majors: PropTypes.object.isRequired,
+  schools: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
   user: state.authUser,
