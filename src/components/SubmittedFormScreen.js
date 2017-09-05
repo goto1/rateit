@@ -4,31 +4,30 @@ import styled from "styled-components";
 import { ContentBlock, Button } from "./f7";
 
 const StyledContentBlock = styled(ContentBlock)`
-  margin: 0;
-  height: 97.5%;
   position: relative;
+  height: 97.5%;
   margin: 0 !important;
 `;
 
-const SubmissionMessage = styled.div`
+const Message = styled.div`
+  position: absolute;
+  top: 30%;
   font-size: 20px;
   text-align: center;
-  position: absolute;
-  top: 40%;
   width: 90%;
 `;
 
 const StyledButton = styled(Button)`
-  width: 90%;
   position: absolute !important;
   bottom: 15px;
+  width: 90%;
 `;
 
 const SubmittedFormScreen = ({ buttonName, onClick, children }) =>
   <StyledContentBlock>
-    <SubmissionMessage>
+    <Message>
       {children}
-    </SubmissionMessage>
+    </Message>
     <StyledButton type="button" onClick={onClick} big fill>
       {buttonName}
     </StyledButton>
