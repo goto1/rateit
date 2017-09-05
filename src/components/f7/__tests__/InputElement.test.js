@@ -1,11 +1,11 @@
 import React from "react";
-import InputElement, { StyledIcon } from "../InputElement";
+import InputElement from "../InputElement";
 import Icon from "../Icon";
 import { shallow } from "enzyme";
 
 describe("InputElement component", () => {
-  const getInputElement = props => {
-    const newProps = {
+  const createInputElement = newProps => {
+    const props = {
       icon: "account_circle",
       id: "username",
       name: "username",
@@ -15,29 +15,25 @@ describe("InputElement component", () => {
       type: "text",
       valid: true,
       value: "Fred",
-      ...props
+      ...newProps
     };
-    return <InputElement {...newProps} />;
+    return <InputElement {...props} />;
   };
 
-  it("should render a `warning` Icon component when invalid", () => {
-    const InputElement = getInputElement({ valid: false });
+  it("should render an `account_circle` icon", () => {
+    const InputElement = createInputElement();
     const wrapper = shallow(InputElement);
-    const actual = wrapper.find(StyledIcon).props().material;
-    const expected = "warning";
+    const actual = wrapper
+      .render()
+      .find(".icon")
+      .html()
+      .includes("account_circle");
+    const expected = true;
     expect(actual).toBe(expected);
   });
 
-  it("should render an `account_circle` Icon component", () => {
-    const InputElement = getInputElement();
-    const wrapper = shallow(InputElement);
-    const actual = wrapper.find(Icon).props().material;
-    const expected = "account_circle";
-    expect(actual).toBe(expected);
-  });
-
-  it("should render an input element with attribute name of `username`", () => {
-    const InputElement = getInputElement();
+  it("should render an input element with the name attribute of `username`", () => {
+    const InputElement = createInputElement();
     const wrapper = shallow(InputElement);
     const actual = wrapper.find("input").props().name;
     const expected = "username";
@@ -45,20 +41,24 @@ describe("InputElement component", () => {
   });
 
   it("should call `onChange` when input changes", () => {
-    const InputElement = getInputElement();
+    const InputElement = createInputElement();
     const element = shallow(InputElement).find("input");
+
     element.simulate("change");
+
     const actual = element.props().onChange.mock.calls.length;
     const expected = 1;
     expect(actual).toBe(expected);
   });
 
   it("should call `onBlur` when input is in focus", () => {
-    const InputElement = getInputElement();
+    const InputElement = createInputElement();
     const element = shallow(InputElement).find("input");
+
     element.simulate("focus");
     element.simulate("change");
     element.simulate("blur");
+
     const actual = element.props().onBlur.mock.calls.length;
     const expected = 1;
     expect(actual).toBe(expected);

@@ -4,14 +4,10 @@ import styled from "styled-components";
 import Icon from "./Icon";
 import pick from "lodash/pick";
 
-const InputWrapper = styled.div`margin-left: 15px;`;
-
-export const StyledIcon = styled(Icon)`
-  position: absolute !important;
-  right: 12.5px;
-  opacity: .7;
-  color: #FF0000;
-  font-size: 20px;
+const StyledIcon = styled(Icon)`
+  transition: transform .75s ease-in-out;
+  transform: ${props => (!props.valid ? "scale(1.15)" : "")};
+  color: ${props => (!props.valid ? "#FF0000" : "#000")};
 `;
 
 const Container = styled.div.attrs({
@@ -19,6 +15,8 @@ const Container = styled.div.attrs({
 })`
   position: relative;
 `;
+
+const InputWrapper = styled.div`margin-left: 15px;`;
 
 const InputElement = props => {
   const { icon, valid } = props;
@@ -33,9 +31,8 @@ const InputElement = props => {
   ]);
   return (
     <Container>
-      {!valid && <StyledIcon material="warning" />}
       <div className="item-media">
-        <Icon material={icon} />
+        <StyledIcon material={icon} valid={valid} />
       </div>
       <InputWrapper valid={valid} className="item-input">
         <input {...inputAttrs} />
