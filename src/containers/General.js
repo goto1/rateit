@@ -125,11 +125,10 @@ export const PasswordReset = ({
     touched,
     errors
   });
-  const passRepeatFieldValid = errors["pass_repeat"] ? false : true;
   const formFieldsValid =
-    passFieldValid &&
-    passRepeatFieldValid &&
-    values.pass === values.pass_repeat;
+    touched.pass_repeat === undefined
+      ? true
+      : values.pass === values.pass_repeat ? true : false;
   return (
     <div>
       <FormFieldLabel
@@ -155,7 +154,7 @@ export const PasswordReset = ({
           onChange={handleChange}
           placeholder="Repeat Password"
           type="password"
-          valid={passRepeatFieldValid}
+          valid={formFieldsValid}
           value={values.pass_repeat}
         />
       </List>
