@@ -4,9 +4,7 @@ import omitBy from "lodash/omitBy";
 import isNil from "lodash/isNil";
 
 const Icon = ({ material, className, onClick }) => {
-  const classNames = className
-    ? `material-icons icon ${className}`
-    : `material-icons icon`;
+  const classNames = `material-icons icon ${className ? className : ""}`.trim();
   const props = omitBy(
     {
       className: classNames,
