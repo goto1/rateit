@@ -15,27 +15,62 @@ exports[`RatingStars component should render correctly 1`] = `
 <div
   className="sc-VigVT jcgCRq"
 >
-  <i
+  .bYCMRk {
+  font-size: 19px;
+  color: #FEBA72;
+  width: 19px;
+  padding-bottom: 2px;
+}
+
+<i
     className="material-icons icon sc-jTzLTM bYCMRk"
   >
     star
   </i>
-  <i
+  .bYCMRk {
+  font-size: 19px;
+  color: #FEBA72;
+  width: 19px;
+  padding-bottom: 2px;
+}
+
+<i
     className="material-icons icon sc-jTzLTM bYCMRk"
   >
     star
   </i>
-  <i
+  .bYCMRk {
+  font-size: 19px;
+  color: #FEBA72;
+  width: 19px;
+  padding-bottom: 2px;
+}
+
+<i
     className="material-icons icon sc-jTzLTM bYCMRk"
   >
     star
   </i>
-  <i
+  .bYCMRk {
+  font-size: 19px;
+  color: #FEBA72;
+  width: 19px;
+  padding-bottom: 2px;
+}
+
+<i
     className="material-icons icon sc-jTzLTM bYCMRk"
   >
     star
   </i>
-  <i
+  .bYCMRk {
+  font-size: 19px;
+  color: #FEBA72;
+  width: 19px;
+  padding-bottom: 2px;
+}
+
+<i
     className="material-icons icon sc-jTzLTM bYCMRk"
   >
     star_border

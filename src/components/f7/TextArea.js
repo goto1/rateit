@@ -3,13 +3,6 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Icon from "./Icon";
 
-// const StyledIcon = styled(Icon)`
-//   position: absolute !important;
-//   color: red;
-//   top: 35%;
-//   right: 5px;
-// `;
-
 const StyledIcon = styled(Icon)`
   transition: transform .75s ease-in-out;
   transform: ${props => (!props.valid ? "scale(1.15)" : "")};

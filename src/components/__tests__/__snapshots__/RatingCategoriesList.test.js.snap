@@ -65,24 +65,161 @@ exports[`RatingCategoriesList component should render correctly 1`] = `
 <div
   className="sc-kgoBCf geAHSS"
 >
-  <div>
-    <div
+  .ecEnce {
+  -webkit-letter-spacing: 2px;
+  -moz-letter-spacing: 2px;
+  -ms-letter-spacing: 2px;
+  letter-spacing: 2px;
+}
+
+.eYvYrI {
+  font-weight: 500;
+  color: #DEB21C;
+}
+
+.ixBfIh {
+  border: 0px;
+  height: 1px;
+  width: 70%;
+  margin: 1px auto;
+  background-image: linear-gradient(    to left,    #FFF,    #000,    #FFF  );
+}
+
+.dhCMem {
+  -webkit-flex-grow: 1;
+  -ms-flex-grow: 1;
+  flex-grow: 1;
+  padding-top: 4px;
+  color: #000;
+}
+
+.gcHgtx {
+  -webkit-flex-basis: 22px;
+  -ms-flex-basis: 22px;
+  flex-basis: 22px;
+  font-size: 19px;
+  padding-top: 4px;
+}
+
+.gbCgzD {
+  font-size: 14px;
+}
+
+.gbCgzD span {
+  font-size: 17px;
+}
+
+.kdJdmo {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 1px;
+}
+
+<div>
+    .ecEnce {
+  -webkit-letter-spacing: 2px;
+  -moz-letter-spacing: 2px;
+  -ms-letter-spacing: 2px;
+  letter-spacing: 2px;
+}
+
+.eYvYrI {
+  font-weight: 500;
+  color: #DEB21C;
+}
+
+.dhCMem {
+  -webkit-flex-grow: 1;
+  -ms-flex-grow: 1;
+  flex-grow: 1;
+  padding-top: 4px;
+  color: #000;
+}
+
+.gcHgtx {
+  -webkit-flex-basis: 22px;
+  -ms-flex-basis: 22px;
+  flex-basis: 22px;
+  font-size: 19px;
+  padding-top: 4px;
+}
+
+.gbCgzD {
+  font-size: 14px;
+}
+
+.gbCgzD span {
+  font-size: 17px;
+}
+
+.kdJdmo {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 1px;
+}
+
+<div
       className="sc-chPdSV kdJdmo"
     >
-      <i
+      .gcHgtx {
+  -webkit-flex-basis: 22px;
+  -ms-flex-basis: 22px;
+  flex-basis: 22px;
+  font-size: 19px;
+  padding-top: 4px;
+}
+
+<i
         className="material-icons icon sc-cSHVUG gcHgtx"
       >
         forward
       </i>
-      <div
+      .dhCMem {
+  -webkit-flex-grow: 1;
+  -ms-flex-grow: 1;
+  flex-grow: 1;
+  padding-top: 4px;
+  color: #000;
+}
+
+<div
         className="sc-jzJRlG dhCMem"
       >
         Attends Group Meetings
       </div>
-      <div
+      .ecEnce {
+  -webkit-letter-spacing: 2px;
+  -moz-letter-spacing: 2px;
+  -ms-letter-spacing: 2px;
+  letter-spacing: 2px;
+}
+
+.eYvYrI {
+  font-weight: 500;
+  color: #DEB21C;
+}
+
+.gbCgzD {
+  font-size: 14px;
+}
+
+.gbCgzD span {
+  font-size: 17px;
+}
+
+<div
         className="sc-kAzzGY gbCgzD sc-bdVaJa ecEnce"
       >
-        <span
+        .eYvYrI {
+  font-weight: 500;
+  color: #DEB21C;
+}
+
+<span
           className="sc-bwzfXH eYvYrI"
           color="#DEB21C"
         >
@@ -91,29 +228,166 @@ exports[`RatingCategoriesList component should render correctly 1`] = `
         /5
       </div>
     </div>
-    <hr
+    .ixBfIh {
+  border: 0px;
+  height: 1px;
+  width: 70%;
+  margin: 1px auto;
+  background-image: linear-gradient(    to left,    #FFF,    #000,    #FFF  );
+}
+
+<hr
       className="sc-htpNat ixBfIh"
       width="70%"
     />
   </div>
-  <div>
-    <div
+  .ecEnce {
+  -webkit-letter-spacing: 2px;
+  -moz-letter-spacing: 2px;
+  -ms-letter-spacing: 2px;
+  letter-spacing: 2px;
+}
+
+.fxvkdv {
+  font-weight: 500;
+  color: #A1BA37;
+}
+
+.dhCMem {
+  -webkit-flex-grow: 1;
+  -ms-flex-grow: 1;
+  flex-grow: 1;
+  padding-top: 4px;
+  color: #000;
+}
+
+.gcHgtx {
+  -webkit-flex-basis: 22px;
+  -ms-flex-basis: 22px;
+  flex-basis: 22px;
+  font-size: 19px;
+  padding-top: 4px;
+}
+
+.gbCgzD {
+  font-size: 14px;
+}
+
+.gbCgzD span {
+  font-size: 17px;
+}
+
+.kdJdmo {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 1px;
+}
+
+<div>
+    .ecEnce {
+  -webkit-letter-spacing: 2px;
+  -moz-letter-spacing: 2px;
+  -ms-letter-spacing: 2px;
+  letter-spacing: 2px;
+}
+
+.fxvkdv {
+  font-weight: 500;
+  color: #A1BA37;
+}
+
+.dhCMem {
+  -webkit-flex-grow: 1;
+  -ms-flex-grow: 1;
+  flex-grow: 1;
+  padding-top: 4px;
+  color: #000;
+}
+
+.gcHgtx {
+  -webkit-flex-basis: 22px;
+  -ms-flex-basis: 22px;
+  flex-basis: 22px;
+  font-size: 19px;
+  padding-top: 4px;
+}
+
+.gbCgzD {
+  font-size: 14px;
+}
+
+.gbCgzD span {
+  font-size: 17px;
+}
+
+.kdJdmo {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 1px;
+}
+
+<div
       className="sc-chPdSV kdJdmo"
     >
-      <i
+      .gcHgtx {
+  -webkit-flex-basis: 22px;
+  -ms-flex-basis: 22px;
+  flex-basis: 22px;
+  font-size: 19px;
+  padding-top: 4px;
+}
+
+<i
         className="material-icons icon sc-cSHVUG gcHgtx"
       >
         forward
       </i>
-      <div
+      .dhCMem {
+  -webkit-flex-grow: 1;
+  -ms-flex-grow: 1;
+  flex-grow: 1;
+  padding-top: 4px;
+  color: #000;
+}
+
+<div
         className="sc-jzJRlG dhCMem"
       >
         Contributes to Discussions
       </div>
-      <div
+      .ecEnce {
+  -webkit-letter-spacing: 2px;
+  -moz-letter-spacing: 2px;
+  -ms-letter-spacing: 2px;
+  letter-spacing: 2px;
+}
+
+.fxvkdv {
+  font-weight: 500;
+  color: #A1BA37;
+}
+
+.gbCgzD {
+  font-size: 14px;
+}
+
+.gbCgzD span {
+  font-size: 17px;
+}
+
+<div
         className="sc-kAzzGY gbCgzD sc-bdVaJa ecEnce"
       >
-        <span
+        .fxvkdv {
+  font-weight: 500;
+  color: #A1BA37;
+}
+
+<span
           className="sc-bwzfXH fxvkdv"
           color="#A1BA37"
         >

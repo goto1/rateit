@@ -16,7 +16,12 @@ exports[`NumericRating component should render correctly 1`] = `
 <div
   className="sc-bdVaJa ecEnce"
 >
-  <span
+  .fxvkdv {
+  font-weight: 500;
+  color: #A1BA37;
+}
+
+<span
     className="sc-bwzfXH fxvkdv"
     color="#A1BA37"
   >
