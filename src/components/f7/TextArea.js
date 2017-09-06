@@ -3,11 +3,17 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Icon from "./Icon";
 
+// const StyledIcon = styled(Icon)`
+//   position: absolute !important;
+//   color: red;
+//   top: 35%;
+//   right: 5px;
+// `;
+
 const StyledIcon = styled(Icon)`
-  position: absolute !important;
-  color: red;
-  top: 35%;
-  right: 5px;
+  transition: transform .75s ease-in-out;
+  transform: ${props => (!props.valid ? "scale(1.15)" : "")};
+  color: ${props => (!props.valid ? "#FF0000" : "#000")};
 `;
 
 const StyledItemContent = styled.div.attrs({
@@ -27,9 +33,8 @@ const Textarea = ({
 }) =>
   <li className="align-top">
     <StyledItemContent>
-      {!valid && <StyledIcon material="warning" />}
       <div className="item-media">
-        <Icon material={icon} />
+        <StyledIcon material={icon} valid={valid} />
       </div>
       <div className="item-inner">
         <div className="item-input">
