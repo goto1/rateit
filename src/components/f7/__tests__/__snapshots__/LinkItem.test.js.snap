@@ -21,16 +21,76 @@ exports[`LinkItem component renders correctly 1`] = `
 }
 
 <li>
-  <a
+  .lfVYTe {
+  padding-right: 15px;
+}
+
+.fvZPbp {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding-right: 0 !important;
+  position: relative;
+}
+
+.bNzvmb {
+  color: #C7C7CC;
+  position: absolute !important;
+  right: 0;
+  width: 17px;
+}
+
+<a
     href="/"
   >
-    <div
+    .lfVYTe {
+  padding-right: 15px;
+}
+
+.fvZPbp {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding-right: 0 !important;
+  position: relative;
+}
+
+.bNzvmb {
+  color: #C7C7CC;
+  position: absolute !important;
+  right: 0;
+  width: 17px;
+}
+
+<div
       className="item-content sc-bdVaJa lfVYTe"
     >
-      <div
+      .fvZPbp {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding-right: 0 !important;
+  position: relative;
+}
+
+.bNzvmb {
+  color: #C7C7CC;
+  position: absolute !important;
+  right: 0;
+  width: 17px;
+}
+
+<div
         className="item-inner sc-bwzfXH fvZPbp"
       >
-        <i
+        .bNzvmb {
+  color: #C7C7CC;
+  position: absolute !important;
+  right: 0;
+  width: 17px;
+}
+
+<i
           className="material-icons icon sc-htpNat bNzvmb"
         >
           keyboard_arrow_right

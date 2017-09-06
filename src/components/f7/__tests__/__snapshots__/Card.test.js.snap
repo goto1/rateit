@@ -6,21 +6,29 @@ exports[`Card component should render correctly 1`] = `
 <div
   className="card"
 >
-  <div
+  
+
+<div
     className="card-header"
   >
     HelloWorld
   </div>
-  <div
+  
+
+<div
     className="card-content"
   >
-    <div
+    
+
+<div
       className="card-content-inner"
     >
       HelloWorld
     </div>
   </div>
-  <div
+  
+
+<div
     className="card-footer"
   >
     HelloWorld

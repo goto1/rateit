@@ -6,16 +6,24 @@ exports[`Navbar component should render correctly 1`] = `
 <div
   className="navbar"
 >
-  <div
+  
+
+<div
     className="navbar-inner"
   >
-    <div
+    
+
+<div
       className="left"
     >
-      <a
+      
+
+<a
         className="back link"
       >
-        <i
+        
+
+<i
           className="icon icon-back"
         />
         <span>
@@ -23,12 +31,16 @@ exports[`Navbar component should render correctly 1`] = `
         </span>
       </a>
     </div>
-    <div
+    
+
+<div
       className="center"
     >
       Home
     </div>
-    <div
+    
+
+<div
       className="right"
     >
       See More

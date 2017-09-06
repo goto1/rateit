@@ -6,17 +6,23 @@ exports[`Accordion component should render correctly 1`] = `
 <div
   className="accordion-list"
 >
-  <div
+  
+
+<div
     className="accordion-item"
   >
     HelloWorld
   </div>
-  <div
+  
+
+<div
     className="accordion-item-toggle"
   >
     HelloWorld
   </div>
-  <div
+  
+
+<div
     className="accordion-item-content"
   >
     HelloWorld
