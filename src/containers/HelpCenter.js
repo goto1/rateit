@@ -7,12 +7,12 @@ import { connect } from "react-redux";
 import get from "lodash/get";
 import PreloaderScreen from "../components/PreloaderScreen";
 import SubmittedFormScreen from "../components/SubmittedFormScreen";
+import FormFieldLabel from "../components/FormFieldLabel";
 import * as FormUtils from "../utils/FormUtils";
 import * as API from "../utils/API";
 import {
   Button,
   ContentBlock,
-  ContentBlockTitle,
   InputElement,
   List,
   NavCenter,
@@ -21,6 +21,10 @@ import {
   Textarea
 } from "../components/f7";
 import { Page } from "framework7-react";
+
+const StyledList = styled(List)`
+  margin-top: 15px !important;
+`;
 
 class ContactForm extends React.Component {
   goBack = () => {
@@ -50,6 +54,7 @@ class ContactForm extends React.Component {
       touched,
       errors
     });
+    const validFormFields = titleFieldValid && messageFieldValid;
     const submitStatus = get(props, "status.submission", null);
 
     if (submitStatus && submitStatus.success) {
@@ -72,9 +77,13 @@ class ContactForm extends React.Component {
     return props.isSubmitting
       ? <PreloaderScreen size="big" />
       : <div>
-          <ContentBlockTitle>Contact form</ContentBlockTitle>
+          <FormFieldLabel
+            description="Contact form"
+            error="Both fields need to be filled"
+            valid={validFormFields}
+          />
           <form onSubmit={props.handleSubmit}>
-            <List inset>
+            <StyledList inset>
               <InputElement
                 icon="info"
                 name="title"
@@ -94,7 +103,7 @@ class ContactForm extends React.Component {
                 valid={messageFieldValid}
                 value={values.message}
               />
-            </List>
+            </StyledList>
             <ContentBlock>
               <Button
                 big
