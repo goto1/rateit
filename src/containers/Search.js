@@ -1,7 +1,10 @@
-import React, { Component } from "react";
-import styled from "styled-components";
+import React from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
+import { connect } from "react-redux";
+import { fetchUsersIfNeeded } from "../actions";
 import UserListItem from "../components/UserListItem";
+import PreloaderScreen from "../components/PreloaderScreen";
 import {
   LinkButton,
   Card,
@@ -14,9 +17,7 @@ import {
   List
 } from "../components/f7";
 import { Page, Navbar, Searchbar } from "framework7-react";
-
-// DELETE WHEN DONE TESTING...
-import * as API from "../utils/";
+import { map } from "lodash";
 
 const StyledLinkButton = styled(LinkButton)`
   color: ${props => props.color} !important;
@@ -42,7 +43,7 @@ const StyledCardContent = styled(CardContent)`
   span { font-weight: 500 !important; }
 `;
 
-let NoResults = () =>
+const NoResultsFound = () =>
   <ContentBlock className="searchbar-not-found">
     <StyledCard>
       <StyledCardHeader>No Results Found</StyledCardHeader>
@@ -98,23 +99,26 @@ SchoolLabels.propTypes = {
   schools: PropTypes.array.isRequired
 };
 
-// DELETE THIS WHEN DONE TESTING
-const allUsers = API.getUsers();
-const currentUser = API.getUserDetails("UArjrbxWHX");
-// DELETE THIS WHEN DONE TESTING
-
 const StyledList = styled(List)`
   margin-top: 25px !important;
 `;
 
-class Search extends Component {
-  renderUserList = () =>
-    this.users.map(user => <UserListItem key={user.id} {...user} />);
+class Search extends React.Component {
+  renderUserList = () => {
+    const allUsers = this.props.users.all;
+    const numOfUsers = Object.keys(allUsers).length;
+
+    return numOfUsers > 0
+      ? map(allUsers, user => <UserListItem key={user.id} {...user} />)
+      : null;
+  };
 
   render() {
-    this.users = allUsers.map(user => API.getUserDetails(user.id));
-    const userSchools = currentUser.schools;
+    const { user } = this.props;
     const userList = this.renderUserList();
+    const authUserSchools = user.schools || null;
+    const isLoading = userList === null || authUserSchools === null;
+
     return (
       <Page>
         <Navbar title="RateIt" sliding />
@@ -125,18 +129,30 @@ class Search extends Component {
           searchList="#search-list"
           searchIn=".username"
           onSearchbarSearch={() => console.log("onSearchbarSearch")}
-          onSearchbarEnable={() => console.log("onSearchbarEnable")}
-          onSearchbarDisable={() => console.log("onSearchbarDisable")}
-          onSearchbarClear={() => console.log("onSearchbarClear")}
         />
-        <SchoolLabels schools={userSchools} />
-        <NoResults />
-        <StyledList id="search-list" className="searchbar-found" inset>
-          {userList}
-        </StyledList>
+        {isLoading
+          ? <PreloaderScreen size="big" />
+          : <div>
+              <SchoolLabels schools={authUserSchools} />
+              <NoResultsFound />
+              <StyledList id="search-list" className="searchbar-found" inset>
+                {userList}
+              </StyledList>
+            </div>}
       </Page>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  user: state.authUser,
+  users: state.users
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchUsersIfNeeded: options => dispatch(fetchUsersIfNeeded(options))
+});
+
+Search = connect(mapStateToProps, mapDispatchToProps)(Search);
 
 export default Search;

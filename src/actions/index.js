@@ -1,5 +1,5 @@
 import { handleRouteChange } from "./RouteActions";
-import { fetchUserIfNeeded } from "./UserActions";
+import { fetchUserIfNeeded, fetchUsersIfNeeded } from "./UserActions";
 import {
   loginUser,
   logoutUser,
@@ -14,6 +14,7 @@ export {
   fetchMajorsIfNeeded,
   fetchSchoolsIfNeeded,
   fetchUserIfNeeded,
+  fetchUsersIfNeeded,
   handleRouteChange,
   loginUser,
   logoutUser,

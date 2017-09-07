@@ -30,14 +30,42 @@ const user = (
   }
 };
 
-export const usersReducer = (state = {}, action) => {
+export const usersReducer = (
+  state = { all: {}, isFetching: false },
+  action
+) => {
   switch (action.type) {
     case ActionTypes.FETCH_USER_REQUEST:
     case ActionTypes.FETCH_USER_SUCCESS:
     case ActionTypes.FETCH_USER_FAILURE:
       return {
         ...state,
-        [action.userId]: user(state[action.userId], action)
+        [action.userId]: user(state[action.userId], action), // DELETE
+        all: {
+          ...state.all,
+          [action.userId]: user(state[action.userId], action)
+        }
+      };
+    case ActionTypes.FETCH_USERS_REQUEST:
+      return {
+        ...state,
+        isFetching: true
+      };
+    case ActionTypes.FETCH_USERS_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        receivedAt: action.receivedAt,
+        all: {
+          ...state.all,
+          ...action.payload.data
+        }
+      };
+    case ActionTypes.FETCH_USERS_FAILURE:
+      return {
+        ...state,
+        error: action.error,
+        isFetching: false
       };
     default:
       return state;

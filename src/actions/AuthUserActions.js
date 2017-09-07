@@ -1,13 +1,14 @@
 import * as ActionTypes from "./ActionTypes";
 import * as API from "../utils/API";
 
+import { fetchUsersIfNeeded } from "./UserActions";
+
 /**
  * Authentication Functionality
  */
 
-export const requestLogin = credentials => ({
-  type: ActionTypes.LOGIN_REQUEST,
-  credentials
+export const requestLogin = () => ({
+  type: ActionTypes.LOGIN_REQUEST
 });
 
 export const receiveLogin = user => ({
@@ -24,8 +25,11 @@ export const loginUser = credentials => dispatch => {
   dispatch(requestLogin(credentials));
 
   return API.loginUser(credentials)
-    .then(response => response.data)
-    .then(user => dispatch(receiveLogin(user)))
+    .then(user => {
+      const schools = user.schools.map(school => school.id);
+      dispatch(receiveLogin(user));
+      dispatch(fetchUsersIfNeeded({ schools }));
+    })
     .catch(error => dispatch(loginError(error)));
 };
 
