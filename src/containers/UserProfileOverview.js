@@ -223,7 +223,7 @@ Overview.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  user: state.users[state.route.userId],
+  user: state.users.all[state.route.userId],
   userBookmarks: state.authUser.bookmarks
 });
 

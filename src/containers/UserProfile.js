@@ -126,7 +126,7 @@ class UserProfile extends React.Component {
 
 const mapStateToProps = state => ({
   route: state.route,
-  users: state.users
+  users: state.users.all
 });
 
 UserProfile = connect(mapStateToProps)(UserProfile);

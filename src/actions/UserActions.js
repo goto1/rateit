@@ -33,7 +33,7 @@ const fetchUser = userId => dispatch => {
 };
 
 const shouldFetchUser = (state, userId) => {
-  const user = state.users[userId];
+  const user = state.users.all[userId];
   if (!user) {
     return true;
   }
