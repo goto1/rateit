@@ -4,31 +4,31 @@ import PropTypes from "prop-types";
 import RatingStars from "./RatingStars";
 import capitalize from "lodash/capitalize";
 
-const UserNameWrapper = styled.div`
+const FullNameWrapper = styled.div`
   font-size: 15px;
   font-weight: 500;
   flex-grow: 1;
   color: ${props => props.color};
 `;
 
-const UserName = ({ type, maxLength, children }) => {
+const FullName = ({ type, maxLength, children }) => {
   const color = type.toLowerCase() === "student" ? "#497B3C" : "#6967AE";
-  const username =
+  const fullName =
     children.length > maxLength
       ? `${children.slice(0, maxLength - 2)}..`
       : children;
 
   return (
-    <UserNameWrapper className="username" color={color}>
-      {username}
-    </UserNameWrapper>
+    <FullNameWrapper className="full-name" color={color}>
+      {fullName}
+    </FullNameWrapper>
   );
 };
 
-UserName.propTypes = {
+FullName.propTypes = {
   type: PropTypes.string.isRequired,
   maxLength: PropTypes.number.isRequired,
-  children: PropTypes.string
+  children: PropTypes.node.isRequired
 };
 
 const UserRating = styled.div`
@@ -99,9 +99,9 @@ const UserItemContents = ({
 }) =>
   <UserItemContentsContainer>
     <Row>
-      <UserName type={type} maxLength={20}>
+      <FullName type={type} maxLength={20}>
         {name}
-      </UserName>
+      </FullName>
       <UserRating margin={margin}>
         {overallRating}
       </UserRating>

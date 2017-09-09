@@ -1,12 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import { connect } from "react-redux";
-import { fetchUsersIfNeeded } from "../actions";
+import styled from "styled-components";
 import UserListItem from "../components/UserListItem";
 import PreloaderScreen from "../components/PreloaderScreen";
 import {
-  LinkButton,
   Card,
   CardContent,
   CardHeader,
@@ -14,6 +12,7 @@ import {
   ContentBlockTitle,
   GridCol,
   GridRow,
+  LinkButton,
   List
 } from "../components/f7";
 import { Page, Navbar, Searchbar } from "framework7-react";
@@ -42,29 +41,6 @@ const StyledCardContent = styled(CardContent)`
   text-align: center;
   span { font-weight: 500 !important; }
 `;
-
-const NoResultsFound = () =>
-  <ContentBlock className="searchbar-not-found">
-    <StyledCard>
-      <StyledCardHeader>No Results Found</StyledCardHeader>
-      <StyledCardContent>
-        Can't find what you're looking for? You can rate <span>professors</span>{" "}
-        or <span>classmates</span> down below!
-      </StyledCardContent>
-    </StyledCard>
-    <GridRow>
-      <GridCol>
-        <StyledLinkButton href="/rate/?type=professor" color="#9595A8" big>
-          Professor
-        </StyledLinkButton>
-      </GridCol>
-      <GridCol>
-        <StyledLinkButton href="/rate/?type=student" color="#A8A284" big>
-          Classmate
-        </StyledLinkButton>
-      </GridCol>
-    </GridRow>
-  </ContentBlock>;
 
 const ChipWrapper = styled.span`
   margin: 7.5px 5px 0 0 !important;
@@ -122,20 +98,52 @@ class Search extends React.Component {
     return (
       <Page>
         <Navbar title="RateIt" sliding />
-        <Searchbar
-          cancelLink="Cancel"
-          placeholder="Search professors and students"
-          clearButton={true}
-          searchList="#search-list"
-          searchIn=".username"
-          onSearchbarSearch={() => console.log("onSearchbarSearch")}
-        />
+
         {isLoading
           ? <PreloaderScreen size="big" />
           : <div>
+              <Searchbar
+                cancelLink="Cancel"
+                placeholder="Search professors and classmates..."
+                searchList=".searchbar-found"
+                searchIn=".full-name"
+                clearButton={true}
+              />
+
               <SchoolLabels schools={authUserSchools} />
-              <NoResultsFound />
-              <StyledList id="search-list" className="searchbar-found" inset>
+
+              <ContentBlock className="searchbar-not-found">
+                <StyledCard>
+                  <StyledCardHeader>No Results Found</StyledCardHeader>
+                  <StyledCardContent>
+                    Can't find what you're looking for? You can rate{" "}
+                    <span>professors</span> or <span>classmates</span> down
+                    below!
+                  </StyledCardContent>
+                </StyledCard>
+                <GridRow>
+                  <GridCol>
+                    <StyledLinkButton
+                      href="/rate/?type=professor"
+                      color="#9595A8"
+                      big
+                    >
+                      Professor
+                    </StyledLinkButton>
+                  </GridCol>
+                  <GridCol>
+                    <StyledLinkButton
+                      href="/rate/?type=student"
+                      color="#A8A284"
+                      big
+                    >
+                      Classmate
+                    </StyledLinkButton>
+                  </GridCol>
+                </GridRow>
+              </ContentBlock>
+
+              <StyledList className="searchbar-found" inset>
                 {userList}
               </StyledList>
             </div>}
@@ -149,10 +157,6 @@ const mapStateToProps = state => ({
   users: state.users
 });
 
-const mapDispatchToProps = dispatch => ({
-  fetchUsersIfNeeded: options => dispatch(fetchUsersIfNeeded(options))
-});
-
-Search = connect(mapStateToProps, mapDispatchToProps)(Search);
+Search = connect(mapStateToProps)(Search);
 
 export default Search;
