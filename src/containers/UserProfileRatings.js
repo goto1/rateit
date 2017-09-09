@@ -11,7 +11,6 @@ import {
   AccordionToggle,
   Card,
   CardContent,
-  CardFooter,
   CardHeader,
   ContentBlockTitle,
   Icon
@@ -117,12 +116,15 @@ Details.propTypes = {
 
 const Content = ({ date, comment, recommendUser, individualRatings }) => {
   const postedOn = new Date(+date);
-  const parsedDate = `${postedOn.getMonth()}/${postedOn.getMonth()}/${postedOn.getFullYear()}`;
+  const month = postedOn.getMonth();
+  const day = postedOn.getDay();
+  const year = postedOn.getFullYear();
+  const fullDate = `${month}/${day}/${year}`;
 
   return (
     <CardContent>
       <DatePosted>
-        {parsedDate}
+        {fullDate}
       </DatePosted>
       <Comment>
         {comment}
@@ -178,20 +180,6 @@ Button.propTypes = {
   children: PropTypes.number.isRequired
 };
 
-const StyledFooter = styled(CardFooter)`
-  justify-content: flex-start !important;
-`;
-
-const Footer = ({ likes, dislikes }) =>
-  <StyledFooter>
-    <Button icon="thumb_up" onClick={() => console.log("liked")}>
-      {likes}
-    </Button>
-    <Button icon="thumb_down" onClick={() => console.log("disliked")}>
-      {dislikes}
-    </Button>
-  </StyledFooter>;
-
 const StyledCard = styled(Card)`
   margin-bottom: 20px !important;
 `;
@@ -200,7 +188,6 @@ const UserRating = props =>
   <StyledCard>
     <Header {...props} />
     <Content {...props} />
-    <Footer {...props} />
   </StyledCard>;
 
 UserRating.propTypes = {
@@ -209,8 +196,6 @@ UserRating.propTypes = {
   date: PropTypes.string.isRequired,
   comment: PropTypes.string.isRequired,
   aggregateRating: PropTypes.number.isRequired,
-  dislikes: PropTypes.number.isRequired,
-  likes: PropTypes.number.isRequired,
   individualRatings: PropTypes.array.isRequired,
   recommendUser: PropTypes.bool.isRequired
 };

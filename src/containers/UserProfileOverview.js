@@ -88,18 +88,6 @@ ContentItem.propTypes = {
   children: PropTypes.string.isRequired
 };
 
-// DELETE WHEN DONE TESTING
-const arrStringify = (arr, attr) => {
-  let str = null;
-  if (arr.length > 0) {
-    str = arr.map(item => item[attr]).join(", ");
-  } else {
-    str = arr[0]["name"];
-  }
-
-  return str;
-};
-
 const StyledNumericRating = styled(NumericRating)`
   font-size: 17px;
   span { font-size: 20px; }
@@ -123,9 +111,15 @@ const UserInformation = ({
   type,
   userBookmarks
 }) => {
-  const schoolNames = schools ? arrStringify(schools, "abbreviation") : "N/A";
-  const majorNames = majors ? arrStringify(majors, "abbreviation") : "N/A";
-  const userEmails = emails ? emails.map(email => email).join(", ") : "N/A";
+  const schoolNames =
+    schools.length > 0
+      ? schools.map(school => school.abbreviation).join(", ")
+      : "N/A";
+  const majorNames =
+    majors.length > 0
+      ? majors.map(major => major.abbreviation).join(", ")
+      : "N/A";
+  const userEmails = emails.length > 0 ? emails.join(", ") : "N/A";
   const bookmarked = userBookmarks.includes(id);
   return (
     <StyledCard>
@@ -148,10 +142,12 @@ const UserInformation = ({
         {bookmarked
           ? <StyledIcon
               material="bookmark"
+              className=".test-me"
               onClick={() => removeUserFromBookmarks(id)}
             />
           : <StyledIcon
               material="bookmark_border"
+              className=".test-me"
               onClick={() => addUserToBookmarks(id)}
             />}
       </Content>
