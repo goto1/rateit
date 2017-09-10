@@ -131,7 +131,7 @@ ContactForm.propTypes = {
   setSubmitting: PropTypes.func.isRequired,
   status: PropTypes.object,
   touched: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
   values: PropTypes.object.isRequired
 };
 
@@ -145,7 +145,7 @@ ContactForm = Formik({
     message: Yup.string().required()
   }),
   handleSubmit: (values, { props, setSubmitting, setStatus }) => {
-    const userId = props.user.id;
+    const userId = props.auth.info.id;
 
     setSubmitting(true);
 
@@ -193,11 +193,11 @@ export let Content = props => {
 };
 
 Content.propTypes = {
-  user: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  user: state.authUser
+  auth: state.auth
 });
 
 Content = connect(mapStateToProps)(Content);

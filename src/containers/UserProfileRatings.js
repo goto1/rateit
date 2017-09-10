@@ -225,7 +225,7 @@ Ratings.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  user: state.users.all[state.route.userId]
+  user: state.users[state.route.userId]
 });
 
 const UserProfileRatings = connect(mapStateToProps)(Ratings);

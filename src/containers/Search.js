@@ -16,7 +16,7 @@ import {
   List
 } from "../components/f7";
 import { Page, Navbar, Searchbar } from "framework7-react";
-import { map } from "lodash";
+import { filter } from "lodash";
 
 const StyledLinkButton = styled(LinkButton)`
   color: ${props => props.color} !important;
@@ -81,19 +81,19 @@ const StyledList = styled(List)`
 
 class Search extends React.Component {
   renderUserList = () => {
-    const allUsers = this.props.users.all;
-    const numOfUsers = Object.keys(allUsers).length;
+    const { users } = this.props;
+    const filtered = filter(users, value => typeof value === "object");
 
-    return numOfUsers > 0
-      ? map(allUsers, user => <UserListItem key={user.id} {...user} />)
+    return filtered.length > 0
+      ? filtered.map(user => <UserListItem key={user.id} {...user} />)
       : null;
   };
 
   render() {
-    const { user } = this.props;
+    const authUser = this.props.auth;
     const userList = this.renderUserList();
-    const authUserSchools = user.schools || null;
-    const isLoading = userList === null || authUserSchools === null;
+    const userSchools = authUser.info ? authUser.info.schools : null;
+    const isLoading = userList === null || userSchools === null;
 
     return (
       <Page>
@@ -110,7 +110,7 @@ class Search extends React.Component {
                 clearButton={true}
               />
 
-              <SchoolLabels schools={authUserSchools} />
+              <SchoolLabels schools={userSchools} />
 
               <ContentBlock className="searchbar-not-found">
                 <StyledCard>
@@ -153,7 +153,7 @@ class Search extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.authUser,
+  auth: state.auth,
   users: state.users
 });
 

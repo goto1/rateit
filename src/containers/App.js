@@ -77,16 +77,19 @@ const Views = ({ children }) =>
 
 class Framework7 extends React.Component {
   componentDidMount() {
-    const { loginUser } = this.props;
-    loginUser({
-      email: "rarn1141@njit.edu"
-    });
+    // TEST USER
+    const userCreds = {
+      email: "rarn1141@njit.edu",
+      password: "KMIlsRkGyX"
+    };
+
+    this.props.loginUser(userCreds);
   }
 
   render() {
-    const { onRouteChange, children } = this.props;
+    const { handleRouteChange, children } = this.props;
     return (
-      <Framework7App routes={routes} onRouteChange={onRouteChange}>
+      <Framework7App routes={routes} onRouteChange={handleRouteChange}>
         <Views>
           {children}
         </Views>
@@ -96,12 +99,8 @@ class Framework7 extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  onRouteChange: event => {
-    dispatch(handleRouteChange(event));
-  },
-  loginUser: credentials => {
-    dispatch(loginUser(credentials));
-  }
+  handleRouteChange: e => dispatch(handleRouteChange(e)),
+  loginUser: credentials => dispatch(loginUser(credentials))
 });
 
 Framework7 = connect(null, mapDispatchToProps)(Framework7);

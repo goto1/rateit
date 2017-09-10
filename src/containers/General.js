@@ -319,23 +319,20 @@ class General extends React.Component {
   };
 
   getFormProps = () => {
-    const { user, schools, majors } = this.props;
-    const userMajors = user ? user.majors.map(major => major.id) : [];
-    const userSchools = user ? user.schools.map(school => school.id) : [];
-    const allSchools =
-      schools.all.length > 0
-        ? schools.all.filter(school => userSchools.includes(school.id))
-        : [];
-    const allMajors = majors.all.length > 0 ? majors.all : [];
+    const { auth, schools, majors } = this.props;
+    const selectedMajor = auth.info ? auth.info.majors.map(m => m.id) : [];
+    const selectedSchool = auth.info ? auth.info.schools.map(s => s.id) : [];
+    const schoolOptions = filter(schools, i => typeof i === "object");
+    const majorOptions = filter(majors, i => typeof i === "object");
 
     return {
-      majors: allMajors,
-      schools: allSchools,
-      userId: user.id,
+      majors: majorOptions,
+      schools: schoolOptions,
+      userId: auth.info.id,
       initialValues: {
         email: "",
-        school: userSchools,
-        major: userMajors,
+        school: selectedSchool,
+        major: selectedMajor,
         pass: "",
         pass_repeat: ""
       }
@@ -344,6 +341,7 @@ class General extends React.Component {
 
   render() {
     const formProps = this.getFormProps();
+
     const isDoneLoading = reduce(
       formProps,
       (res, val, key) => res && val.length !== 0,
@@ -371,11 +369,11 @@ General.propTypes = {
   fetchSchoolsIfNeeded: PropTypes.func.isRequired,
   majors: PropTypes.object.isRequired,
   schools: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  user: state.authUser,
+  auth: state.auth,
   schools: state.schools,
   majors: state.majors
 });

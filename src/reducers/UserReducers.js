@@ -1,11 +1,12 @@
 import * as ActionTypes from "../actions/ActionTypes";
 
-const user = (
-  state = {
-    isFetching: false
-  },
-  action
-) => {
+// TODO: rewrite the actions & reducers to eliminate the `all` property
+
+const initialState = {
+  isFetching: false
+};
+
+const user = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.FETCH_USER_REQUEST:
       return {
@@ -16,8 +17,8 @@ const user = (
       return {
         ...state,
         isFetching: false,
-        ...action.data,
-        lastUpdated: action.receivedAt
+        receivedAt: action.receivedAt,
+        ...action.data
       };
     case ActionTypes.FETCH_USER_FAILURE:
       return {
@@ -30,21 +31,14 @@ const user = (
   }
 };
 
-export const usersReducer = (
-  state = { all: {}, isFetching: false },
-  action
-) => {
+export const usersReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.FETCH_USER_REQUEST:
     case ActionTypes.FETCH_USER_SUCCESS:
     case ActionTypes.FETCH_USER_FAILURE:
       return {
         ...state,
-        [action.userId]: user(state[action.userId], action), // DELETE
-        all: {
-          ...state.all,
-          [action.userId]: user(state[action.userId], action)
-        }
+        [action.userId]: user(state[action.userId], action)
       };
     case ActionTypes.FETCH_USERS_REQUEST:
       return {
@@ -56,16 +50,13 @@ export const usersReducer = (
         ...state,
         isFetching: false,
         receivedAt: action.receivedAt,
-        all: {
-          ...state.all,
-          ...action.payload.data
-        }
+        ...action.data
       };
     case ActionTypes.FETCH_USERS_FAILURE:
       return {
         ...state,
-        error: action.error,
-        isFetching: false
+        isFetching: false,
+        error: action.error
       };
     default:
       return state;

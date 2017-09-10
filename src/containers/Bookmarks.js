@@ -32,9 +32,9 @@ const StyledText = styled.div`
 const UserList = type => {
   class _UserList extends React.Component {
     renderUsers = () => {
-      const { authUser, removeUserFromBookmarks } = this.props;
+      const { auth, removeUserFromBookmarks } = this.props;
 
-      return authUser.bookmarks
+      return auth.info.bookmarks
         .filter(bookmark => bookmark.type === type)
         .map(user =>
           <UserCard
@@ -72,7 +72,7 @@ const UserList = type => {
   }
 
   _UserList.propTypes = {
-    authUser: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
     removeUserFromBookmarks: PropTypes.func.isRequired
   };
 
@@ -84,7 +84,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  authUser: state.authUser
+  auth: state.auth
 });
 
 export const Professors = connect(mapStateToProps, mapDispatchToProps)(

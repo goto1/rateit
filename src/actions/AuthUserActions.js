@@ -4,16 +4,16 @@ import * as API from "../utils/API";
 import { fetchUsersIfNeeded } from "./UserActions";
 
 /**
- * Authentication Functionality
+ * AUTH FUNCTIONALITY
  */
 
 export const requestLogin = () => ({
   type: ActionTypes.LOGIN_REQUEST
 });
 
-export const receiveLogin = user => ({
+export const receiveLogin = data => ({
   type: ActionTypes.LOGIN_SUCCESS,
-  user
+  data
 });
 
 export const loginError = error => ({
@@ -63,9 +63,9 @@ export const addUserRequest = () => ({
   type: ActionTypes.ADD_USER_REQUEST
 });
 
-export const addUserSuccess = payload => ({
+export const addUserSuccess = data => ({
   type: ActionTypes.ADD_USER_SUCCESS,
-  payload
+  data
 });
 
 export const addUserError = error => ({
@@ -74,10 +74,11 @@ export const addUserError = error => ({
 });
 
 export const addUserToBookmarks = userId => (dispatch, getState) => {
-  const { authUser } = getState();
+  const authUser = getState().auth.info;
+
   dispatch(addUserRequest());
+
   return API.bookmarkUser(authUser.id, userId)
-    .then(response => response.data)
     .then(data => dispatch(addUserSuccess(data)))
     .catch(error => dispatch(addUserError(error)));
 };
@@ -86,9 +87,9 @@ export const removeUserRequest = () => ({
   type: ActionTypes.REMOVE_USER_REQUEST
 });
 
-export const removeUserSuccess = payload => ({
+export const removeUserSuccess = deletedUserId => ({
   type: ActionTypes.REMOVE_USER_SUCCESS,
-  payload
+  userId: deletedUserId
 });
 
 export const removeUserError = error => ({
@@ -97,10 +98,11 @@ export const removeUserError = error => ({
 });
 
 export const removeUserFromBookmarks = userId => (dispatch, getState) => {
-  const { authUser } = getState();
+  const authUser = getState().auth.info;
+
   dispatch(removeUserRequest());
+
   return API.removeUser(authUser.id, userId)
-    .then(response => response.data)
-    .then(data => dispatch(removeUserSuccess(data)))
+    .then(() => dispatch(removeUserSuccess(userId)))
     .catch(error => dispatch(removeUserError(error)));
 };

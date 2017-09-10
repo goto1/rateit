@@ -16,29 +16,32 @@ const authReducer = (state = initialState, action) => {
     case ActionTypes.LOGIN_REQUEST:
       return {
         ...state,
-        isFetching: true,
-        isAuthenticated: false
+        isFetching: true
       };
     case ActionTypes.LOGIN_SUCCESS:
       return {
         ...state,
         isFetching: false,
         isAuthenticated: true,
-        errorMessage: "",
-        ...action.user
+        token:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ",
+        info: {
+          ...action.data
+        }
       };
     case ActionTypes.LOGIN_FAILURE:
       return {
         ...state,
         isFetching: false,
         isAuthenticated: false,
-        errorMessage: action.error.message
+        error: action.error
       };
     case ActionTypes.LOGOUT_SUCCESS:
       return {
         ...state,
-        isFetching: true,
-        isAuthenticated: false
+        isAuthenticated: false,
+        token: "",
+        info: {}
       };
     default:
       return state;
@@ -60,13 +63,15 @@ const bookmarksReducer = (state = initialState, action) => {
       return {
         ...state,
         isEditing: false,
-        bookmarks: [...state.bookmarks, action.payload]
+        info: {
+          bookmarks: [...state.info.bookmarks, action.data]
+        }
       };
     case ActionTypes.ADD_USER_FAILURE:
       return {
         ...state,
         isEditing: false,
-        errorMessage: action.error.message
+        error: action.error
       };
     case ActionTypes.REMOVE_USER_REQUEST:
       return {
@@ -77,15 +82,17 @@ const bookmarksReducer = (state = initialState, action) => {
       return {
         ...state,
         isEditing: false,
-        bookmarks: [...state.bookmarks].filter(
-          bookmark => bookmark.id !== action.payload.id
-        )
+        info: {
+          bookmarks: [...state.info.bookmarks].filter(
+            user => user.id !== action.payload.userId
+          )
+        }
       };
     case ActionTypes.REMOVE_USER_FAILURE:
       return {
         ...state,
         isEditing: false,
-        errorMessage: action.error.message
+        error: action.error
       };
     default:
       return state;

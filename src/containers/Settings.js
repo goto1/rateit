@@ -45,18 +45,18 @@ const UserSettings = ({ user, logout }) =>
     </List>
   </div>;
 
-let Settings = ({ user, logout }) =>
+let Settings = ({ auth, logout }) =>
   <Page>
     <Navbar>
       <NavCenter sliding>Settings</NavCenter>
     </Navbar>
     <AccountSettings />
     <HelpAndSupport />
-    <UserSettings user={user} logout={logout} />
+    <UserSettings user={auth.info} logout={logout} />
   </Page>;
 
 const mapStateToProps = state => ({
-  user: state.authUser
+  auth: state.auth
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -6,7 +6,7 @@ import { schoolsReducer } from "./SchoolReducers";
 import { majorsReducer } from "./MajorReducers";
 
 const rootReducer = combineReducers({
-  authUser: authUserReducer,
+  auth: authUserReducer,
   majors: majorsReducer,
   route: routeReducer,
   schools: schoolsReducer,

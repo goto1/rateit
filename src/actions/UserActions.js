@@ -12,9 +12,9 @@ export const fetchUserRequest = userId => ({
 
 export const fetchUserSuccess = (userId, data) => ({
   type: ActionTypes.FETCH_USER_SUCCESS,
-  userId,
+  receivedAt: Date.now(),
   data,
-  receivedAt: Date.now()
+  userId
 });
 
 export const fetchUserFailure = (userId, error) => ({
@@ -27,13 +27,13 @@ const fetchUser = userId => dispatch => {
   dispatch(fetchUserRequest(userId));
 
   return API.fetchUser(userId)
-    .then(response => response.data)
-    .then(data => dispatch(fetchUserSuccess(userId, data)))
-    .catch(err => dispatch(fetchUserFailure(userId, err)));
+    .then(data => dispatch(fetchUserSuccess(data)))
+    .catch(error => dispatch(fetchUserFailure(error)));
 };
 
 const shouldFetchUser = (state, userId) => {
-  const user = state.users.all[userId];
+  const user = state.users[userId];
+
   if (!user) {
     return true;
   }
@@ -57,10 +57,10 @@ export const fetchUsersRequest = () => ({
   type: ActionTypes.FETCH_USERS_REQUEST
 });
 
-export const fetchUsersSuccess = payload => ({
+export const fetchUsersSuccess = response => ({
   type: ActionTypes.FETCH_USERS_SUCCESS,
-  payload,
-  receivedAt: Date.now()
+  receivedAt: Date.now(),
+  data: response.data
 });
 
 export const fetchUsersFailure = error => ({
@@ -72,7 +72,7 @@ const fetchUsers = options => dispatch => {
   dispatch(fetchUsersRequest());
 
   return API.fetchUsers(options)
-    .then(users => dispatch(fetchUsersSuccess(users)))
+    .then(response => dispatch(fetchUsersSuccess(response)))
     .catch(error => dispatch(fetchUsersFailure(error)));
 };
 

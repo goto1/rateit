@@ -185,17 +185,23 @@ UserAggregateRatings.propTypes = {
   aggregateRatings: PropTypes.array.isRequired
 };
 
+// equalizer
+// add
+// add_circle
+// add_circle_outline
+
 const Overview = ({
   addUserToBookmarks,
   removeUserFromBookmarks,
-  userBookmarks,
-  user
+  user,
+  auth
 }) => {
+  const userBookmarks = auth.info.bookmarks.map(user => user.id);
   const props = {
     ...user,
     addUserToBookmarks,
     removeUserFromBookmarks,
-    userBookmarks: userBookmarks.map(user => user.id)
+    userBookmarks
   };
 
   const isFetching = user ? user.isFetching : true;
@@ -219,8 +225,8 @@ Overview.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  user: state.users.all[state.route.userId],
-  userBookmarks: state.authUser.bookmarks
+  user: state.users[state.route.userId],
+  auth: state.auth
 });
 
 const mapDispatchToProps = dispatch => ({

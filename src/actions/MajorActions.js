@@ -1,5 +1,7 @@
 import * as API from "../utils/API";
 import * as ActionTypes from "./ActionTypes";
+import { filter } from "lodash";
+import { createHashTableFromArray } from "../utils/GeneralUtils";
 
 export const fetchMajorsRequest = () => ({
   type: ActionTypes.FETCH_MAJORS_REQUEST
@@ -7,8 +9,8 @@ export const fetchMajorsRequest = () => ({
 
 export const fetchMajorsSuccess = data => ({
   type: ActionTypes.FETCH_MAJORS_SUCCESS,
-  payload: data,
-  receivedAt: Date.now()
+  receivedAt: Date.now(),
+  data
 });
 
 export const fetchMajorsFailure = error => ({
@@ -20,15 +22,18 @@ const fetchMajors = () => dispatch => {
   dispatch(fetchMajorsRequest());
 
   return API.fetchMajors()
-    .then(response => response.data)
-    .then(data => dispatch(fetchMajorsSuccess(data)))
+    .then(response => {
+      const data = createHashTableFromArray(response.data, "id");
+      return dispatch(fetchMajorsSuccess(data));
+    })
     .catch(error => dispatch(fetchMajorsFailure(error)));
 };
 
 export const fetchMajorsIfNeeded = () => (dispatch, getState) => {
-  const majors = getState().majors.all;
+  const majors = getState().majors;
+  const filtered = filter(majors, value => typeof value === "object");
 
-  if (majors.length === 0) {
+  if (filtered.length === 0) {
     return dispatch(fetchMajors());
   }
 };

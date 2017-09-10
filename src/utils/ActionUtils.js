@@ -19,3 +19,11 @@ export const getComponentName = (route, path) => {
 
   return name ? extractComponentName(name) : get(route, `${path}.name`, null);
 };
+
+export const mapArrayToObject = (array, property) =>
+  array && property
+    ? array.reduce((acc, value) => {
+        acc[value[property]] = value;
+        return acc;
+      }, {})
+    : {};

@@ -2,8 +2,7 @@ import * as ActionTypes from "../actions/ActionTypes";
 
 export const schoolsReducer = (
   state = {
-    isFetching: false,
-    all: []
+    isFetching: false
   },
   action
 ) => {
@@ -18,11 +17,12 @@ export const schoolsReducer = (
         ...state,
         isFetching: false,
         receivedAt: action.receivedAt,
-        all: [...action.payload]
+        ...action.data
       };
     case ActionTypes.FETCH_SCHOOLS_FAILURE:
       return {
         ...state,
+        isFetching: false,
         error: action.error
       };
     default:

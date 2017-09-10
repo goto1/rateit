@@ -6,18 +6,9 @@ import {
   users
 } from "../dummy-data";
 
-import { filter, isNil, intersection } from "lodash";
+import { intersection } from "lodash";
+import { createHashTableFromArray } from "../utils/GeneralUtils";
 import * as DummyData from "../dummy-data";
-
-function createLookupTable(array, key) {
-  const lookupTable = {};
-
-  array.forEach(item => {
-    lookupTable[item[key]] = item;
-  });
-
-  return lookupTable;
-}
 
 function getRatingDetails(ratings, userType) {
   const categories =
@@ -77,23 +68,16 @@ const getSchoolDetails = schoolIds =>
 const getMajorDetails = majorIds =>
   majorIds.map(majorId => majors.find(major => major.id === majorId));
 
-export const fetchUser = id =>
+export const fetchUser = userId =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (!id) {
+      if (!userId) {
         reject({
-          error: {
-            code: 404,
-            message: "User ID is not found"
-          }
+          error: "User ID is missing"
         });
       } else {
-        const user = getUserDetails(id);
-        resolve({
-          data: {
-            ...user
-          }
-        });
+        const user = getUserDetails(userId);
+        resolve(user);
       }
     }, 1000);
   });
@@ -101,7 +85,9 @@ export const fetchUser = id =>
 export const fetchUsers = options =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (Object.keys(options).length === 0) {
+      const numOfOptions = Object.keys(options).length;
+
+      if (numOfOptions === 0) {
         reject({});
       } else {
         const users = [...DummyData.users]
@@ -109,12 +95,13 @@ export const fetchUsers = options =>
             user => intersection(user.schools, options.schools).length > 0
           )
           .map(user => getUserDetails(user.id));
+
         resolve({
           page: 1,
           per_page: users.length,
           total: users.length,
           total_pages: 1,
-          data: createLookupTable(users, "id")
+          data: createHashTableFromArray(users, "id")
         });
       }
     }, 500);
@@ -122,59 +109,52 @@ export const fetchUsers = options =>
 
 export const loginUser = credentials =>
   new Promise((resolve, reject) => {
-    if (credentials.email === undefined) {
+    const { email, password } = credentials;
+
+    if (!email || !password) {
       reject({
-        error: "Incorrect username and/or password"
+        error: "Wrong username and/or password"
       });
     } else {
       const allUsers = [...DummyData.users];
-      const authUser = users.find(user => user.username === credentials.email);
+      const user = allUsers.find(user => user.username === email);
       const bookmarks = allUsers
-        .filter(user => authUser.bookmarks.includes(user.id))
-        .map(user => getUserDetails(user.id));
+        .filter(u => user.bookmarks.includes(u.id))
+        .map(u => getUserDetails(u.id));
+      const userInfo = {
+        ...getUserDetails(user.id),
+        bookmarks
+      };
 
-      resolve({
-        ...getUserDetails(authUser.id),
-        bookmarks: bookmarks
-      });
+      resolve(userInfo);
     }
   });
 
-export const bookmarkUser = (currUserId, userId) =>
+export const bookmarkUser = (authUserId, userId) =>
   new Promise((resolve, reject) => {
-    if (!userId) {
-      reject({
-        error: {
-          code: 404,
-          message: "Missing credentials"
-        }
-      });
-    } else {
-      resolve({
-        data: {
-          ...getUserDetails(userId)
-        }
-      });
-    }
+    setTimeout(() => {
+      if (!authUserId || !userId) {
+        reject({
+          error: "Missing information"
+        });
+      } else {
+        const user = getUserDetails(userId);
+
+        resolve(user);
+      }
+    }, 1);
   });
 
-export const removeUser = (currUserId, userId) =>
+export const removeUser = (authUserId, userId) =>
   new Promise((resolve, reject) => {
-    if (!userId) {
-      reject({
-        error: {
-          code: 404,
-          message: "Missing credentials"
-        }
-      });
-    } else {
-      const userToBeRemoved = users.find(user => user.id === userId);
-      resolve({
-        data: {
-          ...userToBeRemoved
-        }
-      });
-    }
+    setTimeout(() => {
+      if (!authUserId || !userId) {
+        reject({ error: "Missing information" });
+      } else {
+        // TODO: API.deleteUser()
+        resolve({});
+      }
+    }, 1);
   });
 
 export const fetchSchools = () =>
@@ -184,15 +164,17 @@ export const fetchSchools = () =>
     setTimeout(() => {
       if (schools.length === 0) {
         reject({
-          error: {
-            code: 404,
-            message: "Could not fetch schools at the moment"
-          }
+          error: "Could not retrieve schools at the moment"
         });
       } else {
-        resolve({
+        const response = {
+          page: 1,
+          per_page: schools.length,
+          total: schools.length,
+          total_pages: 1,
           data: schools
-        });
+        };
+        resolve(response);
       }
     }, 1);
   });
@@ -204,15 +186,17 @@ export const fetchMajors = () =>
     setTimeout(() => {
       if (majors.length === 0) {
         reject({
-          error: {
-            code: 404,
-            message: "Could not fetch majors at the moment"
-          }
+          error: "Could not retrieve majors at the moment"
         });
       } else {
-        resolve({
+        const response = {
+          page: 1,
+          per_page: majors.length,
+          total: majors.length,
+          total_pages: 1,
           data: majors
-        });
+        };
+        resolve(response);
       }
     }, 1);
   });
@@ -260,23 +244,6 @@ function createPostResponse(res) {
   return {
     ...res
   };
-}
-
-function createResponse(res) {
-  if (Object.keys(res).length === 0) {
-    return {};
-  }
-
-  return filter(
-    {
-      page: res.page || 1,
-      per_page: res.per_page || null,
-      total: res.data.length,
-      total_pages: res.total_pages || 1,
-      data: res.data
-    },
-    isNil
-  );
 }
 
 /**
