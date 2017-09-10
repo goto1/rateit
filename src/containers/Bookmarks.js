@@ -32,7 +32,7 @@ const StyledText = styled.div`
 const UserList = type => {
   class _UserList extends React.Component {
     renderUsers = () => {
-      const { auth, removeUserFromBookmarks } = this.props;
+      const { auth, removeUserFromBookmarksIfNeeded } = this.props;
 
       return auth.info.bookmarks
         .filter(bookmark => bookmark.type === type)
