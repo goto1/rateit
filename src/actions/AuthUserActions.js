@@ -73,7 +73,7 @@ export const addUserError = error => ({
   error
 });
 
-export const addUserToBookmarks = userId => (dispatch, getState) => {
+const addUserToBookmarks = userId => (dispatch, getState) => {
   const authUser = getState().auth.info;
 
   dispatch(addUserRequest());
@@ -83,13 +83,26 @@ export const addUserToBookmarks = userId => (dispatch, getState) => {
     .catch(error => dispatch(addUserError(error)));
 };
 
+const shouldAddUserToBookmarks = (state, userId) => {
+  const authUser = state.auth.info;
+  const userFound = authUser.bookmarks.find(b => b.id === userId);
+
+  return userFound === undefined;
+};
+
+export const addUserToBookmarksIfNeeded = userId => (dispatch, getState) => {
+  if (shouldAddUserToBookmarks(getState(), userId)) {
+    return dispatch(addUserToBookmarks(userId));
+  }
+};
+
 export const removeUserRequest = () => ({
   type: ActionTypes.REMOVE_USER_REQUEST
 });
 
-export const removeUserSuccess = deletedUserId => ({
+export const removeUserSuccess = userId => ({
   type: ActionTypes.REMOVE_USER_SUCCESS,
-  userId: deletedUserId
+  userId
 });
 
 export const removeUserError = error => ({
@@ -97,7 +110,7 @@ export const removeUserError = error => ({
   error
 });
 
-export const removeUserFromBookmarks = userId => (dispatch, getState) => {
+const removeUserFromBookmarks = userId => (dispatch, getState) => {
   const authUser = getState().auth.info;
 
   dispatch(removeUserRequest());
@@ -105,4 +118,20 @@ export const removeUserFromBookmarks = userId => (dispatch, getState) => {
   return API.removeUser(authUser.id, userId)
     .then(() => dispatch(removeUserSuccess(userId)))
     .catch(error => dispatch(removeUserError(error)));
+};
+
+const shouldRemoveUserFromBookmarks = (state, userId) => {
+  const authUser = state.auth.info;
+  const userFound = authUser.bookmarks.find(b => b.id === userId);
+
+  return userFound !== undefined;
+};
+
+export const removeUserFromBookmarksIfNeeded = userId => (
+  dispatch,
+  getState
+) => {
+  if (shouldRemoveUserFromBookmarks(getState(), userId)) {
+    return dispatch(removeUserFromBookmarks(userId));
+  }
 };

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { removeUserFromBookmarks } from "../actions";
+import { removeUserFromBookmarksIfNeeded } from "../actions";
 import capitalize from "lodash/capitalize";
 import UserCard from "../components/UserCard";
 import { ContentBlock, ContentBlockTitle } from "../components/f7";
@@ -39,7 +39,7 @@ const UserList = type => {
         .map(user =>
           <UserCard
             key={user.id}
-            removeUserFromBookmarks={removeUserFromBookmarks}
+            removeUserFromBookmarks={removeUserFromBookmarksIfNeeded}
             {...user}
           />
         );
@@ -73,14 +73,15 @@ const UserList = type => {
 
   _UserList.propTypes = {
     auth: PropTypes.object.isRequired,
-    removeUserFromBookmarks: PropTypes.func.isRequired
+    removeUserFromBookmarksIfNeeded: PropTypes.func.isRequired
   };
 
   return _UserList;
 };
 
 const mapDispatchToProps = dispatch => ({
-  removeUserFromBookmarks: userId => dispatch(removeUserFromBookmarks(userId))
+  removeUserFromBookmarksIfNeeded: userId =>
+    dispatch(removeUserFromBookmarksIfNeeded(userId))
 });
 
 const mapStateToProps = state => ({

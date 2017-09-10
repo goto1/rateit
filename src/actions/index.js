@@ -3,14 +3,14 @@ import { fetchUserIfNeeded, fetchUsersIfNeeded } from "./UserActions";
 import {
   loginUser,
   logoutUser,
-  addUserToBookmarks,
-  removeUserFromBookmarks
+  addUserToBookmarksIfNeeded,
+  removeUserFromBookmarksIfNeeded
 } from "./AuthUserActions";
 import { fetchSchoolsIfNeeded } from "./SchoolActions";
 import { fetchMajorsIfNeeded } from "./MajorActions";
 
 export {
-  addUserToBookmarks,
+  addUserToBookmarksIfNeeded,
   fetchMajorsIfNeeded,
   fetchSchoolsIfNeeded,
   fetchUserIfNeeded,
@@ -18,5 +18,5 @@ export {
   handleRouteChange,
   loginUser,
   logoutUser,
-  removeUserFromBookmarks
+  removeUserFromBookmarksIfNeeded
 };

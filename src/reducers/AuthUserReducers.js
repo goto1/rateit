@@ -64,6 +64,7 @@ const bookmarksReducer = (state = initialState, action) => {
         ...state,
         isEditing: false,
         info: {
+          ...state.info,
           bookmarks: [...state.info.bookmarks, action.data]
         }
       };
@@ -83,8 +84,9 @@ const bookmarksReducer = (state = initialState, action) => {
         ...state,
         isEditing: false,
         info: {
+          ...state.info,
           bookmarks: [...state.info.bookmarks].filter(
-            user => user.id !== action.payload.userId
+            b => b.id !== action.userId
           )
         }
       };

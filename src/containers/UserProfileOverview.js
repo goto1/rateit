@@ -1,12 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addUserToBookmarks, removeUserFromBookmarks } from "../actions";
+import {
+  addUserToBookmarksIfNeeded,
+  removeUserFromBookmarksIfNeeded
+} from "../actions";
 import styled from "styled-components";
 import capitalize from "lodash/capitalize";
 import HorizontalRule from "../components/HorizontalRule";
 import NumericRating from "../components/NumericRating";
 import RatingCategoriesList from "../components/RatingCategoriesList";
+import PreloaderScreen from "../components/PreloaderScreen";
 import { Icon, Card, CardContent, CardHeader } from "../components/f7";
 
 const StyledCard = styled(Card)`
@@ -100,8 +104,8 @@ const StyledIcon = styled(Icon)`
 `;
 
 const UserInformation = ({
-  addUserToBookmarks,
-  removeUserFromBookmarks,
+  addUserToBookmarksIfNeeded,
+  removeUserFromBookmarksIfNeeded,
   emails,
   id,
   majors,
@@ -142,13 +146,11 @@ const UserInformation = ({
         {bookmarked
           ? <StyledIcon
               material="bookmark"
-              className=".test-me"
-              onClick={() => removeUserFromBookmarks(id)}
+              onClick={() => removeUserFromBookmarksIfNeeded(id)}
             />
           : <StyledIcon
               material="bookmark_border"
-              className=".test-me"
-              onClick={() => addUserToBookmarks(id)}
+              onClick={() => addUserToBookmarksIfNeeded(id)}
             />}
       </Content>
     </StyledCard>
@@ -191,35 +193,35 @@ UserAggregateRatings.propTypes = {
 // add_circle_outline
 
 const Overview = ({
-  addUserToBookmarks,
-  removeUserFromBookmarks,
+  addUserToBookmarksIfNeeded,
+  removeUserFromBookmarksIfNeeded,
   user,
   auth
 }) => {
   const userBookmarks = auth.info.bookmarks.map(user => user.id);
   const props = {
     ...user,
-    addUserToBookmarks,
-    removeUserFromBookmarks,
+    addUserToBookmarksIfNeeded,
+    removeUserFromBookmarksIfNeeded,
     userBookmarks
   };
 
-  const isFetching = user ? user.isFetching : true;
-
-  if (isFetching) {
-    return <div />;
-  }
+  const isLoading = user === undefined || user.isFetching === true;
 
   return (
     <div>
-      <UserInformation {...props} />
-      <UserAggregateRatings {...props} />
+      {isLoading
+        ? <PreloaderScreen size="big" />
+        : <div>
+            <UserInformation {...props} />
+            <UserAggregateRatings {...props} />
+          </div>}
     </div>
   );
 };
 
 Overview.propTypes = {
-  addUserToBookmarks: PropTypes.func.isRequired,
+  addUserToBookmarksIfNeeded: PropTypes.func.isRequired,
   user: PropTypes.object,
   userBookmarks: PropTypes.array
 };
@@ -230,8 +232,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addUserToBookmarks: userId => dispatch(addUserToBookmarks(userId)),
-  removeUserFromBookmarks: userId => dispatch(removeUserFromBookmarks(userId))
+  addUserToBookmarksIfNeeded: userId =>
+    dispatch(addUserToBookmarksIfNeeded(userId)),
+  removeUserFromBookmarksIfNeeded: userId =>
+    dispatch(removeUserFromBookmarksIfNeeded(userId))
 });
 
 const UserProfileOverview = connect(mapStateToProps, mapDispatchToProps)(
