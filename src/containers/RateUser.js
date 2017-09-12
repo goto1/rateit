@@ -2,8 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import { fetchSchoolsIfNeeded, fetchMajorsIfNeeded } from "../actions";
 import RateUserProfessorForm from "./RateUserProfessorForm";
 import RateUserStudentForm from "./RateUserStudentForm";
+import PreloaderScreen from "../components/PreloaderScreen";
 import {
   ContentBlock,
   ContentBlockTitle,
@@ -13,9 +15,8 @@ import {
   Navbar
 } from "../components/f7";
 import { Page } from "framework7-react";
-
-// DELETE WHEN DONE TESTING
-import * as API from "../utils";
+import { RATING_CATEGORIES } from "../utils/API";
+import { filterByType } from "../utils/GeneralUtils";
 
 export const StyledContentBlock = styled(ContentBlock)`
   margin: 0 !important;
@@ -47,57 +48,84 @@ FormSection.propTypes = {
 };
 
 class RateUser extends React.Component {
-  fetchUserInfo = () => {
-    const allSchools = API.getSchools();
-    const currUser = API.getUserDetails("UArjrbxWHX");
-    this.allMajors = API.getMajors();
+  componentDidMount() {
+    const props = this.props;
 
-    const t1 = currUser.schools.map(school => school.id);
-    this.schools = allSchools.filter(school => t1.includes(school.id));
-
-    this.school = this.schools.slice(0, 1).map(school => school.id).toString();
-    this.major = currUser.majors.slice(0, 1).map(major => major.id).toString();
-
-    this.profRatingCat = API.getRatingCategories().professor;
-    this.studRatingCat = API.getRatingCategories().student;
-  };
+    props.fetchSchoolsIfNeeded();
+    props.fetchMajorsIfNeeded();
+  }
 
   handleSelectChange = (e, handleChange) => {
     const selected = [...e.target.options].filter(option => option.selected);
+
     handleChange(e.target.name, selected[0].value);
   };
 
+  getFormProps = () => {
+    const { auth, majors, route } = this.props;
+    const userType = route.query.type;
+
+    const majorOptions = filterByType(majors, "object");
+    const schoolOptions = auth.info ? auth.info.schools : [];
+
+    const selectedSchool = auth.info ? auth.info.schools[0].id : "";
+    const selectedMajor = auth.info ? auth.info.majors[0].id : "";
+
+    return {
+      major: selectedMajor,
+      majors: majorOptions,
+      ratingCategories:
+        userType === "professor"
+          ? RATING_CATEGORIES.professor
+          : RATING_CATEGORIES.student,
+      school: selectedSchool,
+      schools: schoolOptions
+    };
+  };
+
   render() {
-    this.fetchUserInfo();
+    const { schools, majors } = this.props;
     const userType = this.props.route.query.type;
-    const pFormProps = {
-      handleSelectChange: this.handleSelectChange,
-      majors: this.allMajors,
-      ratingCategories: this.profRatingCat,
-      schools: this.schools,
-      major: this.major,
-      school: this.school
-    };
-    const sFormProps = {
-      ...pFormProps,
-      ratingCategories: this.studRatingCat
-    };
+    const formProps = this.getFormProps();
+
+    const isLoading =
+      schools.receivedAt === undefined && majors.receivedAt === undefined;
+
+    const RatingForm =
+      userType === "professor"
+        ? <RateUserProfessorForm
+            handleSelectChange={this.handleSelectChange}
+            {...formProps}
+          />
+        : <RateUserStudentForm
+            handleSelectChange={this.handleSelectChange}
+            {...formProps}
+          />;
+
     return (
       <Page>
         <Navbar>
           <NavLeft backLink="Cancel" sliding />
           <NavCenter sliding>Rating Submission</NavCenter>
         </Navbar>
-        {userType === "professor"
-          ? <RateUserProfessorForm {...pFormProps} />
-          : <RateUserStudentForm {...sFormProps} />}
+        {isLoading ? <PreloaderScreen size="big" /> : RatingForm}
       </Page>
     );
   }
 }
 
-const mapStateToProps = state => ({ route: state.route });
+const mapStateToProps = state => ({
+  route: state.route,
+  auth: state.auth,
+  schools: state.schools,
+  majors: state.majors
+});
 
-RateUser = connect(mapStateToProps)(RateUser);
+const mapDispatchToProps = dispatch => ({
+  fetchSchoolsIfNeeded: () => dispatch(fetchSchoolsIfNeeded()),
+  fetchMajorsIfNeeded: () => dispatch(fetchMajorsIfNeeded())
+});
+
+RateUser = connect(mapStateToProps, mapDispatchToProps)(RateUser);
 
 export default RateUser;
