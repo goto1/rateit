@@ -24,7 +24,7 @@ export const StyledContentBlock = styled(ContentBlock)`
   text-align: center;
   color: red !important;
   font-size: 12.5px;
-  letter-spacing: .5px;
+  letter-spacing: 0.5px;
 `;
 
 const StyledList = styled(List)`
@@ -32,15 +32,14 @@ const StyledList = styled(List)`
     `${props.margin ? props.margin : "25"}px !important`};
 `;
 
-export const FormSection = ({ title, margin, children }) =>
+export const FormSection = ({ title, margin, children }) => (
   <div>
-    <ContentBlockTitle>
-      {title}
-    </ContentBlockTitle>
+    <ContentBlockTitle>{title}</ContentBlockTitle>
     <StyledList margin={margin} inset>
       {children}
     </StyledList>
-  </div>;
+  </div>
+);
 
 FormSection.propTypes = {
   title: PropTypes.string.isRequired,
@@ -92,15 +91,17 @@ class RateUser extends React.Component {
       schools.receivedAt === undefined && majors.receivedAt === undefined;
 
     const RatingForm =
-      userType === "professor"
-        ? <RateUserProfessorForm
-            handleSelectChange={this.handleSelectChange}
-            {...formProps}
-          />
-        : <RateUserStudentForm
-            handleSelectChange={this.handleSelectChange}
-            {...formProps}
-          />;
+      userType === "professor" ? (
+        <RateUserProfessorForm
+          handleSelectChange={this.handleSelectChange}
+          {...formProps}
+        />
+      ) : (
+        <RateUserStudentForm
+          handleSelectChange={this.handleSelectChange}
+          {...formProps}
+        />
+      );
 
     return (
       <Page>

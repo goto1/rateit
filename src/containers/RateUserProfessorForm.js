@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import RatingCategoryInput from "../components/RatingCategoryInput";
 import { FormSection, StyledContentBlock } from "./RateUser";
 import { Formik } from "formik";
 import Yup from "yup";
-import { isSubmissionDisabled } from "../utils/FormUtils";
+import { isEmpty } from "lodash";
 import {
   Button,
   ContentBlock,
@@ -12,88 +13,91 @@ import {
   SmartSelect
 } from "../components/f7";
 
-let RateUserProfessorForm = ({
-  errors,
-  handleBlur,
-  handleChange,
-  handleChangeValue,
-  handleSelectChange,
-  handleSubmit,
-  isSubmitting,
-  majors,
-  ratingCategories,
-  schools,
-  touched,
-  values
-}) => {
-  const disableSubmission = isSubmissionDisabled({
-    isSubmitting,
-    errors,
-    touched
-  });
-  const validForm = Object.keys(errors).length === 0;
-  return (
-    <form onSubmit={handleSubmit}>
-      <FormSection title="Professor Information">
-        <InputElement
-          icon="account_circle"
-          name="name"
-          onBlur={handleBlur}
-          onChange={handleChange}
-          placeholder="John Doe"
-          type="text"
-          valid={errors.name && touched.name && false}
-          value={values.name}
-        />
-      </FormSection>
-      <FormSection title="School Information">
-        <SmartSelect
-          multiple={false}
-          name="school"
-          onBlur={handleBlur}
-          onChange={e => {
-            handleSelectChange(e, handleChangeValue);
-          }}
-          options={schools}
-          searchbarPlaceholder="Search for a school..."
-          value={values.school}
-        />
-        <SmartSelect
-          multiple={false}
-          name="major"
-          onBlur={handleBlur}
-          onChange={e => {
-            handleSelectChange(e, handleChangeValue);
-          }}
-          options={majors}
-          searchbarPlaceholder="Search for a major..."
-          value={values.major}
-        />
-      </FormSection>
-      {ratingCategories.map(category =>
-        <RatingCategoryInput
-          {...category}
-          key={category.id}
-          onChange={handleChange}
-          onBlur={handleBlur}
-        />
-      )}
-      {!validForm &&
-        <StyledContentBlock>Please fill out all fields</StyledContentBlock>}
-      <ContentBlock>
-        <Button
-          big
-          color="green"
-          disabled={disableSubmission}
-          fill
-          type="submit"
-        >
-          Submit
-        </Button>
-      </ContentBlock>
-    </form>
-  );
-};
+import { submitRateProfessorForm as submitForm } from "../utils/API";
+
+class RateUserProfessorForm extends React.Component {
+  renderRatingCategoriesList = () => {
+    const { ratingCategories, handleChange, handleBlur } = this.props;
+
+    return ratingCategories.map(cat =>
+      <RatingCategoryInput
+        key={cat.id}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        {...cat}
+      />
+    );
+  };
+
+  render() {
+    const props = this.props;
+    const { errors, touched, values } = this.props;
+    const ratingCategoriesList = this.renderRatingCategoriesList();
+
+    const validForm = isEmpty(errors);
+    const disableSubmission =
+      !validForm || props.isSubmitting || isEmpty(props.touched);
+
+    if (props.status) {
+      console.log(props.status);
+    }
+
+    return (
+      <form onSubmit={props.handleSubmit}>
+        <FormSection title="Professor Information">
+          <InputElement
+            icon="account_circle"
+            name="name"
+            onBlur={props.handleBlur}
+            onChange={props.handleChange}
+            placeholder="John Doe"
+            type="text"
+            valid={!errors.name && touched.name && true}
+            value={values.name}
+          />
+        </FormSection>
+
+        <FormSection title="School Information">
+          <SmartSelect
+            multiple={false}
+            name="school"
+            onBlur={props.handleBlur}
+            onChange={e => props.handleSelectChange(e, props.handleChangeValue)}
+            options={props.schools}
+            searchbarPlaceholder="Search for a school..."
+            value={values.school}
+          />
+          <SmartSelect
+            multiple={false}
+            name="major"
+            onBlur={props.handleBlur}
+            onChange={e => props.handleSelectChange(e, props.handleChangeValue)}
+            options={props.majors}
+            searchbarPlaceholder="Search for a major..."
+            value={values.major}
+          />
+        </FormSection>
+
+        {ratingCategoriesList}
+
+        {!validForm &&
+          <StyledContentBlock>Please fill out all fields</StyledContentBlock>}
+
+        <ContentBlock>
+          <Button
+            big
+            color="green"
+            disabled={disableSubmission}
+            fill
+            type="submit"
+          >
+            Submit
+          </Button>
+        </ContentBlock>
+      </form>
+    );
+  }
+}
 
 RateUserProfessorForm.propTypes = {
   errors: PropTypes.object,
@@ -131,9 +135,39 @@ RateUserProfessorForm = Formik({
     yZyycMRm: Yup.string().required(),
     sBuPhZef: Yup.string().required()
   }),
-  handleSubmit: (values, { props, setErrors, setSubmitting }) => {
-    console.log(values);
+  handleSubmit: (values, { props, setSubmitting, setStatus }) => {
+    const authUser = props.auth.info;
+    const formData = {
+      ...values,
+      authorId: authUser.id
+    };
+
+    console.log(formData);
+
+    setSubmitting(true);
+
+    submitForm(authUser.id, formData)
+      .then(response => {
+        setStatus({
+          submission: {
+            success: true,
+            error: ""
+          }
+        });
+      })
+      .catch(error => {
+        setStatus({
+          submission: {
+            success: false,
+            error
+          }
+        });
+      });
   }
 })(RateUserProfessorForm);
 
-export default RateUserProfessorForm;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps)(RateUserProfessorForm);
