@@ -2,9 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import RatingCategoryInput from "../components/RatingCategoryInput";
 import { FormSection, StyledContentBlock } from "./RateUser";
-import { Formik } from "formik";
 import Yup from "yup";
-import { isSubmissionDisabled } from "../utils/FormUtils";
 import {
   Button,
   ContentBlock,
@@ -13,126 +11,110 @@ import {
   SmartSelect,
   Textarea
 } from "../components/f7";
+import UserForm from "./UserForm";
 
-let RateUserStudentForm = ({
-  errors,
-  handleBlur,
-  handleChange,
-  handleChangeValue,
-  handleSelectChange,
-  handleSubmit,
-  isSubmitting,
-  majors,
-  ratingCategories,
-  schools,
-  touched,
-  values
-}) => {
-  const disableSubmission = isSubmissionDisabled({
-    isSubmitting,
-    errors,
-    touched
-  });
-  const validForm = Object.keys(errors).length === 0;
-  return (
-    <form onSubmit={handleSubmit}>
-      <FormSection title="Student Information">
-        <InputElement
-          icon="account_circle"
-          name="name"
-          onBlur={handleBlur}
-          onChange={handleChange}
-          placeholder="John Doe"
-          type="text"
-          valid={errors.name && touched.name && false}
-          value={values.name}
-        />
-        <InputElement
-          icon="email"
-          name="email"
-          onBlur={handleBlur}
-          onChange={handleChange}
-          placeholder="john@school.edu"
-          type="email"
-          valid={errors.email && touched.email && false}
-          value={values.email}
-        />
-      </FormSection>
-      <FormSection title="School Information">
-        <SmartSelect
-          multiple={false}
-          name="school"
-          onChange={e => {
-            handleSelectChange(e, handleChangeValue);
-          }}
-          options={schools}
-          searchbarPlaceholder="Search for a school..."
-          value={values.school}
-        />
-        <SmartSelect
-          multiple={false}
-          name="major"
-          onChange={e => {
-            handleSelectChange(e, handleChangeValue);
-          }}
-          options={majors}
-          searchbarPlaceholder="Search for a major..."
-          value={values.major}
-        />
-      </FormSection>
-      {ratingCategories.map(category => {
-        const props = {
-          ...category,
-          key: category.id,
-          onChange: handleChange,
-          onBlur: handleBlur
-        };
-        return <RatingCategoryInput {...props} />;
-      })}
-      <FormSection title="Additional Information" margin={5}>
-        <Textarea
-          icon="comment"
-          name="comment"
-          onBlur={handleBlur}
-          onChange={handleChange}
-          placeholder="Your comment here..."
-          value={values.comment}
-        />
-        <RadioInput icon="done" name="recommend" onChange={handleChange} />
-      </FormSection>
-      {!validForm &&
-        <StyledContentBlock>Please fill out all fields</StyledContentBlock>}
-      <ContentBlock>
-        <Button
-          type="submit"
-          color="green"
-          disabled={disableSubmission}
-          big
-          fill
-        >
-          Submit
-        </Button>
-      </ContentBlock>
-    </form>
-  );
-};
+class StudentForm extends React.Component {
+  renderRatingCategoriesList = () => {
+    const { ratingCategories, handleChange, handleBlur } = this.props;
 
-RateUserStudentForm.propTypes = {
-  errors: PropTypes.object,
-  handleBlur: PropTypes.func,
-  handleChange: PropTypes.func,
-  handleChangeValue: PropTypes.func,
-  handleSelectChange: PropTypes.func,
-  handleSubmit: PropTypes.func,
-  isSubmitting: PropTypes.bool,
-  majors: PropTypes.array,
-  ratingCategories: PropTypes.array,
-  schools: PropTypes.array,
-  touched: PropTypes.object,
-  values: PropTypes.object
-};
+    return ratingCategories.map(cat => (
+      <RatingCategoryInput
+        key={cat.id}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        {...cat}
+      />
+    ));
+  };
 
-RateUserStudentForm = Formik({
+  render() {
+    const props = this.props;
+    const { values, errors, touched } = this.props;
+    const ratingCategoriesList = this.renderRatingCategoriesList();
+
+    return (
+      <form onSubmit={props.handleSubmit}>
+        <FormSection title="Student Information">
+          <InputElement
+            icon="account_circle"
+            name="name"
+            onBlur={props.handleBlur}
+            onChange={props.handleChange}
+            placeholder="John Doe"
+            type="text"
+            valid={errors.name && touched.name && false}
+            value={values.name}
+          />
+          <InputElement
+            icon="email"
+            name="email"
+            onBlur={props.handleBlur}
+            onChange={props.handleChange}
+            placeholder="john@school.edu"
+            type="email"
+            valid={errors.email && touched.email && false}
+            value={values.email}
+          />
+        </FormSection>
+
+        <FormSection title="School Information">
+          <SmartSelect
+            multiple={false}
+            name="school"
+            onChange={e => props.handleSelectChange(e, props.handleChangeValue)}
+            options={props.schools}
+            searchbarPlaceholder="Search for a school..."
+            value={values.school}
+          />
+          <SmartSelect
+            multiple={false}
+            name="major"
+            onChange={e => props.handleSelectChange(e, props.handleChangeValue)}
+            options={props.majors}
+            searchbarPlaceholder="Search for a major..."
+            value={values.major}
+          />
+        </FormSection>
+
+        {ratingCategoriesList}
+
+        <FormSection title="Additional Information" margin={5}>
+          <Textarea
+            icon="comment"
+            name="comment"
+            onBlur={props.handleBlur}
+            onChange={props.handleChange}
+            placeholder="Your comment here..."
+            value={values.comment}
+          />
+          <RadioInput
+            icon="done"
+            name="recommend"
+            onChange={props.handleChange}
+          />
+        </FormSection>
+
+        {!props.validForm && (
+          <StyledContentBlock>Please fill out all fields</StyledContentBlock>
+        )}
+
+        <ContentBlock>
+          <Button
+            type="submit"
+            color="green"
+            disabled={props.disableSubmission}
+            big
+            fill
+          >
+            Submit
+          </Button>
+        </ContentBlock>
+      </form>
+    );
+  }
+}
+
+const formikOptions = {
   mapPropsToValues: props => ({
     comment: "",
     email: "",
@@ -149,21 +131,27 @@ RateUserStudentForm = Formik({
   }),
   validationSchema: Yup.object().shape({
     comment: Yup.string().required(),
-    email: Yup.string().email().lowercase().required(),
-    major: Yup.string().max(10).required(),
+    email: Yup.string()
+      .email()
+      .lowercase()
+      .required(),
+    major: Yup.string()
+      .max(10)
+      .required(),
     name: Yup.string().required(),
     recommend: Yup.boolean().required(),
-    school: Yup.string().max(10).required(),
+    school: Yup.string()
+      .max(10)
+      .required(),
     DRFJY9jd: Yup.string().required(),
     j84WAR77: Yup.string().required(),
     wXe02QBg: Yup.string().required(),
     zoQCOOJO: Yup.string().required(),
     Gb1tXreK: Yup.string().required(),
     TrK3zUiV: Yup.string().required()
-  }),
-  handleSubmit: (values, { props, setErrors, setSubmitting }) => {
-    console.log(values);
-  }
-})(RateUserStudentForm);
+  })
+};
+
+const RateUserStudentForm = UserForm(StudentForm, formikOptions);
 
 export default RateUserStudentForm;

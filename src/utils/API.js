@@ -10,6 +10,24 @@ import { intersection } from "lodash";
 import { createHashTableFromArray } from "../utils/GeneralUtils";
 import * as DummyData from "../dummy-data";
 
+export const RATING_CATEGORIES = {
+  student: [
+    { id: "DRFJY9jd", description: "Attends Group Meetings" },
+    { id: "j84WAR77", description: "Contributes to Discussions" },
+    { id: "wXe02QBg", description: "Completes Tasks on Time" },
+    { id: "zoQCOOJO", description: "Quality of Completed Work" },
+    { id: "Gb1tXreK", description: "Cooperative & Supportive" },
+    { id: "TrK3zUiV", description: "Contributes Significantly" }
+  ],
+  professor: [
+    { id: "T5wKYAmI", description: "Ability to Communicate Course Content" },
+    { id: "jUtauYzO", description: "Availability Outside of Class Hours" },
+    { id: "mh4m4LcX", description: "Fairness & Consistency in Grading" },
+    { id: "yZyycMRm", description: "Knowledge of Course Material" },
+    { id: "sBuPhZef", description: "Overall Teaching Effectivness" }
+  ]
+};
+
 function getRatingDetails(ratings, userType) {
   const categories =
     userType === "student"
@@ -240,9 +258,45 @@ export const submitContactForm = (userId, formData) =>
     }, 1000);
   });
 
+export const submitRatingForm = (userId, formData) =>
+  new Promise((resolve, reject) => {
+    const data = { ...formData };
+
+    setTimeout(() => {
+      if (Object.keys(data).length === 0 || !userId) {
+        reject({
+          error: "Missing information"
+        });
+      } else {
+        resolve({
+          ...data,
+          receivedAt: Date.now()
+        });
+      }
+    }, 1000);
+  });
+
+export const submitRateProfessorForm = (userId, formData) =>
+  new Promise((resolve, reject) => {
+    const data = { ...formData };
+
+    setTimeout(() => {
+      if (Object.keys(data).length === 0 || !userId) {
+        reject({
+          error: "Missing information"
+        });
+      } else {
+        resolve({
+          ...data
+        });
+      }
+    }, 1000);
+  });
+
 function createPostResponse(res) {
   return {
-    ...res
+    ...res,
+    createdAt: Date.now()
   };
 }
 

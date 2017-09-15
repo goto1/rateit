@@ -1,4 +1,4 @@
-import { isEmpty, isEqual } from "lodash";
+import { isEmpty, isEqual, reduce } from "lodash";
 
 export const isSubmissionDisabled = ({ isSubmitting, errors, touched }) =>
   isSubmitting ||
@@ -22,3 +22,38 @@ export const isInputFieldValid = (name, { touched, errors }) =>
 
 export const isFormFieldValid = (name, { touched, errors }) =>
   !touched[name] ? true : errors[name] ? false : true;
+
+export const separateUserRatings = formData => {
+  if (!formData) {
+    return {};
+  }
+
+  const userRatings = separateFormData(
+    formData,
+    value => !isNaN(parseInt(value, 10))
+  );
+  const restOfFormData = separateFormData(formData, value =>
+    isNaN(parseInt(value, 10))
+  );
+
+  function separateFormData(formData, predicate) {
+    return reduce(
+      formData,
+      (result, value, key) => {
+        const shouldInclude = predicate(value);
+
+        if (shouldInclude) {
+          result[key] = value;
+        }
+
+        return result;
+      },
+      {}
+    );
+  }
+
+  return {
+    ...restOfFormData,
+    ratings: userRatings
+  };
+};

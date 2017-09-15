@@ -1,11 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import UserForm from "./UserForm";
 import RatingCategoryInput from "../components/RatingCategoryInput";
 import { FormSection, StyledContentBlock } from "./RateUser";
-import { Formik } from "formik";
 import Yup from "yup";
-import { isEmpty } from "lodash";
 import {
   Button,
   ContentBlock,
@@ -13,34 +11,24 @@ import {
   SmartSelect
 } from "../components/f7";
 
-import { submitRateProfessorForm as submitForm } from "../utils/API";
-
-class RateUserProfessorForm extends React.Component {
+class ProfessorForm extends React.Component {
   renderRatingCategoriesList = () => {
     const { ratingCategories, handleChange, handleBlur } = this.props;
 
-    return ratingCategories.map(cat =>
+    return ratingCategories.map(cat => (
       <RatingCategoryInput
         key={cat.id}
         onChange={handleChange}
         onBlur={handleBlur}
         {...cat}
       />
-    );
+    ));
   };
 
   render() {
     const props = this.props;
-    const { errors, touched, values } = this.props;
+    const { values, errors, touched } = this.props;
     const ratingCategoriesList = this.renderRatingCategoriesList();
-
-    const validForm = isEmpty(errors);
-    const disableSubmission =
-      !validForm || props.isSubmitting || isEmpty(props.touched);
-
-    if (props.status) {
-      console.log(props.status);
-    }
 
     return (
       <form onSubmit={props.handleSubmit}>
@@ -80,14 +68,15 @@ class RateUserProfessorForm extends React.Component {
 
         {ratingCategoriesList}
 
-        {!validForm &&
-          <StyledContentBlock>Please fill out all fields</StyledContentBlock>}
+        {!props.validForm && (
+          <StyledContentBlock>Please fill out all fields</StyledContentBlock>
+        )}
 
         <ContentBlock>
           <Button
             big
             color="green"
-            disabled={disableSubmission}
+            disabled={props.disableSubmission}
             fill
             type="submit"
           >
@@ -99,22 +88,7 @@ class RateUserProfessorForm extends React.Component {
   }
 }
 
-RateUserProfessorForm.propTypes = {
-  errors: PropTypes.object,
-  handleBlur: PropTypes.func,
-  handleChange: PropTypes.func,
-  handleChangeValue: PropTypes.func,
-  handleSelectChange: PropTypes.func,
-  handleSubmit: PropTypes.func,
-  isSubmitting: PropTypes.bool,
-  majors: PropTypes.array,
-  ratingCategories: PropTypes.array,
-  schools: PropTypes.array,
-  touched: PropTypes.object,
-  values: PropTypes.object
-};
-
-RateUserProfessorForm = Formik({
+const formikOptions = {
   mapPropsToValues: props => ({
     major: props.major,
     name: "",
@@ -134,40 +108,9 @@ RateUserProfessorForm = Formik({
     mh4m4LcX: Yup.string().required(),
     yZyycMRm: Yup.string().required(),
     sBuPhZef: Yup.string().required()
-  }),
-  handleSubmit: (values, { props, setSubmitting, setStatus }) => {
-    const authUser = props.auth.info;
-    const formData = {
-      ...values,
-      authorId: authUser.id
-    };
+  })
+};
 
-    console.log(formData);
+const RateUserProfessorForm = UserForm(ProfessorForm, formikOptions);
 
-    setSubmitting(true);
-
-    submitForm(authUser.id, formData)
-      .then(response => {
-        setStatus({
-          submission: {
-            success: true,
-            error: ""
-          }
-        });
-      })
-      .catch(error => {
-        setStatus({
-          submission: {
-            success: false,
-            error
-          }
-        });
-      });
-  }
-})(RateUserProfessorForm);
-
-const mapStateToProps = state => ({
-  auth: state.auth
-});
-
-export default connect(mapStateToProps)(RateUserProfessorForm);
+export default RateUserProfessorForm;
