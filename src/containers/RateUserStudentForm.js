@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import UserForm from "./UserForm";
 import RatingCategoryInput from "../components/RatingCategoryInput";
 import { FormSection, StyledContentBlock } from "./RateUser";
 import Yup from "yup";
@@ -11,7 +12,7 @@ import {
   SmartSelect,
   Textarea
 } from "../components/f7";
-import UserForm from "./UserForm";
+import { isFormFieldValid } from "../utils/FormUtils";
 
 class StudentForm extends React.Component {
   renderRatingCategoriesList = () => {
@@ -32,6 +33,19 @@ class StudentForm extends React.Component {
     const { values, errors, touched } = this.props;
     const ratingCategoriesList = this.renderRatingCategoriesList();
 
+    const nameFieldValid = isFormFieldValid("name", {
+      touched,
+      errors
+    });
+    const emailFieldValid = isFormFieldValid("email", {
+      touched,
+      errors
+    });
+    const commentFieldValid = isFormFieldValid("comment", {
+      touched,
+      errors
+    });
+
     return (
       <form onSubmit={props.handleSubmit}>
         <FormSection title="Student Information">
@@ -42,7 +56,7 @@ class StudentForm extends React.Component {
             onChange={props.handleChange}
             placeholder="John Doe"
             type="text"
-            valid={errors.name && touched.name && false}
+            valid={nameFieldValid}
             value={values.name}
           />
           <InputElement
@@ -52,7 +66,7 @@ class StudentForm extends React.Component {
             onChange={props.handleChange}
             placeholder="john@school.edu"
             type="email"
-            valid={errors.email && touched.email && false}
+            valid={emailFieldValid}
             value={values.email}
           />
         </FormSection>
@@ -86,6 +100,7 @@ class StudentForm extends React.Component {
             onChange={props.handleChange}
             placeholder="Your comment here..."
             value={values.comment}
+            valid={commentFieldValid}
           />
           <RadioInput
             icon="done"
