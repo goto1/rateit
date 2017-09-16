@@ -27,7 +27,7 @@ export const filterByType = (collection, type) =>
  * only specified in the passed array
  */
 
-export const filterObjectByKeys = (props, keys) =>
+export const filterObjectPropertiesByKey = (props, keys) =>
   isObject(props) && isArray(keys)
     ? reduce(
         props,
