@@ -3,12 +3,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchSchoolsIfNeeded, fetchMajorsIfNeeded } from "../actions";
 import { submitGeneralForm as submitForm } from "../utils/API";
-import { Formik } from "formik";
 import Yup from "yup";
-import { get, reduce, isEqual, isNil, filter } from "lodash";
+import { reduce, isEqual, isNil, filter } from "lodash";
 import * as FormUtils from "../utils/FormUtils";
-import PreloaderScreen from "../components/PreloaderScreen";
-import SubmittedFormScreen from "../components/SubmittedFormScreen";
+import FormikForm from "../utils/FormikForm";
 import FormFieldLabel from "../components/FormFieldLabel";
 import {
   Button,
@@ -171,134 +169,81 @@ PasswordReset.propTypes = {
 };
 
 class UserInformation extends React.Component {
-  goBack = () => {
-    const props = this.props;
-    const submitStatus = get(props, "status.submission", null);
+  getFormikProps = () => ({
+    mapPropsToValues: props => ({
+      email: props.initialValues.email,
+      school: props.initialValues.school,
+      major: props.initialValues.major,
+      pass: props.initialValues.pass,
+      pass_repeat: props.initialValues.pass_repeat
+    }),
+    validationSchema: Yup.object().shape({
+      email: Yup.string().email(),
+      school: Yup.array().required(),
+      major: Yup.array().required(),
+      pass: Yup.string(),
+      pass_repeat: Yup.string().when("pass", {
+        is: val => (val === undefined ? false : val.length > 0 ? true : false),
+        then: Yup.string().required(),
+        otherwise: Yup.string()
+      })
+    }),
+    submitForm: (values, { props }) => {
+      const userId = props.userId;
+      const formData = filter(
+        {
+          ...values,
+          major: !isEqual(props.major, props.initialValues.major)
+            ? values.major
+            : null,
+          school: !isEqual(props.school, props.initialValues.school)
+            ? values.school
+            : null
+        },
+        item => (item === "" ? false : isNil(item) ? false : true)
+      );
 
-    if (submitStatus && submitStatus.success) {
-      props.setStatus({});
-      props.resetForm();
-    }
-
-    if (submitStatus && !submitStatus.success) {
-      props.setStatus({});
-      props.setSubmitting(false);
-    }
-  };
+      return submitForm(userId, formData);
+    },
+    ...this.props
+  });
 
   render() {
-    const props = { ...this.props };
-    const submitStatus = get(props, "status.submission", null);
-    const disableSubmission =
-      FormUtils.shouldDisableSubmission(props) ||
-      props.values.pass !== props.values.pass_repeat;
-
-    if (submitStatus && submitStatus.success) {
-      return (
-        <SubmittedFormScreen buttonName="Back" onClick={this.goBack}>
-          Your account information was changed successfully!
-        </SubmittedFormScreen>
-      );
-    }
-
-    if (submitStatus && !submitStatus.success) {
-      return (
-        <SubmittedFormScreen buttonName="Back" onClick={this.goBack}>
-          Looks like something went wrong! Please go back and try again.
-        </SubmittedFormScreen>
-      );
-    }
-
-    return props.isSubmitting
-      ? <PreloaderScreen size="big" />
-      : <form onSubmit={props.handleSubmit}>
-          <AccountInformation {...props} />
-          <SchoolInformation {...props} />
-          <PasswordReset {...props} />
-          <ContentBlock>
-            <Button
-              big
-              color="green"
-              disabled={disableSubmission}
-              fill
-              type="submit"
-            >
-              Submit Changes
-            </Button>
-          </ContentBlock>
-        </form>;
+    return (
+      <FormikForm {...this.getFormikProps()}>
+        {formik => (
+          <form onSubmit={formik.handleSubmit}>
+            <AccountInformation {...formik} />
+            <SchoolInformation {...formik} />
+            <PasswordReset {...formik} />
+            <ContentBlock>
+              <Button
+                big
+                color="green"
+                disabled={
+                  FormUtils.shouldDisableSubmission(formik) ||
+                  formik.values.pass !== formik.values.pass_repeat
+                }
+                fill
+                type="submit"
+              >
+                Submit Changes
+              </Button>
+            </ContentBlock>
+          </form>
+        )}
+      </FormikForm>
+    );
   }
 }
 
 UserInformation.propTypes = {
-  errors: PropTypes.object.isRequired,
-  handleBlur: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
-  handleChangeValue: PropTypes.func.isRequired,
   handleMultipleSelect: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  isSubmitting: PropTypes.bool.isRequired,
+  initialValues: PropTypes.object.isRequired,
   majors: PropTypes.array.isRequired,
   schools: PropTypes.array.isRequired,
-  touched: PropTypes.object.isRequired,
-  values: PropTypes.object.isRequired
+  userId: PropTypes.string.isRequired
 };
-
-UserInformation = Formik({
-  mapPropsToValues: props => ({
-    email: props.initialValues.email,
-    school: props.initialValues.school,
-    major: props.initialValues.major,
-    pass: props.initialValues.pass,
-    pass_repeat: props.initialValues.pass_repeat
-  }),
-  validationSchema: Yup.object().shape({
-    email: Yup.string().email(),
-    school: Yup.array().required(),
-    major: Yup.array().required(),
-    pass: Yup.string(),
-    pass_repeat: Yup.string().when("pass", {
-      is: val => (val === undefined ? false : val.length > 0 ? true : false),
-      then: Yup.string().required(),
-      otherwise: Yup.string()
-    })
-  }),
-  handleSubmit: (values, { props, setErrors, setSubmitting, setStatus }) => {
-    const userId = props.userId;
-    const formData = filter(
-      {
-        ...values,
-        major: !isEqual(values.major, props.initialValues.major)
-          ? values.major
-          : null,
-        school: !isEqual(values.school, props.initialValues.school)
-          ? values.school
-          : null
-      },
-      item => (item === "" ? false : isNil(item) ? false : true)
-    );
-
-    setSubmitting(true);
-
-    submitForm(userId, formData)
-      .then(response => {
-        setStatus({
-          submission: {
-            success: true,
-            error: ""
-          }
-        });
-      })
-      .catch(error => {
-        setStatus({
-          submission: {
-            success: false,
-            error: "Could not submit the form."
-          }
-        });
-      });
-  }
-})(UserInformation);
 
 class General extends React.Component {
   componentDidMount() {
@@ -354,11 +299,12 @@ class General extends React.Component {
           <NavLeft backLink="Back" sliding />
           <NavCenter sliding>General</NavCenter>
         </Navbar>
-        {isDoneLoading &&
+        {isDoneLoading && (
           <UserInformation
             handleMultipleSelect={this.handleMultipleSelect}
             {...formProps}
-          />}
+          />
+        )}
       </Page>
     );
   }
